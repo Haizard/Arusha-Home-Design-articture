@@ -8,7 +8,6 @@ export default function CollectionGrid({ items }: { items: CollectionCard[] }) {
   return (
     <section className="market-shell collections-page">
       <header className="collections-header">
-        <span className="market-kicker">Store collections</span>
         <h1>All collections</h1>
       </header>
 
@@ -28,9 +27,9 @@ export default function CollectionGrid({ items }: { items: CollectionCard[] }) {
       </div>
 
       <div className="collections-pagination">
-        <button type="button" aria-label="Previous page">‹</button>
+        <button type="button" aria-label="Previous page">&lsaquo;</button>
         <span>1 / 2</span>
-        <button type="button" aria-label="Next page">›</button>
+        <button type="button" aria-label="Next page">&rsaquo;</button>
       </div>
     </section>
   );

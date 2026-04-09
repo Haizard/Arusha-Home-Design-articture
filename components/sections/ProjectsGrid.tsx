@@ -10,9 +10,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 import { getProjects } from "@/app/actions/admin";
 
-export default function ProjectsGrid() {
+type ProjectRecord = {
+  _id: string;
+  title: string;
+  category: string;
+  imageUrl: string;
+};
+
+export default function ProjectsGrid({ showViewAllLink = true }: { showViewAllLink?: boolean }) {
   const [active, setActive] = useState("All");
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<ProjectRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -92,9 +99,11 @@ export default function ProjectsGrid() {
               Our <em style={{ fontStyle: "italic", color: "var(--color-gold)", fontWeight: 400 }}>Work</em>
             </h2>
           </div>
-          <Link href="/projects" className="btn-arrow">
-            Full Portfolio <ArrowRight size={14} />
-          </Link>
+          {showViewAllLink ? (
+            <Link href="/projects" className="btn-arrow">
+              Full Portfolio <ArrowRight size={14} />
+            </Link>
+          ) : null}
         </div>
 
         {/* Filter Tabs */}

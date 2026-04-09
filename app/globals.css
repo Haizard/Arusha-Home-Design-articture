@@ -3213,30 +3213,33 @@ body {
 }
 
 .collections-page {
-  padding: clamp(3rem, 8vw, 6rem) 0 clamp(4rem, 10vw, 7rem);
+  width: min(1420px, calc(100vw - 1rem));
+  padding: 0.7rem 0 2rem;
+  color: #111111;
+  background: #ffffff;
 }
 
 .collections-header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.55rem;
 }
 
 .collections-header h1 {
-  font-size: clamp(2.7rem, 5vw, 5rem);
-  line-height: 0.98;
+  font-size: clamp(1.5rem, 2.7vw, 2.35rem);
+  line-height: 1;
   letter-spacing: -0.05em;
 }
 
 .collections-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.2rem;
+  gap: 0.28rem;
 }
 
 .collection-card {
   position: relative;
-  aspect-ratio: 1.18 / 0.78;
-  border-radius: 0.5rem;
+  aspect-ratio: 1 / 0.67;
+  border-radius: 0.1rem;
   overflow: hidden;
   text-decoration: none;
   color: white;
@@ -3255,7 +3258,7 @@ body {
 .collection-card-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.26);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .collection-card h2 {
@@ -3265,19 +3268,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0.3rem;
   text-align: center;
-  font-size: clamp(1.9rem, 3vw, 3rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  font-size: clamp(0.66rem, 0.92vw, 0.92rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 .collections-pagination {
   display: inline-flex;
   align-items: center;
   gap: 1rem;
-  margin: 2rem auto 0;
-  padding: 0.5rem 1rem;
+  margin: 0.7rem auto 0;
+  padding: 0.32rem 0.72rem;
   border: 1px solid rgba(17,17,17,0.1);
   border-radius: 999px;
   background: #ffffff;
@@ -3470,11 +3475,13 @@ body {
 
 @media (max-width: 640px) {
   .collections-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.16rem;
   }
 
   .collection-card h2 {
-    font-size: 2.2rem;
+    font-size: 0.5rem;
+    padding: 0.16rem;
   }
 
   .store-navbar {
