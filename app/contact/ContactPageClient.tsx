@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { MapPin, Mail, Phone, Clock, Send, CheckCircle } from "lucide-react";
+import { addInquiry } from "@/app/actions/admin";
+import toast from "react-hot-toast";
 
 export default function ContactPageClient() {
   const [form, setForm] = useState({
@@ -21,10 +23,19 @@ export default function ContactPageClient() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 1500));
-    setLoading(false);
-    setSubmitted(true);
+    try {
+      await addInquiry({
+        ...form,
+        projectName: form.service ? `General Inquiry: ${form.service}` : 'General Contact'
+      });
+      setSubmitted(true);
+      toast.success("Message sent successfully!");
+    } catch (error) {
+      toast.error("Failed to send message. Please try again.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
