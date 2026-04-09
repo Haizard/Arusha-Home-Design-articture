@@ -56,6 +56,23 @@ export type CollectionCard = {
   href: string;
 };
 
+export type ShopProduct = {
+  id: string;
+  title: string;
+  image: string;
+  price: number;
+  productType: "Apartments" | "Commercial" | "Educational Facility" | "Healthcare Facility" | "Hotels & Lodges" | "Residential";
+  bedrooms: number;
+  bathrooms: number;
+  floors: number;
+  area: number;
+  width: number;
+  length: number;
+  duplex: boolean;
+  rating?: number;
+  badge?: string;
+};
+
 export type CatalogService = {
   serviceId: string;
   title: string;
@@ -399,4 +416,30 @@ export const collectionCards: CollectionCard[] = [
   { title: "Contemporary House Plans", image: "/images/about-hero.jpg", href: "/products/AHD-38901" },
   { title: "Cottage House Plans", image: "/images/hero-4.jpg", href: "/products/AHD-22304" },
   { title: "Country House Plans", image: "/images/hero-3.jpg", href: "/products/AHD-23307" },
+];
+
+export const shopProducts: ShopProduct[] = [
+  { id: "ID 39801", title: "Office Building", image: "/images/service-arch.jpg", price: 1756, productType: "Commercial", bedrooms: 10, bathrooms: 8, floors: 3, area: 840, width: 28, length: 13, duplex: false },
+  { id: "ID 19901", title: "Resort", image: "/images/proj-1.jpg", price: 913.5, productType: "Hotels & Lodges", bedrooms: 14, bathrooms: 18, floors: 1, area: 1015, width: 50.5, length: 57.15, duplex: false },
+  { id: "ID 19907", title: "Thatched Roof Lodge Design", image: "/images/hero-4.jpg", price: 672.4, productType: "Hotels & Lodges", bedrooms: 9, bathrooms: 9, floors: 1, area: 530, width: 47, length: 81, duplex: false },
+  { id: "ID 19702", title: "Spacious 1-Story Building with Multiple Facilities", image: "/images/services-hero.jpg", price: 650.7, productType: "Educational Facility", bedrooms: 0, bathrooms: 7, floors: 1, area: 723, width: 40, length: 21, duplex: false },
+  { id: "ID 99901", title: "17 Flats Apartment Block", image: "/images/projects-hero.jpg", price: 3212.1, productType: "Apartments", bedrooms: 16, bathrooms: 16, floors: 9, area: 3569, width: 38, length: 17, duplex: false },
+  { id: "ID 29902", title: "12 Bedroom Apartment Design", image: "/images/about-hero.jpg", price: 614.7, productType: "Apartments", bedrooms: 12, bathrooms: 12, floors: 2, area: 683, width: 29, length: 13, duplex: false, rating: 5 },
+  { id: "ID 16701", title: "6 Room Holiday Home", image: "/images/hero-2.jpg", price: 611.4, productType: "Hotels & Lodges", bedrooms: 6, bathrooms: 7, floors: 1, area: 346, width: 31, length: 14, duplex: false },
+  { id: "ID 19701", title: "Funeral Home Design", image: "/images/proj-2.jpg", price: 601.2, productType: "Healthcare Facility", bedrooms: 0, bathrooms: 7, floors: 1, area: 668, width: 33, length: 30, duplex: false },
+  { id: "ID 69902", title: "Modern Apartment Building Design", image: "/images/proj-3.jpg", price: 5267.7, productType: "Apartments", bedrooms: 43, bathrooms: 43, floors: 6, area: 5853, width: 28, length: 50, duplex: false },
+  { id: "ID 24521", title: "Two-story 4-Bedroom House Plan", image: "/images/hero-1.jpg", price: 553.8, productType: "Residential", bedrooms: 4, bathrooms: 5, floors: 2, area: 282, width: 20, length: 8, duplex: true },
+  { id: "ID 19903", title: "2 Bedrooms Vacation Property Design", image: "/images/prod-bed.jpg", price: 532.8, productType: "Residential", bedrooms: 2, bathrooms: 5, floors: 1, area: 592, width: 23, length: 43, duplex: false },
+  { id: "ID 14510", title: "4 Bedroom Thatch Roof Villa", image: "/images/hero-3.jpg", price: 510.3, productType: "Residential", bedrooms: 4, bathrooms: 5, floors: 1, area: 567, width: 28, length: 38, duplex: false },
+  { id: "ID 14414", title: "4 Bedroom 4 Bath House Plan", image: "/images/hero-2.jpg", price: 494.1, productType: "Residential", bedrooms: 4, bathrooms: 4, floors: 1, area: 549, width: 29, length: 21, duplex: false, rating: 5 },
+  { id: "ID 29907", title: "9 Bedroom Lodge Design", image: "/images/projects-hero.jpg", price: 486.9, productType: "Hotels & Lodges", bedrooms: 9, bathrooms: 9, floors: 2, area: 541, width: 22, length: 21, duplex: true },
+  { id: "ID 19908", title: "9-Bedroom Single-Story Multi-Unit Lodge Plan", image: "/images/hero-4.jpg", price: 478.8, productType: "Hotels & Lodges", bedrooms: 9, bathrooms: 9, floors: 1, area: 532, width: 80, length: 50, duplex: false },
+  { id: "ID 15603", title: "5 Bedroom House Plan", image: "/images/hero-1.jpg", price: 474.3, productType: "Residential", bedrooms: 5, bathrooms: 6, floors: 1, area: 527, width: 20, length: 25, duplex: false },
+  { id: "ID 19902", title: "12 Bedroom Holiday Home", image: "/images/proj-1.jpg", price: 462.6, productType: "Hotels & Lodges", bedrooms: 12, bathrooms: 13, floors: 1, area: 514, width: 31, length: 24, duplex: false },
+  { id: "ID 19905", title: "Inn Home Plan Design", image: "/images/service-kitchen.jpg", price: 443, productType: "Hotels & Lodges", bedrooms: 12, bathrooms: 15, floors: 1, area: 74, width: 9.5, length: 8.5, duplex: false, badge: "Best Seller" },
+  { id: "ID 69901", title: "6 Story Apartment Design", image: "/images/about-hero.jpg", price: 2205.9, productType: "Apartments", bedrooms: 20, bathrooms: 20, floors: 6, area: 2451, width: 24, length: 19, duplex: false },
+  { id: "ID 14505", title: "Bungalow 4 Bedrooms", image: "/images/proj-2.jpg", price: 439.2, productType: "Residential", bedrooms: 4, bathrooms: 5, floors: 1, area: 488, width: 22, length: 27, duplex: false },
+  { id: "ID 15503", title: "Caribbean Style House", image: "/images/proj-3.jpg", price: 432, productType: "Residential", bedrooms: 5, bathrooms: 5, floors: 1, area: 480, width: 22, length: 28.1, duplex: false },
+  { id: "ID 36501", title: "6 Bedroom House Design", image: "/images/hero-3.jpg", price: 428.4, productType: "Residential", bedrooms: 6, bathrooms: 5, floors: 3, area: 476, width: 17, length: 20, duplex: true },
+  { id: "ID 16702", title: "Contemporary 6 Bedrooms House", image: "/images/hero-2.jpg", price: 422.1, productType: "Residential", bedrooms: 6, bathrooms: 7, floors: 1, area: 469, width: 20, length: 29, duplex: false, rating: 5 },
 ];

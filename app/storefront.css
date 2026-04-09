@@ -456,3 +456,263 @@
     height: 2rem;
   }
 }
+
+.shop-page {
+  padding: 2rem 0 4rem;
+  color: #111111;
+}
+
+.shop-hero {
+  position: relative;
+  min-height: 26rem;
+  border-radius: 1.6rem;
+  overflow: hidden;
+}
+
+.shop-hero-image {
+  object-fit: cover;
+}
+
+.shop-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.34);
+}
+
+.shop-hero-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+}
+
+.shop-hero-copy h1 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.shop-hero-copy p {
+  max-width: 52rem;
+  margin-top: 1rem;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.shop-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 2rem 0 1.25rem;
+}
+
+.shop-toolbar-left,
+.shop-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.shop-sort select {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.shop-layout {
+  display: grid;
+  grid-template-columns: 18rem minmax(0, 1fr);
+  gap: 2rem;
+}
+
+.shop-filters {
+  padding-top: 0.3rem;
+}
+
+.shop-filter-group {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(17,17,17,0.08);
+}
+
+.shop-filter-group h3 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  margin-bottom: 0.9rem;
+}
+
+.shop-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.shop-checkboxes label,
+.shop-filter-group select {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(17,17,17,0.65);
+  font-size: 0.98rem;
+}
+
+.shop-filter-group input[type='checkbox'] {
+  accent-color: #111111;
+}
+
+.shop-filter-group select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.shop-switch {
+  display: inline-flex;
+  position: relative;
+  width: 3rem;
+  height: 1.8rem;
+}
+
+.shop-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.shop-switch span {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: #d5d0c9;
+}
+
+.shop-switch span::after {
+  content: '';
+  position: absolute;
+  top: 0.18rem;
+  left: 0.2rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.2s ease;
+}
+
+.shop-switch input:checked + span::after {
+  transform: translateX(1.2rem);
+}
+
+.shop-switch input:checked + span {
+  background: #111111;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.35rem;
+}
+
+.shop-card {
+  display: block;
+  text-decoration: none;
+  color: #111111;
+  background: #ffffff;
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.shop-card-image-wrap {
+  position: relative;
+  aspect-ratio: 1.15 / 0.8;
+  background: #ddd6ce;
+}
+
+.shop-card-image {
+  object-fit: cover;
+}
+
+.shop-card-badge {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  z-index: 1;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: #7b3ff2;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.shop-card-body {
+  padding: 1rem 1rem 1.2rem;
+}
+
+.shop-card-body h3 {
+  font-size: 1.12rem;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.shop-card-body p {
+  margin-top: 0.7rem;
+  color: rgba(17,17,17,0.66);
+  font-size: 1rem;
+}
+
+.shop-rating {
+  display: flex;
+  gap: 0.15rem;
+  margin-top: 0.6rem;
+  color: #108a83;
+}
+
+.shop-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem 0.6rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(17,17,17,0.08);
+}
+
+.shop-spec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(17,17,17,0.76);
+}
+
+.shop-pagination {
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 1200px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .shop-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+}
