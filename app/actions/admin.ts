@@ -106,7 +106,8 @@ export async function getProducts() {
 export async function getProduct(id: string) {
   await connectDB();
   const UpdatedProduct = (await import('@/models/Product')).default;
-  const product = await UpdatedProduct.findById(id).lean();
+  const product = await UpdatedProduct.findById(id).lean()
+    || await UpdatedProduct.findOne({ planId: id }).lean();
   return JSON.parse(JSON.stringify(product));
 }
 

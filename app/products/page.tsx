@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ShopPage from "@/components/catalog/ShopPage";
-import { shopProducts } from "@/lib/site-catalog";
+import { getProducts } from "@/app/actions/admin";
 
 export const metadata: Metadata = {
   title: "Products | Arusha Home Design Pro",
@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     "Browse all products in a filterable shop view with sidebar filters and product cards.",
 };
 
-export default function ProductsPage() {
-  return <ShopPage items={shopProducts} />;
+export default async function ProductsPage() {
+  const products = await getProducts().catch(() => []);
+  return <ShopPage items={products} />;
 }

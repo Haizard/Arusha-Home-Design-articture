@@ -6,6 +6,33 @@ const ProductSchema = new Schema({
   description: { type: String, required: true },
   imageUrl: { type: String, required: true }, // Main thumbnail
   images: [{ type: String }], // Gallery images
+  badge: { type: String },
+  rating: { type: Number, default: 0 },
+  reviewName: { type: String },
+  duplex: { type: Boolean, default: false },
+  priceLabel: { type: String },
+  apartments: { type: String },
+  penthouses: { type: String },
+  fileTypes: [{ type: String }],
+  recommendedType: { type: String },
+  drawingOptions: [{ type: String }],
+  trustPoints: [{ type: String }],
+  roomsIncluded: [{ type: String }],
+  drawingSets: {
+    architectural: [{ type: String }],
+    structural: [{ type: String }],
+    electrical: [{ type: String }],
+    mechanical: [{ type: String }],
+    boq: [{ type: String }],
+  },
+  estimateTiers: [{
+    name: { type: String },
+    total: { type: String },
+    items: [{
+      label: { type: String },
+      cost: { type: String },
+    }],
+  }],
   
   // Technical Specifications
   planId: { type: String },
@@ -25,6 +52,10 @@ const ProductSchema = new Schema({
     name: { type: String }, // e.g. "Standard PDF Set"
     price: { type: Number },
     features: [{ type: String }] // What's in this package
+  }],
+  faqs: [{
+    question: { type: String },
+    answer: { type: String }
   }],
 }, { timestamps: true });
 

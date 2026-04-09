@@ -7,23 +7,38 @@ import {
   ArrowDownWideNarrow,
   Bath,
   BedDouble,
+  Car,
   Filter,
-  House,
   Layers2,
   MapPinned,
   Ruler,
   Star,
 } from "lucide-react";
-import type { ShopProduct } from "@/lib/site-catalog";
 
-const productTypeLabels: ShopProduct["productType"][] = [
-  "Apartments",
-  "Commercial",
-  "Educational Facility",
-  "Healthcare Facility",
-  "Hotels & Lodges",
-  "Residential",
-];
+type CmsProductListItem = {
+  _id: string;
+  title: string;
+  category: string;
+  description: string;
+  imageUrl: string;
+  badge?: string;
+  rating?: number;
+  duplex?: boolean;
+  planId?: string;
+  area?: string;
+  dimensions?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  stories?: number;
+  garage?: number;
+  basePrice?: number;
+};
+
+function getAreaNumber(area?: string) {
+  if (!area) return 0;
+  const match = area.match(/[\d.]+/);
+  return match ? Number(match[0]) : 0;
+}
 
 function spec(icon: React.ReactNode, label: string) {
   return (
@@ -34,8 +49,12 @@ function spec(icon: React.ReactNode, label: string) {
   );
 }
 
-export default function ShopPage({ items }: { items: ShopProduct[] }) {
-  const [selectedTypes, setSelectedTypes] = useState<ShopProduct["productType"][]>([]);
+export default function ShopPage({ items }: { items: CmsProductListItem[] }) {
+  const productTypeLabels = useMemo(
+    () => Array.from(new Set(items.map((item) => item.category).filter(Boolean))),
+    [items]
+  );
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [minBedrooms, setMinBedrooms] = useState<number | null>(null);
   const [minBathrooms, setMinBathrooms] = useState<number | null>(null);
   const [minFloors, setMinFloors] = useState<number | null>(null);
@@ -45,25 +64,25 @@ export default function ShopPage({ items }: { items: ShopProduct[] }) {
 
   const filtered = useMemo(() => {
     const next = items.filter((item) => {
-      if (selectedTypes.length > 0 && !selectedTypes.includes(item.productType)) return false;
-      if (minBedrooms !== null && item.bedrooms < minBedrooms) return false;
-      if (minBathrooms !== null && item.bathrooms < minBathrooms) return false;
-      if (minFloors !== null && item.floors < minFloors) return false;
-      if (minArea !== null && item.area < minArea) return false;
+      if (selectedTypes.length > 0 && !selectedTypes.includes(item.category)) return false;
+      if (minBedrooms !== null && (item.bedrooms ?? 0) < minBedrooms) return false;
+      if (minBathrooms !== null && (item.bathrooms ?? 0) < minBathrooms) return false;
+      if (minFloors !== null && (item.stories ?? 1) < minFloors) return false;
+      if (minArea !== null && getAreaNumber(item.area) < minArea) return false;
       if (duplexOnly && !item.duplex) return false;
       return true;
     });
 
-    next.sort((a, b) => (sort === "high" ? b.price - a.price : a.price - b.price));
+    next.sort((a, b) => (sort === "high" ? (b.basePrice ?? 0) - (a.basePrice ?? 0) : (a.basePrice ?? 0) - (b.basePrice ?? 0)));
     return next;
   }, [items, selectedTypes, minBedrooms, minBathrooms, minFloors, minArea, duplexOnly, sort]);
 
   const counts = useMemo(() => {
     return productTypeLabels.reduce<Record<string, number>>((acc, type) => {
-      acc[type] = items.filter((item) => item.productType === type).length;
+      acc[type] = items.filter((item) => item.category === type).length;
       return acc;
     }, {});
-  }, [items]);
+  }, [items, productTypeLabels]);
 
   return (
     <div className="store-page-shell">
@@ -176,28 +195,28 @@ export default function ShopPage({ items }: { items: ShopProduct[] }) {
 
           <div className="shop-grid">
             {filtered.map((item) => (
-              <Link key={item.id} href={`/products/${item.id}`} className="shop-card">
+              <Link key={item._id} href={`/products/${item._id}`} className="shop-card">
                 <div className="shop-card-image-wrap">
-                  <Image src={item.image} alt={item.title} fill sizes="(max-width: 900px) 100vw, 33vw" className="shop-card-image" />
+                  <Image src={item.imageUrl} alt={item.title} fill sizes="(max-width: 900px) 100vw, 33vw" className="shop-card-image" />
                   {item.badge ? <span className="shop-card-badge">{item.badge}</span> : null}
                 </div>
                 <div className="shop-card-body">
-                  <h3>{item.title} - {item.id}</h3>
-                  <p>From ${item.price.toFixed(2)}</p>
-                  {item.rating ? (
+                  <h3>{item.title}{item.planId ? ` - ${item.planId}` : ""}</h3>
+                  <p>From ${(item.basePrice ?? 0).toFixed(2)}</p>
+                  {item.rating && item.rating > 0 ? (
                     <div className="shop-rating">
                       {Array.from({ length: 5 }).map((_, index) => (
-                        <Star key={index} size={15} fill="currentColor" />
+                        <Star key={index} size={15} fill={index < Math.round(item.rating ?? 0) ? "currentColor" : "none"} />
                       ))}
                     </div>
                   ) : null}
                   <div className="shop-spec-grid">
-                    {spec(<Layers2 size={15} />, `${item.floors} Floors`)}
-                    {spec(<BedDouble size={15} />, `${item.bedrooms} Bedrooms`)}
-                    {spec(<Bath size={15} />, `${item.bathrooms} Bathrooms`)}
-                    {spec(<Ruler size={15} />, `${item.width} m`)}
-                    {spec(<House size={15} />, `${item.length} m`)}
-                    {spec(<MapPinned size={15} />, `${item.area} Area`)}
+                    {spec(<Layers2 size={15} />, `${item.stories ?? 1} Floors`)}
+                    {spec(<BedDouble size={15} />, `${item.bedrooms ?? 0} Bedrooms`)}
+                    {spec(<Bath size={15} />, `${item.bathrooms ?? 0} Bathrooms`)}
+                    {spec(<Ruler size={15} />, item.dimensions || "Custom size")}
+                    {spec(<MapPinned size={15} />, item.area || "Area on request")}
+                    {spec(<Car size={15} />, `${item.garage ?? 0} Parking`)}
                   </div>
                 </div>
               </Link>

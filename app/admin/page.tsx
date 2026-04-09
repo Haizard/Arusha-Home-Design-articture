@@ -43,7 +43,11 @@ const EMPTY_FORMS: Record<Tab, any> = {
     title: '', category: 'Architecture', description: '', imageUrl: '', 
     images: [], planId: '', area: '', dimensions: '', 
     bedrooms: 0, bathrooms: 0, stories: 1, garage: 0, 
-    features: [], basePrice: 0, packages: [] 
+    features: [], basePrice: 0, packages: [], badge: '', rating: 0, reviewName: '', duplex: false, faqs: [],
+    priceLabel: '', apartments: '', penthouses: '', fileTypes: [], recommendedType: '',
+    drawingOptions: [], trustPoints: [], roomsIncluded: [],
+    drawingSets: { architectural: [], structural: [], electrical: [], mechanical: [], boq: [] },
+    estimateTiers: []
   },
   testimonials: { name: '', role: '', text: '', avatar: '', stars: 5 },
   inquiries:    {},
@@ -957,23 +961,57 @@ export default function AdminPage() {
                     {field('Base Price (Starting)', 'basePrice', { type: 'number', placeholder: '249' })}
                   </div>
 
+                  <div className="form-grid-2">
+                    {field('Badge', 'badge', { placeholder: 'e.g. Best Seller' })}
+                    {field('Rating (0-5)', 'rating', { type: 'number', placeholder: '5', required: false })}
+                  </div>
+
+                  <div className="form-grid-2">
+                    {field('Review Name', 'reviewName', { placeholder: 'e.g. Ekong Richard', required: false })}
+                    {field('Display Price Label', 'priceLabel', { placeholder: 'e.g. From $270' })}
+                  </div>
+
+                  <div className="form-grid-2">
+                    {field('Recommended File Type', 'recommendedType', { placeholder: 'e.g. CAD + PDF', required: false })}
+                    <div />
+                  </div>
+
                   {/* Pricing Packages Area */}
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: 'var(--color-gold)', display: 'flex', justifyContent: 'space-between' }}>
                       Pricing Packages
-                      <button type="button" onClick={() => setFormData({...formData, packages: [...(formData.packages || []), {name: '', price: 0}]})} style={{ background: 'none', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', fontSize: '10px', fontWeight: 700 }}>+ ADD PACKAGE</button>
+                      <button type="button" onClick={() => setFormData({...formData, packages: [...(formData.packages || []), {name: '', price: 0, features: []}]})} style={{ background: 'none', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', fontSize: '10px', fontWeight: 700 }}>+ ADD PACKAGE</button>
                     </div>
                     {(formData.packages || []).map((pkg: any, i: number) => (
-                      <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 100px auto', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
-                        <input className="admin-input" placeholder="Package name (e.g. CAD Set)" value={pkg.name} onChange={e => {
-                          const pkgs = formData.packages.map((p: any, idx: number) => idx === i ? { ...p, name: e.target.value } : p);
-                          setFormData({...formData, packages: pkgs});
-                        }} />
-                        <input className="admin-input" type="number" placeholder="Price" value={pkg.price} onChange={e => {
-                          const pkgs = formData.packages.map((p: any, idx: number) => idx === i ? { ...p, price: +e.target.value } : p);
-                          setFormData({...formData, packages: pkgs});
-                        }} />
-                        <button type="button" onClick={() => setFormData({...formData, packages: formData.packages.filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
+                      <div key={i} style={{ marginBottom: '12px', padding: '12px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 100px auto', gap: '8px', alignItems: 'center' }}>
+                          <input className="admin-input" placeholder="Package name (e.g. CAD Set)" value={pkg.name} onChange={e => {
+                            const pkgs = formData.packages.map((p: any, idx: number) => idx === i ? { ...p, name: e.target.value } : p);
+                            setFormData({...formData, packages: pkgs});
+                          }} />
+                          <input className="admin-input" type="number" placeholder="Price" value={pkg.price} onChange={e => {
+                            const pkgs = formData.packages.map((p: any, idx: number) => idx === i ? { ...p, price: +e.target.value } : p);
+                            setFormData({...formData, packages: pkgs});
+                          }} />
+                          <button type="button" onClick={() => setFormData({...formData, packages: formData.packages.filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
+                        </div>
+                        <div className="admin-field" style={{ marginTop: '10px', marginBottom: 0 }}>
+                          <label className="admin-label">Package Features (comma separated)</label>
+                          <input
+                            className="admin-input"
+                            placeholder="Editable CAD files, Printable PDF sheets, BOQ summary..."
+                            value={(pkg.features || []).join(', ')}
+                            onChange={e => {
+                              const pkgs = formData.packages.map((p: any, idx: number) => idx === i
+                                ? {
+                                    ...p,
+                                    features: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean),
+                                  }
+                                : p);
+                              setFormData({...formData, packages: pkgs});
+                            }}
+                          />
+                        </div>
                       </div>
                     ))}
                     {(formData.packages || []).length === 0 && <div style={{ fontSize: '11px', color: '#444', textAlign: 'center' }}>No custom packages added</div>}
@@ -993,6 +1031,21 @@ export default function AdminPage() {
                     <div className="form-grid-2" style={{ marginTop: '12px' }}>
                       {field('Stories', 'stories', { type: 'number' })}
                       {field('Garage/Parking', 'garage', { type: 'number' })}
+                    </div>
+                    <div className="form-grid-2" style={{ marginTop: '12px' }}>
+                      {field('Apartments Label', 'apartments', { placeholder: 'e.g. 11 Apartments', required: false })}
+                      {field('Penthouses Label', 'penthouses', { placeholder: 'e.g. 1 Penthouse', required: false })}
+                    </div>
+                    <div className="admin-field" style={{ marginTop: '12px' }}>
+                      <label className="admin-label">Duplex Layout</label>
+                      <label style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: '#bbb' }}>
+                        <input
+                          type="checkbox"
+                          checked={!!formData.duplex}
+                          onChange={e => setFormData({ ...formData, duplex: e.target.checked })}
+                        />
+                        <span>Mark this product as duplex</span>
+                      </label>
                     </div>
                   </div>
 
@@ -1022,6 +1075,150 @@ export default function AdminPage() {
                       placeholder="Open Concept, Master Suite, Large Porch..."
                       value={formData.features ? formData.features.join(', ') : ''} 
                       onChange={e => setFormData({...formData, features: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})} 
+                    />
+                  </div>
+
+                  <div className="form-grid-2">
+                    <div className="admin-field">
+                      <label className="admin-label">File Types (comma separated)</label>
+                      <input
+                        className="admin-input"
+                        placeholder="CAD + PDF, PDF"
+                        value={formData.fileTypes ? formData.fileTypes.join(', ') : ''}
+                        onChange={e => setFormData({...formData, fileTypes: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})}
+                      />
+                    </div>
+                    <div className="admin-field">
+                      <label className="admin-label">Drawing Options (comma separated)</label>
+                      <input
+                        className="admin-input"
+                        placeholder="Architectural Drawings, Structural Drawings..."
+                        value={formData.drawingOptions ? formData.drawingOptions.join(', ') : ''}
+                        onChange={e => setFormData({...formData, drawingOptions: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-grid-2">
+                    <div className="admin-field">
+                      <label className="admin-label">Trust Points (comma separated)</label>
+                      <input
+                        className="admin-input"
+                        placeholder="Instant digital delivery, 100% money guarantee..."
+                        value={formData.trustPoints ? formData.trustPoints.join(', ') : ''}
+                        onChange={e => setFormData({...formData, trustPoints: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})}
+                      />
+                    </div>
+                    <div className="admin-field">
+                      <label className="admin-label">Rooms Included (comma separated)</label>
+                      <input
+                        className="admin-input"
+                        placeholder="Master Bedroom, Kitchen, Living Room..."
+                        value={formData.roomsIncluded ? formData.roomsIncluded.join(', ') : ''}
+                        onChange={e => setFormData({...formData, roomsIncluded: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})}
+                      />
+                    </div>
+                  </div>
+
+                  <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div className="admin-label" style={{ marginBottom: '16px', color: '#c9a84c' }}>Drawing Sets</div>
+                    <div className="form-grid-2">
+                      <div className="admin-field">
+                        <label className="admin-label">Architectural (comma separated)</label>
+                        <textarea className="admin-input resize-none" rows={3} value={formData.drawingSets?.architectural?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, architectural: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
+                      </div>
+                      <div className="admin-field">
+                        <label className="admin-label">Structural (comma separated)</label>
+                        <textarea className="admin-input resize-none" rows={3} value={formData.drawingSets?.structural?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, structural: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
+                      </div>
+                    </div>
+                    <div className="form-grid-2" style={{ marginTop: '12px' }}>
+                      <div className="admin-field">
+                        <label className="admin-label">Electrical (comma separated)</label>
+                        <textarea className="admin-input resize-none" rows={3} value={formData.drawingSets?.electrical?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, electrical: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
+                      </div>
+                      <div className="admin-field">
+                        <label className="admin-label">Mechanical (comma separated)</label>
+                        <textarea className="admin-input resize-none" rows={3} value={formData.drawingSets?.mechanical?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, mechanical: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
+                      </div>
+                    </div>
+                    <div className="admin-field" style={{ marginTop: '12px' }}>
+                      <label className="admin-label">BOQ (comma separated)</label>
+                      <textarea className="admin-input resize-none" rows={3} value={formData.drawingSets?.boq?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, boq: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
+                    </div>
+                  </div>
+
+                  <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div className="admin-label" style={{ marginBottom: '16px', color: 'var(--color-gold)', display: 'flex', justifyContent: 'space-between' }}>
+                      Construction Cost Tiers
+                      <button type="button" onClick={() => setFormData({...formData, estimateTiers: [...(formData.estimateTiers || []), { name: '', total: '', items: [] }]})} style={{ background: 'none', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', fontSize: '10px', fontWeight: 700 }}>+ ADD TIER</button>
+                    </div>
+                    {(formData.estimateTiers || []).map((tier: any, i: number) => (
+                      <div key={i} style={{ marginBottom: '12px', padding: '12px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 140px auto', gap: '8px', alignItems: 'center' }}>
+                          <input className="admin-input" placeholder="Tier name (e.g. Standard)" value={tier.name} onChange={e => {
+                            const tiers = formData.estimateTiers.map((t: any, idx: number) => idx === i ? { ...t, name: e.target.value } : t);
+                            setFormData({...formData, estimateTiers: tiers});
+                          }} />
+                          <input className="admin-input" placeholder="Total (e.g. $1,152,094)" value={tier.total} onChange={e => {
+                            const tiers = formData.estimateTiers.map((t: any, idx: number) => idx === i ? { ...t, total: e.target.value } : t);
+                            setFormData({...formData, estimateTiers: tiers});
+                          }} />
+                          <button type="button" onClick={() => setFormData({...formData, estimateTiers: formData.estimateTiers.filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
+                        </div>
+                        <div className="admin-field" style={{ marginTop: '10px', marginBottom: 0 }}>
+                          <label className="admin-label">Tier Items (one per line: Label | Cost)</label>
+                          <textarea
+                            className="admin-input resize-none"
+                            rows={4}
+                            placeholder="Substructure | $253,925"
+                            value={(tier.items || []).map((item: any) => `${item.label || ''} | ${item.cost || ''}`).join('\n')}
+                            onChange={e => {
+                              const tiers = formData.estimateTiers.map((t: any, idx: number) => idx === i
+                                ? {
+                                    ...t,
+                                    items: e.target.value
+                                      .split('\n')
+                                      .map((line: string) => line.trim())
+                                      .filter(Boolean)
+                                      .map((line: string) => {
+                                        const [label, ...costParts] = line.split('|');
+                                        return { label: label?.trim() || '', cost: costParts.join('|').trim() || '' };
+                                      })
+                                      .filter((item: any) => item.label && item.cost),
+                                  }
+                                : t);
+                              setFormData({...formData, estimateTiers: tiers});
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                    {(formData.estimateTiers || []).length === 0 && <div style={{ fontSize: '11px', color: '#444', textAlign: 'center' }}>No estimate tiers added</div>}
+                  </div>
+
+                  <div className="admin-field">
+                    <label className="admin-label">FAQs (one per line, format: Question | Answer)</label>
+                    <textarea
+                      className="admin-input resize-none"
+                      rows={4}
+                      placeholder="Can this design be customized? | Yes, we can adapt it to your site."
+                      value={(formData.faqs || []).map((faq: any) => `${faq.question || ''} | ${faq.answer || ''}`).join('\n')}
+                      onChange={e => setFormData({
+                        ...formData,
+                        faqs: e.target.value
+                          .split('\n')
+                          .map((line: string) => line.trim())
+                          .filter(Boolean)
+                          .map((line: string) => {
+                            const [question, ...answerParts] = line.split('|');
+                            return {
+                              question: question?.trim() || '',
+                              answer: answerParts.join('|').trim() || '',
+                            };
+                          })
+                          .filter((faq: any) => faq.question && faq.answer)
+                      })}
                     />
                   </div>
 
