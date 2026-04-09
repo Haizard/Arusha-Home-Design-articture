@@ -146,3 +146,4 @@
 [browser] Image with src "/images/services-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading (file://C:/Users/SFG DESIGN/Desktop/Arusha-Home-Design-articture/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
  GET /products 200 in 5.2s (next.js: 9ms, application-code: 5.2s)
+✓ Compiled in 2.7s
