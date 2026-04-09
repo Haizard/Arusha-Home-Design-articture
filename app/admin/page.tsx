@@ -12,7 +12,7 @@ import {
   LayoutDashboard, Briefcase, ShoppingBag, MessageSquare, Mail,
   Plus, Pencil, Trash2, X, Save, ChevronRight,
   AlertCircle, Loader2, Database, CheckCircle2, RefreshCw,
-  Image as ImageIcon, Home, Upload, Phone,
+  Image as ImageIcon, Home, Upload, Phone, Menu,
 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
@@ -218,6 +218,7 @@ export default function AdminPage() {
     </div>
   );
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const activeNav = NAV_ITEMS.find(n => n.id === activeTab)!;
 
   return (
@@ -232,7 +233,7 @@ export default function AdminPage() {
         .sidebar {
           width: 260px; min-width: 260px; height: 100vh;
           background: #0c0c0e; border-right: 1px solid rgba(255,255,255,0.06);
-          display: flex; flex-direction: column; transition: width .3s ease;
+          display: flex; flex-direction: column; transition: all 0.3s ease;
           overflow: hidden;
         }
         .sidebar-logo {
@@ -282,23 +283,30 @@ export default function AdminPage() {
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
         /* ── Main ── */
-        .admin-main { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
+        .admin-main { flex: 1; overflow-y: auto; display: flex; flex-direction: column; width: 100%; }
         .admin-topbar {
           position: sticky; top: 0; z-index: 10;
           display: flex; align-items: center; justify-content: space-between;
-          padding: 0 32px; height: 64px;
+          padding: 0 24px; height: 64px;
           background: rgba(6,6,8,.9); backdrop-filter: blur(16px);
           border-bottom: 1px solid rgba(255,255,255,.05);
         }
-        .topbar-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #555; }
+        .topbar-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; }
         .topbar-breadcrumb span { color: #999; }
-        .admin-content { padding: 32px; }
+        .admin-content { padding: 24px; width: 100%; max-width: 1400px; margin: 0 auto; }
+
+        .hamburger {
+          display: none; width: 36px; height: 36px; border-radius: 8px;
+          background: rgba(255,255,255,0.05); color: #888; border: none; cursor: pointer;
+          align-items: center; justify-content: center; margin-right: 12px;
+        }
 
         /* ── Page header ── */
         .page-header {
           display: flex; align-items: flex-start; justify-content: space-between;
           margin-bottom: 32px; gap: 16px;
         }
+
         .page-title { font-size: 26px; font-weight: 700; color: #fff; letter-spacing: -.02em; }
         .page-sub { font-size: 13px; color: #555; margin-top: 4px; }
 
@@ -322,7 +330,9 @@ export default function AdminPage() {
 
         /* ── Cards Grid ── */
         .cards-grid {
-          display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;
+          display: grid; 
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+          gap: 20px;
         }
         .item-card {
           background: #0e0e10; border: 1px solid rgba(255,255,255,.06);
@@ -393,21 +403,15 @@ export default function AdminPage() {
         }
         .modal-close:hover { background: rgba(255,255,255,.1); color: #fff; }
         .modal-body { padding: 24px 28px; }
-        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .admin-field { display: flex; flex-direction: column; gap: 6px; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .admin-field { display: flex; flex-direction: column; gap: 4px; }
         .admin-label { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #555; font-weight: 600; }
-        .admin-input {
+        .admin-input, .admin-select {
           background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
           border-radius: 10px; padding: 11px 14px; font-size: 13.5px; color: #e5e5e5;
           outline: none; transition: border-color .2s; width: 100%; font-family: inherit;
         }
-        .admin-input:focus { border-color: rgba(201,168,76,.6); background: rgba(201,168,76,.03); }
-        .admin-select {
-          background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
-          border-radius: 10px; padding: 11px 14px; font-size: 13.5px; color: #e5e5e5;
-          outline: none; transition: border-color .2s; width: 100%; font-family: inherit; cursor: pointer;
-        }
-        .admin-select:focus { border-color: rgba(201,168,76,.6); }
+        .admin-input:focus, .admin-select:focus { border-color: rgba(201,168,76,.6); background: rgba(201,168,76,.03); }
         option { background: #1a1a1e; }
         .image-preview {
           width: 100%; aspect-ratio: 16/9; border-radius: 10px; object-fit: cover;
@@ -461,6 +465,51 @@ export default function AdminPage() {
           color: var(--color-gold);
           border-color: var(--color-gold);
         }
+
+        /* ── Unified Responsive Block ── */
+        @media (max-width: 900px) {
+          .hamburger { display: flex; }
+          .sidebar {
+            position: fixed; inset: 0 auto 0 0; z-index: 1000;
+            transform: translateX(-100%); box-shadow: 20px 0 40px rgba(0,0,0,0.5);
+          }
+          .sidebar.open { transform: translateX(0); }
+          .sidebar-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+            z-index: 999; display: none;
+          }
+          .sidebar-overlay.open { display: block; }
+          .admin-topbar { padding: 0 16px; }
+          .topbar-breadcrumb { display: none; }
+          .admin-content { padding: 20px 16px; }
+          .page-header { flex-direction: column; align-items: stretch; }
+          .modal-box { max-width: 100%; height: 100%; max-height: 100%; border-radius: 0; }
+          .tab-strip { width: 100%; overflow-x: auto; white-space: nowrap; }
+          .hide-mobile { display: none; }
+        }
+
+        @media (max-width: 600px) {
+           .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+           .form-grid-2 { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+           .admin-input, .admin-select { padding: 8px 10px; font-size: 12px; }
+           .card-title { font-size: 12px; }
+           .card-desc { display: none; }
+           .tab-strip { 
+             display: grid !important; 
+             grid-template-columns: 1fr 1fr !important; 
+             width: 100% !important; 
+             gap: 4px !important;
+             background: transparent !important;
+             border: none !important;
+           }
+           .tab-pill { 
+             justify-content: center !important;
+             padding: 8px 4px !important;
+             font-size: 10px !important;
+             background: rgba(255,255,255,0.05) !important;
+             border: 1px solid rgba(255,255,255,0.08) !important;
+           }
+        }
       `}</style>
 
       <Toaster
@@ -471,23 +520,31 @@ export default function AdminPage() {
       />
 
       <div className="admin-root">
+        {/* Sidebar Overlay */}
+        <div className={`sidebar-overlay ${isSidebarOpen ? 'open' : ''}`} onClick={() => setIsSidebarOpen(false)} />
+
         {/* ── SIDEBAR ── */}
-        <aside className="sidebar">
+        <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
           <div className="sidebar-logo">
             <div className="logo-mark">A</div>
             <div>
               <div className="logo-text">Arusha Admin</div>
               <div className="logo-sub">Content Management</div>
             </div>
+            {isSidebarOpen && (
+               <button onClick={() => setIsSidebarOpen(false)} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#555' }}>
+                 <X size={18} />
+               </button>
+            )}
           </div>
 
           <div className="sidebar-section">
-            <div className="sidebar-section-label">Content</div>
+            <div className="sidebar-section-label">Management</div>
             {NAV_ITEMS.map(({ id, label, icon: Icon, color }) => (
               <button
                 key={id}
                 className={`nav-btn ${activeTab === id ? 'active' : ''}`}
-                onClick={() => setActiveTab(id)}
+                onClick={() => { setActiveTab(id); setIsSidebarOpen(false); }}
               >
                 <span className="nav-icon">
                   <Icon size={15} color={activeTab === id ? color : '#555'} />
@@ -502,17 +559,16 @@ export default function AdminPage() {
             <div className="db-badge">
               <div className={`db-dot ${dbStatus === 'ok' ? 'db-ok' : dbStatus === 'error' ? 'db-error' : 'db-checking'}`} />
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 12, fontWeight: 600, color: dbStatus === 'ok' ? '#34d399' : dbStatus === 'error' ? '#f87171' : '#888' }}>
-                  {dbStatus === 'ok' ? 'MongoDB Connected' : dbStatus === 'error' ? 'DB Disconnected' : 'Connecting…'}
+                <div style={{ fontSize: 11, fontWeight: 700, color: dbStatus === 'ok' ? '#34d399' : dbStatus === 'error' ? '#f87171' : '#888' }}>
+                  {dbStatus === 'ok' ? 'Cloud Sync Online' : dbStatus === 'error' ? 'Sync Paused' : 'Connecting…'}
                 </div>
-                <div style={{ fontSize: 10, color: '#333', marginTop: 1 }}>Atlas Cluster</div>
+                <div style={{ fontSize: 9, color: '#333', textTransform: 'uppercase' }}>Production DB Active</div>
               </div>
               <Database size={13} color={dbStatus === 'ok' ? '#34d399' : '#555'} />
             </div>
-            <Link href="/" target="_blank" className="nav-btn" style={{ marginTop: 6, textDecoration: 'none', display: 'flex' }}>
+            <Link href="/" className="nav-btn" style={{ marginTop: 6, textDecoration: 'none', display: 'flex' }}>
               <span className="nav-icon"><Home size={14} color="#555" /></span>
               View Site
-              <ChevronRight size={13} style={{ marginLeft: 'auto', color: '#333' }} />
             </Link>
           </div>
         </aside>
@@ -521,18 +577,23 @@ export default function AdminPage() {
         <main className="admin-main">
           {/* Top bar */}
           <div className="admin-topbar">
-            <div className="topbar-breadcrumb">
-              <span>Admin</span>
-              <ChevronRight size={13} />
-              <span style={{ color: '#c9a84c', fontWeight: 600, textTransform: 'capitalize' }}>{activeTab}</span>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+               <button className="hamburger" onClick={() => setIsSidebarOpen(true)}>
+                 <Menu size={20} />
+               </button>
+               <div className="topbar-breadcrumb">
+                 <span>CMS</span>
+                 <ChevronRight size={12} />
+                 <span style={{ color: '#c9a84c', fontWeight: 600, textTransform: 'capitalize' }}>{activeTab}</span>
+               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <button className="btn-ghost" onClick={fetchData} title="Refresh">
-                <RefreshCw size={14} /> Refresh
+                <RefreshCw size={12} /> <span className="hide-mobile">Refresh</span>
               </button>
               {activeTab !== 'inquiries' && (
-                <button className="btn-primary" onClick={() => openModal()}>
-                  <Plus size={16} /> Add {activeTab.slice(0, -1)}
+                <button className="btn-primary" onClick={() => openModal()} style={{ padding: '8px 16px' }}>
+                  <Plus size={16} /> <span style={{ fontSize: '12px' }}>Add New</span>
                 </button>
               )}
             </div>

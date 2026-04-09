@@ -19,7 +19,9 @@ export async function POST(req: NextRequest) {
     const ext = file.name.split('.').pop();
     const filename = `${randomUUID()}.${ext}`;
     
-    // Ensure upload directory exists
+    // PRODUCTION NOTE: Vercel filesystem is read-only. 
+    // For production, you should use a cloud provider like Cloudinary or Vercel Blob.
+    // Local uploads will work in dev but will be lost on deployment.
     const uploadDir = join(process.cwd(), 'public', 'uploads');
     try {
       await mkdir(uploadDir, { recursive: true });

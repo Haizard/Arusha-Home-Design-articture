@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "www.maramani.com",
+        hostname: "res.cloudinary.com",
         pathname: "/**",
       },
     ],

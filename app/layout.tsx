@@ -57,6 +57,8 @@ export const metadata: Metadata = {
   },
 };
 
+import LayoutWrapper from "@/components/layout/LayoutWrapper";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
@@ -66,9 +68,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <SmoothScrollProvider>
           <ScrollProgress />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <LayoutWrapper>
+            {children}
+          </LayoutWrapper>
         </SmoothScrollProvider>
       </body>
     </html>
