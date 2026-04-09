@@ -1,0 +1,58 @@
+﻿Γùç injected env (1) from .env // tip: Γùê encrypted .env [www.dotenvx.com]
+Γùç injected env (0) from .env.local // tip: Γîÿ enable debugging { debug: true }
+Starting seed process...
+MONGODB_URI: Defined (length: 89)
+node.exe : Error: 
+MONGODB_URI is not 
+defined. Set it in .env 
+or .env.local
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" "C:
+\Users\Dell\AppData\Roamin
+g\n ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (E  
+  rror: MONGODB_...v or   
+  .env.local:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+    at connectDB (C:\Users
+\Dell\Desktop\architecture
+\lib\mongodb.ts:18:11)
+    at seed (C:\Users\Dell
+\Desktop\architecture\seed
+.ts:158:9)
+    at Product (C:\Users\D
+ell\Desktop\architecture\s
+eed.ts:173:1)
+    at Object.<anonymous> 
+(C:\Users\Dell\Desktop\arc
+hitecture\seed.ts:176:2)
+    at Module._compile (no
+de:internal/modules/cjs/lo
+ader:1812:14)
+    at Object.transformer 
+(C:\Users\Dell\Desktop\arc
+hitecture\node_modules\tsx
+\dist\register-D46fvsV_.cj
+s:3:1104)
+    at Module.load (node:i
+nternal/modules/cjs/loader
+:1533:32)
+    at Module._load (node:
+internal/modules/cjs/loade
+r:1335:12)
+    at wrapModuleLoad (nod
+e:internal/modules/cjs/loa
+der:255:19)
+    at loadCJSModuleWithMo
+duleLoad (node:internal/mo
+dules/esm/translators:328:
+3)
