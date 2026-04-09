@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import type { LucideIcon } from 'lucide-react';
 import {
   getServices, addService, updateService, deleteService,
   getProjects, addProject, updateProject, deleteProject,
@@ -11,7 +12,7 @@ import {
 import {
   LayoutDashboard, Briefcase, ShoppingBag, MessageSquare, Mail,
   Plus, Pencil, Trash2, X, Save, ChevronRight,
-  AlertCircle, Loader2, Database, CheckCircle2, RefreshCw,
+  AlertCircle, Loader2, Database, RefreshCw,
   Image as ImageIcon, Home, Upload, Phone, Menu,
 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
@@ -19,7 +20,87 @@ import Link from 'next/link';
 
 type Tab = 'services' | 'projects' | 'products' | 'testimonials' | 'inquiries';
 
-const NAV_ITEMS: { id: Tab; label: string; icon: any; color: string }[] = [
+type ProcessStep = { title: string; desc: string };
+type ServiceFeature = { icon: string; title: string; desc: string };
+type ServiceFaq = { q: string; a: string };
+type ProductPackageForm = { name: string; price: number; features: string[] };
+type EstimateTierItem = { label: string; cost: string };
+type EstimateTierForm = { name: string; total: string; items: EstimateTierItem[] };
+type ProductFaqForm = { question: string; answer: string };
+
+type AdminFormData = {
+  [key: string]: unknown;
+  _id?: string;
+  __v?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  serviceId?: string;
+  iconName?: string;
+  title?: string;
+  description?: string;
+  imageUrl?: string;
+  processSteps?: ProcessStep[];
+  features_list?: ServiceFeature[];
+  faqs?: ServiceFaq[] | ProductFaqForm[];
+  category?: string;
+  location?: string;
+  gallery?: string[];
+  blueprints?: string[];
+  specifications?: {
+    year?: string;
+    area?: string;
+    team?: string[];
+    materials?: string[];
+    client?: string;
+  };
+  drawingSets?: {
+    rooms?: string[];
+    architectural?: string[];
+    structural?: string[];
+    mechanical?: string[];
+    electrical?: string[];
+    boq?: string[];
+  };
+  constructionCost?: string;
+  features?: string[];
+  images?: string[];
+  planId?: string;
+  area?: string;
+  dimensions?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  stories?: number;
+  garage?: number;
+  basePrice?: number;
+  packages?: ProductPackageForm[];
+  badge?: string;
+  rating?: number;
+  reviewName?: string;
+  duplex?: boolean;
+  priceLabel?: string;
+  apartments?: string;
+  penthouses?: string;
+  fileTypes?: string[];
+  recommendedType?: string;
+  drawingOptions?: string[];
+  trustPoints?: string[];
+  roomsIncluded?: string[];
+  estimateTiers?: EstimateTierForm[];
+  name?: string;
+  role?: string;
+  text?: string;
+  avatar?: string;
+  stars?: number;
+  projectName?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+  desc?: string;
+};
+
+type AdminListItem = AdminFormData;
+
+const NAV_ITEMS: { id: Tab; label: string; icon: LucideIcon; color: string }[] = [
   { id: 'services',     label: 'Services',     icon: LayoutDashboard, color: '#c9a84c' },
   { id: 'projects',     label: 'Projects',     icon: Briefcase,       color: '#60a5fa' },
   { id: 'products',     label: 'Products',     icon: ShoppingBag,     color: '#a78bfa' },
@@ -27,7 +108,7 @@ const NAV_ITEMS: { id: Tab; label: string; icon: any; color: string }[] = [
   { id: 'inquiries',    label: 'Inquiries',    icon: Mail,            color: '#f87171' },
 ];
 
-const EMPTY_FORMS: Record<Tab, any> = {
+const EMPTY_FORMS: Record<Tab, AdminFormData> = {
   services:     { 
     serviceId: '', title: '', description: '', iconName: 'Sofa', imageUrl: '',
     processSteps: [], features_list: [], faqs: []
@@ -56,13 +137,12 @@ const EMPTY_FORMS: Record<Tab, any> = {
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<Tab>('services');
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<AdminListItem[]>([]);
   const [dbStatus, setDbStatus] = useState<'checking'|'ok'|'error'>('checking');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingItem, setEditingItem] = useState<any>(null);
-  const [formData, setFormData] = useState<any>({});
+  const [editingItem, setEditingItem] = useState<AdminListItem | null>(null);
+  const [formData, setFormData] = useState<AdminFormData>({});
   const [submitting, setSubmitting] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   // Test DB connection on mount
   useEffect(() => {
@@ -75,14 +155,14 @@ export default function AdminPage() {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      let result: any[] = [];
+      let result: AdminListItem[] = [];
       if (activeTab === 'services')     result = await getServices();
       else if (activeTab === 'projects')     result = await getProjects();
       else if (activeTab === 'products')     result = await getProducts();
       else if (activeTab === 'testimonials') result = await getTestimonials();
       else                                   result = await getInquiries();
       // Stringify ObjectIds to plain strings
-      setData(JSON.parse(JSON.stringify(result)));
+      setData(JSON.parse(JSON.stringify(result)) as AdminListItem[]);
     } catch {
       toast.error('Failed to load data');
     } finally {
@@ -92,36 +172,46 @@ export default function AdminPage() {
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
-  const openModal = (item: any = null) => {
+  const openModal = (item: AdminListItem | null = null) => {
     setEditingItem(item);
     setFormData(item ? { ...item } : { ...EMPTY_FORMS[activeTab] });
     setIsModalOpen(true);
   };
   const closeModal = () => { setIsModalOpen(false); setEditingItem(null); setFormData({}); };
 
+  const getErrorMessage = (error: unknown, fallback: string) =>
+    error instanceof Error ? error.message : fallback;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     const tid = toast.loading(editingItem ? 'Saving changes…' : 'Creating entry…');
     try {
-      // Remove internal MongoDB keys for both creation and update
-      const { _id, __v, createdAt, updatedAt, ...cleanData } = formData;
+      const cleanData = { ...formData };
+      delete cleanData._id;
+      delete cleanData.__v;
+      delete cleanData.createdAt;
+      delete cleanData.updatedAt;
 
       if (activeTab === 'services') {
-        editingItem ? await updateService(editingItem._id, cleanData) : await addService(cleanData);
+        if (editingItem?._id) await updateService(editingItem._id, cleanData);
+        else await addService(cleanData);
       } else if (activeTab === 'projects') {
-        editingItem ? await updateProject(editingItem._id, cleanData) : await addProject(cleanData);
+        if (editingItem?._id) await updateProject(editingItem._id, cleanData);
+        else await addProject(cleanData);
       } else if (activeTab === 'products') {
-        editingItem ? await updateProduct(editingItem._id, cleanData) : await addProduct(cleanData);
+        if (editingItem?._id) await updateProduct(editingItem._id, cleanData);
+        else await addProduct(cleanData);
       } else {
-        editingItem ? await updateTestimonial(editingItem._id, cleanData) : await addTestimonial(cleanData);
+        if (editingItem?._id) await updateTestimonial(editingItem._id, cleanData);
+        else await addTestimonial(cleanData);
       }
       toast.success(editingItem ? 'Updated ✓' : 'Created ✓', { id: tid });
       closeModal();
       fetchData();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Submit error:', err);
-      toast.error(err.message || 'Operation failed. Check all fields.', { id: tid });
+      toast.error(getErrorMessage(err, 'Operation failed. Check all fields.'), { id: tid });
     } finally {
       setSubmitting(false);
     }
@@ -169,8 +259,8 @@ export default function AdminPage() {
       } else {
         throw new Error(result.message);
       }
-    } catch (err: any) {
-      toast.error(err.message || 'Upload failed', { id: tid });
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Upload failed'), { id: tid });
     }
   };
 
@@ -223,7 +313,12 @@ export default function AdminPage() {
   );
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const activeNav = NAV_ITEMS.find(n => n.id === activeTab)!;
+  const processSteps = (formData.processSteps ?? []) as ProcessStep[];
+  const serviceFeatures = (formData.features_list ?? []) as ServiceFeature[];
+  const serviceFaqs = (formData.faqs ?? []) as ServiceFaq[];
+  const productPackages = (formData.packages ?? []) as ProductPackageForm[];
+  const estimateTiers = (formData.estimateTiers ?? []) as EstimateTierForm[];
+  const productFaqs = (formData.faqs ?? []) as ProductFaqForm[];
 
   return (
     <>
@@ -749,17 +844,17 @@ export default function AdminPage() {
                       Architectural Process 
                       <button type="button" onClick={() => setFormData({...formData, processSteps: [...(formData.processSteps || []), {title: '', desc: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD STEP</button>
                     </div>
-                    {(formData.processSteps || []).map((step: any, i: number) => (
+                    {processSteps.map((step, i) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr auto', gap: '8px', marginBottom: '8px', alignItems: 'start' }}>
                         <input className="admin-input" placeholder="Title" value={step.title} onChange={e => {
-                          const steps = formData.processSteps.map((s: any, idx: number) => idx === i ? { ...s, title: e.target.value } : s);
+                          const steps = processSteps.map((s, idx) => idx === i ? { ...s, title: e.target.value } : s);
                           setFormData({...formData, processSteps: steps});
                         }} />
                         <textarea className="admin-input" rows={1} placeholder="Description" value={step.desc} onChange={e => {
-                          const steps = formData.processSteps.map((s: any, idx: number) => idx === i ? { ...s, desc: e.target.value } : s);
+                          const steps = processSteps.map((s, idx) => idx === i ? { ...s, desc: e.target.value } : s);
                           setFormData({...formData, processSteps: steps});
                         }} />
-                        <button type="button" onClick={() => setFormData({...formData, processSteps: formData.processSteps.filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
+                        <button type="button" onClick={() => setFormData({...formData, processSteps: processSteps.filter((_, idx) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
                       </div>
                     ))}
                   </div>
@@ -770,21 +865,21 @@ export default function AdminPage() {
                       Specialized Features 
                       <button type="button" onClick={() => setFormData({...formData, features_list: [...(formData.features_list || []), {icon: 'Zap', title: '', desc: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD FEATURE</button>
                     </div>
-                    {(formData.features_list || []).map((feat: any, i: number) => (
+                    {serviceFeatures.map((feat, i) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '100px 1fr 1fr auto', gap: '8px', marginBottom: '8px', alignItems: 'start' }}>
                         <input className="admin-input" placeholder="Icon" value={feat.icon} onChange={e => {
-                          const f = formData.features_list.map((item: any, idx: number) => idx === i ? { ...item, icon: e.target.value } : item);
+                          const f = serviceFeatures.map((item, idx) => idx === i ? { ...item, icon: e.target.value } : item);
                           setFormData({...formData, features_list: f});
                         }} />
                         <input className="admin-input" placeholder="Title" value={feat.title} onChange={e => {
-                          const f = formData.features_list.map((item: any, idx: number) => idx === i ? { ...item, title: e.target.value } : item);
+                          const f = serviceFeatures.map((item, idx) => idx === i ? { ...item, title: e.target.value } : item);
                           setFormData({...formData, features_list: f});
                         }} />
                         <input className="admin-input" placeholder="Desc" value={feat.desc} onChange={e => {
-                          const f = formData.features_list.map((item: any, idx: number) => idx === i ? { ...item, desc: e.target.value } : item);
+                          const f = serviceFeatures.map((item, idx) => idx === i ? { ...item, desc: e.target.value } : item);
                           setFormData({...formData, features_list: f});
                         }} />
-                        <button type="button" onClick={() => setFormData({...formData, features_list: formData.features_list.filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
+                        <button type="button" onClick={() => setFormData({...formData, features_list: serviceFeatures.filter((_, idx) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
                       </div>
                     ))}
                   </div>
@@ -795,17 +890,17 @@ export default function AdminPage() {
                       FAQs
                       <button type="button" onClick={() => setFormData({...formData, faqs: [...(formData.faqs || []), {q: '', a: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD FAQ</button>
                     </div>
-                    {(formData.faqs || []).map((faq: any, i: number) => (
+                    {serviceFaqs.map((faq, i) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr auto', gap: '8px', marginBottom: '8px', alignItems: 'start' }}>
                         <input className="admin-input" placeholder="Question" value={faq.q} onChange={e => {
-                          const f = formData.faqs.map((item: any, idx: number) => idx === i ? { ...item, q: e.target.value } : item);
+                          const f = serviceFaqs.map((item, idx) => idx === i ? { ...item, q: e.target.value } : item);
                           setFormData({...formData, faqs: f});
                         }} />
                         <textarea className="admin-input" rows={1} placeholder="Answer" value={faq.a} onChange={e => {
-                          const f = formData.faqs.map((item: any, idx: number) => idx === i ? { ...item, a: e.target.value } : item);
+                          const f = serviceFaqs.map((item, idx) => idx === i ? { ...item, a: e.target.value } : item);
                           setFormData({...formData, faqs: f});
                         }} />
-                        <button type="button" onClick={() => setFormData({...formData, faqs: formData.faqs.filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
+                        <button type="button" onClick={() => setFormData({...formData, faqs: serviceFaqs.filter((_, idx) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
                       </div>
                     ))}
                   </div>
@@ -933,6 +1028,7 @@ export default function AdminPage() {
                   {formData.imageUrl && (
                     <div style={{ marginTop: '8px' }}>
                       <label className="admin-label">Hero Preview</label>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={formData.imageUrl} alt="preview" className="image-preview" />
                     </div>
                   )}
@@ -982,18 +1078,18 @@ export default function AdminPage() {
                       Pricing Packages
                       <button type="button" onClick={() => setFormData({...formData, packages: [...(formData.packages || []), {name: '', price: 0, features: []}]})} style={{ background: 'none', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', fontSize: '10px', fontWeight: 700 }}>+ ADD PACKAGE</button>
                     </div>
-                    {(formData.packages || []).map((pkg: any, i: number) => (
+                    {productPackages.map((pkg, i) => (
                       <div key={i} style={{ marginBottom: '12px', padding: '12px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 100px auto', gap: '8px', alignItems: 'center' }}>
                           <input className="admin-input" placeholder="Package name (e.g. CAD Set)" value={pkg.name} onChange={e => {
-                            const pkgs = formData.packages.map((p: any, idx: number) => idx === i ? { ...p, name: e.target.value } : p);
+                            const pkgs = productPackages.map((p, idx) => idx === i ? { ...p, name: e.target.value } : p);
                             setFormData({...formData, packages: pkgs});
                           }} />
                           <input className="admin-input" type="number" placeholder="Price" value={pkg.price} onChange={e => {
-                            const pkgs = formData.packages.map((p: any, idx: number) => idx === i ? { ...p, price: +e.target.value } : p);
+                            const pkgs = productPackages.map((p, idx) => idx === i ? { ...p, price: +e.target.value } : p);
                             setFormData({...formData, packages: pkgs});
                           }} />
-                          <button type="button" onClick={() => setFormData({...formData, packages: formData.packages.filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
+                          <button type="button" onClick={() => setFormData({...formData, packages: productPackages.filter((_, idx) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
                         </div>
                         <div className="admin-field" style={{ marginTop: '10px', marginBottom: 0 }}>
                           <label className="admin-label">Package Features (comma separated)</label>
@@ -1002,7 +1098,7 @@ export default function AdminPage() {
                             placeholder="Editable CAD files, Printable PDF sheets, BOQ summary..."
                             value={(pkg.features || []).join(', ')}
                             onChange={e => {
-                              const pkgs = formData.packages.map((p: any, idx: number) => idx === i
+                              const pkgs = productPackages.map((p, idx) => idx === i
                                 ? {
                                     ...p,
                                     features: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean),
@@ -1153,18 +1249,18 @@ export default function AdminPage() {
                       Construction Cost Tiers
                       <button type="button" onClick={() => setFormData({...formData, estimateTiers: [...(formData.estimateTiers || []), { name: '', total: '', items: [] }]})} style={{ background: 'none', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', fontSize: '10px', fontWeight: 700 }}>+ ADD TIER</button>
                     </div>
-                    {(formData.estimateTiers || []).map((tier: any, i: number) => (
+                    {estimateTiers.map((tier, i) => (
                       <div key={i} style={{ marginBottom: '12px', padding: '12px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 140px auto', gap: '8px', alignItems: 'center' }}>
                           <input className="admin-input" placeholder="Tier name (e.g. Standard)" value={tier.name} onChange={e => {
-                            const tiers = formData.estimateTiers.map((t: any, idx: number) => idx === i ? { ...t, name: e.target.value } : t);
+                            const tiers = estimateTiers.map((t, idx) => idx === i ? { ...t, name: e.target.value } : t);
                             setFormData({...formData, estimateTiers: tiers});
                           }} />
                           <input className="admin-input" placeholder="Total (e.g. $1,152,094)" value={tier.total} onChange={e => {
-                            const tiers = formData.estimateTiers.map((t: any, idx: number) => idx === i ? { ...t, total: e.target.value } : t);
+                            const tiers = estimateTiers.map((t, idx) => idx === i ? { ...t, total: e.target.value } : t);
                             setFormData({...formData, estimateTiers: tiers});
                           }} />
-                          <button type="button" onClick={() => setFormData({...formData, estimateTiers: formData.estimateTiers.filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
+                          <button type="button" onClick={() => setFormData({...formData, estimateTiers: estimateTiers.filter((_, idx) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
                         </div>
                         <div className="admin-field" style={{ marginTop: '10px', marginBottom: 0 }}>
                           <label className="admin-label">Tier Items (one per line: Label | Cost)</label>
@@ -1172,9 +1268,9 @@ export default function AdminPage() {
                             className="admin-input resize-none"
                             rows={4}
                             placeholder="Substructure | $253,925"
-                            value={(tier.items || []).map((item: any) => `${item.label || ''} | ${item.cost || ''}`).join('\n')}
+                            value={(tier.items || []).map((item) => `${item.label || ''} | ${item.cost || ''}`).join('\n')}
                             onChange={e => {
-                              const tiers = formData.estimateTiers.map((t: any, idx: number) => idx === i
+                              const tiers = estimateTiers.map((t, idx) => idx === i
                                 ? {
                                     ...t,
                                     items: e.target.value
@@ -1185,7 +1281,7 @@ export default function AdminPage() {
                                         const [label, ...costParts] = line.split('|');
                                         return { label: label?.trim() || '', cost: costParts.join('|').trim() || '' };
                                       })
-                                      .filter((item: any) => item.label && item.cost),
+                                      .filter((item: EstimateTierItem) => item.label && item.cost),
                                   }
                                 : t);
                               setFormData({...formData, estimateTiers: tiers});
@@ -1203,7 +1299,7 @@ export default function AdminPage() {
                       className="admin-input resize-none"
                       rows={4}
                       placeholder="Can this design be customized? | Yes, we can adapt it to your site."
-                      value={(formData.faqs || []).map((faq: any) => `${faq.question || ''} | ${faq.answer || ''}`).join('\n')}
+                      value={productFaqs.map((faq) => `${faq.question || ''} | ${faq.answer || ''}`).join('\n')}
                       onChange={e => setFormData({
                         ...formData,
                         faqs: e.target.value
@@ -1217,14 +1313,15 @@ export default function AdminPage() {
                               answer: answerParts.join('|').trim() || '',
                             };
                           })
-                          .filter((faq: any) => faq.question && faq.answer)
+                          .filter((faq: ProductFaqForm) => faq.question && faq.answer)
                       })}
                     />
                   </div>
 
                   {textarea('Description', 'description', 'Describe this design…')}
-                  
+
                   {formData.imageUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
                     <img src={formData.imageUrl} alt="preview" className="image-preview" />
                   )}
                 </>)}
