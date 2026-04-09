@@ -1,0 +1,20 @@
+
+> temp-app@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.2 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.100.26:3000
+- Environments: .env
+✓ Ready in 5.9s
+⚠ Slow filesystem detected. The benchmark took 911ms. If C:\Users\SFG DESIGN\Desktop\Arusha-Home-Design-articture\.next/dev is a network drive, consider moving it to a local folder.
+See more: https://nextjs.org/docs/app/guides/local-development
+
+○ Compiling / ...
+ GET / 200 in 11.1s (next.js: 7.9s, application-code: 3.2s)
+ GET / 200 in 3.7s (next.js: 19ms, application-code: 3.7s)
+○ Compiling /products/[id] ...
+ GET /products/AHD-24411 200 in 22.0s (next.js: 21.1s, application-code: 993ms)
+○ Compiling /products ...
+ GET /products 200 in 18.8s (next.js: 18.3s, application-code: 552ms)
+ GET /products/AHD-24411 200 in 162ms (next.js: 61ms, application-code: 101ms)

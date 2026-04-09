@@ -64,6 +64,13 @@ const categories = [
   { title: "Modern villas", image: "/images/projects-hero.jpg", href: "/projects" },
 ];
 
+const browseFacets = [
+  { label: "By size", items: ["Under 100 sqm", "200-300 sqm", "500+ sqm"] },
+  { label: "By bedrooms", items: ["2 bedrooms", "3 bedrooms", "4 bedrooms"] },
+  { label: "By style", items: ["Modern", "Contemporary", "Luxury"] },
+  { label: "By budget", items: ["Under $100", "$100-$300", "$300-$500"] },
+];
+
 const familyPlans = [
   { title: "2 bedroom plans", subtitle: "Compact homes for efficient living", image: "/images/prod-bed.jpg" },
   { title: "3 bedroom plans", subtitle: "Balanced layouts for growing families", image: "/images/hero-1.jpg" },
@@ -288,6 +295,23 @@ export default function MarketplaceHome() {
                 <p>{item.text}</p>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="market-shell market-facet-band">
+        <div className="market-facet-grid">
+          {browseFacets.map((facet) => (
+            <article key={facet.label} className="market-facet-card">
+              <span>{facet.label}</span>
+              <div>
+                {facet.items.map((item) => (
+                  <Link key={item} href="/products">
+                    {item}
+                  </Link>
+                ))}
+              </div>
+            </article>
           ))}
         </div>
       </section>
