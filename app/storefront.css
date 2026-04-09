@@ -1,3 +1,12 @@
+.storefront-body {
+  background: #f7f4ee !important;
+  color: #111111 !important;
+}
+
+.storefront-main {
+  background: #f7f4ee;
+}
+
 .store-page-shell {
   background: #f7f4ee;
   min-height: 100vh;
@@ -169,18 +178,18 @@
 }
 
 .collections-page {
-  padding: clamp(2rem, 5vw, 4rem) 0 clamp(3rem, 8vw, 5rem);
+  padding: clamp(0.8rem, 2vw, 1.4rem) 0 clamp(1.5rem, 5vw, 3rem);
   color: #111111;
   background: #f7f4ee;
 }
 
 .collections-header {
   text-align: center;
-  margin-bottom: 1.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .collections-header h1 {
-  font-size: clamp(2.7rem, 5vw, 5rem);
+  font-size: clamp(1.7rem, 3.6vw, 3rem);
   line-height: 0.98;
   letter-spacing: -0.05em;
 }
@@ -188,13 +197,13 @@
 .collections-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.95rem;
+  gap: 0.35rem;
 }
 
 .collection-card {
   position: relative;
-  aspect-ratio: 1.16 / 0.78;
-  border-radius: 0.4rem;
+  aspect-ratio: 1 / 0.72;
+  border-radius: 0.18rem;
   overflow: hidden;
   text-decoration: none;
   color: white;
@@ -223,12 +232,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.2rem;
+  padding: 0.45rem;
   text-align: center;
-  font-size: clamp(2.1rem, 3.5vw, 3.4rem);
+  font-size: clamp(0.72rem, 1.15vw, 1.05rem);
   font-weight: 800;
-  line-height: 0.96;
-  letter-spacing: -0.04em;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
@@ -236,7 +245,7 @@
   display: inline-flex;
   align-items: center;
   gap: 1rem;
-  margin: 1.5rem auto 0;
+  margin: 1rem auto 0;
   padding: 0.45rem 0.9rem;
   border: 1px solid rgba(17, 17, 17, 0.1);
   border-radius: 999px;
@@ -434,12 +443,9 @@
 }
 
 @media (max-width: 640px) {
-  .collections-grid {
-    grid-template-columns: 1fr;
-  }
-
   .collection-card h2 {
-    font-size: 2rem;
+    font-size: 0.58rem;
+    padding: 0.25rem;
   }
 
   .store-navbar {
@@ -454,6 +460,19 @@
   .store-utility-icons button:not(.site-mobile-toggle) {
     width: 2rem;
     height: 2rem;
+  }
+
+  .collections-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.22rem;
+  }
+
+  .collections-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .collections-page {
+    padding-top: 0.45rem;
   }
 }
 

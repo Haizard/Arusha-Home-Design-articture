@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import ShopPage from "@/components/catalog/ShopPage";
-import { shopProducts } from "@/lib/site-catalog";
+import CollectionGrid from "@/components/catalog/CollectionGrid";
+import { collectionCards } from "@/lib/site-catalog";
 
 export const metadata: Metadata = {
-  title: "Shop | Arusha Home Design Pro",
+  title: "Products | Arusha Home Design Pro",
   description:
-    "Browse all products in a Maramani-inspired shop layout with filters, sorting, and denser plan cards.",
+    "Browse all house-plan collections in a clean tiled catalog inspired by the provided Maramani collections page.",
 };
 
 export default function ProductsPage() {
-  return <ShopPage items={shopProducts} />;
+  return (
+    <div className="store-page-shell">
+      <CollectionGrid items={collectionCards} />
+    </div>
+  );
 }

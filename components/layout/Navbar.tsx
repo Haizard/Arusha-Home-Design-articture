@@ -144,6 +144,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const isProductsPage = pathname?.startsWith("/products");
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -154,14 +155,16 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="site-promo-bar" aria-hidden="true">
-        <div className="site-promo-track">
-          <span>House plan now</span>
-          <span>Customize your own house plan now</span>
-          <span>Compare layouts before you build</span>
-          <span>Design support from concept to site</span>
+      {!isProductsPage ? (
+        <div className="site-promo-bar" aria-hidden="true">
+          <div className="site-promo-track">
+            <span>House plan now</span>
+            <span>Customize your own house plan now</span>
+            <span>Compare layouts before you build</span>
+            <span>Design support from concept to site</span>
+          </div>
         </div>
-      </div>
+      ) : null}
 
       <nav className="store-navbar" role="navigation" aria-label="Main navigation">
         <Link href="/" className="store-logo">
