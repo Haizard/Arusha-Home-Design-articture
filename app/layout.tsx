@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans, Space_Grotesk, Italiana, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import "./storefront.css";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 

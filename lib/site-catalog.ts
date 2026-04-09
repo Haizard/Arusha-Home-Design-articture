@@ -50,6 +50,12 @@ export type CatalogProject = {
   summary: string;
 };
 
+export type CollectionCard = {
+  title: string;
+  image: string;
+  href: string;
+};
+
 export type CatalogService = {
   serviceId: string;
   title: string;
@@ -352,4 +358,45 @@ export const catalogProjects: CatalogProject[] = [
     status: "Completed",
     summary: "An upscale interior concept focused on view framing, quiet luxury, and layered material contrast.",
   },
+];
+
+export const collectionCards: CollectionCard[] = [
+  { title: "$100 to $300 Plans", image: "/images/proj-3.jpg", href: "/products/AHD-23307" },
+  { title: "$300 to $500 Plans", image: "/images/proj-2.jpg", href: "/products/AHD-22304" },
+  { title: "$500 to $700 Plans", image: "/images/hero-2.jpg", href: "/products/AHD-24411" },
+  { title: "$700+ Plans", image: "/images/projects-hero.jpg", href: "/products/AHD-38901" },
+  { title: "1 Bedroom House Plans", image: "/images/hero-4.jpg", href: "/products/AHD-22304" },
+  { title: "1 Floor Plans", image: "/images/proj-1.jpg", href: "/products/AHD-13418" },
+  { title: "100-200 SQM", image: "/images/prod-bed.jpg", href: "/products/AHD-22304" },
+  { title: "2 Bedroom House Plans", image: "/images/proj-1.jpg", href: "/products/AHD-22304" },
+  { title: "2 Floor Plans", image: "/images/hero-1.jpg", href: "/products/AHD-24411" },
+  { title: "200-300 SQM", image: "/images/proj-2.jpg", href: "/products/AHD-13418" },
+  { title: "3 Bedroom House Plans", image: "/images/service-kitchen.jpg", href: "/products/AHD-13418" },
+  { title: "3 Floor Plans", image: "/images/hero-3.jpg", href: "/products/AHD-38901" },
+  { title: "300-400 SQM", image: "/images/proj-3.jpg", href: "/products/AHD-24411" },
+  { title: "4 Bedroom House Plans", image: "/images/hero-2.jpg", href: "/products/AHD-24411" },
+  { title: "4+ Floor Plans", image: "/images/projects-hero.jpg", href: "/products/AHD-38901" },
+  { title: "400-500 SQM", image: "/images/hero-1.jpg", href: "/products/AHD-38901" },
+  { title: "5+ Bedroom House Plans", image: "/images/hero-2.jpg", href: "/products/AHD-38901" },
+  { title: "500-750 SQM", image: "/images/about-hero.jpg", href: "/products/AHD-38901" },
+  { title: "750+ SQM", image: "/images/hero-1.jpg", href: "/products/AHD-38901" },
+  { title: "A Frame House Plans", image: "/images/hero-3.jpg", href: "/products/AHD-22304" },
+  { title: "African House Plans", image: "/images/proj-2.jpg", href: "/products/AHD-23307" },
+  { title: "All Products", image: "/images/services-hero.jpg", href: "/products" },
+  { title: "Apartment Plans", image: "/images/projects-hero.jpg", href: "/products/AHD-38901" },
+  { title: "Beach House Floor Plans", image: "/images/proj-1.jpg", href: "/products/AHD-24411" },
+  { title: "Beach House Plans", image: "/images/proj-3.jpg", href: "/products/AHD-13418" },
+  { title: "Best Sellers", image: "/images/proj-2.jpg", href: "/products/AHD-24411" },
+  { title: "Botswana House Plans", image: "/images/hero-4.jpg", href: "/products/AHD-13418" },
+  { title: "Bungalow House Plans", image: "/images/hero-3.jpg", href: "/products/AHD-23307" },
+  { title: "Cabin House Plans", image: "/images/hero-1.jpg", href: "/products/AHD-22304" },
+  { title: "Cape Dutch House Plans", image: "/images/about-hero.jpg", href: "/products/AHD-24411" },
+  { title: "Classical House Plans", image: "/images/proj-1.jpg", href: "/products/AHD-13418" },
+  { title: "Coastal House Plans", image: "/images/proj-2.jpg", href: "/products/AHD-22304" },
+  { title: "Colonial House Plans", image: "/images/proj-3.jpg", href: "/products/AHD-24411" },
+  { title: "Commercial Buildings", image: "/images/service-arch.jpg", href: "/projects" },
+  { title: "Community Health Center Medical Centres Building Design", image: "/images/services-hero.jpg", href: "/projects" },
+  { title: "Contemporary House Plans", image: "/images/about-hero.jpg", href: "/products/AHD-38901" },
+  { title: "Cottage House Plans", image: "/images/hero-4.jpg", href: "/products/AHD-22304" },
+  { title: "Country House Plans", image: "/images/hero-3.jpg", href: "/products/AHD-23307" },
 ];

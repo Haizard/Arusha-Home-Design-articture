@@ -3,15 +3,82 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/projects", label: "Projects" },
-  { href: "/products", label: "Products" },
-  { href: "/contact", label: "Contact" },
+  { href: "/products", label: "Shop" },
+  { href: "/products", label: "Best Sellers" },
+  { href: "/products", label: "By Size" },
+  { href: "/products", label: "By Style" },
+  { href: "/products", label: "By Budget" },
+  { href: "/contact", label: "Custom Plan" },
+  { href: "/about", label: "Learn" },
 ];
+
+const dropdowns: Record<
+  string,
+  {
+    featured: { title: string; href: string; description: string; image: string };
+    links: { title: string; href: string; description: string }[];
+  }
+> = {
+  "By Size": {
+    featured: {
+      title: "Explore plans by size",
+      href: "/products",
+      description: "Compare compact homes, family layouts, and large-format concepts with a clearer storefront view.",
+      image: "/images/hero-2.jpg",
+    },
+    links: [
+      { title: "100-200 SQM", href: "/products/AHD-22304", description: "Compact, efficient homes" },
+      { title: "200-300 SQM", href: "/products/AHD-13418", description: "Balanced family layouts" },
+      { title: "300-500 SQM", href: "/products/AHD-24411", description: "More room for premium living" },
+      { title: "500+ SQM", href: "/products/AHD-38901", description: "Large-format statement homes" },
+    ],
+  },
+  "By Style": {
+    featured: {
+      title: "Browse by architectural style",
+      href: "/products",
+      description: "Move between modern, contemporary, luxury, and expressive character-led homes.",
+      image: "/images/hero-1.jpg",
+    },
+    links: [
+      { title: "Modern House Plans", href: "/products/AHD-13418", description: "Clean lines and open living" },
+      { title: "Contemporary Homes", href: "/products/AHD-24411", description: "Refined curb appeal" },
+      { title: "Luxury Mansions", href: "/products/AHD-38901", description: "Grand, high-end concepts" },
+      { title: "A-Frame & Cabins", href: "/products/AHD-22304", description: "Distinctive character-led forms" },
+    ],
+  },
+  "By Budget": {
+    featured: {
+      title: "Compare by budget band",
+      href: "/products",
+      description: "Sort plans by entry, mid-range, and premium investment levels before you customize.",
+      image: "/images/proj-3.jpg",
+    },
+    links: [
+      { title: "Under $300", href: "/products/AHD-22304", description: "Entry-level plan packages" },
+      { title: "$300-$500", href: "/products/AHD-23307", description: "Popular mid-range choices" },
+      { title: "$500-$1000", href: "/products/AHD-24411", description: "Bigger family-ready plans" },
+      { title: "$1000+", href: "/products/AHD-38901", description: "Premium complex builds" },
+    ],
+  },
+  Learn: {
+    featured: {
+      title: "Learn how the storefront works",
+      href: "/about",
+      description: "Understand the studio, see built work, and move into a custom consultation when needed.",
+      image: "/images/about-hero.jpg",
+    },
+    links: [
+      { title: "About the Studio", href: "/about", description: "How we design and deliver" },
+      { title: "See Projects", href: "/projects", description: "Built work and concept studies" },
+      { title: "Book a Consultation", href: "/contact", description: "Talk through your site and goals" },
+      { title: "Custom Plan Support", href: "/contact", description: "Adapt any plan to your needs" },
+    ],
+  },
+};
 
 function MenuIcon() {
   return (
@@ -32,10 +99,51 @@ function CloseIcon() {
   );
 }
 
+function UtilityIcon({ type }: { type: "heart" | "search" | "user" | "bag" }) {
+  if (type === "heart") {
+    return (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 21s-6.7-4.35-9.33-8.07C.56 9.85 1.32 5.75 5 4.3c2.07-.82 4.36.02 5.68 1.8C12 4.32 14.29 3.48 16.36 4.3c3.68 1.45 4.44 5.55 2.33 8.63C18.7 16.65 12 21 12 21Z" />
+      </svg>
+    );
+  }
+  if (type === "search") {
+    return (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-3.5-3.5" />
+      </svg>
+    );
+  }
+  if (type === "user") {
+    return (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c1.8-4 5-6 8-6s6.2 2 8 6" />
+      </svg>
+    );
+  }
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M6 7h15l-1.3 9.1a2 2 0 0 1-2 1.7H9.2a2 2 0 0 1-2-1.6L5.2 3.8A1 1 0 0 0 4.2 3H2" />
+      <circle cx="9" cy="21" r="1" />
+      <circle cx="18" cy="21" r="1" />
+    </svg>
+  );
+}
+
+function ChevronTiny() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isHome = pathname === "/";
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -46,40 +154,76 @@ export default function Navbar() {
 
   return (
     <>
-      {isHome ? (
-        <div className="site-promo-bar" aria-hidden="true">
-          <div className="site-promo-track">
-            <span>House plan now</span>
-            <span>Customize your own house plan now</span>
-            <span>Compare layouts before you build</span>
-            <span>Design support from concept to site</span>
-          </div>
+      <div className="site-promo-bar" aria-hidden="true">
+        <div className="site-promo-track">
+          <span>House plan now</span>
+          <span>Customize your own house plan now</span>
+          <span>Compare layouts before you build</span>
+          <span>Design support from concept to site</span>
         </div>
-      ) : null}
+      </div>
 
-      <nav className={`site-navbar ${isHome ? "home" : "inner"}`} role="navigation" aria-label="Main navigation">
-        <Link href="/" className="site-logo">
+      <nav className="store-navbar" role="navigation" aria-label="Main navigation">
+        <Link href="/" className="store-logo">
           <span className="site-logo-mark">A</span>
           <span>
-            Arusha Home Design Pro
-            <small>Architecture, interiors, and customizable plans</small>
+            Arusha Home
+            <small>Design Pro</small>
           </span>
         </Link>
 
-        <ul className="site-nav-links" role="list">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link href={link.href} className={pathname === link.href ? "active" : ""} onClick={() => setMenuOpen(false)}>
-                {link.label}
-              </Link>
-            </li>
-          ))}
+        <ul className="store-nav-links" role="list">
+          {navLinks.map((link) => {
+            const showChevron = ["By Size", "By Style", "By Budget", "Learn"].includes(link.label);
+            const menu = dropdowns[link.label];
+            return (
+              <li
+                key={link.label}
+                className={`store-nav-item ${openDropdown === link.label ? "open" : ""}`}
+                onMouseEnter={() => setOpenDropdown(menu ? link.label : null)}
+                onMouseLeave={() => setOpenDropdown((current) => (current === link.label ? null : current))}
+              >
+                <Link
+                  href={link.href}
+                  className={pathname === link.href ? "active" : ""}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setOpenDropdown(null);
+                  }}
+                >
+                  {link.label} {showChevron ? <ChevronTiny /> : null}
+                </Link>
+                {menu ? (
+                  <div className="store-dropdown">
+                    <div className="store-dropdown-inner">
+                      <Link href={menu.featured.href} className="store-dropdown-feature" onClick={() => setOpenDropdown(null)}>
+                        <div className="store-dropdown-thumb" style={{ position: "relative" }}>
+                          <Image src={menu.featured.image} alt={menu.featured.title} fill sizes="220px" className="store-dropdown-thumb-image" />
+                        </div>
+                        <strong>{menu.featured.title}</strong>
+                        <span>{menu.featured.description}</span>
+                      </Link>
+                      <div className="store-dropdown-links">
+                        {menu.links.map((item) => (
+                          <Link key={item.title} href={item.href} className="store-dropdown-link" onClick={() => setOpenDropdown(null)}>
+                            <strong>{item.title}</strong>
+                            <span>{item.description}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+              </li>
+            );
+          })}
         </ul>
 
-        <div className="site-nav-actions">
-          <Link href="/contact" className="site-nav-button">
-            Start your project
-          </Link>
+        <div className="store-utility-icons">
+          <button type="button" aria-label="Wishlist"><UtilityIcon type="heart" /></button>
+          <button type="button" aria-label="Search"><UtilityIcon type="search" /></button>
+          <button type="button" aria-label="Account"><UtilityIcon type="user" /></button>
+          <button type="button" aria-label="Bag"><UtilityIcon type="bag" /></button>
           <button
             className="site-mobile-toggle"
             type="button"
@@ -95,7 +239,7 @@ export default function Navbar() {
       <div className={`site-mobile-panel ${menuOpen ? "open" : ""}`}>
         <div className="site-mobile-panel-inner">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className={pathname === link.href ? "active" : ""} onClick={() => setMenuOpen(false)}>
+            <Link key={link.label} href={link.href} className={pathname === link.href ? "active" : ""} onClick={() => setMenuOpen(false)}>
               {link.label}
             </Link>
           ))}
