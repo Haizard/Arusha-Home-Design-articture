@@ -181,6 +181,10 @@ export default function AdminPage() {
 
   const getErrorMessage = (error: unknown, fallback: string) =>
     error instanceof Error ? error.message : fallback;
+  const getFieldValue = (key: string) => {
+    const value = formData[key];
+    return typeof value === 'string' || typeof value === 'number' ? value : '';
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -270,7 +274,7 @@ export default function AdminPage() {
       <div style={{ display: 'flex', gap: '8px' }}>
         <input
           type="text"
-          value={formData[key] ?? ''}
+          value={getFieldValue(key)}
           onChange={e => setFormData({ ...formData, [key]: e.target.value })}
           placeholder={placeholder || 'https://... or click upload'}
           className="admin-input"
@@ -290,7 +294,7 @@ export default function AdminPage() {
       <input
         type={opts?.type || 'text'}
         required={opts?.required ?? true}
-        value={formData[key] ?? ''}
+        value={getFieldValue(key)}
         onChange={e => setFormData({ ...formData, [key]: opts?.type === 'number' ? +e.target.value : e.target.value })}
         placeholder={opts?.placeholder || ''}
         className="admin-input"
@@ -304,7 +308,7 @@ export default function AdminPage() {
       <textarea
         required
         rows={4}
-        value={formData[key] ?? ''}
+        value={getFieldValue(key)}
         onChange={e => setFormData({ ...formData, [key]: e.target.value })}
         placeholder={placeholder || ''}
         className="admin-input resize-none"
@@ -319,6 +323,7 @@ export default function AdminPage() {
   const productPackages = (formData.packages ?? []) as ProductPackageForm[];
   const estimateTiers = (formData.estimateTiers ?? []) as EstimateTierForm[];
   const productFaqs = (formData.faqs ?? []) as ProductFaqForm[];
+  const testimonialStars = typeof formData.stars === 'number' ? formData.stars : 0;
 
   return (
     <>
@@ -747,7 +752,7 @@ export default function AdminPage() {
                       <div className="card-body" style={{ padding: '1.5rem' }}>
                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                             <div className="card-tag" style={{ background: 'rgba(248,113,113,0.1)', color: '#f87171' }}>Inquiry</div>
-                            <button className="card-action-btn del" onClick={() => handleDelete(item._id)}><Trash2 size={12} /></button>
+                            <button className="card-action-btn del" onClick={() => { if (item._id) handleDelete(item._id); }}><Trash2 size={12} /></button>
                          </div>
                          <div style={{ color: 'var(--color-gold)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>
                             Project: {item.projectName}
@@ -764,7 +769,7 @@ export default function AdminPage() {
                               </div>
                             )}
                             <div style={{ fontSize: '10px', color: '#444', marginTop: '4px' }}>
-                               {new Date(item.createdAt).toLocaleString()}
+                               {item.createdAt ? new Date(item.createdAt).toLocaleString() : ''}
                             </div>
                          </div>
                       </div>
@@ -781,7 +786,7 @@ export default function AdminPage() {
                             <button className="card-action-btn" title="Edit" onClick={() => openModal(item)}>
                               <Pencil size={14} />
                             </button>
-                            <button className="card-action-btn del" title="Delete" onClick={() => handleDelete(item._id)}>
+                            <button className="card-action-btn del" title="Delete" onClick={() => { if (item._id) handleDelete(item._id); }}>
                               <Trash2 size={14} />
                             </button>
                           </div>
@@ -888,7 +893,7 @@ export default function AdminPage() {
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: '#c9a84c', display: 'flex', justifyContent: 'space-between' }}>
                       FAQs
-                      <button type="button" onClick={() => setFormData({...formData, faqs: [...(formData.faqs || []), {q: '', a: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD FAQ</button>
+                      <button type="button" onClick={() => setFormData({...formData, faqs: [...serviceFaqs, {q: '', a: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD FAQ</button>
                     </div>
                     {serviceFaqs.map((faq, i) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr auto', gap: '8px', marginBottom: '8px', alignItems: 'start' }}>
@@ -1343,8 +1348,8 @@ export default function AdminPage() {
                           onClick={() => setFormData({ ...formData, stars: n })}
                           style={{
                             width: 40, height: 40, borderRadius: 8, border: 'none',
-                            background: formData.stars >= n ? 'rgba(201,168,76,.2)' : 'rgba(255,255,255,.04)',
-                            color: formData.stars >= n ? '#c9a84c' : '#444',
+                            background: testimonialStars >= n ? 'rgba(201,168,76,.2)' : 'rgba(255,255,255,.04)',
+                            color: testimonialStars >= n ? '#c9a84c' : '#444',
                             fontSize: 18, cursor: 'pointer', transition: 'all .15s',
                           }}
                         >★</button>
