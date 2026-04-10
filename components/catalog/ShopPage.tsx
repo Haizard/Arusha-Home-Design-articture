@@ -34,10 +34,27 @@ type CmsProductListItem = {
   basePrice?: number;
 };
 
+type ShopFilters = {
+  q?: string;
+  minArea?: string;
+  maxArea?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  badge?: string;
+  label?: string;
+  sort?: string;
+};
+
 function getAreaNumber(area?: string) {
   if (!area) return 0;
   const match = area.match(/[\d.]+/);
   return match ? Number(match[0]) : 0;
+}
+
+function getNumberParam(value: string | null) {
+  if (!value) return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
 }
 
 function spec(icon: React.ReactNode, label: string) {
@@ -49,33 +66,54 @@ function spec(icon: React.ReactNode, label: string) {
   );
 }
 
-export default function ShopPage({ items }: { items: CmsProductListItem[] }) {
+export default function ShopPage({ items, filters }: { items: CmsProductListItem[]; filters?: ShopFilters }) {
   const productTypeLabels = useMemo(
     () => Array.from(new Set(items.map((item) => item.category).filter(Boolean))),
     [items]
   );
+  const query = filters?.q?.trim().toLowerCase() ?? "";
+  const queryMinArea = getNumberParam(filters?.minArea ?? null);
+  const queryMaxArea = getNumberParam(filters?.maxArea ?? null);
+  const queryMinPrice = getNumberParam(filters?.minPrice ?? null);
+  const queryMaxPrice = getNumberParam(filters?.maxPrice ?? null);
+  const queryBadge = filters?.badge?.trim().toLowerCase() ?? "";
+  const queryLabel = filters?.label?.trim() ?? "";
+  const querySort = filters?.sort === "low" ? "low" : "high";
+
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [minBedrooms, setMinBedrooms] = useState<number | null>(null);
   const [minBathrooms, setMinBathrooms] = useState<number | null>(null);
   const [minFloors, setMinFloors] = useState<number | null>(null);
-  const [minArea, setMinArea] = useState<number | null>(null);
+  const [minArea, setMinArea] = useState<number | null>(queryMinArea);
   const [duplexOnly, setDuplexOnly] = useState(false);
-  const [sort, setSort] = useState<"high" | "low">("high");
+  const [sort, setSort] = useState<"high" | "low">(querySort);
 
   const filtered = useMemo(() => {
     const next = items.filter((item) => {
+      const areaNumber = getAreaNumber(item.area);
+      const price = item.basePrice ?? 0;
+      const haystack = [item.title, item.description, item.category, item.badge]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
       if (selectedTypes.length > 0 && !selectedTypes.includes(item.category)) return false;
       if (minBedrooms !== null && (item.bedrooms ?? 0) < minBedrooms) return false;
       if (minBathrooms !== null && (item.bathrooms ?? 0) < minBathrooms) return false;
       if (minFloors !== null && (item.stories ?? 1) < minFloors) return false;
-      if (minArea !== null && getAreaNumber(item.area) < minArea) return false;
+      if (minArea !== null && areaNumber < minArea) return false;
+      if (queryMaxArea !== null && areaNumber > queryMaxArea) return false;
+      if (queryMinPrice !== null && price < queryMinPrice) return false;
+      if (queryMaxPrice !== null && price > queryMaxPrice) return false;
+      if (query && !haystack.includes(query)) return false;
+      if (queryBadge && (item.badge ?? "").toLowerCase() !== queryBadge) return false;
       if (duplexOnly && !item.duplex) return false;
       return true;
     });
 
     next.sort((a, b) => (sort === "high" ? (b.basePrice ?? 0) - (a.basePrice ?? 0) : (a.basePrice ?? 0) - (b.basePrice ?? 0)));
     return next;
-  }, [items, selectedTypes, minBedrooms, minBathrooms, minFloors, minArea, duplexOnly, sort]);
+  }, [items, selectedTypes, minBedrooms, minBathrooms, minFloors, minArea, duplexOnly, sort, query, queryBadge, queryMaxArea, queryMinPrice, queryMaxPrice]);
 
   const counts = useMemo(() => {
     return productTypeLabels.reduce<Record<string, number>>((acc, type) => {
@@ -95,6 +133,7 @@ export default function ShopPage({ items }: { items: CmsProductListItem[] }) {
             <p>
               We&apos;re passionate about helping you bring your dream home to life. Browse our architectural plans by style, budget, and scale to find the right starting point for your project.
             </p>
+            {queryLabel ? <p><strong>Filtered view:</strong> {queryLabel}</p> : null}
           </div>
         </div>
 

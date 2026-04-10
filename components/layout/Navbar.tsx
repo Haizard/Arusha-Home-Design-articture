@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const navLinks = [
   { href: "/products", label: "Shop" },
-  { href: "/products", label: "Best Sellers" },
+  { href: "/products?badge=best%20seller&label=Best%20Sellers", label: "Best Sellers" },
   { href: "/products", label: "By Size" },
   { href: "/products", label: "By Style" },
   { href: "/products", label: "By Budget" },
@@ -30,10 +30,10 @@ const dropdowns: Record<
       image: "/images/hero-2.jpg",
     },
     links: [
-      { title: "100-200 SQM", href: "/products/AHD-22304", description: "Compact, efficient homes" },
-      { title: "200-300 SQM", href: "/products/AHD-13418", description: "Balanced family layouts" },
-      { title: "300-500 SQM", href: "/products/AHD-24411", description: "More room for premium living" },
-      { title: "500+ SQM", href: "/products/AHD-38901", description: "Large-format statement homes" },
+      { title: "100-200 SQM", href: "/products?minArea=100&maxArea=200&label=100-200%20SQM", description: "Compact, efficient homes" },
+      { title: "200-300 SQM", href: "/products?minArea=200&maxArea=300&label=200-300%20SQM", description: "Balanced family layouts" },
+      { title: "300-500 SQM", href: "/products?minArea=300&maxArea=500&label=300-500%20SQM", description: "More room for premium living" },
+      { title: "500+ SQM", href: "/products?minArea=500&label=500%2B%20SQM", description: "Large-format statement homes" },
     ],
   },
   "By Style": {
@@ -44,10 +44,10 @@ const dropdowns: Record<
       image: "/images/hero-1.jpg",
     },
     links: [
-      { title: "Modern House Plans", href: "/products/AHD-13418", description: "Clean lines and open living" },
-      { title: "Contemporary Homes", href: "/products/AHD-24411", description: "Refined curb appeal" },
-      { title: "Luxury Mansions", href: "/products/AHD-38901", description: "Grand, high-end concepts" },
-      { title: "A-Frame & Cabins", href: "/products/AHD-22304", description: "Distinctive character-led forms" },
+      { title: "Modern House Plans", href: "/products?q=modern&label=Modern%20House%20Plans", description: "Clean lines and open living" },
+      { title: "Contemporary Homes", href: "/products?q=contemporary&label=Contemporary%20Homes", description: "Refined curb appeal" },
+      { title: "Luxury Mansions", href: "/products?q=luxury&label=Luxury%20Mansions", description: "Grand, high-end concepts" },
+      { title: "A-Frame & Cabins", href: "/products?q=cabin&label=A-Frame%20%26%20Cabins", description: "Distinctive character-led forms" },
     ],
   },
   "By Budget": {
@@ -58,10 +58,10 @@ const dropdowns: Record<
       image: "/images/proj-3.jpg",
     },
     links: [
-      { title: "Under $300", href: "/products/AHD-22304", description: "Entry-level plan packages" },
-      { title: "$300-$500", href: "/products/AHD-23307", description: "Popular mid-range choices" },
-      { title: "$500-$1000", href: "/products/AHD-24411", description: "Bigger family-ready plans" },
-      { title: "$1000+", href: "/products/AHD-38901", description: "Premium complex builds" },
+      { title: "Under $300", href: "/products?maxPrice=300&sort=low&label=Under%20%24300", description: "Entry-level plan packages" },
+      { title: "$300-$500", href: "/products?minPrice=300&maxPrice=500&sort=low&label=%24300-%24500", description: "Popular mid-range choices" },
+      { title: "$500-$1000", href: "/products?minPrice=500&maxPrice=1000&sort=low&label=%24500-%241000", description: "Bigger family-ready plans" },
+      { title: "$1000+", href: "/products?minPrice=1000&sort=high&label=%241000%2B", description: "Premium complex builds" },
     ],
   },
   Learn: {
