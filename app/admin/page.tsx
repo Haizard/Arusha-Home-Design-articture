@@ -250,7 +250,7 @@ export default function AdminPage() {
 
       if (result.success) {
         if (isArray) {
-          const currentArr = formData[key] || [];
+          const currentArr = Array.isArray(formData[key]) ? formData[key] : [];
           setFormData({ ...formData, [key]: [...currentArr, result.url] });
         } else {
           setFormData({ ...formData, [key]: result.url });
