@@ -197,7 +197,8 @@ export default function ShopPage({ items }: { items: CmsProductListItem[] }) {
             {filtered.map((item) => (
               <Link key={item._id} href={`/products/${item._id}`} className="shop-card">
                 <div className="shop-card-image-wrap">
-                  <Image src={item.imageUrl} alt={item.title} fill sizes="(max-width: 900px) 100vw, 33vw" className="shop-card-image" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={item.imageUrl} alt={item.title} className="shop-card-image" />
                   {item.badge ? <span className="shop-card-badge">{item.badge}</span> : null}
                 </div>
                 <div className="shop-card-body">

@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -90,7 +89,9 @@ const defaultFaqs: ProductFaq[] = [
 ];
 
 export default function ProductDetailClient({ product }: { product: CmsProduct }) {
-  const gallery = product.images && product.images.length > 0 ? [product.imageUrl, ...product.images] : [product.imageUrl];
+  const gallery = [product.imageUrl, ...(product.images ?? [])]
+    .map((image) => image?.trim())
+    .filter((image): image is string => Boolean(image));
   const [activeImage, setActiveImage] = useState(0);
   const fileTypes = product.fileTypes && product.fileTypes.length > 0 ? product.fileTypes : ["CAD + PDF", "PDF"];
   const [selectedType, setSelectedType] = useState(product.recommendedType || fileTypes[0]);
@@ -140,6 +141,8 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
   };
   const faqs = product.faqs && product.faqs.length > 0 ? product.faqs.filter((faq) => faq.question && faq.answer) : defaultFaqs;
 
+  const activeGalleryImage = gallery[activeImage] ?? gallery[0] ?? "";
+
   return (
     <main className="detail-page">
       <section className="market-shell detail-hero-shell">
@@ -163,14 +166,16 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
                   className={index === activeImage ? "active" : ""}
                   onClick={() => setActiveImage(index)}
                 >
-                  <Image src={image} alt={`${product.title} preview ${index + 1}`} fill sizes="96px" className="detail-thumb-image" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={image} alt={`${product.title} preview ${index + 1}`} className="detail-thumb-image" />
                 </button>
               ))}
             </div>
 
             <div className="detail-main-column">
               <div className="detail-main-image-wrap">
-                <Image src={gallery[activeImage]} alt={product.title} fill priority sizes="(max-width: 900px) 100vw, 60vw" className="detail-main-image" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={activeGalleryImage} alt={product.title} className="detail-main-image" />
               </div>
 
               <div className="detail-spec-row">
