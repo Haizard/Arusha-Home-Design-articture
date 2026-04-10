@@ -1644,7 +1644,7 @@ body {
 }
 
 .market-shell {
-  width: min(1360px, calc(100vw - 2rem));
+  width: min(1360px, calc(100vw - clamp(1.5rem, 6vw, 4rem)));
   margin: 0 auto;
 }
 
@@ -1698,10 +1698,12 @@ body {
   justify-content: center;
   gap: 1.5rem;
   padding-top: clamp(4.5rem, 8vw, 6.5rem);
+  padding-inline: clamp(0.75rem, 3vw, 2rem);
 }
 
 .market-hero-copy {
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
   padding: clamp(1rem, 2vw, 1.5rem) 0;
   background: transparent;
   color: white;
@@ -1711,12 +1713,14 @@ body {
 }
 
 .market-hero-copy h1 {
-  font-size: clamp(1.8rem, 3.6vw, 3.2rem);
-  line-height: 0.96;
+  width: min(100%, 18ch);
+  margin: 0 auto 1rem;
+  font-size: clamp(1.6rem, 3.1vw, 2.8rem);
+  line-height: 1.04;
   letter-spacing: -0.04em;
-  margin: 0.85rem 0 1rem;
   max-width: none;
-  white-space: nowrap;
+  white-space: normal;
+  text-wrap: balance;
 }
 
 .market-hero-copy p,
@@ -2365,9 +2369,11 @@ body {
   z-index: 1;
   width: 100%;
   padding: clamp(7rem, 15vw, 12rem) 0 3rem;
+  padding-inline: clamp(0.75rem, 3vw, 2rem);
 }
 
 .catalog-hero-card {
+  width: min(100%, 52rem);
   max-width: 52rem;
   padding: clamp(1.5rem, 3vw, 2.5rem);
   border-radius: 1.75rem;
@@ -2377,11 +2383,14 @@ body {
 }
 
 .catalog-hero-card h1 {
-  font-size: clamp(2.6rem, 5vw, 5rem);
-  line-height: 0.95;
+  width: min(100%, 18ch);
+  font-size: clamp(2rem, 4.5vw, 4.2rem);
+  line-height: 1;
   letter-spacing: -0.04em;
   margin: 0.8rem 0 1rem;
-  max-width: 12ch;
+  max-width: none;
+  white-space: normal;
+  text-wrap: balance;
 }
 
 .catalog-hero-card p {
@@ -3118,7 +3127,7 @@ body {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 1.5rem;
-  padding: 1rem clamp(1rem, 4vw, 2.5rem);
+  padding: 1rem clamp(1rem, 4vw, 2.75rem);
   background: rgba(247,244,238,0.96);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(17,17,17,0.08);
@@ -3127,9 +3136,17 @@ body {
 .store-logo {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
+  width: clamp(9.5rem, 15vw, 13rem);
   color: #111111;
   text-decoration: none;
+  flex-shrink: 0;
+}
+
+.store-logo-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .store-logo span:last-child {
@@ -3184,8 +3201,8 @@ body {
 }
 
 .collections-page {
-  width: min(1420px, calc(100vw - 1rem));
-  padding: 0.7rem 0 2rem;
+  width: min(1420px, calc(100vw - clamp(1.5rem, 6vw, 4rem)));
+  padding: 0.9rem 0 2rem;
   color: #111111;
   background: #ffffff;
 }
@@ -3517,17 +3534,19 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
+  padding-inline: clamp(0.75rem, 3vw, 2rem);
 }
 
 .projects-hero-copy h1 {
+  width: min(100%, 18ch);
   max-width: none;
-  margin: 0;
-  font-size: clamp(1.8rem, 3.6vw, 3.2rem);
+  margin: 0 auto;
+  font-size: clamp(1.6rem, 3.1vw, 2.8rem);
   line-height: 1.04;
   letter-spacing: -0.045em;
   color: #ffffff;
   text-wrap: balance;
-  white-space: nowrap;
+  white-space: normal;
   text-shadow: 0 10px 28px rgba(17, 17, 17, 0.14);
 }
 
