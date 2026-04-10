@@ -45,21 +45,8 @@ export default function ProjectsPageClient() {
         </div>
 
         <div className="market-shell projects-hero-shell">
-          <div className="projects-hero-card">
-            <span className="projects-eyebrow">Built work, concept studies, and interior transformations</span>
+          <div className="projects-hero-copy">
             <h1>Projects presented with the same calm confidence as the home page.</h1>
-            <p>
-              Explore architecture, interiors, and development work through a cleaner, lighter page
-              that puts the portfolio first and lets the visuals carry more weight.
-            </p>
-            <div className="projects-hero-actions">
-              <Link href="/contact" className="projects-primary-button">
-                Start a similar project <ArrowRight size={16} />
-              </Link>
-              <Link href="/services" className="projects-secondary-button">
-                Explore services
-              </Link>
-            </div>
           </div>
         </div>
       </section>
@@ -171,7 +158,7 @@ export default function ProjectsPageClient() {
         .projects-hero-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, rgba(247, 244, 238, 0.08) 0%, rgba(247, 244, 238, 0.2) 38%, rgba(247, 244, 238, 0.62) 100%);
+          background: linear-gradient(180deg, rgba(247, 244, 238, 0.01) 0%, rgba(247, 244, 238, 0.08) 38%, rgba(247, 244, 238, 0.2) 100%);
         }
 
         .projects-hero-shell {
@@ -179,52 +166,23 @@ export default function ProjectsPageClient() {
           z-index: 1;
           min-height: min(88vh, 860px);
           display: flex;
-          align-items: flex-end;
-          padding: 0 0 3rem;
-        }
-
-        .projects-hero-card {
-          max-width: 50rem;
-          padding: clamp(1.6rem, 3vw, 2.4rem);
-          border-radius: 1.75rem;
-          background: rgba(255, 255, 255, 0.84);
-          backdrop-filter: blur(18px);
-          border: 1px solid rgba(17, 17, 17, 0.06);
-          box-shadow: 0 24px 60px rgba(17, 17, 17, 0.08);
-        }
-
-        .projects-eyebrow {
-          display: inline-flex;
           align-items: center;
-          font-size: 0.75rem;
-          font-weight: 700;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: rgba(17, 17, 17, 0.52);
+          justify-content: center;
+          padding: 0;
+          padding-top: clamp(4.5rem, 8vw, 6.5rem);
         }
 
-        .projects-hero-card h1 {
-          font-size: clamp(2.8rem, 6vw, 5.4rem);
+        .projects-hero-copy {
+          color: #ffffff;
+          text-align: center;
+        }
+
+        .projects-hero-copy h1 {
+          font-size: clamp(1.8rem, 3.6vw, 3.2rem);
           line-height: 0.96;
           letter-spacing: -0.05em;
-          margin: 0.9rem 0 1rem;
-          max-width: 10ch;
-          color: #111111;
-        }
-
-        .projects-hero-card p {
-          max-width: 44rem;
-          font-size: clamp(1rem, 1.35vw, 1.12rem);
-          line-height: 1.72;
-          color: rgba(17, 17, 17, 0.66);
-        }
-
-        .projects-hero-actions {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          margin-top: 1.5rem;
-          flex-wrap: wrap;
+          margin: 0;
+          white-space: nowrap;
         }
 
         .projects-primary-button,
@@ -442,16 +400,16 @@ export default function ProjectsPageClient() {
             min-height: auto;
             padding-top: 5rem;
           }
+
+          .projects-hero-copy h1 {
+            white-space: normal;
+          }
         }
 
         @media (max-width: 700px) {
           .projects-grid,
           .projects-highlights-grid {
             grid-template-columns: 1fr;
-          }
-
-          .projects-hero-card h1 {
-            max-width: 11ch;
           }
         }
       `}</style>

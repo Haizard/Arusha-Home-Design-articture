@@ -41,7 +41,7 @@ const dropdowns: Record<
       title: "Browse by architectural style",
       href: "/products",
       description: "Move between modern, contemporary, luxury, and expressive character-led homes.",
-      image: "/images/hero-1.jpg",
+      image: "/images/proj-1.jpg",
     },
     links: [
       { title: "Modern House Plans", href: "/products?q=modern&label=Modern%20House%20Plans", description: "Clean lines and open living" },

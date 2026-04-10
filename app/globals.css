@@ -1651,7 +1651,7 @@ body {
 .market-hero {
   position: relative;
   min-height: min(92vh, 920px);
-  padding: clamp(2rem, 4vw, 3rem) 0 3rem;
+  padding: clamp(2rem, 4vw, 3rem) 0 0;
 }
 
 .market-hero-media,
@@ -1686,34 +1686,37 @@ body {
 .market-closing-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(7,7,7,0.1) 0%, rgba(7,7,7,0.45) 50%, rgba(7,7,7,0.74) 100%);
+  background: linear-gradient(180deg, rgba(7,7,7,0.01) 0%, rgba(7,7,7,0.08) 48%, rgba(7,7,7,0.18) 100%);
 }
 
 .market-hero-content {
   position: relative;
   z-index: 1;
-  min-height: min(92vh, 920px);
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.7fr);
-  align-items: end;
+  min-height: calc(min(92vh, 920px) - 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1.5rem;
+  padding-top: clamp(4.5rem, 8vw, 6.5rem);
 }
 
 .market-hero-copy {
-  max-width: 58rem;
+  max-width: none;
   padding: clamp(1rem, 2vw, 1.5rem) 0;
   background: transparent;
   color: white;
   box-shadow: none;
   backdrop-filter: none;
+  text-align: center;
 }
 
 .market-hero-copy h1 {
-  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-size: clamp(1.8rem, 3.6vw, 3.2rem);
   line-height: 0.96;
   letter-spacing: -0.04em;
   margin: 0.85rem 0 1rem;
-  max-width: 11ch;
+  max-width: none;
+  white-space: nowrap;
 }
 
 .market-hero-copy p,
@@ -2261,7 +2264,7 @@ body {
   .market-hero-content {
     min-height: auto;
     padding-top: 5rem;
-    grid-template-columns: 1fr;
+    justify-content: center;
   }
 
   .market-benefit-row,
@@ -2323,6 +2326,10 @@ body {
   .market-closing-content h2,
   .market-bottom-copy h2 {
     letter-spacing: -0.03em;
+  }
+
+  .market-hero-copy h1 {
+    white-space: normal;
   }
 
   .market-spec-grid {

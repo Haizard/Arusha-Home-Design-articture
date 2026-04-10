@@ -148,7 +148,7 @@ export default function AboutPageClient() {
               }}
             >
               <Image
-                src="/images/hero-1.jpg"
+                src="/images/proj-1.jpg"
                 alt="Arusha Home Design Pro team at work"
                 fill
                 style={{ objectFit: "cover" }}

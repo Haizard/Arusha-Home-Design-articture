@@ -23,27 +23,15 @@ import {
 const heroSlides = [
   {
     image: "/images/hero-2.jpg",
-    eyebrow: "Architectural plans with real-world build intelligence",
     title: "Build your dream home with a smarter starting point.",
-    description:
-      "Browse polished house plans, compare practical specs, and work with Arusha Home Design Pro to customize every detail for your site and lifestyle.",
-    cta: "Browse house plans",
   },
   {
     image: "/images/proj-1.jpg",
-    eyebrow: "From concept boards to build-ready drawings",
     title: "Luxury design language made practical for East African living.",
-    description:
-      "Find layouts shaped for daylight, ventilation, family life, and elegant curb appeal before you commit to construction.",
-    cta: "See featured homes",
   },
   {
     image: "/images/projects-hero.jpg",
-    eyebrow: "Designed to feel premium and easy to trust",
     title: "Choose a plan, refine it with us, and move confidently into construction.",
-    description:
-      "Our catalog blends marketplace clarity with studio-level expertise, so you can compare options without losing the custom design experience.",
-    cta: "Start your shortlist",
   },
 ];
 
@@ -97,7 +85,7 @@ const featuredPlans = [
   {
     title: "Contemporary courtyard home",
     id: "AHD-13418",
-    image: "/images/hero-1.jpg",
+    image: "/images/proj-1.jpg",
     price: "From $181",
     floors: "1 Floor",
     bedrooms: "3 Bedrooms",
@@ -248,17 +236,7 @@ export default function MarketplaceHome() {
 
         <div className="market-shell market-hero-content">
           <div className="market-hero-copy">
-            <span className="market-eyebrow">{currentSlide.eyebrow}</span>
             <h1>{currentSlide.title}</h1>
-            <p>{currentSlide.description}</p>
-            <div className="market-hero-actions">
-              <Link href="/products" className="market-button primary">
-                {currentSlide.cta} <ArrowRight size={16} />
-              </Link>
-              <Link href="/contact" className="market-button secondary">
-                Customize your plan
-              </Link>
-            </div>
             <div className="market-slide-dots" aria-label="Hero slide controls">
               {heroSlides.map((_, index) => (
                 <button

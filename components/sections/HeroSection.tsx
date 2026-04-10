@@ -9,7 +9,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 const SLIDES = [
-  "/images/hero-1.jpg",
+  "/images/proj-1.jpg",
   "/images/hero-2.jpg",
   "/images/hero-3.jpg",
   "/images/hero-4.jpg"
