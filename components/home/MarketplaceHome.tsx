@@ -9,7 +9,6 @@ import {
   BedDouble,
   Building2,
   Calculator,
-  CheckCircle2,
   Clock3,
   Home,
   Layers2,
@@ -31,7 +30,7 @@ const heroSlides = [
     cta: "Browse house plans",
   },
   {
-    image: "/images/hero-1.jpg",
+    image: "/images/proj-1.jpg",
     eyebrow: "From concept boards to build-ready drawings",
     title: "Luxury design language made practical for East African living.",
     description:
@@ -73,7 +72,7 @@ const browseFacets = [
 
 const familyPlans = [
   { title: "2 bedroom plans", subtitle: "Compact homes for efficient living", image: "/images/prod-bed.jpg" },
-  { title: "3 bedroom plans", subtitle: "Balanced layouts for growing families", image: "/images/hero-1.jpg" },
+  { title: "3 bedroom plans", subtitle: "Balanced layouts for growing families", image: "/images/proj-1.jpg" },
   { title: "4 bedroom plans", subtitle: "More room for hosting and flexibility", image: "/images/hero-2.jpg" },
   { title: "5+ bedroom plans", subtitle: "Statement homes with generous scale", image: "/images/projects-hero.jpg" },
 ];
@@ -260,16 +259,6 @@ export default function MarketplaceHome() {
                 Customize your plan
               </Link>
             </div>
-          </div>
-
-          <div className="market-hero-panel">
-            <span className="market-panel-label">Why this new direction works</span>
-            <h2>Browse first. Customize second. Build with confidence.</h2>
-            <ul>
-              <li><CheckCircle2 size={16} /> Clear plan categories inspired by real shopping behavior</li>
-              <li><CheckCircle2 size={16} /> Practical specs surfaced before the customer has to ask</li>
-              <li><CheckCircle2 size={16} /> Premium photography paired with marketplace-style trust cues</li>
-            </ul>
             <div className="market-slide-dots" aria-label="Hero slide controls">
               {heroSlides.map((_, index) => (
                 <button
@@ -324,20 +313,6 @@ export default function MarketplaceHome() {
               <span>{category.title}</span>
             </Link>
           ))}
-        </div>
-      </section>
-
-      <section className="market-proof market-shell">
-        <div className="market-brand-row">
-          <div>
-            <span className="market-watermark">+5,000</span>
-            <p>Dream homes brought to life with Arusha Home Design Pro</p>
-          </div>
-          <div className="market-proof-links">
-            <Link href="/products">Shop</Link>
-            <Link href="/projects">Best Sellers</Link>
-            <Link href="/contact">Custom Plan</Link>
-          </div>
         </div>
       </section>
 
