@@ -23,15 +23,15 @@ import {
 const heroSlides = [
   {
     image: "/images/hero-2.jpg",
-    title: "Build your dream home with a smarter starting point.",
+    title: "Build your dream home with confidence.",
   },
   {
     image: "/images/proj-1.jpg",
-    title: "Luxury design language made practical for East African living.",
+    title: "Luxury design made practical for East African living.",
   },
   {
     image: "/images/projects-hero.jpg",
-    title: "Choose a plan, refine it with us, and move confidently into construction.",
+    title: "Choose a plan and move confidently into construction.",
   },
 ];
 
@@ -421,49 +421,6 @@ export default function MarketplaceHome() {
           <div className="market-compare-panel">
             <Image src="/images/hero-4.jpg" alt="Built home exterior" fill sizes="(max-width: 900px) 100vw, 50vw" className="market-compare-image" />
             <span>Under Construction</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="market-closing-banner">
-        <div className="market-closing-media">
-          <Image src="/images/services-hero.jpg" alt="Modern architecture showcase" fill sizes="100vw" className="market-closing-image" />
-          <div className="market-closing-overlay" />
-        </div>
-        <div className="market-shell market-closing-content">
-          <span className="market-kicker light">Modern homes, luxurious style</span>
-          <h2>A homepage that feels closer to a plan marketplace than a studio brochure.</h2>
-          <p>
-            We design beautiful, up-to-date homes with practical filters, social proof, and a stronger browsing flow that invites customers deeper into the catalog.
-          </p>
-          <div className="market-hero-actions">
-            <Link href="/products" className="market-button primary">
-              Explore all plans <ArrowRight size={16} />
-            </Link>
-            <Link href="/contact" className="market-button secondary on-dark">
-              Talk to the studio
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="market-shell market-bottom-gallery">
-        <div className="market-bottom-copy">
-          <span className="market-kicker">Customize the dream home you have in mind</span>
-          <h2>Built for browsing, ready for consultation.</h2>
-          <p>
-            The new home page now leads with discoverability and trust, while still leaving room for your architectural expertise to shine.
-          </p>
-        </div>
-        <div className="market-bottom-collage">
-          <div className="market-collage-large">
-            <Image src="/images/proj-1.jpg" alt="Plan preview board" fill sizes="(max-width: 900px) 100vw, 28vw" className="market-collage-image" />
-          </div>
-          <div className="market-collage-small">
-            <Image src="/images/proj-2.jpg" alt="Exterior example" fill sizes="(max-width: 900px) 100vw, 20vw" className="market-collage-image" />
-          </div>
-          <div className="market-collage-small lower">
-            <Image src="/images/proj-3.jpg" alt="Landscape example" fill sizes="(max-width: 900px) 100vw, 20vw" className="market-collage-image" />
           </div>
         </div>
       </section>
