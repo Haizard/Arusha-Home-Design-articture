@@ -58,25 +58,25 @@ export default function StatsSection() {
   return (
     <section
       ref={sectionRef}
-      className="stats-section section"
+      className="stats-section market-section"
       id="stats"
       aria-label="Company statistics"
-      style={{ backgroundColor: "var(--color-void)", borderTop: "1px solid var(--color-border)" }}
+      style={{ backgroundColor: "#fbf9f4", padding: "6rem 0" }}
     >
-      <div className="section-container">
+      <div className="market-shell">
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-          <div className="section-label" style={{ justifyContent: "center" }}>
+          <div className="market-kicker" style={{ justifyContent: "center" }}>
             By the Numbers
           </div>
           <h2
             className="font-display"
             style={{
-              fontSize: "var(--text-headline)",
+              fontSize: "clamp(2rem, 4.4vw, 3.8rem)",
               fontWeight: 700,
-              color: "var(--color-stone-100)",
+              color: "#111111",
               lineHeight: 1.0,
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.05em",
             }}
           >
             Proven Excellence
@@ -87,13 +87,13 @@ export default function StatsSection() {
           {stats.map((stat, i) => (
             <div
               key={stat.label}
-              className="stat-card"
-              style={{ background: "var(--color-obsidian)" }}
+              className="market-plan-card"
+              style={{ background: "#ffffff", padding: "2.5rem 1.5rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
             >
-              <div className="stat-number">
+              <div style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 800, color: "#111111", lineHeight: 1, marginBottom: "0.5rem" }}>
                 <span id={`stat-num-${i}`}>0{stat.suffix}</span>
               </div>
-              <div className="stat-label">{stat.label}</div>
+              <div style={{ fontSize: "0.9rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(17,17,17,0.5)" }}>{stat.label}</div>
             </div>
           ))}
         </div>

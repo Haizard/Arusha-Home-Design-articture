@@ -6,11 +6,26 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const values = [
-  { title: "Excellence", desc: "We uphold the highest standards of quality and professionalism in every project we undertake." },
-  { title: "Innovation", desc: "We embrace creativity and modern design solutions to shape the future of architecture." },
-  { title: "Sustainability", desc: "We prioritize eco-friendly and resource-efficient designs for lasting positive impact." },
-  { title: "Client-Centric", desc: "We listen, collaborate, and deliver solutions tailored to each client's unique vision." },
-  { title: "Integrity", desc: "We operate with honesty, transparency, and strong ethical principles at all times." },
+  {
+    title: "Excellence",
+    desc: "We uphold the highest standards of quality and professionalism in every project.",
+  },
+  {
+    title: "Innovation",
+    desc: "We embrace creativity and modern design solutions to shape the future of architecture and interiors.",
+  },
+  {
+    title: "Sustainability",
+    desc: "We prioritize eco-friendly and resource-efficient designs for lasting impact.",
+  },
+  {
+    title: "Client-Centric Approach",
+    desc: "We listen, collaborate, and deliver solutions tailored to each client’s vision.",
+  },
+  {
+    title: "Integrity",
+    desc: "We operate with honesty, transparency, and strong ethical principles.",
+  },
 ];
 
 export default function PhilosophySection() {
@@ -55,41 +70,40 @@ export default function PhilosophySection() {
   return (
     <section
       ref={sectionRef}
-      className="section"
+      className="market-section"
       id="philosophy"
       aria-label="Philosophy and values"
       style={{
-        backgroundColor: "var(--color-graphite)",
-        borderTop: "1px solid var(--color-border)",
+        backgroundColor: "#ffffff",
+        padding: "6rem 0"
       }}
     >
-      <div className="section-container">
+      <div className="market-shell">
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: "6rem",
+            gap: "5rem",
             alignItems: "start",
           }}
           className="philosophy-inner"
         >
           {/* Left — Quote */}
           <div>
-            <div className="section-label">Our Philosophy</div>
-            <blockquote className="philosophy-quote" style={{ marginBottom: "3rem" }}>
-              We transform spaces into artworks that tell your story.
+            <div className="market-kicker">Mission and Values</div>
+            <blockquote className="philosophy-quote" style={{ marginBottom: "2rem", color: "#111111", fontSize: "clamp(1.5rem, 3vw, 2.5rem)", letterSpacing: "-0.03em" }}>
+              Arusha Home Design Pro is dedicated to delivering innovative, sustainable, and functional design solutions.
             </blockquote>
             <p
               style={{
-                color: "var(--color-stone-400)",
+                color: "rgba(17,17,17,0.65)",
                 lineHeight: 1.8,
-                fontSize: "0.95rem",
-                maxWidth: "420px",
+                fontSize: "1rem",
+                maxWidth: "500px",
+                marginBottom: "2rem",
               }}
             >
-              Arusha Home Design Pro is dedicated to delivering innovative, sustainable, and
-              functional design solutions that improve the built environment and uplift communities
-              across East Africa.
+              We strive to create high-quality spaces that blend creativity, efficiency, and sustainability, ensuring every project meets our clients’ needs while contributing to the growth of East Africa’s architectural landscape.
             </p>
 
             {/* Gold line divider */}
@@ -105,10 +119,10 @@ export default function PhilosophySection() {
             <p
               style={{
                 fontFamily: "var(--font-ui)",
-                fontSize: "0.7rem",
+                fontSize: "0.75rem",
                 letterSpacing: "0.25em",
                 textTransform: "uppercase",
-                color: "var(--color-stone-600)",
+                color: "rgba(17,17,17,0.45)",
               }}
             >
               Arusha · Tanzania · East Africa
@@ -117,7 +131,7 @@ export default function PhilosophySection() {
 
           {/* Right — Values */}
           <div>
-            <div className="section-label">Core Values</div>
+            <div className="market-kicker">Core Values</div>
             <div className="values-list" style={{ display: "flex", flexDirection: "column", gap: "0" }}>
               {values.map((v, i) => (
                 <div
@@ -147,9 +161,9 @@ export default function PhilosophySection() {
                     <h3
                       style={{
                         fontFamily: "var(--font-display)",
-                        fontSize: "1.05rem",
-                        fontWeight: 600,
-                        color: "var(--color-stone-100)",
+                        fontSize: "1.15rem",
+                        fontWeight: 700,
+                        color: "#111111",
                         marginBottom: "0.4rem",
                       }}
                     >
@@ -157,8 +171,8 @@ export default function PhilosophySection() {
                     </h3>
                     <p
                       style={{
-                        fontSize: "0.875rem",
-                        color: "var(--color-stone-400)",
+                        fontSize: "0.95rem",
+                        color: "rgba(17,17,17,0.6)",
                         lineHeight: 1.7,
                       }}
                     >

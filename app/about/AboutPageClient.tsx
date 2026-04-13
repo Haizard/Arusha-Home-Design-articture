@@ -36,18 +36,9 @@ const team = [
 export default function AboutPageClient() {
   return (
     <>
-      <section className="page-hero" aria-label="About page header">
-        <Image
-          src="/images/about-hero.jpg"
-          alt="Modern office architectural design"
-          fill
-          priority
-          style={{ objectFit: "cover", opacity: 0.5 }}
-          className="hero-bg-img"
-          sizes="100vw"
-        />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <div className="section-label" style={{ justifyContent: "center" }}>
+      <section className="market-hero" style={{ background: "white", padding: "8rem 0 4rem" }}>
+        <div className="market-shell" style={{ textAlign: "center" }}>
+          <div className="market-kicker" style={{ justifyContent: "center" }}>
             Who We Are
           </div>
           <h1
@@ -55,10 +46,12 @@ export default function AboutPageClient() {
             style={{
               fontSize: "var(--text-headline)",
               fontWeight: 700,
-              color: "var(--color-stone-100)",
+              color: "#111111",
               lineHeight: 1.0,
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.05em",
               marginBottom: "1.5rem",
+              maxWidth: "18ch",
+              margin: "0 auto 1.5rem"
             }}
           >
             Passion for
@@ -69,41 +62,55 @@ export default function AboutPageClient() {
           </h1>
           <p
             style={{
-              color: "var(--color-stone-400)",
-              maxWidth: "560px",
+              color: "rgba(17,17,17,0.62)",
+              maxWidth: "600px",
               margin: "0 auto",
               lineHeight: 1.8,
+              fontSize: "1.1rem"
             }}
           >
             Arusha Home Design Pro is a dynamic architectural and interior design firm based in
-            Arusha, Tanzania — serving clients across East Africa with passion, precision, and
-            creativity.
+            Arusha, Tanzania, serving clients across East Africa. We are passionate about creating spaces that combine functionality, elegance, and modern design.
+          </p>
+          <div style={{ marginTop: "2rem", fontSize: "0.9rem", color: "var(--color-gold)", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+            🏛️ Architecture | ✨ Interior Design
+          </div>
+          <p
+            style={{
+              color: "rgba(17,17,17,0.62)",
+              maxWidth: "800px",
+              margin: "2rem auto 0",
+              lineHeight: 1.8,
+              fontSize: "1rem"
+            }}
+          >
+            We specialize in architectural design, interior design, and the design and customization of kitchens and wardrobes, delivering tailored solutions that meet each client’s unique vision. Through creativity, attention to detail, and professional execution, we transform ideas into inspiring, practical spaces.
           </p>
         </div>
       </section>
 
       {/* Story Section */}
-      <section className="section" style={{ background: "var(--color-void)" }}>
-        <div className="section-container">
+      <section className="market-section" style={{ background: "#fbf9f4", padding: "6rem 0" }}>
+        <div className="market-shell">
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "5rem",
+              gridTemplateColumns: "1.1fr 0.9fr",
+              gap: "4rem",
               alignItems: "center",
             }}
             className="story-grid"
           >
             <div>
-              <div className="section-label">Our Story</div>
+              <div className="market-kicker">Company Overview</div>
               <h2
                 className="font-display"
                 style={{
-                  fontSize: "var(--text-subhead)",
+                  fontSize: "clamp(2rem, 3.5vw, 3rem)",
                   fontWeight: 700,
-                  color: "var(--color-stone-100)",
-                  lineHeight: 1.15,
-                  letterSpacing: "-0.02em",
+                  color: "#111111",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.04em",
                   marginBottom: "1.5rem",
                 }}
               >
@@ -111,10 +118,10 @@ export default function AboutPageClient() {
               </h2>
               <p
                 style={{
-                  color: "var(--color-stone-400)",
-                  lineHeight: 1.9,
+                  color: "rgba(17,17,17,0.65)",
+                  lineHeight: 1.8,
                   marginBottom: "1.25rem",
-                  fontSize: "0.95rem",
+                  fontSize: "1rem",
                 }}
               >
                 Arusha Home Design Pro is one of the leading architectural and interior design
@@ -125,9 +132,9 @@ export default function AboutPageClient() {
               </p>
               <p
                 style={{
-                  color: "var(--color-stone-400)",
-                  lineHeight: 1.9,
-                  fontSize: "0.95rem",
+                  color: "rgba(17,17,17,0.65)",
+                  lineHeight: 1.8,
+                  fontSize: "1rem",
                   marginBottom: "2.5rem",
                 }}
               >
@@ -135,7 +142,7 @@ export default function AboutPageClient() {
                 transform concepts into elegant, practical spaces that enhance both lifestyles and
                 communities.
               </p>
-              <Link href="/contact" className="btn-primary">
+              <Link href="/contact" className="market-button primary">
                 Work With Us <ArrowRight size={16} />
               </Link>
             </div>
@@ -204,18 +211,19 @@ export default function AboutPageClient() {
       <PhilosophySection />
 
       {/* Team Section */}
-      <section className="section" style={{ background: "var(--color-graphite)", borderTop: "1px solid var(--color-border)" }}>
-        <div className="section-container">
+      <section className="market-section" style={{ background: "white", padding: "6rem 0" }}>
+        <div className="market-shell">
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-            <div className="section-label" style={{ justifyContent: "center" }}>Our Team</div>
+            <div className="market-kicker" style={{ justifyContent: "center" }}>Our Team</div>
             <h2
               className="font-display"
               style={{
-                fontSize: "var(--text-headline)",
+                fontSize: "clamp(2rem, 4vw, 3.5rem)",
                 fontWeight: 700,
-                color: "var(--color-stone-100)",
+                color: "#111111",
                 lineHeight: 1.0,
-                letterSpacing: "-0.02em",
+                letterSpacing: "-0.04em",
+                marginBottom: "1.5rem",
               }}
             >
               The People Behind the{" "}
@@ -223,52 +231,57 @@ export default function AboutPageClient() {
                 Magic
               </em>
             </h2>
+            <p
+              style={{
+                color: "rgba(17,17,17,0.6)",
+                maxWidth: "600px",
+                margin: "0 auto",
+                lineHeight: 1.6,
+                fontSize: "1rem"
+              }}
+            >
+              Meet the dedicated and skilled professionals who form the backbone of Arusha Home Design Pro, committed to delivering excellence in every project.
+            </p>
           </div>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(min(260px, 100%), 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(min(280px, 100%), 1fr))",
               gap: "1.5rem",
             }}
           >
             {team.map((member) => (
-              <div key={member.name} className="team-card">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="team-card-image"
-                  style={{ objectFit: "cover" }}
-                  sizes="(max-width:768px) 100vw, 25vw"
-                />
-                <div className="team-card-info">
-                  <div className="team-card-name">{member.name}</div>
-                  <div className="team-card-role">{member.role}</div>
+              <div key={member.name} className="market-plan-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+                <div style={{ position: "relative", aspectRatio: "1/1.1", overflow: "hidden" }}>
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width:768px) 100vw, 25vw"
+                  />
+                </div>
+                <div style={{ padding: "1.5rem", flexGrow: 1, display: "flex", flexDirection: "column" }}>
+                  <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#111111", marginBottom: "0.25rem" }}>{member.name}</div>
+                  <div style={{ fontSize: "0.85rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--color-gold)", marginBottom: "1rem" }}>{member.role}</div>
                   <p
                     style={{
-                      fontSize: "0.82rem",
-                      color: "var(--color-stone-400)",
-                      marginTop: "0.75rem",
+                      fontSize: "0.9rem",
+                      color: "rgba(17,17,17,0.6)",
                       lineHeight: 1.6,
-                      opacity: 0,
-                      transition: "opacity 0.4s 0.1s",
                     }}
-                    className="team-bio"
                   >
                     {member.bio}
                   </p>
                 </div>
-                <style jsx>{`
-                  .team-card:hover .team-bio { opacity: 1 !important; }
-                `}</style>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <ContactCTA />
+      <ContactCTA variant="light" />
     </>
   );
 }

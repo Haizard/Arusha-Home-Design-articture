@@ -2,17 +2,24 @@
 import Link from "next/link";
 import { ArrowRight, MapPin, Mail, Phone } from "lucide-react";
 
-export default function ContactCTA() {
+interface ContactCTAProps {
+  variant?: "dark" | "light";
+}
+
+export default function ContactCTA({ variant = "dark" }: ContactCTAProps) {
+  const isDark = variant === "dark";
+  
   return (
     <section
-      className="section"
+      className={isDark ? "section" : "market-section"}
       id="contact-cta"
       aria-label="Contact call to action"
       style={{
-        backgroundColor: "var(--color-void)",
-        borderTop: "1px solid var(--color-border)",
+        backgroundColor: isDark ? "var(--color-void)" : "#ffffff",
+        borderTop: isDark ? "1px solid var(--color-border)" : "1px solid rgba(17,17,17,0.06)",
         position: "relative",
         overflow: "hidden",
+        padding: isDark ? "var(--section-pad) 0" : "6rem 0"
       }}
     >
       {/* Background radial glow */}
@@ -26,13 +33,14 @@ export default function ContactCTA() {
           width: "600px",
           height: "600px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)",
+          background: isDark
+            ? "radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)"
+            : "radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
 
-      <div className="section-container" style={{ position: "relative" }}>
+      <div className={isDark ? "section-container" : "market-shell"} style={{ position: "relative" }}>
         <div
           style={{
             display: "grid",
@@ -44,15 +52,15 @@ export default function ContactCTA() {
         >
           {/* Left */}
           <div>
-            <div className="section-label">Start a Project</div>
+            <div className={isDark ? "section-label" : "market-kicker"}>Start a Project</div>
             <h2
               className="font-display"
               style={{
-                fontSize: "var(--text-headline)",
+                fontSize: isDark ? "var(--text-headline)" : "clamp(1.8rem, 4vw, 3rem)",
                 fontWeight: 700,
-                color: "var(--color-stone-100)",
+                color: isDark ? "var(--color-stone-100)" : "#111111",
                 lineHeight: 1.0,
-                letterSpacing: "-0.02em",
+                letterSpacing: "-0.04em",
                 marginBottom: "1.5rem",
               }}
             >
@@ -66,7 +74,7 @@ export default function ContactCTA() {
             </h2>
             <p
               style={{
-                color: "var(--color-stone-400)",
+                color: isDark ? "var(--color-stone-400)" : "rgba(17,17,17,0.6)",
                 fontSize: "1rem",
                 lineHeight: 1.8,
                 maxWidth: "400px",
@@ -76,7 +84,7 @@ export default function ContactCTA() {
               Let&apos;s discuss your vision. Our team is ready to turn your ideas into
               breathtaking spaces across East Africa.
             </p>
-            <Link href="/contact" className="btn-primary" id="cta-contact-btn">
+            <Link href="/contact" className={isDark ? "btn-primary" : "market-button primary"} id="cta-contact-btn">
               Get a Free Consultation <ArrowRight size={16} />
             </Link>
           </div>
@@ -85,8 +93,8 @@ export default function ContactCTA() {
           <div>
             <div
               style={{
-                background: "var(--color-graphite)",
-                border: "1px solid var(--color-border)",
+                background: isDark ? "var(--color-graphite)" : "#f7f4ee",
+                border: isDark ? "1px solid var(--color-border)" : "1px solid rgba(17,17,17,0.06)",
                 borderRadius: "var(--radius-xl)",
                 padding: "2.5rem",
               }}
@@ -95,9 +103,9 @@ export default function ContactCTA() {
                 className="font-display"
                 style={{
                   fontSize: "1.25rem",
-                  color: "var(--color-stone-100)",
+                  color: isDark ? "var(--color-stone-100)" : "#111111",
                   marginBottom: "2rem",
-                  fontWeight: 600,
+                  fontWeight: 700,
                 }}
               >
                 Arusha Office
@@ -137,13 +145,13 @@ export default function ContactCTA() {
                           ((e.target as HTMLElement).style.color = "var(--color-gold)")
                         }
                         onMouseLeave={(e) =>
-                          ((e.target as HTMLElement).style.color = "var(--color-stone-100)")
+                          ((e.target as HTMLElement).style.color = isDark ? "var(--color-stone-100)" : "#111111")
                         }
                       >
                         {value}
                       </a>
                     ) : (
-                      <div className="contact-info-value">{value}</div>
+                      <div className="contact-info-value" style={{ color: isDark ? "var(--color-stone-200)" : "#111111" }}>{value}</div>
                     )}
                   </div>
                 </div>
@@ -154,7 +162,7 @@ export default function ContactCTA() {
                 style={{
                   marginTop: "2rem",
                   paddingTop: "2rem",
-                  borderTop: "1px solid var(--color-border)",
+                  borderTop: isDark ? "1px solid var(--color-border)" : "1px solid rgba(17,17,17,0.08)",
                 }}
               >
                 <p
@@ -163,7 +171,7 @@ export default function ContactCTA() {
                     fontSize: "0.7rem",
                     letterSpacing: "0.2em",
                     textTransform: "uppercase",
-                    color: "var(--color-stone-600)",
+                    color: isDark ? "var(--color-stone-600)" : "rgba(17,17,17,0.4)",
                   }}
                 >
                   Mon–Sat · 8:00 AM – 6:00 PM EAT

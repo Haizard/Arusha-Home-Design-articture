@@ -12,7 +12,7 @@ const navLinks = [
   { href: "/products", label: "By Style" },
   { href: "/products", label: "By Budget" },
   { href: "/contact", label: "Custom Plan" },
-  { href: "/about", label: "Learn" },
+  { href: "/about", label: "About" },
 ];
 
 const dropdowns: Record<
@@ -64,7 +64,7 @@ const dropdowns: Record<
       { title: "$1000+", href: "/products?minPrice=1000&sort=high&label=%241000%2B", description: "Premium complex builds" },
     ],
   },
-  Learn: {
+  About: {
     featured: {
       title: "Learn how the storefront works",
       href: "/about",
@@ -186,7 +186,7 @@ export default function Navbar() {
 
         <ul className="store-nav-links" role="list">
           {navLinks.map((link) => {
-            const showChevron = ["By Size", "By Style", "By Budget", "Learn"].includes(link.label);
+            const showChevron = ["By Size", "By Style", "By Budget", "About"].includes(link.label);
             const menu = dropdowns[link.label];
             return (
               <li

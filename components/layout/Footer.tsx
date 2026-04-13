@@ -58,22 +58,35 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="store-footer-links">
+          <div className="store-footer-links" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
             <div>
               <h4>Support</h4>
               <ul>
-                <li><Link href="/contact">Frequently Asked Questions</Link></li>
-                <li><Link href="/contact">For Affiliates</Link></li>
-                <li><Link href="/contact">Refer a friend</Link></li>
-                <li><Link href="/contact">Terms and Conditions</Link></li>
-                <li><Link href="/contact">Privacy Policy</Link></li>
-                <li><Link href="/contact">Refund policy</Link></li>
+                <li><Link href="/contact">FAQs</Link></li>
+                <li><Link href="/contact">Affiliates</Link></li>
+                <li><Link href="/contact">Terms</Link></li>
+                <li><Link href="/contact">Privacy</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Product & Services</h4>
+              <ul>
+                <li><Link href="/products">Tv showcase</Link></li>
+                <li><Link href="/products">Kitchen carbinet</Link></li>
+                <li><Link href="/products">Bedroom wadrobe</Link></li>
+                <li><Link href="/products">Bed</Link></li>
+                <li><Link href="/products">Bathroom carbinet</Link></li>
+                <li><Link href="/services">Architecture drawing</Link></li>
+                <li><Link href="/services">Interior design</Link></li>
+                <li><Link href="/services">Exterior design</Link></li>
+                <li><Link href="/services">Renovation</Link></li>
+                <li><Link href="/services">Construction</Link></li>
               </ul>
             </div>
             <div>
               <h4>About</h4>
-              <p>
-                Arusha Home Design Pro provides practical, East Africa-aware house plans and studio-level customization support with premium documentation and design options.
+              <p style={{ fontSize: "0.9rem", color: "rgba(17,17,17,0.6)", lineHeight: "1.6" }}>
+                Arusha Home Design Pro is a dynamic architectural and interior design firm based in Arusha, Tanzania, serving clients across East Africa with elegance and functionality.
               </p>
             </div>
           </div>
