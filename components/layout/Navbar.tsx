@@ -169,10 +169,10 @@ export default function Navbar() {
       <nav className="store-navbar" role="navigation" aria-label="Main navigation">
         <Link href="/" className="store-logo">
           <Image
-            src="/images/site-logo.jpeg"
+            src="/images/site-logo-tight.png"
             alt="Arusha Home Designs Pro"
-            width={640}
-            height={320}
+            width={790}
+            height={540}
             className="store-logo-image"
             priority
           />
