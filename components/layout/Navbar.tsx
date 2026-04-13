@@ -168,14 +168,20 @@ export default function Navbar() {
 
       <nav className="store-navbar" role="navigation" aria-label="Main navigation">
         <Link href="/" className="store-logo">
-          <Image
-            src="/images/site-logo-tight.png"
-            alt="Arusha Home Designs Pro"
-            width={790}
-            height={540}
-            className="store-logo-image"
-            priority
-          />
+          <span className="store-logo-mark-wrap" aria-hidden="true">
+            <Image
+              src="/images/site-logo-mark.png"
+              alt=""
+              width={350}
+              height={350}
+              className="store-logo-mark-image"
+              priority
+            />
+          </span>
+          <span className="store-logo-copy">
+            Arusha Home
+            <small>Design Pro</small>
+          </span>
         </Link>
 
         <ul className="store-nav-links" role="list">
