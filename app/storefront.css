@@ -685,7 +685,7 @@
 
 .shop-card-image-wrap {
   position: relative;
-  aspect-ratio: 1.15 / 0.8;
+  aspect-ratio: 1.08 / 0.64;
   background: #ddd6ce;
   border-bottom: 1px solid rgba(17,17,17,0.06);
 }
@@ -713,34 +713,38 @@
 }
 
 .shop-card-body {
-  padding: 1.05rem 1.05rem 1.2rem;
+  padding: 0.85rem 0.9rem 0.95rem;
 }
 
 .shop-card-body h3 {
-  font-size: 1.12rem;
-  line-height: 1.35;
+  font-size: 1rem;
+  line-height: 1.24;
   font-weight: 800;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .shop-card-body p {
-  margin-top: 0.7rem;
+  margin-top: 0.45rem;
   color: rgba(17,17,17,0.66);
-  font-size: 0.98rem;
+  font-size: 0.88rem;
 }
 
 .shop-rating {
   display: flex;
   gap: 0.15rem;
-  margin-top: 0.6rem;
+  margin-top: 0.45rem;
   color: #108a83;
 }
 
 .shop-spec-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.9rem 0.6rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
+  gap: 0.55rem 0.4rem;
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
   border-top: 1px solid rgba(17,17,17,0.08);
 }
 
@@ -757,11 +761,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.22rem;
   text-align: center;
-  font-size: 0.88rem;
+  font-size: 0.76rem;
   font-weight: 600;
   color: rgba(17,17,17,0.76);
+  line-height: 1.18;
 }
 
 .shop-pagination {
@@ -794,7 +799,7 @@
   }
 
   .shop-card-image-wrap {
-    aspect-ratio: 1 / 0.72;
+    aspect-ratio: 1 / 0.68;
   }
 
   .shop-card-badge {
@@ -805,18 +810,18 @@
   }
 
   .shop-card-body {
-    padding: 0.78rem 0.76rem 0.88rem;
+    padding: 0.7rem 0.72rem 0.8rem;
   }
 
   .shop-card-body h3 {
-    font-size: 0.9rem;
-    line-height: 1.18;
+    font-size: 0.82rem;
+    line-height: 1.14;
   }
 
   .shop-card-body p {
-    margin-top: 0.45rem;
-    font-size: 0.74rem;
-    line-height: 1.35;
+    margin-top: 0.35rem;
+    font-size: 0.68rem;
+    line-height: 1.22;
   }
 
   .shop-rating {
@@ -826,14 +831,14 @@
 
   .shop-spec-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.55rem 0.45rem;
-    margin-top: 0.7rem;
-    padding-top: 0.7rem;
+    gap: 0.42rem 0.3rem;
+    margin-top: 0.58rem;
+    padding-top: 0.58rem;
   }
 
   .shop-spec {
-    gap: 0.24rem;
-    font-size: 0.66rem;
-    line-height: 1.2;
+    gap: 0.18rem;
+    font-size: 0.6rem;
+    line-height: 1.12;
   }
 }
