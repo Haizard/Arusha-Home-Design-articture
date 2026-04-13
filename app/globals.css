@@ -2380,6 +2380,191 @@ body {
   }
 }
 
+@media (max-width: 640px) {
+  .market-benefit-row,
+  .market-mini-rail,
+  .market-grid-four,
+  .market-grid-three,
+  .market-bottom-gallery,
+  .market-compare,
+  .market-bottom-collage,
+  .market-facet-grid,
+  .projects-grid,
+  .projects-highlights-grid,
+  .catalog-service-grid,
+  .catalog-project-grid {
+    gap: 0.7rem;
+  }
+
+  .market-mini-card,
+  .market-budget-card,
+  .market-category-image-wrap,
+  .market-plan-image-wrap,
+  .market-compare-panel,
+  .market-collage-large,
+  .market-collage-small {
+    min-height: 8.75rem;
+  }
+
+  .market-mini-card span,
+  .market-budget-card h3 {
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: 0.7rem;
+    font-size: 0.76rem;
+    line-height: 1.12;
+  }
+
+  .market-category-card h3,
+  .market-plan-card h3 {
+    font-size: 0.9rem;
+    line-height: 1.18;
+  }
+
+  .market-category-card h3 {
+    padding: 0.8rem 0.8rem 0;
+  }
+
+  .market-category-card p {
+    padding: 0.35rem 0.8rem 0.85rem;
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  .market-plan-body {
+    padding: 0.8rem 0.8rem 0.9rem;
+  }
+
+  .market-plan-meta {
+    font-size: 0.62rem;
+    gap: 0.5rem;
+  }
+
+  .market-price {
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+  }
+
+  .market-plan-badge {
+    top: 0.55rem;
+    left: 0.55rem;
+    min-height: 1.55rem;
+    padding: 0.22rem 0.48rem;
+    font-size: 0.58rem;
+  }
+
+  .market-spec-grid {
+    gap: 0.5rem 0.55rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+  }
+
+  .market-spec-grid span {
+    gap: 0.3rem;
+    font-size: 0.68rem;
+    line-height: 1.2;
+  }
+
+  .market-facet-card {
+    padding: 0.8rem 0.75rem;
+    border-radius: 0.95rem;
+  }
+
+  .market-facet-card > span {
+    font-size: 0.62rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .market-facet-card div {
+    gap: 0.4rem;
+  }
+
+  .market-facet-card a,
+  .catalog-filter-row span {
+    min-height: 1.9rem;
+    padding: 0.3rem 0.55rem;
+    font-size: 0.66rem;
+    line-height: 1.15;
+  }
+
+  .projects-highlight-card {
+    padding: 0.75rem;
+    gap: 0.55rem;
+  }
+
+  .projects-highlight-card h2 {
+    font-size: 0.78rem;
+    line-height: 1.15;
+  }
+
+  .projects-highlight-card p {
+    font-size: 0.68rem;
+    line-height: 1.3;
+  }
+
+  .projects-card-image-wrap {
+    aspect-ratio: 1 / 0.72;
+  }
+
+  .projects-card-badge {
+    top: 0.55rem;
+    left: 0.55rem;
+    min-height: 1.55rem;
+    padding: 0.2rem 0.48rem;
+    font-size: 0.56rem;
+  }
+
+  .projects-card-body {
+    padding: 0.8rem 0.78rem 0.88rem;
+  }
+
+  .projects-card-topline {
+    font-size: 0.56rem;
+    gap: 0.35rem;
+    letter-spacing: 0.08em;
+  }
+
+  .projects-card h3 {
+    margin: 0.55rem 0 0.45rem;
+    font-size: 0.9rem;
+    line-height: 1.16;
+  }
+
+  .projects-card p {
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+
+  .projects-card-meta {
+    gap: 0.35rem 0.5rem;
+    margin-top: 0.7rem;
+  }
+
+  .projects-card-meta span {
+    gap: 0.28rem;
+    font-size: 0.62rem;
+    line-height: 1.2;
+  }
+
+  .store-footer-main-grid,
+  .store-footer-links,
+  .store-service-grid {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+
+  .store-service-grid h3 {
+    font-size: 1.08rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .store-footer-links a,
+  .store-footer-links p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+}
+
 
 .catalog-hero {
   position: relative;
