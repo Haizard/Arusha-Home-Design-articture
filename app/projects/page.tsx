@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProjectsPageClient from "./ProjectsPageClient";
+import { getProjects } from "@/app/actions/admin";
 
 export const metadata: Metadata = {
   title: "Portfolio | Arusha Home Design Pro",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "Explore residential, commercial, and interior portfolio work presented in the same polished visual language as the rest of the site.",
 };
 
-export default function ProjectsPage() {
-  return <ProjectsPageClient />;
+export default async function ProjectsPage() {
+  const projects = await getProjects().catch(() => []);
+  return <ProjectsPageClient projects={projects} />;
 }

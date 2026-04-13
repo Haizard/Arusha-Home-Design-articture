@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Building2, Clock3, Compass, MapPin, PencilRuler, ShieldCheck } from "lucide-react";
-import { catalogProjects } from "@/lib/site-catalog";
 
 const highlights = [
   {
@@ -26,7 +25,20 @@ const highlights = [
   },
 ];
 
-export default function ProjectsPageClient() {
+type ProjectListItem = {
+  _id: string;
+  title: string;
+  category: string;
+  location: string;
+  imageUrl: string;
+  description?: string;
+  specifications?: {
+    year?: string;
+    area?: string;
+  };
+};
+
+export default function ProjectsPageClient({ projects }: { projects: ProjectListItem[] }) {
   return (
     <main className="projects-page">
       <section className="projects-hero" aria-label="Projects page hero">
@@ -78,39 +90,50 @@ export default function ProjectsPageClient() {
           </div>
 
           <div className="projects-grid">
-            {catalogProjects.map((project) => (
-              <article key={`${project.title}-${project.year}`} className="projects-card">
-                <div className="projects-card-image-wrap">
-                  <span className="projects-card-badge">{project.category}</span>
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 900px) 100vw, 33vw"
-                    className="projects-card-image"
-                  />
-                </div>
-                <div className="projects-card-body">
-                  <div className="projects-card-topline">
-                    <span>{project.status}</span>
-                    <span>{project.year}</span>
+            {projects.length > 0 ? (
+              projects.map((project) => (
+                <Link
+                  key={project._id}
+                  href={`/projects/${project._id}`}
+                  className="projects-card"
+                >
+                  <div className="projects-card-image-wrap">
+                    <span className="projects-card-badge">{project.category}</span>
+                    <Image
+                      src={project.imageUrl}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 33vw"
+                      className="projects-card-image"
+                    />
                   </div>
-                  <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
-                  <div className="projects-card-meta">
-                    <span>
-                      <MapPin size={15} /> {project.location}
-                    </span>
-                    <span>
-                      <Clock3 size={15} /> {project.year}
-                    </span>
-                    <span>
-                      <PencilRuler size={15} /> {project.area}
-                    </span>
+                  <div className="projects-card-body">
+                    <div className="projects-card-topline">
+                      <span>{project.category}</span>
+                      <span>{project.specifications?.year || "Recent"}</span>
+                    </div>
+                    <h3>{project.title}</h3>
+                    <p>{project.description || "Explore the full project brief, gallery, and drawing information."}</p>
+                    <div className="projects-card-meta">
+                      <span>
+                        <MapPin size={15} /> {project.location}
+                      </span>
+                      <span>
+                        <Clock3 size={15} /> {project.specifications?.year || "Recent"}
+                      </span>
+                      <span>
+                        <PencilRuler size={15} /> {project.specifications?.area || "Custom scope"}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </Link>
+              ))
+            ) : (
+              <div className="projects-empty-state">
+                <h3>No projects published yet.</h3>
+                <p>Add projects from the admin/CMS and they will appear here automatically.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

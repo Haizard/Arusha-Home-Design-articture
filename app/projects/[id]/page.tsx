@@ -1,7 +1,7 @@
-import { getProject, getProjects } from '@/app/actions/admin';
+import { getProject } from '@/app/actions/admin';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, MapPin, Calendar, ChevronRight, Ruler, Users, Building2, Layers, Share2, Download } from 'lucide-react';
+import { ArrowLeft, MapPin, Ruler, Users, Building2, Share2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import ContactCTA from '@/components/sections/ContactCTA';
 import ProjectGallery from '@/components/ui/ProjectGallery';
@@ -15,9 +15,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     notFound();
   }
 
-  // Get other projects for recommendation
-  const allProjects = await getProjects();
-  const otherProjects = allProjects.filter((p: any) => p._id !== project._id).slice(0, 3);
+  const currentId = project._id;
 
   // Use actual gallery or fallback
   const displayGallery = project.gallery?.length > 0 ? project.gallery : [project.imageUrl];
@@ -131,7 +129,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                    ))}
                 </div>
 
-                 <InquireButton project={{ _id: project._id, title: project.title }} />
+                 <InquireButton project={{ _id: currentId, title: project.title }} />
                 
                 <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid #eee' }}>
                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>

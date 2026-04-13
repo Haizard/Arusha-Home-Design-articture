@@ -3930,6 +3930,25 @@ body {
   gap: 1.25rem;
 }
 
+.projects-empty-state {
+  grid-column: 1 / -1;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #faf7f2 100%);
+  border: 1px solid rgba(17,17,17,0.06);
+  box-shadow: 0 18px 42px rgba(17,17,17,0.05);
+}
+
+.projects-empty-state h3 {
+  font-size: 1.25rem;
+  color: #111111;
+}
+
+.projects-empty-state p {
+  margin-top: 0.6rem;
+  color: rgba(17,17,17,0.62);
+}
+
 .projects-card {
   background: #ffffff;
   border-radius: 1.5rem;
