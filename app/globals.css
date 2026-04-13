@@ -2278,7 +2278,7 @@ body {
   .market-bottom-gallery,
   .market-compare,
   .market-bottom-collage {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .market-mini-card,
@@ -2337,7 +2337,7 @@ body {
   }
 
   .market-spec-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -2583,7 +2583,7 @@ body {
   .market-facet-grid,
   .catalog-service-grid,
   .catalog-project-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .catalog-hero {
@@ -3097,9 +3097,8 @@ body {
   .detail-topbar,
   .detail-actions,
   .detail-buy-row,
-  .detail-tier-tabs,
-  .detail-drawing-grid {
-    grid-template-columns: 1fr;
+  .detail-tier-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     flex-direction: column;
     align-items: stretch;
   }
@@ -3109,7 +3108,7 @@ body {
   }
 
   .detail-spec-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .detail-inclusion-card,
@@ -3469,7 +3468,7 @@ body {
   .store-service-grid,
   .store-footer-main-grid,
   .store-footer-links {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .store-payment-row {
@@ -3479,7 +3478,7 @@ body {
 
 @media (max-width: 640px) {
   .collections-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.16rem;
   }
 
@@ -3804,6 +3803,6 @@ body {
 @media (max-width: 700px) {
   .projects-grid,
   .projects-highlights-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
