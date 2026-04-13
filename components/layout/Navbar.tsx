@@ -170,10 +170,10 @@ export default function Navbar() {
         <Link href="/" className="store-logo">
           <span className="store-logo-mark-wrap" aria-hidden="true">
             <Image
-              src="/images/site-logo-mark.png"
+              src="/images/site-logo-tight.png"
               alt=""
-              width={350}
-              height={350}
+              width={790}
+              height={540}
               className="store-logo-mark-image"
               priority
             />
