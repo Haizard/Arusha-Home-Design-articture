@@ -652,14 +652,24 @@
   text-decoration: none;
   color: #111111;
   background: #ffffff;
-  border-radius: 0.4rem;
+  border-radius: 1.3rem;
   overflow: hidden;
+  border: 1px solid rgba(17,17,17,0.08);
+  box-shadow: 0 18px 42px rgba(17,17,17,0.06);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.shop-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(207,171,79,0.26);
+  box-shadow: 0 28px 56px rgba(17,17,17,0.1);
 }
 
 .shop-card-image-wrap {
   position: relative;
   aspect-ratio: 1.15 / 0.8;
   background: #ddd6ce;
+  border-bottom: 1px solid rgba(17,17,17,0.06);
 }
 
 .shop-card-image {
@@ -676,14 +686,16 @@
   z-index: 1;
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
-  background: #7b3ff2;
-  color: white;
+  background: rgba(255,255,255,0.94);
+  color: #8d6d1d;
   font-size: 0.75rem;
   font-weight: 700;
+  border: 1px solid rgba(207,171,79,0.22);
+  box-shadow: 0 12px 24px rgba(17,17,17,0.08);
 }
 
 .shop-card-body {
-  padding: 1rem 1rem 1.2rem;
+  padding: 1.05rem 1.05rem 1.2rem;
 }
 
 .shop-card-body h3 {
@@ -695,7 +707,7 @@
 .shop-card-body p {
   margin-top: 0.7rem;
   color: rgba(17,17,17,0.66);
-  font-size: 1rem;
+  font-size: 0.98rem;
 }
 
 .shop-rating {
@@ -712,6 +724,15 @@
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(17,17,17,0.08);
+}
+
+.shop-filter-group {
+  border-top: 1px solid rgba(17,17,17,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(249,246,240,0.9) 100%);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 12px 26px rgba(17,17,17,0.04);
+  margin-bottom: 0.85rem;
 }
 
 .shop-spec {

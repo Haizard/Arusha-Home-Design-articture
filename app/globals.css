@@ -1797,11 +1797,20 @@ body {
   text-decoration: none;
   font-size: 0.92rem;
   font-weight: 700;
+  border: 1px solid transparent;
+  box-shadow: 0 14px 30px rgba(17,17,17,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.market-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 40px rgba(17,17,17,0.12);
 }
 
 .market-button.primary {
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #f5efe4 100%);
   color: #111111;
+  border-color: rgba(17,17,17,0.08);
 }
 
 .market-button.secondary {
@@ -1925,10 +1934,23 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  padding: 0.72rem 1rem;
+  border-radius: 999px;
   text-decoration: none;
   color: #111111;
   font-size: 0.92rem;
   font-weight: 700;
+  background: rgba(255,255,255,0.84);
+  border: 1px solid rgba(17,17,17,0.08);
+  box-shadow: 0 10px 24px rgba(17,17,17,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.market-proof-links a:hover,
+.market-inline-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(207,171,79,0.34);
+  box-shadow: 0 16px 30px rgba(17,17,17,0.08);
 }
 
 .market-section {
@@ -1985,7 +2007,16 @@ body {
   background: #ffffff;
   border-radius: 1.5rem;
   overflow: hidden;
-  box-shadow: 0 20px 45px rgba(17,17,17,0.06);
+  border: 1px solid rgba(17,17,17,0.07);
+  box-shadow: 0 18px 42px rgba(17,17,17,0.06);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.market-category-card:hover,
+.market-plan-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(207,171,79,0.25);
+  box-shadow: 0 28px 56px rgba(17,17,17,0.1);
 }
 
 .market-category-image-wrap,
@@ -2018,12 +2049,20 @@ body {
   border-radius: 1.5rem;
   overflow: hidden;
   color: white;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 18px 46px rgba(17,17,17,0.08);
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.market-budget-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 58px rgba(17,17,17,0.12);
 }
 
 .market-budget-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.68));
+  background: linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.18) 48%, rgba(0,0,0,0.72) 100%);
 }
 
 .market-budget-card h3 {
@@ -2412,7 +2451,15 @@ body {
   padding: 1.15rem 1.2rem;
   border-radius: 1.25rem;
   background: #ffffff;
+  border: 1px solid rgba(17,17,17,0.07);
   box-shadow: 0 18px 40px rgba(17,17,17,0.05);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.market-facet-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(207,171,79,0.26);
+  box-shadow: 0 24px 42px rgba(17,17,17,0.08);
 }
 
 .market-facet-card > span {
@@ -2443,6 +2490,14 @@ body {
   text-decoration: none;
   font-size: 0.84rem;
   font-weight: 600;
+  border: 1px solid rgba(17,17,17,0.04);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.market-facet-card a:hover {
+  background: #f8f3e8;
+  color: #8d6d1d;
+  border-color: rgba(207,171,79,0.22);
 }
 
 .catalog-section {
@@ -3590,11 +3645,21 @@ body {
   text-decoration: none;
   font-size: 0.92rem;
   font-weight: 700;
+  border: 1px solid transparent;
+  box-shadow: 0 14px 30px rgba(17,17,17,0.08);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.projects-primary-button:hover,
+.projects-secondary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 38px rgba(17,17,17,0.12);
 }
 
 .projects-primary-button {
   background: #cfab4f;
   color: #111111;
+  border-color: rgba(160,118,17,0.18);
 }
 
 .projects-secondary-button {
@@ -3620,6 +3685,11 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 0.85rem;
+  padding: 1rem 1.05rem;
+  border-radius: 1.2rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(250,247,242,0.96) 100%);
+  border: 1px solid rgba(17,17,17,0.06);
+  box-shadow: 0 12px 28px rgba(17,17,17,0.04);
 }
 
 .projects-highlight-card svg {
@@ -3679,7 +3749,15 @@ body {
   background: #ffffff;
   border-radius: 1.5rem;
   overflow: hidden;
+  border: 1px solid rgba(17,17,17,0.07);
   box-shadow: 0 20px 45px rgba(17, 17, 17, 0.06);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.projects-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(207,171,79,0.24);
+  box-shadow: 0 28px 58px rgba(17,17,17,0.1);
 }
 
 .projects-card-image-wrap {
@@ -3697,10 +3775,12 @@ body {
   min-height: 2rem;
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  background: #cfab4f;
-  color: #111111;
+  background: rgba(255,255,255,0.94);
+  color: #8d6d1d;
   font-size: 0.74rem;
   font-weight: 700;
+  border: 1px solid rgba(207,171,79,0.2);
+  box-shadow: 0 12px 24px rgba(17,17,17,0.08);
 }
 
 .projects-card-body {
@@ -3761,7 +3841,7 @@ body {
   background: linear-gradient(180deg, #ffffff 0%, #faf7f2 100%);
   border: 1px solid rgba(17, 17, 17, 0.06);
   border-radius: 1.6rem;
-  box-shadow: 0 20px 45px rgba(17, 17, 17, 0.05);
+  box-shadow: 0 24px 52px rgba(17, 17, 17, 0.06);
 }
 
 .projects-closing-actions {
