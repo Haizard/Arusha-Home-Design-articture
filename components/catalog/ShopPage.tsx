@@ -68,7 +68,7 @@ function spec(icon: React.ReactNode, label: string) {
 
 export default function ShopPage({ items, filters }: { items: CmsProductListItem[]; filters?: ShopFilters }) {
   const productTypeLabels = useMemo(
-    () => Array.from(new Set(items.map((item) => item.category).filter(Boolean))),
+    () => Array.from(new Set(items.map((item: any) => item.category).filter(Boolean))),
     [items]
   );
   const query = filters?.q?.trim().toLowerCase() ?? "";
@@ -233,7 +233,7 @@ export default function ShopPage({ items, filters }: { items: CmsProductListItem
           </aside>
 
           <div className="shop-grid">
-            {filtered.map((item) => (
+            {filtered.map((item: any) => (
               <Link key={item._id} href={`/products/${item._id}`} className="shop-card">
                 <div className="shop-card-image-wrap">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -245,7 +245,7 @@ export default function ShopPage({ items, filters }: { items: CmsProductListItem
                   <p>From ${(item.basePrice ?? 0).toFixed(2)}</p>
                   {item.rating && item.rating > 0 ? (
                     <div className="shop-rating">
-                      {Array.from({ length: 5 }).map((_, index) => (
+                      {Array.from({ length: 5 }).map((_: any, index: number) => (
                         <Star key={index} size={15} fill={index < Math.round(item.rating ?? 0) ? "currentColor" : "none"} />
                       ))}
                     </div>

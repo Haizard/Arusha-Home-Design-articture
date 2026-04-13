@@ -216,7 +216,7 @@ export default function Navbar() {
                         <span>{menu.featured.description}</span>
                       </Link>
                       <div className="store-dropdown-links">
-                        {menu.links.map((item) => (
+                        {menu.links.map((item: any) => (
                           <Link key={item.title} href={item.href} className="store-dropdown-link" onClick={() => setOpenDropdown(null)}>
                             <strong>{item.title}</strong>
                             <span>{item.description}</span>

@@ -746,7 +746,7 @@ export default function AdminPage() {
               </div>
             ) : (
               <div className="cards-grid">
-                {data.map((item) => (
+                {data.map((item: any) => (
                   <div key={item._id} className="item-card">
                     {activeTab === 'inquiries' ? (
                       <div className="card-body" style={{ padding: '1.5rem' }}>
@@ -1273,7 +1273,7 @@ export default function AdminPage() {
                             className="admin-input resize-none"
                             rows={4}
                             placeholder="Substructure | $253,925"
-                            value={(tier.items || []).map((item) => `${item.label || ''} | ${item.cost || ''}`).join('\n')}
+                            value={(tier.items || []).map((item: any) => `${item.label || ''} | ${item.cost || ''}`).join('\n')}
                             onChange={e => {
                               const tiers = estimateTiers.map((t, idx) => idx === i
                                 ? {

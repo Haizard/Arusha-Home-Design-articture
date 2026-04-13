@@ -75,7 +75,7 @@ export function ServicesCatalog({ services }: { services: CatalogService[] }) {
               <h3>{service.title}</h3>
               <p>{service.summary}</p>
               <ul>
-                {service.deliverables.map((item) => (
+                {service.deliverables.map((item: any) => (
                   <li key={item}>
                     <Sparkles size={15} />
                     {item}
@@ -106,7 +106,7 @@ export function ProductsCatalog({ plans }: { plans: CatalogPlan[] }) {
         </div>
       </div>
       <div className="catalog-filter-row">
-        {["Modern House", "Luxury House", "Budget Smart", "Best Seller", "Compound Living"].map((item) => (
+        {["Modern House", "Luxury House", "Budget Smart", "Best Seller", "Compound Living"].map((item: any) => (
           <span key={item}>{item}</span>
         ))}
       </div>

@@ -102,7 +102,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <ProjectGallery images={displayGallery} />
 
             <div className="project-detail-spec-ribbon">
-              {specItems.map((item) => (
+              {specItems.map((item: any) => (
                 <div key={item.label} className="project-detail-spec-tile">
                   <item.icon size={18} />
                   <span>{item.label}</span>
@@ -129,7 +129,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                   <div key={group.title} className="project-detail-drawing-card">
                     <h3>{group.title}</h3>
                     <ul>
-                      {group.items.map((item) => (
+                      {group.items.map((item: string) => (
                         <li key={item}>{item}</li>
                       ))}
                     </ul>
@@ -147,7 +147,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               </div>
 
               <div className="project-detail-feature-list">
-                {featureList.map((item) => (
+                {featureList.map((item: string) => (
                   <div key={item} className="project-detail-feature-item">
                     <span className="project-detail-feature-check" />
                     <span>{item}</span>
