@@ -4,33 +4,42 @@ import { join } from 'path';
 import { randomUUID } from 'crypto';
 
 export async function POST(req: NextRequest) {
+  console.log('--- Upload Request Started ---');
   try {
     const formData = await req.formData();
     const file = formData.get('file') as File;
 
-    if (!file) {
-      return NextResponse.json({ success: false, message: 'No file uploaded' }, { status: 400 });
+    if (!file || typeof file === 'string') {
+      console.warn('Upload Error: No file or invalid file type in formData');
+      return NextResponse.json({ success: false, message: 'No file uploaded or invalid file format' }, { status: 400 });
     }
+
+    console.log(`Uploading file: ${file.name}, size: ${file.size} bytes`);
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create unique filename using built-in randomUUID
+    // Create unique filename
     const ext = file.name.split('.').pop();
     const filename = `${randomUUID()}.${ext}`;
     
-    // PRODUCTION NOTE: Vercel filesystem is read-only. 
-    // For production, you should use a cloud provider like Cloudinary or Vercel Blob.
-    // Local uploads will work in dev but will be lost on deployment.
+    // Improved path resolution
     const uploadDir = join(process.cwd(), 'public', 'uploads');
+    console.log(`Target upload directory: ${uploadDir}`);
+    console.log(`Current working directory: ${process.cwd()}`);
+
     try {
       await mkdir(uploadDir, { recursive: true });
-    } catch (e) {
-      // Ignore if directory exists
+      console.log('Upload directory checked/created');
+    } catch (e: any) {
+      console.error('Error creating upload directory:', e.message);
     }
 
     const path = join(uploadDir, filename);
+    console.log(`Writing file to: ${path}`);
+    
     await writeFile(path, buffer);
+    console.log('File written successfully');
 
     return NextResponse.json({ 
       success: true, 
@@ -38,7 +47,13 @@ export async function POST(req: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('Upload Error:', error);
-    return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+    console.error('CRITICAL Upload Error:', error);
+    return NextResponse.json({ 
+      success: false, 
+      message: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined 
+    }, { status: 500 });
+  } finally {
+    console.log('--- Upload Request Ended ---');
   }
 }
