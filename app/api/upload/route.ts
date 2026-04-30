@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const maxDuration = 60; // Allow 60 seconds for processing large images
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '15mb', // Set limit to 15MB
+    },
+  },
+};
+
 export async function POST(req: NextRequest) {
   console.log('--- Upload Request Started (Base64 Mode) ---');
   try {
