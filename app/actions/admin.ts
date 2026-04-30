@@ -7,6 +7,7 @@ import Product from '@/models/Product';
 import Testimonial from '@/models/Testimonial';
 import Inquiry from '@/models/Inquiry';
 import { revalidatePath } from 'next/cache';
+import { sendInquiryNotification } from '@/lib/mailer';
 
 // --- Services ---
 export async function getServices() {
@@ -33,22 +34,22 @@ export async function addService(formData: any) {
 export async function updateService(id: string, formData: any) {
   await connectDB();
   console.log(`Updating Service ${id} with data:`, JSON.stringify(formData, null, 2));
-  
+
   // Re-importing Service inside the function can sometimes help with stale models in dev
   const UpdatedService = (await import('@/models/Service')).default;
-  
+
   const service = await UpdatedService.findByIdAndUpdate(
-    id, 
-    { $set: formData }, 
+    id,
+    { $set: formData },
     { new: true, runValidators: true }
   );
-  
+
   if (!service) throw new Error('Service not found');
 
   revalidatePath('/');
   revalidatePath('/services');
-  revalidatePath(`/services/${id}`); 
-  
+  revalidatePath(`/services/${id}`);
+
   return JSON.parse(JSON.stringify(service));
 }
 
@@ -124,8 +125,8 @@ export async function updateProduct(id: string, formData: any) {
   await connectDB();
   const UpdatedProduct = (await import('@/models/Product')).default;
   const product = await UpdatedProduct.findByIdAndUpdate(
-    id, 
-    { $set: formData }, 
+    id,
+    { $set: formData },
     { new: true, runValidators: true }
   );
   revalidatePath('/');
@@ -167,6 +168,7 @@ export async function deleteTestimonial(id: string) {
   await Testimonial.findByIdAndDelete(id);
   revalidatePath('/');
 }
+
 // --- Inquiries ---
 export async function getInquiries() {
   await connectDB();
@@ -176,9 +178,29 @@ export async function getInquiries() {
 
 export async function addInquiry(formData: any) {
   await connectDB();
+
+  // 1. Save to MongoDB first — this always succeeds regardless of email
   const inquiry = await Inquiry.create(formData);
   revalidatePath('/admin');
+
+  // 2. Fire email notification — errors are caught inside sendInquiryNotification
+  //    so a mail failure never breaks the form submission for the user.
+  await sendInquiryNotification({
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    service: formData.service,
+    message: formData.message,
+    projectName: formData.projectName,
+  });
+
   return JSON.parse(JSON.stringify(inquiry));
+}
+
+export async function updateInquiryStatus(id: string, status: 'pending' | 'read' | 'archived') {
+  await connectDB();
+  await Inquiry.findByIdAndUpdate(id, { status });
+  revalidatePath('/admin');
 }
 
 export async function deleteInquiry(id: string) {

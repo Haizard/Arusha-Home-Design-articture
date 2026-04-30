@@ -7,13 +7,14 @@ import {
   getProjects, addProject, updateProject, deleteProject,
   getProducts, addProduct, updateProduct, deleteProduct,
   getTestimonials, addTestimonial, updateTestimonial, deleteTestimonial,
-  getInquiries, deleteInquiry,
+  getInquiries, deleteInquiry, updateInquiryStatus,
 } from '@/app/actions/admin';
 import {
   LayoutDashboard, Briefcase, ShoppingBag, MessageSquare, Mail,
   Plus, Pencil, Trash2, X, Save, ChevronRight,
   AlertCircle, Loader2, Database, RefreshCw,
   Image as ImageIcon, Home, Upload, Phone, Menu,
+  CheckCircle2, Archive, Clock,
 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
@@ -234,6 +235,16 @@ export default function AdminPage() {
       fetchData();
     } catch {
       toast.error('Delete failed', { id: tid });
+    }
+  };
+
+  const handleInquiryStatus = async (id: string, status: 'pending' | 'read' | 'archived') => {
+    try {
+      await updateInquiryStatus(id, status);
+      toast.success(`Marked as ${status} ✓`);
+      fetchData();
+    } catch {
+      toast.error('Failed to update status');
     }
   };
 
@@ -750,28 +761,76 @@ export default function AdminPage() {
                   <div key={item._id} className="item-card">
                     {activeTab === 'inquiries' ? (
                       <div className="card-body" style={{ padding: '1.5rem' }}>
-                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                            <div className="card-tag" style={{ background: 'rgba(248,113,113,0.1)', color: '#f87171' }}>Inquiry</div>
-                            <button className="card-action-btn del" onClick={() => { if (item._id) handleDelete(item._id); }}><Trash2 size={12} /></button>
-                         </div>
-                         <div style={{ color: 'var(--color-gold)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>
-                            Project: {item.projectName}
-                         </div>
-                         <div className="card-title">{item.name}</div>
-                         <div className="card-desc" style={{ WebkitLineClamp: 4, marginBottom: '1rem' }}>{item.message}</div>
-                         <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                            <div style={{ fontSize: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                               <Mail size={12} color="#555" /> {item.email}
-                            </div>
-                            {item.phone && (
-                              <div style={{ fontSize: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                 <Phone size={12} color="#555" /> {item.phone}
-                              </div>
-                            )}
-                            <div style={{ fontSize: '10px', color: '#444', marginTop: '4px' }}>
-                               {item.createdAt ? new Date(item.createdAt).toLocaleString() : ''}
-                            </div>
-                         </div>
+                        {/* Header row: status badge + delete */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                          <span style={{
+                            fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em',
+                            textTransform: 'uppercase', padding: '3px 10px', borderRadius: '999px',
+                            background: item.status === 'read' ? 'rgba(52,211,153,0.12)' : item.status === 'archived' ? 'rgba(255,255,255,0.06)' : 'rgba(251,191,36,0.12)',
+                            color: item.status === 'read' ? '#34d399' : item.status === 'archived' ? '#555' : '#fbbf24',
+                            display: 'flex', alignItems: 'center', gap: '5px'
+                          }}>
+                            {item.status === 'read' ? <CheckCircle2 size={9} /> : item.status === 'archived' ? <Archive size={9} /> : <Clock size={9} />}
+                            {item.status || 'pending'}
+                          </span>
+                          <button className="card-action-btn del" title="Delete" onClick={() => { if (item._id) handleDelete(item._id); }}><Trash2 size={12} /></button>
+                        </div>
+
+                        {/* Service / project label */}
+                        <div style={{ color: '#c9a84c', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>
+                          {item.service || item.projectName || 'General Inquiry'}
+                        </div>
+
+                        {/* Name */}
+                        <div className="card-title" style={{ marginBottom: '6px' }}>{item.name}</div>
+
+                        {/* Message preview */}
+                        <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.6, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', marginBottom: '1rem' }}>
+                          {item.message}
+                        </div>
+
+                        {/* Contact details */}
+                        <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '0.875rem', display: 'flex', flexDirection: 'column', gap: '5px', marginBottom: '1rem' }}>
+                          <a href={`mailto:${item.email}`} style={{ fontSize: '12px', display: 'flex', alignItems: 'center', gap: '8px', color: '#c9a84c', textDecoration: 'none' }}>
+                            <Mail size={11} color="#555" /> {item.email}
+                          </a>
+                          {item.phone && (
+                            <a href={`tel:${item.phone}`} style={{ fontSize: '12px', display: 'flex', alignItems: 'center', gap: '8px', color: '#888', textDecoration: 'none' }}>
+                              <Phone size={11} color="#555" /> {item.phone}
+                            </a>
+                          )}
+                          <div style={{ fontSize: '10px', color: '#3a3a3a', marginTop: '2px' }}>
+                            {item.createdAt ? new Date(item.createdAt).toLocaleString('en-TZ', { dateStyle: 'medium', timeStyle: 'short' }) : ''}
+                          </div>
+                        </div>
+
+                        {/* Action buttons */}
+                        <div style={{ display: 'flex', gap: '6px' }}>
+                          {item.status !== 'read' && (
+                            <button
+                              onClick={() => handleInquiryStatus(item._id, 'read')}
+                              style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px', padding: '7px', fontSize: '11px', fontWeight: 600, background: 'rgba(52,211,153,0.1)', color: '#34d399', border: '1px solid rgba(52,211,153,0.2)', borderRadius: '8px', cursor: 'pointer' }}
+                            >
+                              <CheckCircle2 size={11} /> Mark Read
+                            </button>
+                          )}
+                          {item.status !== 'archived' && (
+                            <button
+                              onClick={() => handleInquiryStatus(item._id, 'archived')}
+                              style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px', padding: '7px', fontSize: '11px', fontWeight: 600, background: 'rgba(255,255,255,0.04)', color: '#555', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '8px', cursor: 'pointer' }}
+                            >
+                              <Archive size={11} /> Archive
+                            </button>
+                          )}
+                          {item.status === 'archived' && (
+                            <button
+                              onClick={() => handleInquiryStatus(item._id, 'pending')}
+                              style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px', padding: '7px', fontSize: '11px', fontWeight: 600, background: 'rgba(251,191,36,0.08)', color: '#fbbf24', border: '1px solid rgba(251,191,36,0.15)', borderRadius: '8px', cursor: 'pointer' }}
+                            >
+                              <Clock size={11} /> Reopen
+                            </button>
+                          )}
+                        </div>
                       </div>
                     ) : (
                       <>
