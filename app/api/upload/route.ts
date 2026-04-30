@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { randomUUID } from 'crypto';
 
 export async function POST(req: NextRequest) {
-  console.log('--- Upload Request Started ---');
+  console.log('--- Upload Request Started (Base64 Mode) ---');
   try {
     const formData = await req.formData();
     const file = formData.get('file') as File;
@@ -14,36 +11,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'No file uploaded or invalid file format' }, { status: 400 });
     }
 
-    console.log(`Uploading file: ${file.name}, size: ${file.size} bytes`);
+    console.log(`Processing file: ${file.name}, type: ${file.type}, size: ${file.size} bytes`);
 
+    // Convert file to buffer
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create unique filename
-    const ext = file.name.split('.').pop();
-    const filename = `${randomUUID()}.${ext}`;
-    
-    // Improved path resolution
-    const uploadDir = join(process.cwd(), 'public', 'uploads');
-    console.log(`Target upload directory: ${uploadDir}`);
-    console.log(`Current working directory: ${process.cwd()}`);
+    // Convert to Base64 Data URI
+    // This allows storing the image directly in MongoDB as a string
+    const base64Image = buffer.toString('base64');
+    const dataUri = `data:${file.type};base64,${base64Image}`;
 
-    try {
-      await mkdir(uploadDir, { recursive: true });
-      console.log('Upload directory checked/created');
-    } catch (e: any) {
-      console.error('Error creating upload directory:', e.message);
-    }
-
-    const path = join(uploadDir, filename);
-    console.log(`Writing file to: ${path}`);
-    
-    await writeFile(path, buffer);
-    console.log('File written successfully');
+    console.log('File converted to Base64 successfully');
 
     return NextResponse.json({ 
       success: true, 
-      url: `/uploads/${filename}` 
+      url: dataUri 
     });
 
   } catch (error: any) {
