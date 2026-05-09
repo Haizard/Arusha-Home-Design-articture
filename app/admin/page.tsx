@@ -343,10 +343,11 @@ export default function AdminPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const processSteps = (Array.isArray(formData.processSteps) ? formData.processSteps : []) as ProcessStep[];
   const serviceFeatures = (Array.isArray(formData.features_list) ? formData.features_list : []) as ServiceFeature[];
-  const serviceFaqs = (Array.isArray(formData.faqs) ? formData.faqs : []) as ServiceFaq[];
+  
+  const serviceFaqs = (Array.isArray(formData.faqs) ? formData.faqs : []).filter((f): f is ServiceFaq => 'q' in f && 'a' in f);
   const productPackages = (Array.isArray(formData.packages) ? formData.packages : []) as ProductPackageForm[];
   const estimateTiers = (Array.isArray(formData.estimateTiers) ? formData.estimateTiers : []) as EstimateTierForm[];
-  const productFaqs = (Array.isArray(formData.faqs) ? formData.faqs : []) as ProductFaqForm[];
+  const productFaqs = (Array.isArray(formData.faqs) ? formData.faqs : []).filter((f): f is ProductFaqForm => 'question' in f && 'answer' in f);
   const testimonialStars = typeof formData.stars === 'number' ? formData.stars : 0;
 
   return (
@@ -963,7 +964,7 @@ export default function AdminPage() {
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: '#c9a84c', display: 'flex', justifyContent: 'space-between' }}>
                       FAQs
-                      <button type="button" onClick={() => setFormData({...formData, faqs: [...(Array.isArray(formData.faqs) ? formData.faqs : []), {q: '', a: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD FAQ</button>
+                      <button type="button" onClick={() => setFormData({...formData, faqs: [...serviceFaqs, {q: '', a: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD FAQ</button>
                     </div>
                     {serviceFaqs.map((faq, i) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr auto', gap: '8px', marginBottom: '8px', alignItems: 'start' }}>
@@ -975,7 +976,7 @@ export default function AdminPage() {
                           const f = serviceFaqs.map((item, idx) => idx === i ? { ...item, a: e.target.value } : item);
                           setFormData({...formData, faqs: f});
                         }} />
-                        <button type="button" onClick={() => setFormData({...formData, faqs: (Array.isArray(formData.faqs) ? formData.faqs : []).filter((_, idx) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
+                        <button type="button" onClick={() => setFormData({...formData, faqs: serviceFaqs.filter((_, idx) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
                       </div>
                     ))}
                   </div>
@@ -1028,12 +1029,12 @@ export default function AdminPage() {
                        </div>
                        <div className="admin-field">
                          <label className="admin-label">Materials (comma separated)</label>
-                         <input className="admin-input" value={formData.specifications?.materials?.join(', ') || ''} onChange={e => setFormData({...formData, specifications: {...formData.specifications, materials: e.target.value.split(',').map((s: string) => s.trim())}})} />
+                         <input className="admin-input" value={(Array.isArray(formData.specifications?.materials) ? formData.specifications.materials : []).join(', ') || ''} onChange={e => setFormData({...formData, specifications: {...formData.specifications, materials: e.target.value.split(',').map((s: string) => s.trim())}})} />
                        </div>
                     </div>
                     <div className="admin-field" style={{ marginTop: '12px' }}>
                        <label className="admin-label">Team (comma separated)</label>
-                       <input className="admin-input" value={formData.specifications?.team?.join(', ') || ''} onChange={e => setFormData({...formData, specifications: {...formData.specifications, team: e.target.value.split(',').map((s: string) => s.trim())}})} />
+                       <input className="admin-input" value={(Array.isArray(formData.specifications?.team) ? formData.specifications.team : []).join(', ') || ''} onChange={e => setFormData({...formData, specifications: {...formData.specifications, team: e.target.value.split(',').map((s: string) => s.trim())}})} />
                     </div>
                   </div>
 
@@ -1057,21 +1058,21 @@ export default function AdminPage() {
                     <div className="form-grid-2">
                        <div className="admin-field">
                          <label className="admin-label">Rooms Included</label>
-                         <textarea className="admin-input" rows={2} value={formData.drawingSets?.rooms?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: {...formData.drawingSets, rooms: e.target.value.split(',').map((s: string) => s.trim())}})} />
+                         <textarea className="admin-input" rows={2} value={(Array.isArray(formData.drawingSets?.rooms) ? formData.drawingSets.rooms : []).join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: {...formData.drawingSets, rooms: e.target.value.split(',').map((s: string) => s.trim())}})} />
                        </div>
                        <div className="admin-field">
                          <label className="admin-label">Architectural Package</label>
-                         <textarea className="admin-input" rows={2} value={formData.drawingSets?.architectural?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: {...formData.drawingSets, architectural: e.target.value.split(',').map((s: string) => s.trim())}})} />
+                         <textarea className="admin-input" rows={2} value={(Array.isArray(formData.drawingSets?.architectural) ? formData.drawingSets.architectural : []).join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: {...formData.drawingSets, architectural: e.target.value.split(',').map((s: string) => s.trim())}})} />
                        </div>
                     </div>
                     <div className="form-grid-2" style={{ marginTop: '12px' }}>
                        <div className="admin-field">
                          <label className="admin-label">Structural Package</label>
-                         <textarea className="admin-input" rows={2} value={formData.drawingSets?.structural?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: {...formData.drawingSets, structural: e.target.value.split(',').map((s: string) => s.trim())}})} />
+                         <textarea className="admin-input" rows={2} value={(Array.isArray(formData.drawingSets?.structural) ? formData.drawingSets.structural : []).join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: {...formData.drawingSets, structural: e.target.value.split(',').map((s: string) => s.trim())}})} />
                        </div>
                        <div className="admin-field">
                          <label className="admin-label">Mechanical Package</label>
-                         <textarea className="admin-input" rows={2} value={formData.drawingSets?.mechanical?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: {...formData.drawingSets, mechanical: e.target.value.split(',').map((s: string) => s.trim())}})} />
+                         <textarea className="admin-input" rows={2} value={(Array.isArray(formData.drawingSets?.mechanical) ? formData.drawingSets.mechanical : []).join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: {...formData.drawingSets, mechanical: e.target.value.split(',').map((s: string) => s.trim())}})} />
                        </div>
                     </div>
                   </div>
@@ -1296,26 +1297,26 @@ export default function AdminPage() {
                     <div className="form-grid-2">
                       <div className="admin-field">
                         <label className="admin-label">Architectural (comma separated)</label>
-                        <textarea className="admin-input resize-none" rows={3} value={formData.drawingSets?.architectural?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, architectural: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
+                        <textarea className="admin-input resize-none" rows={3} value={(Array.isArray(formData.drawingSets?.architectural) ? formData.drawingSets.architectural : []).join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, architectural: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
                       </div>
                       <div className="admin-field">
                         <label className="admin-label">Structural (comma separated)</label>
-                        <textarea className="admin-input resize-none" rows={3} value={formData.drawingSets?.structural?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, structural: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
+                        <textarea className="admin-input resize-none" rows={3} value={(Array.isArray(formData.drawingSets?.structural) ? formData.drawingSets.structural : []).join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, structural: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
                       </div>
                     </div>
                     <div className="form-grid-2" style={{ marginTop: '12px' }}>
                       <div className="admin-field">
                         <label className="admin-label">Electrical (comma separated)</label>
-                        <textarea className="admin-input resize-none" rows={3} value={formData.drawingSets?.electrical?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, electrical: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
+                        <textarea className="admin-input resize-none" rows={3} value={(Array.isArray(formData.drawingSets?.electrical) ? formData.drawingSets.electrical : []).join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, electrical: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
                       </div>
                       <div className="admin-field">
                         <label className="admin-label">Mechanical (comma separated)</label>
-                        <textarea className="admin-input resize-none" rows={3} value={formData.drawingSets?.mechanical?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, mechanical: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
+                        <textarea className="admin-input resize-none" rows={3} value={(Array.isArray(formData.drawingSets?.mechanical) ? formData.drawingSets.mechanical : []).join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, mechanical: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
                       </div>
                     </div>
                     <div className="admin-field" style={{ marginTop: '12px' }}>
                       <label className="admin-label">BOQ (comma separated)</label>
-                      <textarea className="admin-input resize-none" rows={3} value={formData.drawingSets?.boq?.join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, boq: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
+                      <textarea className="admin-input resize-none" rows={3} value={(Array.isArray(formData.drawingSets?.boq) ? formData.drawingSets.boq : []).join(', ') || ''} onChange={e => setFormData({...formData, drawingSets: { ...formData.drawingSets, boq: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean) }})} />
                     </div>
                   </div>
 
