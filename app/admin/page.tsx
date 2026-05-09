@@ -341,12 +341,12 @@ export default function AdminPage() {
   );
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const processSteps = (formData.processSteps ?? []) as ProcessStep[];
-  const serviceFeatures = (formData.features_list ?? []) as ServiceFeature[];
-  const serviceFaqs = (formData.faqs ?? []) as ServiceFaq[];
-  const productPackages = (formData.packages ?? []) as ProductPackageForm[];
-  const estimateTiers = (formData.estimateTiers ?? []) as EstimateTierForm[];
-  const productFaqs = (formData.faqs ?? []) as ProductFaqForm[];
+  const processSteps = (Array.isArray(formData.processSteps) ? formData.processSteps : []) as ProcessStep[];
+  const serviceFeatures = (Array.isArray(formData.features_list) ? formData.features_list : []) as ServiceFeature[];
+  const serviceFaqs = (Array.isArray(formData.faqs) ? formData.faqs : []) as ServiceFaq[];
+  const productPackages = (Array.isArray(formData.packages) ? formData.packages : []) as ProductPackageForm[];
+  const estimateTiers = (Array.isArray(formData.estimateTiers) ? formData.estimateTiers : []) as EstimateTierForm[];
+  const productFaqs = (Array.isArray(formData.faqs) ? formData.faqs : []) as ProductFaqForm[];
   const testimonialStars = typeof formData.stars === 'number' ? formData.stars : 0;
 
   return (
@@ -963,7 +963,7 @@ export default function AdminPage() {
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: '#c9a84c', display: 'flex', justifyContent: 'space-between' }}>
                       FAQs
-                      <button type="button" onClick={() => setFormData({...formData, faqs: [...serviceFaqs, {q: '', a: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD FAQ</button>
+                      <button type="button" onClick={() => setFormData({...formData, faqs: [...(Array.isArray(formData.faqs) ? formData.faqs : []), {q: '', a: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD FAQ</button>
                     </div>
                     {serviceFaqs.map((faq, i) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr auto', gap: '8px', marginBottom: '8px', alignItems: 'start' }}>
@@ -975,7 +975,7 @@ export default function AdminPage() {
                           const f = serviceFaqs.map((item, idx) => idx === i ? { ...item, a: e.target.value } : item);
                           setFormData({...formData, faqs: f});
                         }} />
-                        <button type="button" onClick={() => setFormData({...formData, faqs: serviceFaqs.filter((_, idx) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
+                        <button type="button" onClick={() => setFormData({...formData, faqs: (Array.isArray(formData.faqs) ? formData.faqs : []).filter((_, idx) => idx !== i)})} className="card-action-btn del" style={{ padding: '8px' }}><Trash2 size={12} /></button>
                       </div>
                     ))}
                   </div>
@@ -1045,7 +1045,7 @@ export default function AdminPage() {
                       <input 
                         className="admin-input" 
                         placeholder="Architectural Drawings, Structural Calculations..."
-                        value={formData.features ? formData.features.join(', ') : ''} 
+                        value={(Array.isArray(formData.features) ? formData.features : []).join(', ') || ''} 
                         onChange={e => setFormData({...formData, features: e.target.value.split(',').map((s: string) => s.trim())})} 
                       />
                     </div>
@@ -1080,7 +1080,7 @@ export default function AdminPage() {
                   <div className="admin-field">
                     <label className="admin-label">Gallery URLs (comma separated)</label>
                     <div style={{ display: 'flex', gap: '8px' }}>
-                      <textarea className="admin-input" value={formData.gallery?.join(', ') || ''} onChange={e => setFormData({...formData, gallery: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})} rows={2} style={{ flex: 1 }} />
+                      <textarea className="admin-input" value={(Array.isArray(formData.gallery) ? formData.gallery : []).join(', ') || ''} onChange={e => setFormData({...formData, gallery: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})} rows={2} style={{ flex: 1 }} />
                       <label className="upload-btn-icon" style={{ height: 'auto', padding: '0 12px' }}>
                         <Upload size={16} />
                         <input type="file" hidden accept="image/*" onChange={e => handleFileUpload(e, 'gallery', true)} />
@@ -1090,7 +1090,7 @@ export default function AdminPage() {
                   <div className="admin-field">
                     <label className="admin-label">Blueprint URLs (comma separated)</label>
                     <div style={{ display: 'flex', gap: '8px' }}>
-                      <textarea className="admin-input" value={formData.blueprints?.join(', ') || ''} onChange={e => setFormData({...formData, blueprints: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})} rows={2} style={{ flex: 1 }} />
+                      <textarea className="admin-input" value={(Array.isArray(formData.blueprints) ? formData.blueprints : []).join(', ') || ''} onChange={e => setFormData({...formData, blueprints: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})} rows={2} style={{ flex: 1 }} />
                       <label className="upload-btn-icon" style={{ height: 'auto', padding: '0 12px' }}>
                         <Upload size={16} />
                         <input type="file" hidden accept="image/*,application/pdf" onChange={e => handleFileUpload(e, 'blueprints', true)} />
@@ -1171,7 +1171,7 @@ export default function AdminPage() {
                           <input
                             className="admin-input"
                             placeholder="Editable CAD files, Printable PDF sheets, BOQ summary..."
-                            value={(pkg.features || []).join(', ')}
+                            value={(Array.isArray(pkg.features) ? pkg.features : []).join(', ')}
                             onChange={e => {
                               const pkgs = productPackages.map((p, idx) => idx === i
                                 ? {
@@ -1185,7 +1185,7 @@ export default function AdminPage() {
                         </div>
                       </div>
                     ))}
-                    {(formData.packages || []).length === 0 && <div style={{ fontSize: '11px', color: '#444', textAlign: 'center' }}>No custom packages added</div>}
+                    {(Array.isArray(formData.packages) ? formData.packages : []).length === 0 && <div style={{ fontSize: '11px', color: '#444', textAlign: 'center' }}>No custom packages added</div>}
                   </div>
 
 
@@ -1227,7 +1227,7 @@ export default function AdminPage() {
                     <div style={{ display: 'flex', gap: '8px' }}>
                       <textarea 
                         className="admin-input" 
-                        value={formData.images?.join(', ') || ''} 
+                        value={(Array.isArray(formData.images) ? formData.images : []).join(', ') || ''} 
                         onChange={e => setFormData({...formData, images: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})} 
                         rows={2}
                         style={{ flex: 1 }}
@@ -1244,7 +1244,7 @@ export default function AdminPage() {
                     <input 
                       className="admin-input" 
                       placeholder="Open Concept, Master Suite, Large Porch..."
-                      value={formData.features ? formData.features.join(', ') : ''} 
+                      value={(Array.isArray(formData.features) ? formData.features : []).join(', ') || ''} 
                       onChange={e => setFormData({...formData, features: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})} 
                     />
                   </div>
@@ -1255,7 +1255,7 @@ export default function AdminPage() {
                       <input
                         className="admin-input"
                         placeholder="CAD + PDF, PDF"
-                        value={formData.fileTypes ? formData.fileTypes.join(', ') : ''}
+                        value={(Array.isArray(formData.fileTypes) ? formData.fileTypes : []).join(', ') || ''}
                         onChange={e => setFormData({...formData, fileTypes: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})}
                       />
                     </div>
@@ -1264,7 +1264,7 @@ export default function AdminPage() {
                       <input
                         className="admin-input"
                         placeholder="Architectural Drawings, Structural Drawings..."
-                        value={formData.drawingOptions ? formData.drawingOptions.join(', ') : ''}
+                        value={(Array.isArray(formData.drawingOptions) ? formData.drawingOptions : []).join(', ') || ''}
                         onChange={e => setFormData({...formData, drawingOptions: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})}
                       />
                     </div>
@@ -1276,7 +1276,7 @@ export default function AdminPage() {
                       <input
                         className="admin-input"
                         placeholder="Instant digital delivery, 100% money guarantee..."
-                        value={formData.trustPoints ? formData.trustPoints.join(', ') : ''}
+                        value={(Array.isArray(formData.trustPoints) ? formData.trustPoints : []).join(', ') || ''}
                         onChange={e => setFormData({...formData, trustPoints: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})}
                       />
                     </div>
@@ -1285,7 +1285,7 @@ export default function AdminPage() {
                       <input
                         className="admin-input"
                         placeholder="Master Bedroom, Kitchen, Living Room..."
-                        value={formData.roomsIncluded ? formData.roomsIncluded.join(', ') : ''}
+                        value={(Array.isArray(formData.roomsIncluded) ? formData.roomsIncluded : []).join(', ') || ''}
                         onChange={e => setFormData({...formData, roomsIncluded: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})}
                       />
                     </div>
@@ -1343,7 +1343,7 @@ export default function AdminPage() {
                             className="admin-input resize-none"
                             rows={4}
                             placeholder="Substructure | $253,925"
-                            value={(tier.items || []).map((item: any) => `${item.label || ''} | ${item.cost || ''}`).join('\n')}
+                            value={(Array.isArray(tier.items) ? tier.items : []).map((item: any) => `${item.label || ''} | ${item.cost || ''}`).join('\n')}
                             onChange={e => {
                               const tiers = estimateTiers.map((t, idx) => idx === i
                                 ? {
@@ -1365,7 +1365,7 @@ export default function AdminPage() {
                         </div>
                       </div>
                     ))}
-                    {(formData.estimateTiers || []).length === 0 && <div style={{ fontSize: '11px', color: '#444', textAlign: 'center' }}>No estimate tiers added</div>}
+                    {(Array.isArray(formData.estimateTiers) ? formData.estimateTiers : []).length === 0 && <div style={{ fontSize: '11px', color: '#444', textAlign: 'center' }}>No estimate tiers added</div>}
                   </div>
 
                   <div className="admin-field">
@@ -1448,17 +1448,17 @@ export default function AdminPage() {
                       Technical Specifications
                       <button type="button" onClick={() => setFormData({...formData, techSpecs: [...(Array.isArray(formData.techSpecs) ? formData.techSpecs : []), {label: '', value: ''}]})} style={{ background: 'none', border: 'none', color: '#fbbf24', cursor: 'pointer', fontSize: '10px' }}>+ ADD SPEC</button>
                     </div>
-                    {(formData.techSpecs || []).map((spec: any, i: number) => (
+                    {(Array.isArray(formData.techSpecs) ? formData.techSpecs : []).map((spec: any, i: number) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', marginBottom: '8px' }}>
                         <input className="admin-input" placeholder="Label (e.g. Finish)" value={spec.label} onChange={e => {
-                          const s = (formData.techSpecs || []).map((item: any, idx: number) => idx === i ? { ...item, label: e.target.value } : item);
+                          const s = (Array.isArray(formData.techSpecs) ? formData.techSpecs : []).map((item: any, idx: number) => idx === i ? { ...item, label: e.target.value } : item);
                           setFormData({...formData, techSpecs: s});
                         }} />
                         <input className="admin-input" placeholder="Value (e.g. Natural Touch)" value={spec.value} onChange={e => {
-                          const s = (formData.techSpecs || []).map((item: any, idx: number) => idx === i ? { ...item, value: e.target.value } : item);
+                          const s = (Array.isArray(formData.techSpecs) ? formData.techSpecs : []).map((item: any, idx: number) => idx === i ? { ...item, value: e.target.value } : item);
                           setFormData({...formData, techSpecs: s});
                         }} />
-                        <button type="button" onClick={() => setFormData({...formData, techSpecs: (formData.techSpecs || []).filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del"><Trash2 size={12} /></button>
+                        <button type="button" onClick={() => setFormData({...formData, techSpecs: (Array.isArray(formData.techSpecs) ? formData.techSpecs : []).filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del"><Trash2 size={12} /></button>
                       </div>
                     ))}
                   </div>
@@ -1469,16 +1469,16 @@ export default function AdminPage() {
                       Colour Range Swatches
                       <button type="button" onClick={() => setFormData({...formData, swatches: [...(Array.isArray(formData.swatches) ? formData.swatches : []), {name: '', image: '', look: '', brand: '', finish: ''}]})} style={{ background: 'none', border: 'none', color: '#fbbf24', cursor: 'pointer', fontSize: '10px' }}>+ ADD SWATCH</button>
                     </div>
-                    {(formData.swatches || []).map((swatch: any, i: number) => (
+                    {(Array.isArray(formData.swatches) ? formData.swatches : []).map((swatch: any, i: number) => (
                       <div key={i} style={{ border: '1px solid rgba(255,255,255,0.05)', padding: '12px', borderRadius: '8px', marginBottom: '12px', background: 'rgba(255,255,255,0.01)' }}>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', marginBottom: '8px' }}>
                           <input className="admin-input" placeholder="Swatch Name" value={swatch.name} onChange={e => {
-                            const s = (formData.swatches || []).map((item: any, idx: number) => idx === i ? { ...item, name: e.target.value } : item);
+                            const s = (Array.isArray(formData.swatches) ? formData.swatches : []).map((item: any, idx: number) => idx === i ? { ...item, name: e.target.value } : item);
                             setFormData({...formData, swatches: s});
                           }} />
                           <div style={{ display: 'flex', gap: '4px' }}>
                             <input className="admin-input" placeholder="Image URL" value={swatch.image} onChange={e => {
-                              const s = (formData.swatches || []).map((item: any, idx: number) => idx === i ? { ...item, image: e.target.value } : item);
+                              const s = (Array.isArray(formData.swatches) ? formData.swatches : []).map((item: any, idx: number) => idx === i ? { ...item, image: e.target.value } : item);
                               setFormData({...formData, swatches: s});
                             }} />
                             <label className="upload-btn-icon" style={{ width: '38px', height: '38px' }}>
@@ -1491,22 +1491,22 @@ export default function AdminPage() {
                                 const res = await fetch('/api/upload', { method: 'POST', body: upData });
                                 const resJson = await res.json();
                                 if (resJson.success) {
-                                  const s = (formData.swatches || []).map((item: any, idx: number) => idx === i ? { ...item, image: resJson.url } : item);
+                                  const s = (Array.isArray(formData.swatches) ? formData.swatches : []).map((item: any, idx: number) => idx === i ? { ...item, image: resJson.url } : item);
                                   setFormData({...formData, swatches: s});
                                   toast.success('Uploaded ✓', { id: tid });
                                 } else toast.error('Upload failed', { id: tid });
                               }} />
                             </label>
                           </div>
-                          <button type="button" onClick={() => setFormData({...formData, swatches: (formData.swatches || []).filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del"><Trash2 size={12} /></button>
+                          <button type="button" onClick={() => setFormData({...formData, swatches: (Array.isArray(formData.swatches) ? formData.swatches : []).filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del"><Trash2 size={12} /></button>
                         </div>
                         <div className="form-grid-2">
                           <input className="admin-input" placeholder="Look (e.g. Wood)" value={swatch.look} onChange={e => {
-                            const s = (formData.swatches || []).map((item: any, idx: number) => idx === i ? { ...item, look: e.target.value } : item);
+                            const s = (Array.isArray(formData.swatches) ? formData.swatches : []).map((item: any, idx: number) => idx === i ? { ...item, look: e.target.value } : item);
                             setFormData({...formData, swatches: s});
                           }} style={{ fontSize: '11px' }} />
                           <input className="admin-input" placeholder="Finish (e.g. Textured)" value={swatch.finish} onChange={e => {
-                            const s = (formData.swatches || []).map((item: any, idx: number) => idx === i ? { ...item, finish: e.target.value } : item);
+                            const s = (Array.isArray(formData.swatches) ? formData.swatches : []).map((item: any, idx: number) => idx === i ? { ...item, finish: e.target.value } : item);
                             setFormData({...formData, swatches: s});
                           }} style={{ fontSize: '11px' }} />
                         </div>
@@ -1520,7 +1520,7 @@ export default function AdminPage() {
                     <div style={{ display: 'flex', gap: '8px' }}>
                       <textarea 
                         className="admin-input" 
-                        value={(formData.profiles || []).join(', ')} 
+                        value={(Array.isArray(formData.profiles) ? formData.profiles : []).join(', ')} 
                         onChange={e => setFormData({...formData, profiles: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})} 
                         rows={2}
                         style={{ flex: 1 }}
