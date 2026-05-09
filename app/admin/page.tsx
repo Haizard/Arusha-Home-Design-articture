@@ -421,8 +421,6 @@ export default function AdminPage() {
         }
         .topbar-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; }
         .topbar-breadcrumb span { color: #999; }
-        .admin-content { padding: 24px; width: 100%; max-width: 1400px; margin: 0 auto; }
-
         .hamburger {
           display: none; width: 36px; height: 36px; border-radius: 8px;
           background: rgba(255,255,255,0.05); color: #888; border: none; cursor: pointer;
@@ -919,7 +917,7 @@ export default function AdminPage() {
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: '#c9a84c', display: 'flex', justifyContent: 'space-between' }}>
                       Architectural Process 
-                      <button type="button" onClick={() => setFormData({...formData, processSteps: [...(formData.processSteps || []), {title: '', desc: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD STEP</button>
+                      <button type="button" onClick={() => setFormData({...formData, processSteps: [...(Array.isArray(formData.processSteps) ? formData.processSteps : []), {title: '', desc: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD STEP</button>
                     </div>
                     {processSteps.map((step, i) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr auto', gap: '8px', marginBottom: '8px', alignItems: 'start' }}>
@@ -940,7 +938,7 @@ export default function AdminPage() {
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: '#c9a84c', display: 'flex', justifyContent: 'space-between' }}>
                       Specialized Features 
-                      <button type="button" onClick={() => setFormData({...formData, features_list: [...(formData.features_list || []), {icon: 'Zap', title: '', desc: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD FEATURE</button>
+                      <button type="button" onClick={() => setFormData({...formData, features_list: [...(Array.isArray(formData.features_list) ? formData.features_list : []), {icon: 'Zap', title: '', desc: ''}]})} style={{ background: 'none', border: 'none', color: '#c9a84c', cursor: 'pointer', fontSize: '10px' }}>+ ADD FEATURE</button>
                     </div>
                     {serviceFeatures.map((feat, i) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '100px 1fr 1fr auto', gap: '8px', marginBottom: '8px', alignItems: 'start' }}>
@@ -1153,7 +1151,7 @@ export default function AdminPage() {
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: 'var(--color-gold)', display: 'flex', justifyContent: 'space-between' }}>
                       Pricing Packages
-                      <button type="button" onClick={() => setFormData({...formData, packages: [...(formData.packages || []), {name: '', price: 0, features: []}]})} style={{ background: 'none', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', fontSize: '10px', fontWeight: 700 }}>+ ADD PACKAGE</button>
+                      <button type="button" onClick={() => setFormData({...formData, packages: [...(Array.isArray(formData.packages) ? formData.packages : []), {name: '', price: 0, features: []}]})} style={{ background: 'none', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', fontSize: '10px', fontWeight: 700 }}>+ ADD PACKAGE</button>
                     </div>
                     {productPackages.map((pkg, i) => (
                       <div key={i} style={{ marginBottom: '12px', padding: '12px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
@@ -1324,7 +1322,7 @@ export default function AdminPage() {
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: 'var(--color-gold)', display: 'flex', justifyContent: 'space-between' }}>
                       Construction Cost Tiers
-                      <button type="button" onClick={() => setFormData({...formData, estimateTiers: [...(formData.estimateTiers || []), { name: '', total: '', items: [] }]})} style={{ background: 'none', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', fontSize: '10px', fontWeight: 700 }}>+ ADD TIER</button>
+                      <button type="button" onClick={() => setFormData({...formData, estimateTiers: [...(Array.isArray(formData.estimateTiers) ? formData.estimateTiers : []), { name: '', total: '', items: [] }]})} style={{ background: 'none', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', fontSize: '10px', fontWeight: 700 }}>+ ADD TIER</button>
                     </div>
                     {estimateTiers.map((tier, i) => (
                       <div key={i} style={{ marginBottom: '12px', padding: '12px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
@@ -1448,7 +1446,7 @@ export default function AdminPage() {
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: '#fbbf24', display: 'flex', justifyContent: 'space-between' }}>
                       Technical Specifications
-                      <button type="button" onClick={() => setFormData({...formData, techSpecs: [...(formData.techSpecs || []), {label: '', value: ''}]})} style={{ background: 'none', border: 'none', color: '#fbbf24', cursor: 'pointer', fontSize: '10px' }}>+ ADD SPEC</button>
+                      <button type="button" onClick={() => setFormData({...formData, techSpecs: [...(Array.isArray(formData.techSpecs) ? formData.techSpecs : []), {label: '', value: ''}]})} style={{ background: 'none', border: 'none', color: '#fbbf24', cursor: 'pointer', fontSize: '10px' }}>+ ADD SPEC</button>
                     </div>
                     {(formData.techSpecs || []).map((spec: any, i: number) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', marginBottom: '8px' }}>
@@ -1469,7 +1467,7 @@ export default function AdminPage() {
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: '#fbbf24', display: 'flex', justifyContent: 'space-between' }}>
                       Colour Range Swatches
-                      <button type="button" onClick={() => setFormData({...formData, swatches: [...(formData.swatches || []), {name: '', image: '', look: '', brand: '', finish: ''}]})} style={{ background: 'none', border: 'none', color: '#fbbf24', cursor: 'pointer', fontSize: '10px' }}>+ ADD SWATCH</button>
+                      <button type="button" onClick={() => setFormData({...formData, swatches: [...(Array.isArray(formData.swatches) ? formData.swatches : []), {name: '', image: '', look: '', brand: '', finish: ''}]})} style={{ background: 'none', border: 'none', color: '#fbbf24', cursor: 'pointer', fontSize: '10px' }}>+ ADD SWATCH</button>
                     </div>
                     {(formData.swatches || []).map((swatch: any, i: number) => (
                       <div key={i} style={{ border: '1px solid rgba(255,255,255,0.05)', padding: '12px', borderRadius: '8px', marginBottom: '12px', background: 'rgba(255,255,255,0.01)' }}>
