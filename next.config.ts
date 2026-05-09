@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "pgbison.co.za",
+        pathname: "/**",
+      },
     ],
   },
   experimental: {

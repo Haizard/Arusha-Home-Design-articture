@@ -10,6 +10,9 @@ import {
   getInquiries, deleteInquiry, updateInquiryStatus,
 } from '@/app/actions/admin';
 import {
+  getMaterialRanges, addMaterialRange, updateMaterialRange, deleteMaterialRange,
+} from '@/app/actions/materials';
+import {
   LayoutDashboard, Briefcase, ShoppingBag, MessageSquare, Mail,
   Plus, Pencil, Trash2, X, Save, ChevronRight,
   AlertCircle, Loader2, Database, RefreshCw,
@@ -19,7 +22,7 @@ import {
 import toast, { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
 
-type Tab = 'services' | 'projects' | 'products' | 'testimonials' | 'inquiries';
+type Tab = 'services' | 'projects' | 'products' | 'testimonials' | 'inquiries' | 'materials';
 
 type ProcessStep = { title: string; desc: string };
 type ServiceFeature = { icon: string; title: string; desc: string };
@@ -107,6 +110,7 @@ const NAV_ITEMS: { id: Tab; label: string; icon: LucideIcon; color: string }[] =
   { id: 'products',     label: 'Products',     icon: ShoppingBag,     color: '#a78bfa' },
   { id: 'testimonials', label: 'Testimonials', icon: MessageSquare,   color: '#34d399' },
   { id: 'inquiries',    label: 'Inquiries',    icon: Mail,            color: '#f87171' },
+  { id: 'materials',    label: 'Materials',    icon: Database,        color: '#fbbf24' },
 ];
 
 const EMPTY_FORMS: Record<Tab, AdminFormData> = {
@@ -133,6 +137,10 @@ const EMPTY_FORMS: Record<Tab, AdminFormData> = {
   },
   testimonials: { name: '', role: '', text: '', avatar: '', stars: 5 },
   inquiries:    {},
+  materials: { 
+    title: '', category: 'Decorative Panels', description: '', logo: '', heroImage: '',
+    techSpecs: [], swatches: [], profiles: [] 
+  },
 };
 
 export default function AdminPage() {
@@ -161,6 +169,7 @@ export default function AdminPage() {
       else if (activeTab === 'projects')     result = await getProjects();
       else if (activeTab === 'products')     result = await getProducts();
       else if (activeTab === 'testimonials') result = await getTestimonials();
+      else if (activeTab === 'materials')    result = await getMaterialRanges();
       else                                   result = await getInquiries();
       // Stringify ObjectIds to plain strings
       setData(JSON.parse(JSON.stringify(result)) as AdminListItem[]);
@@ -207,6 +216,9 @@ export default function AdminPage() {
       } else if (activeTab === 'products') {
         if (editingItem?._id) await updateProduct(editingItem._id, cleanData);
         else await addProduct(cleanData);
+      } else if (activeTab === 'materials') {
+        if (editingItem?._id) await updateMaterialRange(editingItem._id, cleanData);
+        else await addMaterialRange(cleanData);
       } else {
         if (editingItem?._id) await updateTestimonial(editingItem._id, cleanData);
         else await addTestimonial(cleanData);
@@ -230,6 +242,7 @@ export default function AdminPage() {
       else if (activeTab === 'projects')     await deleteProject(id);
       else if (activeTab === 'products')     await deleteProduct(id);
       else if (activeTab === 'testimonials') await deleteTestimonial(id);
+      else if (activeTab === 'materials')    await deleteMaterialRange(id);
       else                                   await deleteInquiry(id);
       toast.success('Deleted ✓', { id: tid });
       fetchData();
@@ -1420,6 +1433,108 @@ export default function AdminPage() {
                     <img src={formData.avatar} alt="avatar preview" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(201,168,76,.3)' }} />
                   )}
                 </>)}
+
+                {/* ── MATERIALS ── */}
+                {activeTab === 'materials' && (<>
+                  <div className="form-grid-2">
+                    {field('Range Title', 'title', { placeholder: 'e.g. MONTEO+' })}
+                    {field('Category', 'category', { placeholder: 'e.g. Melamine Faced Board' })}
+                  </div>
+                  {imageField('Brand Logo URL', 'logo', 'Upload brand logo')}
+                  {imageField('Hero Image URL', 'heroImage', 'Upload main lifestyle image')}
+                  {textarea('Description', 'description', 'Describe this material range…')}
+
+                  {/* Tech Specs */}
+                  <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div className="admin-label" style={{ marginBottom: '16px', color: '#fbbf24', display: 'flex', justifyContent: 'space-between' }}>
+                      Technical Specifications
+                      <button type="button" onClick={() => setFormData({...formData, techSpecs: [...(formData.techSpecs || []), {label: '', value: ''}]})} style={{ background: 'none', border: 'none', color: '#fbbf24', cursor: 'pointer', fontSize: '10px' }}>+ ADD SPEC</button>
+                    </div>
+                    {(formData.techSpecs || []).map((spec: any, i: number) => (
+                      <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', marginBottom: '8px' }}>
+                        <input className="admin-input" placeholder="Label (e.g. Finish)" value={spec.label} onChange={e => {
+                          const s = (formData.techSpecs || []).map((item: any, idx: number) => idx === i ? { ...item, label: e.target.value } : item);
+                          setFormData({...formData, techSpecs: s});
+                        }} />
+                        <input className="admin-input" placeholder="Value (e.g. Natural Touch)" value={spec.value} onChange={e => {
+                          const s = (formData.techSpecs || []).map((item: any, idx: number) => idx === i ? { ...item, value: e.target.value } : item);
+                          setFormData({...formData, techSpecs: s});
+                        }} />
+                        <button type="button" onClick={() => setFormData({...formData, techSpecs: (formData.techSpecs || []).filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del"><Trash2 size={12} /></button>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Color Range Swatches */}
+                  <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div className="admin-label" style={{ marginBottom: '16px', color: '#fbbf24', display: 'flex', justifyContent: 'space-between' }}>
+                      Colour Range Swatches
+                      <button type="button" onClick={() => setFormData({...formData, swatches: [...(formData.swatches || []), {name: '', image: '', look: '', brand: '', finish: ''}]})} style={{ background: 'none', border: 'none', color: '#fbbf24', cursor: 'pointer', fontSize: '10px' }}>+ ADD SWATCH</button>
+                    </div>
+                    {(formData.swatches || []).map((swatch: any, i: number) => (
+                      <div key={i} style={{ border: '1px solid rgba(255,255,255,0.05)', padding: '12px', borderRadius: '8px', marginBottom: '12px', background: 'rgba(255,255,255,0.01)' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', marginBottom: '8px' }}>
+                          <input className="admin-input" placeholder="Swatch Name" value={swatch.name} onChange={e => {
+                            const s = (formData.swatches || []).map((item: any, idx: number) => idx === i ? { ...item, name: e.target.value } : item);
+                            setFormData({...formData, swatches: s});
+                          }} />
+                          <div style={{ display: 'flex', gap: '4px' }}>
+                            <input className="admin-input" placeholder="Image URL" value={swatch.image} onChange={e => {
+                              const s = (formData.swatches || []).map((item: any, idx: number) => idx === i ? { ...item, image: e.target.value } : item);
+                              setFormData({...formData, swatches: s});
+                            }} />
+                            <label className="upload-btn-icon" style={{ width: '38px', height: '38px' }}>
+                              <Upload size={14} />
+                              <input type="file" hidden accept="image/*" onChange={async (e) => {
+                                const file = e.target.files?.[0];
+                                if (!file) return;
+                                const tid = toast.loading('Uploading swatch...');
+                                const upData = new FormData(); upData.append('file', file);
+                                const res = await fetch('/api/upload', { method: 'POST', body: upData });
+                                const resJson = await res.json();
+                                if (resJson.success) {
+                                  const s = (formData.swatches || []).map((item: any, idx: number) => idx === i ? { ...item, image: resJson.url } : item);
+                                  setFormData({...formData, swatches: s});
+                                  toast.success('Uploaded ✓', { id: tid });
+                                } else toast.error('Upload failed', { id: tid });
+                              }} />
+                            </label>
+                          </div>
+                          <button type="button" onClick={() => setFormData({...formData, swatches: (formData.swatches || []).filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del"><Trash2 size={12} /></button>
+                        </div>
+                        <div className="form-grid-2">
+                          <input className="admin-input" placeholder="Look (e.g. Wood)" value={swatch.look} onChange={e => {
+                            const s = (formData.swatches || []).map((item: any, idx: number) => idx === i ? { ...item, look: e.target.value } : item);
+                            setFormData({...formData, swatches: s});
+                          }} style={{ fontSize: '11px' }} />
+                          <input className="admin-input" placeholder="Finish (e.g. Textured)" value={swatch.finish} onChange={e => {
+                            const s = (formData.swatches || []).map((item: any, idx: number) => idx === i ? { ...item, finish: e.target.value } : item);
+                            setFormData({...formData, swatches: s});
+                          }} style={{ fontSize: '11px' }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Profile Images */}
+                  <div className="admin-field">
+                    <label className="admin-label">Profile Images (comma separated URLs)</label>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <textarea 
+                        className="admin-input" 
+                        value={(formData.profiles || []).join(', ')} 
+                        onChange={e => setFormData({...formData, profiles: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)})} 
+                        rows={2}
+                        style={{ flex: 1 }}
+                      />
+                      <label className="upload-btn-icon" style={{ height: 'auto', padding: '0 12px' }}>
+                        <Upload size={16} />
+                        <input type="file" hidden accept="image/*" onChange={e => handleFileUpload(e, 'profiles', true)} />
+                      </label>
+                    </div>
+                  </div>
+                </>)}
+
 
               </div>
 

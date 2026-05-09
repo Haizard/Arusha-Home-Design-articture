@@ -14,8 +14,10 @@ if (!cached) {
 async function connectDB() {
   const URI = process.env.MONGODB_URI;
   if (!URI) {
+    console.error('❌ MONGODB_URI is missing in environment variables');
     throw new Error('MONGODB_URI is not defined. Set it in .env or .env.local');
   }
+
   if (cached.conn) {
     return cached.conn;
   }
@@ -23,10 +25,17 @@ async function connectDB() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      serverSelectionTimeoutMS: 5000,
+      family: 4, // Force IPv4
     };
 
+    console.log('⏳ Connecting to MongoDB...');
     cached.promise = mongoose.connect(URI, opts).then((mongoose) => {
+      console.log('✅ MongoDB Connected Successfully');
       return mongoose;
+    }).catch((err) => {
+      console.error('❌ MongoDB Connection Error:', err.message);
+      throw err;
     });
   }
 

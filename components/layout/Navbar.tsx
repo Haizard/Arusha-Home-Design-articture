@@ -7,6 +7,7 @@ import Image from "next/image";
 
 const navLinks = [
   { href: "/products", label: "Shop" },
+  { href: "/materials", label: "Materials" },
   { href: "/products?badge=best%20seller&label=Best%20Sellers", label: "Best Sellers" },
   { href: "/products", label: "By Size" },
   { href: "/products", label: "By Style" },
