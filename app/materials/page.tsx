@@ -2,49 +2,59 @@ import { getMaterialRanges } from '@/app/actions/materials';
 import Link from 'next/link';
 import Image from 'next/image';
 
+export const metadata = {
+  title: 'Our Materials',
+  description: 'Explore our curated range of decorative panels and architectural materials, designed to bring durability and premium aesthetics to every space.',
+};
+
 export default async function MaterialsPage() {
   const ranges = await getMaterialRanges();
 
-  // Group ranges by category
-  const categories = ranges.reduce((acc: any, range: any) => {
-    if (!acc[range.category]) acc[range.category] = [];
-    acc[range.category].push(range);
-    return acc;
-  }, {});
-
   return (
-    <div className="bg-white min-h-screen">
-      <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="mb-16">
-          <h1 className="text-6xl font-bold tracking-tighter text-neutral-900 mb-4">Our Products</h1>
-          <p className="text-lg text-neutral-500 max-w-2xl">
-            Explore our curated range of decorative panels and architectural materials, 
-            designed to bring durability and premium aesthetics to every space.
+    <div className="bg-cream text-stone-200 min-h-screen font-sans">
+      {/* Hero Section */}
+      <section className="text-center py-20 md:py-28 border-b border-gray-200">
+        <div className="max-w-4xl mx-auto px-6">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-stone-100 mb-4">
+            Material Excellence
+          </h1>
+          <p className="text-lg md:text-xl text-stone-400 max-w-3xl mx-auto">
+            Discover a curated collection of world-class materials. Each range is selected for its superior quality, aesthetic appeal, and innovative design to elevate your projects.
           </p>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+      {/* Grid Section */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {ranges.map((range: any) => (
             <Link 
               key={range._id} 
               href={`/materials/${range._id}`}
-              className="group relative aspect-[1.5/1] overflow-hidden bg-neutral-100"
+              className="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
             >
-              <Image 
-                src={range.heroImage || '/images/placeholder.jpg'} 
-                alt={range.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                <span className="text-[10px] uppercase font-bold tracking-[0.4em] text-white/70 mb-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image 
+                  src={range.heroImage || '/images/placeholder.jpg'} 
+                  alt={range.title}
+                  fill
+                  className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                />
+              </div>
+              <div className="p-6">
+                <p className="text-xs font-semibold tracking-widest text-amber-800 uppercase mb-2">
                   {range.category}
-                </span>
-                <h2 className="text-3xl font-bold text-white tracking-tight uppercase">
+                </p>
+                <h2 className="text-2xl font-bold text-stone-100 tracking-tight">
                   {range.title}
                 </h2>
-                <div className="mt-4 h-[2px] w-0 bg-white group-hover:w-24 transition-all duration-500" />
+                <p className="text-stone-400 mt-2 text-sm leading-relaxed h-12 overflow-hidden text-ellipsis">
+                    {range.description}
+                </p>
+                <div className="mt-4 text-sm font-bold text-stone-200 group-hover:text-stone-100 transition-colors flex items-center gap-2">
+                  Explore Range 
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                </div>
               </div>
             </Link>
           ))}
