@@ -6,17 +6,13 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 const navLinks = [
-  { href: "/materials", label: "Materials" },
+  { href: "/", label: "Home" },
   { href: "/looks", label: "Choose a Look" },
-  { href: "/", label: "Studio" },
-  { href: "/contact", label: "Request Samples" },
-  { href: "/products", label: "Plans" },
+  { href: "/materials", label: "Materials" },
+  { href: "/products", label: "Plans & Products" },
   { href: "/projects", label: "Projects" },
-  { href: "/products?badge=best%20seller&label=Best%20Sellers", label: "Best Sellers" },
-  { href: "/products", label: "By Size" },
-  { href: "/products", label: "By Style" },
-  { href: "/products", label: "By Budget" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const dropdowns: Record<
