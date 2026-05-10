@@ -123,6 +123,9 @@ export default async function HomePage() {
       </section>
 
       <section className="pg-expression">
+        <div className="pg-expression-image">
+          <Image src="/images/projects-hero.jpg" alt="Expression gallery" fill sizes="(max-width: 900px) 100vw, 48vw" />
+        </div>
         <div className="pg-shell pg-expression-copy">
           <p>Gallery 5</p>
           <h2>Expressions</h2>
