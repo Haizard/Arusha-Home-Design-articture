@@ -1,103 +1,155 @@
-import { getMaterialRanges } from "@/app/actions/materials";
 import { getLooks } from "@/app/actions/looks";
+import { getMaterialRanges } from "@/app/actions/materials";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BriefcaseBusiness, Images, Palette, Sparkles } from "lucide-react";
-import MaterialsHub from "@/components/materials/MaterialsHub";
+import { ArrowRight } from "lucide-react";
 import { fallbackLooks, getSlug, isUsableImageSrc, type LookItem } from "@/lib/lookFallbacks";
+import type { MaterialRangeCard } from "@/components/materials/MaterialsHub";
+
+const newsItems = [
+  {
+    title: "Designing beautiful homes around better surface choices",
+    text: "A refined room starts with the boards, colours, textures, and product ranges that customers can actually compare.",
+  },
+  {
+    title: "How material palettes guide kitchens and wardrobes",
+    text: "Choose a look, open its combinations, then match the right range before moving into fabrication or installation.",
+  },
+  {
+    title: "From inspiration to consultation",
+    text: "Use the gallery pages to shortlist finishes, product applications, and reference images before requesting samples.",
+  },
+];
+
+function imageOrFallback(value: unknown, fallback: string) {
+  return isUsableImageSrc(value) ? value : fallback;
+}
 
 export default async function HomePage() {
-  const [ranges, cmsLooks] = await Promise.all([
-    getMaterialRanges().catch(() => []),
+  const [cmsLooks, ranges] = await Promise.all([
     getLooks().catch(() => []),
+    getMaterialRanges().catch(() => []),
   ]);
-  const looks = ((cmsLooks as LookItem[]).length > 0 ? cmsLooks : fallbackLooks) as LookItem[];
-  const heroRange = ranges.find((range: { heroImage?: string }) => range.heroImage) ?? ranges[0];
-  const heroImage = heroRange?.heroImage || looks.find((look) => isUsableImageSrc(look.coverImage))?.coverImage || "/images/service-kitchen.jpg";
+  const looks = (((cmsLooks as LookItem[]).length > 0 ? cmsLooks : fallbackLooks) as LookItem[]).slice(0, 4);
+  const materialRanges = (ranges as MaterialRangeCard[]).slice(0, 5);
 
   return (
-    <div className="home-material-page">
-      <section className="home-material-hero">
-        <div className="home-material-hero-media">
-          <Image src={heroImage} alt="Interior material selection" fill priority sizes="100vw" />
-          <div className="home-material-hero-overlay" />
-        </div>
-        <div className="home-material-shell home-material-hero-grid">
-          <div className="home-material-copy">
-            <p className="material-kicker">Arusha Home Design Pro</p>
-            <h1>Choose the look. Shape the room.</h1>
-            <p>
-              Explore room looks, surface palettes, products, projects, and design support from one cleaner starting point.
-            </p>
-            <div className="home-material-actions">
-              <Link href="/looks" className="materials-primary-action">
-                Choose a look <ArrowRight size={17} />
-              </Link>
-              <Link href="/materials" className="materials-primary-action">
-                Materials
-              </Link>
-              <Link href="/projects" className="materials-secondary-action">
-                Projects
-              </Link>
-            </div>
+    <div className="pg-home">
+      <section className="pg-hero">
+        <Image src="/images/service-kitchen.jpg" alt="Premium kitchen surface" fill priority sizes="100vw" />
+        <div className="pg-hero-shade" />
+        <div className="pg-shell pg-hero-content">
+          <div>
+            <h1>Thinner.<br />Stronger.<br />More beautiful.</h1>
+            <Link href="/looks" className="pg-outline-button">Choose a Look</Link>
           </div>
-
-          <div className="home-look-preview">
-            <div className="home-look-preview-head">
-              <Sparkles size={18} />
-              <div>
-                <strong>Choose a Look</strong>
-                <span>Bliss, Delight, Exhilaration</span>
-              </div>
-            </div>
-            {[
-              { name: "Bliss", image: "/images/service-kitchen.jpg" },
-              { name: "Delight", image: "/images/service-interior.jpg" },
-              { name: "Exhilaration", image: "/images/prod-wardrobe.jpg" },
-            ].map((look) => (
-              <Link key={look.name} href="/looks" className="home-look-row">
-                <span><Image src={look.image} alt={look.name} fill sizes="70px" /></span>
-                <strong>{look.name}</strong>
-                <ArrowRight size={15} />
-              </Link>
-            ))}
+          <div className="pg-hero-controls">
+            <span>01</span><b /><span>02</span><span>03</span><span>04</span>
           </div>
         </div>
       </section>
 
-      <section className="home-material-rhythm">
-        <div className="home-material-shell home-look-showcase">
-          <div className="home-section-head">
-            <div>
-              <p className="material-kicker">Choose a Look</p>
-              <h2>Start with an inspiration style.</h2>
-            </div>
-            <Link href="/looks">View all looks <ArrowRight size={15} /></Link>
+      <section className="pg-slim-banner">
+        <Image src="/images/prod-tv.jpg" alt="Thin premium board sample" fill sizes="100vw" />
+      </section>
+
+      <section className="pg-shell pg-intro">
+        <h2>Beautiful spaces start here</h2>
+        <p>
+          A thoughtful home begins with surfaces people can see, touch, compare, and imagine in real rooms. Choose an inspiration look, inspect the colours and designs used, then move into product ranges and consultation.
+        </p>
+      </section>
+
+      <section className="pg-shell pg-look-section">
+        <span className="pg-watermark">LOOK</span>
+        <div className="pg-section-title inline">
+          <p>Look</p>
+          <h2>Choose a Look</h2>
+        </div>
+        <div className="pg-look-grid">
+          {looks.map((look) => {
+            const lookSlug = getSlug(look.name, look.slug);
+            const image = imageOrFallback(look.coverImage, "/images/service-interior.jpg");
+            return (
+              <Link href={`/looks/${lookSlug}`} key={lookSlug} className="pg-look-card">
+                <Image src={image} alt={look.name || "Look"} fill sizes="(max-width: 900px) 100vw, 38vw" />
+                <span />
+                <div>
+                  <h3>{look.name}</h3>
+                  <p>{look.description || "Open this look to explore its colour combinations and product galleries."}</p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="pg-about-band">
+        <div className="pg-shell pg-about-grid">
+          <div className="pg-story-card">
+            <Image src="/images/about-hero.jpg" alt="Interior surface story" fill sizes="(max-width: 900px) 100vw, 48vw" />
+            <div>The best stories are found in beautiful spaces.</div>
           </div>
-          <div className="home-look-card-grid">
-            {looks.slice(0, 3).map((look) => {
-              const lookSlug = getSlug(look.name, look.slug);
-              const coverImage = isUsableImageSrc(look.coverImage) ? look.coverImage : "/images/service-kitchen.jpg";
-              return (
-                <Link key={lookSlug} href={`/looks/${lookSlug}`} className="home-feature-card">
-                  <span>
-                    <Image src={coverImage} alt={look.name || "Look"} fill sizes="(max-width: 900px) 100vw, 30vw" />
-                  </span>
-                  <strong>{look.name}</strong>
-                  <small><Images size={14} /> {look.categories?.length ?? 0} categories</small>
-                </Link>
-              );
-            })}
+          <div className="pg-about-copy">
+            <p>Arusha Home</p>
+            <h2>About us</h2>
+            <p>
+              We help customers move from inspiration to practical selections: looks, colours, product ranges, plans, projects, and consultation support for interiors that feel considered.
+            </p>
+            <Link href="/about" className="pg-outline-button dark">Discover More</Link>
+            <span>ABOUT US</span>
           </div>
         </div>
+      </section>
 
-        <div className="home-material-shell home-support-grid">
-          <Link href="/materials" className="home-support-card"><Palette size={18} /><strong>Materials</strong><span>Boards, colours, finishes</span></Link>
-          <Link href="/products" className="home-support-card"><BriefcaseBusiness size={18} /><strong>Plans</strong><span>House plans and packages</span></Link>
-          <Link href="/contact" className="home-support-card"><Sparkles size={18} /><strong>Consultation</strong><span>Request samples or support</span></Link>
+      <section className="pg-shell pg-ranges">
+        <div className="pg-section-title">
+          <p>Explore</p>
+          <h2>Our product ranges</h2>
         </div>
+        <div className="pg-range-strip">
+          {materialRanges.length > 0 ? materialRanges.map((range) => (
+            <Link key={range._id || range.title} href={range._id ? `/materials/${range._id}` : "/materials"} className="pg-range-card">
+              <Image src={imageOrFallback(range.heroImage || range.swatches?.[0]?.image, "/images/prod-wardrobe.jpg")} alt={range.title || "Material range"} fill sizes="180px" />
+              <span>{range.title}</span>
+            </Link>
+          )) : ["/images/prod-wardrobe.jpg", "/images/prod-tv.jpg", "/images/prod-bath.jpg", "/images/service-interior.jpg"].map((image, index) => (
+            <Link key={image} href="/materials" className="pg-range-card">
+              <Image src={image} alt={`Product range ${index + 1}`} fill sizes="180px" />
+              <span>Range {index + 1}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
-        <MaterialsHub ranges={ranges} compact />
+      <section className="pg-expression">
+        <div className="pg-shell pg-expression-copy">
+          <p>Gallery 5</p>
+          <h2>Expressions</h2>
+          <p>
+            Browse colours, designs, and product applications that help customers feel the mood of a room before choosing what to build.
+          </p>
+          <Link href="/looks" className="pg-outline-button dark">View Looks</Link>
+        </div>
+      </section>
+
+      <section className="pg-shell pg-news">
+        <div className="pg-news-head">
+          <div>
+            <p>Arusha Home</p>
+            <h2>Blogs & News</h2>
+          </div>
+          <Link href="/about" className="pg-outline-button dark">View All</Link>
+        </div>
+        <div className="pg-news-grid">
+          {newsItems.map((item) => (
+            <article key={item.title} className="pg-news-card">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <Link href="/contact" aria-label={item.title}><ArrowRight size={17} /></Link>
+            </article>
+          ))}
+        </div>
       </section>
     </div>
   );
