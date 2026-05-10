@@ -4,7 +4,7 @@ import { ArrowLeft, Images, Sparkles } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getLookBySlug } from "@/app/actions/looks";
 import { fallbackLooks, getSlug, isUsableImageSrc, type LookItem } from "@/lib/lookFallbacks";
-import LookDesignPreview from "@/components/looks/LookDesignPreview";
+import LookPreviewGallery, { type LookPreviewItem } from "@/components/looks/LookPreviewGallery";
 
 export default async function LookCategoryPage({
   params,
@@ -25,6 +25,12 @@ export default async function LookCategoryPage({
       : "/images/service-kitchen.jpg";
   const gallery = (category.gallery ?? []).filter((item) => isUsableImageSrc(item.image));
   const leadImage = gallery[0]?.image || fallbackImage;
+  const designItems = ((category.coloursDesignsUsed ?? []) as unknown[]).map((item) =>
+    typeof item === "string" ? { name: item, images: [fallbackImage] } : item
+  ).filter((item): item is LookPreviewItem => typeof item === "object" && item !== null);
+  const productRangeItems = ((category.productRange ?? []) as unknown[]).map((item) =>
+    typeof item === "string" ? { name: item, images: [fallbackImage] } : item
+  ).filter((item): item is LookPreviewItem => typeof item === "object" && item !== null);
 
   return (
     <main className="look-detail-page">
@@ -40,23 +46,6 @@ export default async function LookCategoryPage({
             <h1>{category.name}</h1>
             <p>{category.description || look.description || "A curated material pairing gallery."}</p>
             <span><Images size={16} /> {gallery.length || 1} reference images</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="looks-shell look-detail-specs">
-        <div className="look-detail-spec-card">
-          <p className="material-kicker">Colours & Designs Used</p>
-          <h2>Design palette</h2>
-          <LookDesignPreview designs={category.coloursDesignsUsed ?? []} fallbackImage={fallbackImage} />
-        </div>
-        <div className="look-detail-spec-card">
-          <p className="material-kicker">Product Range</p>
-          <h2>Applicable products</h2>
-          <div className="look-detail-chip-list">
-            {(category.productRange?.length ? category.productRange : ["Add product ranges from the CMS"]).map((item) => (
-              <span key={item}>{item}</span>
-            ))}
           </div>
         </div>
       </section>
@@ -82,6 +71,19 @@ export default async function LookCategoryPage({
               {item.caption ? <figcaption>{item.caption}</figcaption> : null}
             </figure>
           ))}
+        </div>
+      </section>
+
+      <section className="looks-shell look-detail-specs">
+        <div className="look-detail-spec-card">
+          <p className="material-kicker">Colours & Designs Used</p>
+          <h2>Design palette</h2>
+          <LookPreviewGallery items={designItems} fallbackImage={fallbackImage} emptyLabel="Add colours and designs from the CMS" />
+        </div>
+        <div className="look-detail-spec-card">
+          <p className="material-kicker">Product Range</p>
+          <h2>Applicable products</h2>
+          <LookPreviewGallery items={productRangeItems} fallbackImage={fallbackImage} emptyLabel="Add product range images from the CMS" />
         </div>
       </section>
     </main>

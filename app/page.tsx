@@ -1,13 +1,19 @@
 import { getMaterialRanges } from "@/app/actions/materials";
+import { getLooks } from "@/app/actions/looks";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Layers3, Palette, Sparkles } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, Images, Palette, Sparkles } from "lucide-react";
 import MaterialsHub from "@/components/materials/MaterialsHub";
+import { fallbackLooks, getSlug, isUsableImageSrc, type LookItem } from "@/lib/lookFallbacks";
 
 export default async function HomePage() {
-  const ranges = await getMaterialRanges().catch(() => []);
+  const [ranges, cmsLooks] = await Promise.all([
+    getMaterialRanges().catch(() => []),
+    getLooks().catch(() => []),
+  ]);
+  const looks = ((cmsLooks as LookItem[]).length > 0 ? cmsLooks : fallbackLooks) as LookItem[];
   const heroRange = ranges.find((range: { heroImage?: string }) => range.heroImage) ?? ranges[0];
-  const heroImage = heroRange?.heroImage || "/images/service-kitchen.jpg";
+  const heroImage = heroRange?.heroImage || looks.find((look) => isUsableImageSrc(look.coverImage))?.coverImage || "/images/service-kitchen.jpg";
 
   return (
     <div className="home-material-page">
@@ -19,16 +25,19 @@ export default async function HomePage() {
         <div className="home-material-shell home-material-hero-grid">
           <div className="home-material-copy">
             <p className="material-kicker">Arusha Home Design Pro</p>
-            <h1>Design the room around the material first.</h1>
+            <h1>Choose the look. Shape the room.</h1>
             <p>
-              Choose boards, finishes, colour combinations, and room references before moving into plans, projects, or consultation.
+              Explore room looks, surface palettes, products, projects, and design support from one cleaner starting point.
             </p>
             <div className="home-material-actions">
+              <Link href="/looks" className="materials-primary-action">
+                Choose a look <ArrowRight size={17} />
+              </Link>
               <Link href="/materials" className="materials-primary-action">
-                Explore material studio <ArrowRight size={17} />
+                Materials
               </Link>
               <Link href="/projects" className="materials-secondary-action">
-                View applications
+                Projects
               </Link>
             </div>
           </div>
@@ -57,11 +66,37 @@ export default async function HomePage() {
       </section>
 
       <section className="home-material-rhythm">
-        <div className="home-material-shell home-material-stats">
-          <div><Palette size={18} /><strong>70%</strong><span>material-led customer journey</span></div>
-          <div><Layers3 size={18} /><strong>{ranges.length || "CMS"}</strong><span>admin controlled ranges</span></div>
-          <div><Sparkles size={18} /><strong>Looks</strong><span>dynamic galleries and pairings</span></div>
+        <div className="home-material-shell home-look-showcase">
+          <div className="home-section-head">
+            <div>
+              <p className="material-kicker">Choose a Look</p>
+              <h2>Start with an inspiration style.</h2>
+            </div>
+            <Link href="/looks">View all looks <ArrowRight size={15} /></Link>
+          </div>
+          <div className="home-look-card-grid">
+            {looks.slice(0, 3).map((look) => {
+              const lookSlug = getSlug(look.name, look.slug);
+              const coverImage = isUsableImageSrc(look.coverImage) ? look.coverImage : "/images/service-kitchen.jpg";
+              return (
+                <Link key={lookSlug} href={`/looks/${lookSlug}`} className="home-feature-card">
+                  <span>
+                    <Image src={coverImage} alt={look.name || "Look"} fill sizes="(max-width: 900px) 100vw, 30vw" />
+                  </span>
+                  <strong>{look.name}</strong>
+                  <small><Images size={14} /> {look.categories?.length ?? 0} categories</small>
+                </Link>
+              );
+            })}
+          </div>
         </div>
+
+        <div className="home-material-shell home-support-grid">
+          <Link href="/materials" className="home-support-card"><Palette size={18} /><strong>Materials</strong><span>Boards, colours, finishes</span></Link>
+          <Link href="/products" className="home-support-card"><BriefcaseBusiness size={18} /><strong>Plans</strong><span>House plans and packages</span></Link>
+          <Link href="/contact" className="home-support-card"><Sparkles size={18} /><strong>Consultation</strong><span>Request samples or support</span></Link>
+        </div>
+
         <MaterialsHub ranges={ranges} compact />
       </section>
     </div>

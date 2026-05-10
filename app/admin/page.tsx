@@ -43,11 +43,12 @@ type MaterialLookCategoryForm = {
   description?: string;
   coverImage?: string;
   coloursDesignsUsed?: MaterialLookDesignForm[];
-  productRange?: string[];
+  productRange?: MaterialLookProductRangeForm[];
   gallery?: MaterialLookImageForm[];
 };
 type MaterialLookGroupForm = { name?: string; slug?: string; description?: string; coverImage?: string; categories?: MaterialLookCategoryForm[] };
-type MaterialLookDesignForm = { name?: string; image?: string; finish?: string; productRange?: string };
+type MaterialLookDesignForm = { name?: string; image?: string; images?: string[]; finish?: string; productRange?: string };
+type MaterialLookProductRangeForm = { name?: string; images?: string[]; description?: string };
 
 type AdminFormData = {
   [key: string]: unknown;
@@ -249,17 +250,35 @@ export default function AdminPage() {
       };
     }).filter((category) => category.name);
   const serializeLookDesigns = (designs: MaterialLookDesignForm[] = []) =>
-    designs.map((design) => [
-      design.name ?? '',
-      design.image ?? '',
-      design.finish ?? '',
-      design.productRange ?? '',
-    ].join(' | ')).join('\n');
+    (designs as unknown[]).map((entry) => {
+      const design = typeof entry === 'string' ? { name: entry } : entry as MaterialLookDesignForm;
+      return [
+        design.name ?? '',
+        (design.images?.length ? design.images : design.image ? [design.image] : []).join(', '),
+        design.finish ?? '',
+        design.productRange ?? '',
+      ].join(' | ');
+    }).join('\n');
   const parseLookDesigns = (value: string): MaterialLookDesignForm[] =>
     value.split('\n').map((line) => {
-      const [name = '', image = '', finish = '', productRange = ''] = line.split('|').map((part) => part.trim());
-      return { name, image, finish, productRange };
+      const [name = '', imageList = '', finish = '', productRange = ''] = line.split('|').map((part) => part.trim());
+      const images = splitList(imageList);
+      return { name, image: images[0], images, finish, productRange };
     }).filter((design) => design.name);
+  const serializeLookProductRanges = (ranges: MaterialLookProductRangeForm[] = []) =>
+    (ranges as unknown[]).map((entry) => {
+      const range = typeof entry === 'string' ? { name: entry } : entry as MaterialLookProductRangeForm;
+      return [
+        range.name ?? '',
+        (range.images ?? []).join(', '),
+        range.description ?? '',
+      ].join(' | ');
+    }).join('\n');
+  const parseLookProductRanges = (value: string): MaterialLookProductRangeForm[] =>
+    value.split('\n').map((line) => {
+      const [name = '', imageList = '', description = ''] = line.split('|').map((part) => part.trim());
+      return { name, images: splitList(imageList), description };
+    }).filter((range) => range.name);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -415,10 +434,32 @@ export default function AdminPage() {
       const url = await uploadImageFile(file);
       const categories = lookCategories.map((category, idx) => {
         if (idx !== categoryIndex) return category;
-        const designs = (category.coloursDesignsUsed ?? []).map((design, designIdx) =>
-          designIdx === designIndex ? { ...design, image: url } : design
-        );
+        const designs = (category.coloursDesignsUsed ?? []).map((design, designIdx) => {
+          if (designIdx !== designIndex) return design;
+          const images = [...(design.images ?? (design.image ? [design.image] : [])), url];
+          return { ...design, image: images[0], images };
+        });
         return { ...category, coloursDesignsUsed: designs };
+      });
+      setFormData({ ...formData, categories });
+      toast.success('Uploaded ✓', { id: tid });
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Upload failed'), { id: tid });
+    }
+  };
+
+  const handleLookProductRangeImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, categoryIndex: number, rangeIndex: number) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const tid = toast.loading('Uploading product range image...');
+    try {
+      const url = await uploadImageFile(file);
+      const categories = lookCategories.map((category, idx) => {
+        if (idx !== categoryIndex) return category;
+        const productRange = (category.productRange ?? []).map((range, productIdx) =>
+          productIdx === rangeIndex ? { ...range, images: [...(range.images ?? []), url] } : range
+        );
+        return { ...category, productRange };
       });
       setFormData({ ...formData, categories });
       toast.success('Uploaded ✓', { id: tid });
@@ -1963,7 +2004,7 @@ export default function AdminPage() {
                         </div>
                         <div className="form-grid-2" style={{ marginTop: '10px' }}>
                           <div className="admin-field">
-                            <label className="admin-label">Colours & Designs Used: name | image URL | finish | product range</label>
+                            <label className="admin-label">Colours & Designs Used: name | image URLs comma separated | finish | product range</label>
                             <textarea
                               className="admin-input"
                               rows={4}
@@ -1989,16 +2030,30 @@ export default function AdminPage() {
                             ) : null}
                           </div>
                           <div className="admin-field">
-                            <label className="admin-label">Product Range (comma separated)</label>
+                            <label className="admin-label">Product Range: name | image URLs comma separated | description</label>
                             <textarea
                               className="admin-input"
-                              rows={3}
-                              value={(category.productRange ?? []).join(', ')}
+                              rows={4}
+                              placeholder={'Kitchen cabinetry | /uploads/a.jpg, /uploads/b.jpg | Cabinet and drawer applications'}
+                              value={serializeLookProductRanges(category.productRange)}
                               onChange={e => {
-                                const categories = lookCategories.map((item, idx) => idx === i ? { ...item, productRange: splitList(e.target.value) } : item);
+                                const categories = lookCategories.map((item, idx) => idx === i ? { ...item, productRange: parseLookProductRanges(e.target.value) } : item);
                                 setFormData({ ...formData, categories });
                               }}
                             />
+                            {(category.productRange ?? []).length > 0 ? (
+                              <div style={{ display: 'grid', gap: '6px', marginTop: '8px' }}>
+                                {(category.productRange ?? []).map((range, rangeIndex) => (
+                                  <div key={`${range.name}-${rangeIndex}`} style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '8px', alignItems: 'center' }}>
+                                    <span style={{ fontSize: '11px', color: '#385f5a' }}>{range.name || `Product ${rangeIndex + 1}`}</span>
+                                    <label className="upload-btn-icon" style={{ width: '38px', height: '34px' }}>
+                                      <Upload size={14} />
+                                      <input type="file" hidden accept="image/*" onChange={e => handleLookProductRangeImageUpload(e, i, rangeIndex)} />
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : null}
                           </div>
                         </div>
                         <div className="admin-field" style={{ marginTop: '10px' }}>

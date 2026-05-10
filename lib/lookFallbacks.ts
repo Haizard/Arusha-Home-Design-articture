@@ -7,8 +7,15 @@ export type LookGalleryImage = {
 export type LookDesign = {
   name?: string;
   image?: string;
+  images?: string[];
   finish?: string;
   productRange?: string;
+};
+
+export type LookProductRange = {
+  name?: string;
+  images?: string[];
+  description?: string;
 };
 
 export type LookCategory = {
@@ -17,7 +24,7 @@ export type LookCategory = {
   description?: string;
   coverImage?: string;
   coloursDesignsUsed?: LookDesign[];
-  productRange?: string[];
+  productRange?: LookProductRange[];
   gallery?: LookGalleryImage[];
 };
 
@@ -66,10 +73,13 @@ export const fallbackLooks: LookItem[] = [
         coverImage: "/images/service-kitchen.jpg",
         description: "A clean white and cool grey pairing for contemporary cabinet work.",
         coloursDesignsUsed: [
-          { name: "Iceberg White", image: "/images/service-kitchen.jpg", finish: "Soft matte", productRange: "Decorative boards" },
-          { name: "Storm Grey", image: "/images/prod-tv.jpg", finish: "Cool neutral", productRange: "Kitchen cabinetry" },
+          { name: "Iceberg White", image: "/images/service-kitchen.jpg", images: ["/images/service-kitchen.jpg", "/images/prod-bath.jpg"], finish: "Soft matte", productRange: "Decorative boards" },
+          { name: "Storm Grey", image: "/images/prod-tv.jpg", images: ["/images/prod-tv.jpg", "/images/service-interior.jpg"], finish: "Cool neutral", productRange: "Kitchen cabinetry" },
         ],
-        productRange: ["Decorative boards", "Kitchen cabinetry", "Wardrobe shutters"],
+        productRange: [
+          { name: "Decorative boards", images: ["/images/service-kitchen.jpg", "/images/prod-tv.jpg"], description: "Board finishes for cabinetry and fitted interiors." },
+          { name: "Wardrobe shutters", images: ["/images/prod-wardrobe.jpg", "/images/service-interior.jpg"], description: "Vertical panel applications for storage fronts." },
+        ],
         gallery: [{ image: "/images/service-kitchen.jpg" }, { image: "/images/prod-tv.jpg" }],
       },
       {
@@ -78,10 +88,13 @@ export const fallbackLooks: LookItem[] = [
         coverImage: "/images/prod-wardrobe.jpg",
         description: "Warm wood detail balanced with crisp white surfaces.",
         coloursDesignsUsed: [
-          { name: "Arden woodgrain", image: "/images/prod-wardrobe.jpg", finish: "Woodgrain", productRange: "Wardrobes" },
-          { name: "Iceberg White", image: "/images/service-interior.jpg", finish: "Matte", productRange: "Wall panels" },
+          { name: "Arden woodgrain", image: "/images/prod-wardrobe.jpg", images: ["/images/prod-wardrobe.jpg", "/images/service-interior.jpg"], finish: "Woodgrain", productRange: "Wardrobes" },
+          { name: "Iceberg White", image: "/images/service-interior.jpg", images: ["/images/service-interior.jpg", "/images/service-kitchen.jpg"], finish: "Matte", productRange: "Wall panels" },
         ],
-        productRange: ["Wardrobes", "Wall panels", "Joinery boards"],
+        productRange: [
+          { name: "Wardrobes", images: ["/images/prod-wardrobe.jpg", "/images/service-interior.jpg"], description: "Storage and bedroom applications." },
+          { name: "Wall panels", images: ["/images/service-interior.jpg", "/images/prod-tv.jpg"], description: "Feature wall and room cladding ideas." },
+        ],
         gallery: [{ image: "/images/prod-wardrobe.jpg" }, { image: "/images/service-interior.jpg" }],
       },
     ],
@@ -98,10 +111,13 @@ export const fallbackLooks: LookItem[] = [
           coverImage: "/images/service-interior.jpg",
           description: "A bright timber-led combination with light neutral panels.",
           coloursDesignsUsed: [
-            { name: "Natural Oak", image: "/images/service-interior.jpg", finish: "Woodgrain", productRange: "Kitchen surfaces" },
-            { name: "Glacier neutral", image: "/images/prod-bath.jpg", finish: "Light neutral", productRange: "Feature shelving" },
+            { name: "Natural Oak", image: "/images/service-interior.jpg", images: ["/images/service-interior.jpg", "/images/prod-bath.jpg"], finish: "Woodgrain", productRange: "Kitchen surfaces" },
+            { name: "Glacier neutral", image: "/images/prod-bath.jpg", images: ["/images/prod-bath.jpg", "/images/service-kitchen.jpg"], finish: "Light neutral", productRange: "Feature shelving" },
           ],
-          productRange: ["Kitchen surfaces", "Living room storage", "Feature shelving"],
+          productRange: [
+            { name: "Kitchen surfaces", images: ["/images/service-kitchen.jpg", "/images/service-interior.jpg"], description: "Cabinet and working surface references." },
+            { name: "Feature shelving", images: ["/images/prod-bath.jpg", "/images/prod-tv.jpg"], description: "Open display and accent storage." },
+          ],
           gallery: [{ image: "/images/service-interior.jpg" }, { image: "/images/prod-bath.jpg" }],
         },
     ],
@@ -118,10 +134,13 @@ export const fallbackLooks: LookItem[] = [
           coverImage: "/images/prod-tv.jpg",
           description: "A darker premium pairing for media walls, feature storage, and suites.",
           coloursDesignsUsed: [
-            { name: "Graphite", image: "/images/prod-tv.jpg", finish: "Deep matte", productRange: "Media units" },
-            { name: "Warm Walnut", image: "/images/projects-hero.jpg", finish: "Woodgrain", productRange: "Feature wall panels" },
+            { name: "Graphite", image: "/images/prod-tv.jpg", images: ["/images/prod-tv.jpg", "/images/projects-hero.jpg"], finish: "Deep matte", productRange: "Media units" },
+            { name: "Warm Walnut", image: "/images/projects-hero.jpg", images: ["/images/projects-hero.jpg", "/images/prod-wardrobe.jpg"], finish: "Woodgrain", productRange: "Feature wall panels" },
           ],
-          productRange: ["Media units", "Premium cabinetry", "Feature wall panels"],
+          productRange: [
+            { name: "Media units", images: ["/images/prod-tv.jpg", "/images/projects-hero.jpg"], description: "TV walls and entertainment storage." },
+            { name: "Feature wall panels", images: ["/images/projects-hero.jpg", "/images/prod-wardrobe.jpg"], description: "Statement wall applications." },
+          ],
           gallery: [{ image: "/images/prod-tv.jpg" }, { image: "/images/projects-hero.jpg" }],
         },
     ],

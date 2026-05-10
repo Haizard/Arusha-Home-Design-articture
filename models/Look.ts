@@ -9,8 +9,15 @@ const LookGalleryImageSchema = new Schema({
 const LookDesignSchema = new Schema({
   name: { type: String, required: true },
   image: { type: String },
+  images: [{ type: String }],
   finish: { type: String },
   productRange: { type: String },
+});
+
+const LookProductRangeSchema = new Schema({
+  name: { type: String, required: true },
+  images: [{ type: String }],
+  description: { type: String },
 });
 
 const LookCategorySchema = new Schema({
@@ -19,7 +26,7 @@ const LookCategorySchema = new Schema({
   description: { type: String },
   coverImage: { type: String },
   coloursDesignsUsed: [LookDesignSchema],
-  productRange: [{ type: String }],
+  productRange: [LookProductRangeSchema],
   gallery: [LookGalleryImageSchema],
 });
 

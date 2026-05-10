@@ -1931,7 +1931,7 @@
 
 .home-material-hero {
   position: relative;
-  min-height: clamp(34rem, 72vh, 48rem);
+  min-height: clamp(26rem, 54vh, 36rem);
   overflow: hidden;
   background: #dfe7e2;
 }
@@ -1961,8 +1961,8 @@
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.34fr);
   gap: clamp(1rem, 4vw, 3rem);
   align-items: end;
-  min-height: clamp(34rem, 72vh, 48rem);
-  padding: clamp(3rem, 8vw, 6rem) 0;
+  min-height: clamp(26rem, 54vh, 36rem);
+  padding: clamp(1.75rem, 5vw, 3.4rem) 0;
 }
 
 .home-material-copy {
@@ -1977,24 +1977,24 @@
 
 .home-material-copy h1 {
   margin-top: 0.65rem;
-  max-width: 11ch;
-  font-size: clamp(3rem, 8vw, 7.6rem);
-  line-height: 0.86;
-  letter-spacing: -0.06em;
+  max-width: 14ch;
+  font-size: clamp(2.4rem, 5.8vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
 }
 
 .home-material-copy p {
   max-width: 38rem;
-  margin-top: 1rem;
-  font-size: clamp(1rem, 1.8vw, 1.18rem);
-  line-height: 1.7;
+  margin-top: 0.8rem;
+  font-size: clamp(0.92rem, 1.3vw, 1.05rem);
+  line-height: 1.55;
 }
 
 .home-material-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.35rem;
+  margin-top: 1rem;
 }
 
 .home-look-preview {
@@ -2062,29 +2062,107 @@
 }
 
 .home-material-rhythm {
-  padding: clamp(2rem, 5vw, 3rem) 0 clamp(3rem, 7vw, 5rem);
+  padding: clamp(1.6rem, 4vw, 2.5rem) 0 clamp(3rem, 7vw, 5rem);
 }
 
-.home-material-stats {
+.home-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.home-section-head h2 {
+  margin-top: 0.35rem;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+}
+
+.home-section-head a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #0d5e59;
+  font-size: 0.86rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.home-look-showcase {
+  margin-bottom: 1rem;
+}
+
+.home-look-card-grid,
+.home-support-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.8rem;
   margin-bottom: 1rem;
 }
 
-.home-material-stats div {
-  padding: 1rem;
+.home-feature-card {
+  display: grid;
+  gap: 0.65rem;
+  overflow: hidden;
+  padding: 0.65rem;
   border: 1px solid rgba(17,24,22,0.08);
   border-radius: 1rem;
   background: rgba(255,255,255,0.78);
+  color: #111816;
+  text-decoration: none;
 }
 
-.home-material-stats strong,
-.home-material-stats span {
+.home-feature-card > span {
+  position: relative;
+  display: block;
+  aspect-ratio: 1.4 / 0.72;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #dfe7e2;
+}
+
+.home-feature-card img {
+  object-fit: cover;
+}
+
+.home-feature-card strong,
+.home-feature-card small,
+.home-support-card strong,
+.home-support-card span {
   display: block;
 }
 
-.home-material-stats span {
+.home-feature-card strong {
+  font-size: 1rem;
+}
+
+.home-feature-card small {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgba(17,24,22,0.58);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.home-support-card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem;
+  border: 1px solid rgba(17,24,22,0.08);
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.72);
+  color: #111816;
+  text-decoration: none;
+}
+
+.home-support-card strong {
+  font-size: 1rem;
+}
+
+.home-support-card span {
   color: rgba(17,24,22,0.58);
   font-size: 0.8rem;
   font-weight: 750;
@@ -2093,6 +2171,16 @@
 .materials-platform.compact .materials-showcase,
 .materials-platform.compact .materials-swatch-lab {
   padding: clamp(1.5rem, 4vw, 3rem) 0;
+}
+
+.materials-platform.compact .material-section-heading h2 {
+  font-size: clamp(1.7rem, 3.4vw, 3rem);
+  line-height: 1;
+}
+
+.materials-platform.compact .material-section-heading > p {
+  font-size: 0.92rem;
+  line-height: 1.55;
 }
 
 .looks-page,
@@ -2355,37 +2443,172 @@
   letter-spacing: -0.05em;
 }
 
-.look-detail-chip-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
+.look-preview-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
   margin-top: 1rem;
 }
 
-.look-detail-chip-list span,
-.look-detail-chip-list button {
-  padding: 0.56rem 0.78rem;
-  border: none;
+.look-preview-card {
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgba(17,24,22,0.08);
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.76);
+  color: #111816;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.look-preview-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(53,74,70,0.12);
+}
+
+.look-preview-card-image {
+  position: relative;
+  display: block;
+  aspect-ratio: 1.18 / 0.78;
+  background: #dfe7e2;
+}
+
+.look-preview-card-image img,
+.look-preview-modal-image img {
+  object-fit: cover;
+}
+
+.look-preview-card-image small {
+  position: absolute;
+  right: 0.55rem;
+  bottom: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.28rem 0.5rem;
   border-radius: 999px;
-  background: rgba(16,138,131,0.1);
-  color: #0d5e59;
-  font-size: 0.85rem;
+  background: rgba(255,255,255,0.84);
+  color: #111816;
+  font-size: 0.68rem;
   font-weight: 850;
 }
 
-.look-detail-chip-list button {
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+.look-preview-card-body {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem;
 }
 
-.look-detail-chip-list button:hover {
-  transform: translateY(-2px);
-  background: rgba(16,138,131,0.18);
+.look-preview-card-body strong {
+  font-size: 0.95rem;
+}
+
+.look-preview-card-body em {
+  color: rgba(17,24,22,0.58);
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 750;
+}
+
+.look-preview-empty {
+  padding: 0.8rem;
+  border-radius: 0.85rem;
+  background: rgba(16,138,131,0.08);
+  color: #0d5e59;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.look-preview-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3200;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+  background: #111816;
+}
+
+.look-preview-modal-toolbar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+}
+
+.look-preview-modal-toolbar button,
+.look-preview-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.86);
+  color: #111816;
+  cursor: pointer;
+}
+
+.look-preview-modal-image {
+  position: relative;
+  min-height: 100vh;
+}
+
+.look-preview-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.look-preview-arrow.prev {
+  left: 1rem;
+}
+
+.look-preview-arrow.next {
+  right: 1rem;
+}
+
+.look-preview-modal-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(237,242,239,0.96);
+  color: #111816;
+}
+
+.look-preview-modal-info h2 {
+  margin-top: 0.45rem;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+}
+
+.look-preview-modal-info dl {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.look-preview-modal-info dt {
+  color: rgba(17,24,22,0.48);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.look-preview-modal-info dd {
+  margin-top: 0.15rem;
+  font-weight: 800;
 }
 
 @media (max-width: 900px) {
   .home-material-hero-grid,
-  .home-material-stats {
+  .home-look-card-grid,
+  .home-support-grid,
+  .look-preview-modal {
     grid-template-columns: 1fr;
   }
 
@@ -2394,7 +2617,8 @@
   }
 
   .look-category-card-grid,
-  .look-detail-specs {
+  .look-detail-specs,
+  .look-preview-card-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2410,11 +2634,11 @@
 
   .home-material-hero-grid {
     min-height: auto;
-    padding: 4rem 0 2rem;
+    padding: 2.4rem 0 1.5rem;
   }
 
   .home-material-copy h1 {
-    font-size: clamp(2.8rem, 18vw, 4.5rem);
+    font-size: clamp(2.35rem, 14vw, 3.6rem);
   }
 
   .looks-grid {
