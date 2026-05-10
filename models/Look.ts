@@ -11,6 +11,8 @@ const LookCategorySchema = new Schema({
   slug: { type: String },
   description: { type: String },
   coverImage: { type: String },
+  coloursDesignsUsed: [{ type: String }],
+  productRange: [{ type: String }],
   gallery: [LookGalleryImageSchema],
 });
 

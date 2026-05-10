@@ -31,14 +31,35 @@ export default async function LookCategoryPage({
         <Image src={leadImage} alt={category.name || "Look gallery"} fill priority sizes="100vw" />
         <div className="looks-hero-overlay" />
         <div className="looks-shell look-detail-copy">
-          <Link href="/looks" className="material-look-back">
-            <ArrowLeft size={16} /> Choose a Look
+          <Link href={`/looks/${lookSlug}`} className="material-look-back">
+            <ArrowLeft size={16} /> {look.name}
           </Link>
           <div>
             <p className="material-kicker">{look.name}</p>
             <h1>{category.name}</h1>
             <p>{category.description || look.description || "A curated material pairing gallery."}</p>
             <span><Images size={16} /> {gallery.length || 1} reference images</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="looks-shell look-detail-specs">
+        <div className="look-detail-spec-card">
+          <p className="material-kicker">Colours & Designs Used</p>
+          <h2>Design palette</h2>
+          <div className="look-detail-chip-list">
+            {(category.coloursDesignsUsed?.length ? category.coloursDesignsUsed : ["Add colours and designs from the CMS"]).map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+        </div>
+        <div className="look-detail-spec-card">
+          <p className="material-kicker">Product Range</p>
+          <h2>Applicable products</h2>
+          <div className="look-detail-chip-list">
+            {(category.productRange?.length ? category.productRange : ["Add product ranges from the CMS"]).map((item) => (
+              <span key={item}>{item}</span>
+            ))}
           </div>
         </div>
       </section>

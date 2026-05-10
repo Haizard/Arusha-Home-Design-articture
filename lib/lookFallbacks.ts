@@ -9,6 +9,8 @@ export type LookCategory = {
   slug?: string;
   description?: string;
   coverImage?: string;
+  coloursDesignsUsed?: string[];
+  productRange?: string[];
   gallery?: LookGalleryImage[];
 };
 
@@ -56,6 +58,8 @@ export const fallbackLooks: LookItem[] = [
         slug: "iceberg-white-storm-grey",
         coverImage: "/images/service-kitchen.jpg",
         description: "A clean white and cool grey pairing for contemporary cabinet work.",
+        coloursDesignsUsed: ["Iceberg White", "Storm Grey", "Soft matte cabinet balance"],
+        productRange: ["Decorative boards", "Kitchen cabinetry", "Wardrobe shutters"],
         gallery: [{ image: "/images/service-kitchen.jpg" }, { image: "/images/prod-tv.jpg" }],
       },
       {
@@ -63,6 +67,8 @@ export const fallbackLooks: LookItem[] = [
         slug: "arden-iceberg-white",
         coverImage: "/images/prod-wardrobe.jpg",
         description: "Warm wood detail balanced with crisp white surfaces.",
+        coloursDesignsUsed: ["Arden woodgrain", "Iceberg White", "Vertical wardrobe panels"],
+        productRange: ["Wardrobes", "Wall panels", "Joinery boards"],
         gallery: [{ image: "/images/prod-wardrobe.jpg" }, { image: "/images/service-interior.jpg" }],
       },
     ],
@@ -76,10 +82,12 @@ export const fallbackLooks: LookItem[] = [
       {
         name: "Natural Oak and Glacier",
         slug: "natural-oak-glacier",
-        coverImage: "/images/service-interior.jpg",
-        description: "A bright timber-led combination with light neutral panels.",
-        gallery: [{ image: "/images/service-interior.jpg" }, { image: "/images/prod-bath.jpg" }],
-      },
+          coverImage: "/images/service-interior.jpg",
+          description: "A bright timber-led combination with light neutral panels.",
+          coloursDesignsUsed: ["Natural Oak", "Glacier neutral", "Open shelf accents"],
+          productRange: ["Kitchen surfaces", "Living room storage", "Feature shelving"],
+          gallery: [{ image: "/images/service-interior.jpg" }, { image: "/images/prod-bath.jpg" }],
+        },
     ],
   },
   {
@@ -91,10 +99,12 @@ export const fallbackLooks: LookItem[] = [
       {
         name: "Graphite and Warm Walnut",
         slug: "graphite-warm-walnut",
-        coverImage: "/images/prod-tv.jpg",
-        description: "A darker premium pairing for media walls, feature storage, and suites.",
-        gallery: [{ image: "/images/prod-tv.jpg" }, { image: "/images/projects-hero.jpg" }],
-      },
+          coverImage: "/images/prod-tv.jpg",
+          description: "A darker premium pairing for media walls, feature storage, and suites.",
+          coloursDesignsUsed: ["Graphite", "Warm Walnut", "High contrast TV wall"],
+          productRange: ["Media units", "Premium cabinetry", "Feature wall panels"],
+          gallery: [{ image: "/images/prod-tv.jpg" }, { image: "/images/projects-hero.jpg" }],
+        },
     ],
   },
 ];

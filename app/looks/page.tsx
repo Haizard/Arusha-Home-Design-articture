@@ -45,18 +45,11 @@ export default async function LooksPage() {
                     <h3>{look.name}</h3>
                     <p>{look.description || "A curated material look with colour-pairing galleries."}</p>
                   </div>
-                  <div className="look-category-list">
-                    {(look.categories ?? []).map((category) => {
-                      const categorySlug = getSlug(category.name, category.slug);
-                      return (
-                        <Link key={categorySlug} href={`/looks/${lookSlug}/${categorySlug}`}>
-                          <Images size={15} />
-                          {category.name}
-                          <ArrowRight size={14} />
-                        </Link>
-                      );
-                    })}
-                  </div>
+                  <Link href={`/looks/${lookSlug}`} className="look-open-link">
+                    <Images size={15} />
+                    Open categories
+                    <ArrowRight size={14} />
+                  </Link>
                 </div>
               </article>
             );

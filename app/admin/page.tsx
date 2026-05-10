@@ -37,7 +37,15 @@ type ProductFaqForm = { question: string; answer: string };
 type MaterialTechSpecForm = { label?: string; value?: string };
 type MaterialSwatchForm = { name?: string; image?: string; look?: string; brand?: string; finish?: string };
 type MaterialLookImageForm = { image?: string; alt?: string; caption?: string };
-type MaterialLookCategoryForm = { name?: string; slug?: string; description?: string; coverImage?: string; gallery?: MaterialLookImageForm[] };
+type MaterialLookCategoryForm = {
+  name?: string;
+  slug?: string;
+  description?: string;
+  coverImage?: string;
+  coloursDesignsUsed?: string[];
+  productRange?: string[];
+  gallery?: MaterialLookImageForm[];
+};
 type MaterialLookGroupForm = { name?: string; slug?: string; description?: string; coverImage?: string; categories?: MaterialLookCategoryForm[] };
 
 type AdminFormData = {
@@ -335,6 +343,52 @@ export default function AdminPage() {
       } else {
         throw new Error(result.message);
       }
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Upload failed'), { id: tid });
+    }
+  };
+
+  const uploadImageFile = async (file: File) => {
+    const uploadData = new FormData();
+    uploadData.append('file', file);
+
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      body: uploadData,
+    });
+    const result = await res.json();
+    if (!result.success || typeof result.url !== 'string') {
+      throw new Error(result.message || 'Upload failed');
+    }
+    return result.url as string;
+  };
+
+  const handleLookCategoryCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const tid = toast.loading('Uploading category cover...');
+    try {
+      const url = await uploadImageFile(file);
+      const categories = lookCategories.map((item, idx) => idx === index ? { ...item, coverImage: url } : item);
+      setFormData({ ...formData, categories });
+      toast.success('Uploaded ✓', { id: tid });
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Upload failed'), { id: tid });
+    }
+  };
+
+  const handleLookCategoryGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const tid = toast.loading('Uploading gallery image...');
+    try {
+      const url = await uploadImageFile(file);
+      const categories = lookCategories.map((item, idx) => {
+        if (idx !== index) return item;
+        return { ...item, gallery: [...(item.gallery ?? []), { image: url }] };
+      });
+      setFormData({ ...formData, categories });
+      toast.success('Uploaded ✓', { id: tid });
     } catch (err: unknown) {
       toast.error(getErrorMessage(err, 'Upload failed'), { id: tid });
     }
@@ -1838,7 +1892,7 @@ export default function AdminPage() {
                       <span>Look Categories and Galleries</span>
                       <button
                         type="button"
-                        onClick={() => setFormData({ ...formData, categories: [...lookCategories, { name: '', slug: '', description: '', coverImage: '', gallery: [] }] })}
+                        onClick={() => setFormData({ ...formData, categories: [...lookCategories, { name: '', slug: '', description: '', coverImage: '', coloursDesignsUsed: [], productRange: [], gallery: [] }] })}
                         style={{ background: 'none', border: 'none', color: '#108a83', cursor: 'pointer', fontSize: '10px' }}
                       >
                         + ADD CATEGORY
@@ -1859,27 +1913,66 @@ export default function AdminPage() {
                           <button type="button" onClick={() => setFormData({ ...formData, categories: lookCategories.filter((_, idx) => idx !== i) })} className="card-action-btn del"><Trash2 size={12} /></button>
                         </div>
                         <div className="form-grid-2">
-                          <input className="admin-input" placeholder="Category cover image URL" value={category.coverImage ?? ''} onChange={e => {
-                            const categories = lookCategories.map((item, idx) => idx === i ? { ...item, coverImage: e.target.value } : item);
-                            setFormData({ ...formData, categories });
-                          }} />
+                          <div style={{ display: 'flex', gap: '8px' }}>
+                            <input className="admin-input" placeholder="Category cover image URL" value={category.coverImage ?? ''} onChange={e => {
+                              const categories = lookCategories.map((item, idx) => idx === i ? { ...item, coverImage: e.target.value } : item);
+                              setFormData({ ...formData, categories });
+                            }} />
+                            <label className="upload-btn-icon" style={{ width: '38px', height: '38px' }}>
+                              <Upload size={14} />
+                              <input type="file" hidden accept="image/*" onChange={e => handleLookCategoryCoverUpload(e, i)} />
+                            </label>
+                          </div>
                           <input className="admin-input" placeholder="Category description" value={category.description ?? ''} onChange={e => {
                             const categories = lookCategories.map((item, idx) => idx === i ? { ...item, description: e.target.value } : item);
                             setFormData({ ...formData, categories });
                           }} />
                         </div>
+                        <div className="form-grid-2" style={{ marginTop: '10px' }}>
+                          <div className="admin-field">
+                            <label className="admin-label">Colours & Designs Used (comma separated)</label>
+                            <textarea
+                              className="admin-input"
+                              rows={3}
+                              value={(category.coloursDesignsUsed ?? []).join(', ')}
+                              onChange={e => {
+                                const categories = lookCategories.map((item, idx) => idx === i ? { ...item, coloursDesignsUsed: splitList(e.target.value) } : item);
+                                setFormData({ ...formData, categories });
+                              }}
+                            />
+                          </div>
+                          <div className="admin-field">
+                            <label className="admin-label">Product Range (comma separated)</label>
+                            <textarea
+                              className="admin-input"
+                              rows={3}
+                              value={(category.productRange ?? []).join(', ')}
+                              onChange={e => {
+                                const categories = lookCategories.map((item, idx) => idx === i ? { ...item, productRange: splitList(e.target.value) } : item);
+                                setFormData({ ...formData, categories });
+                              }}
+                            />
+                          </div>
+                        </div>
                         <div className="admin-field" style={{ marginTop: '10px' }}>
-                          <label className="admin-label">Gallery image URLs (comma separated)</label>
-                          <textarea
-                            className="admin-input"
-                            rows={3}
-                            value={(category.gallery ?? []).map((image) => image.image).filter(Boolean).join(', ')}
-                            onChange={e => {
-                              const gallery = splitList(e.target.value).map((image) => ({ image }));
-                              const categories = lookCategories.map((item, idx) => idx === i ? { ...item, gallery } : item);
-                              setFormData({ ...formData, categories });
-                            }}
-                          />
+                          <label className="admin-label">Gallery images (URLs or upload)</label>
+                          <div style={{ display: 'flex', gap: '8px' }}>
+                            <textarea
+                              className="admin-input"
+                              rows={3}
+                              style={{ flex: 1 }}
+                              value={(category.gallery ?? []).map((image) => image.image).filter(Boolean).join(', ')}
+                              onChange={e => {
+                                const gallery = splitList(e.target.value).map((image) => ({ image }));
+                                const categories = lookCategories.map((item, idx) => idx === i ? { ...item, gallery } : item);
+                                setFormData({ ...formData, categories });
+                              }}
+                            />
+                            <label className="upload-btn-icon" style={{ height: 'auto', padding: '0 12px' }}>
+                              <Upload size={16} />
+                              <input type="file" hidden accept="image/*" onChange={e => handleLookCategoryGalleryUpload(e, i)} />
+                            </label>
+                          </div>
                         </div>
                       </div>
                     ))}
