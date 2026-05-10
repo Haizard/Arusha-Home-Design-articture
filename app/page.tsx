@@ -1,5 +1,8 @@
-import MarketplaceHome from "@/components/home/MarketplaceHome";
+import { getMaterialRanges } from "@/app/actions/materials";
+import MaterialsHub from "@/components/materials/MaterialsHub";
 
-export default function HomePage() {
-  return <MarketplaceHome />;
+export default async function HomePage() {
+  const ranges = await getMaterialRanges().catch(() => []);
+
+  return <MaterialsHub ranges={ranges} />;
 }

@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight,
   BadgeCheck,
   BedDouble,
   Building2,
@@ -254,7 +253,7 @@ export default function MarketplaceHome() {
 
       <section className="market-benefits">
         <div className="market-shell market-benefit-row">
-          {highlights.map((item: any) => (
+          {highlights.map((item) => (
             <div key={item.title} className="market-benefit">
               <item.icon size={20} />
               <div>
@@ -272,7 +271,7 @@ export default function MarketplaceHome() {
             <article key={facet.label} className="market-facet-card">
               <span>{facet.label}</span>
               <div>
-                {facet.items.map((item: any) => (
+                {facet.items.map((item) => (
                   <Link key={item} href="/products">
                     {item}
                   </Link>
@@ -306,7 +305,7 @@ export default function MarketplaceHome() {
           </Link>
         </div>
         <div className="market-grid market-grid-four">
-          {familyPlans.map((item: any) => (
+          {familyPlans.map((item) => (
             <article key={item.title} className="market-category-card">
               <div className="market-category-image-wrap">
                 <Image src={item.image} alt={item.title} fill sizes="(max-width: 900px) 100vw, 25vw" className="market-category-image" />
@@ -330,7 +329,7 @@ export default function MarketplaceHome() {
           </Link>
         </div>
         <div className="market-grid market-grid-three">
-          {budgetPlans.map((item: any) => (
+          {budgetPlans.map((item) => (
             <article key={item.title} className="market-budget-card">
               <Image src={item.image} alt={item.title} fill sizes="(max-width: 900px) 100vw, 33vw" className="market-budget-image" />
               <div className="market-budget-overlay" />

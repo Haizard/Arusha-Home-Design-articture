@@ -2,6 +2,20 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const maxDuration = 60; // Allow 60 seconds for processing large images
 
+function getErrorDetails(error: unknown) {
+  if (error instanceof Error) {
+    return {
+      message: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
+    };
+  }
+
+  return {
+    message: 'Unknown upload error',
+    stack: undefined,
+  };
+}
+
 export async function POST(req: NextRequest) {
   console.log('--- Upload Request Started (Base64 Mode) ---');
   try {
@@ -31,12 +45,13 @@ export async function POST(req: NextRequest) {
       url: dataUri 
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorDetails = getErrorDetails(error);
     console.error('CRITICAL Upload Error:', error);
     return NextResponse.json({ 
       success: false, 
-      message: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined 
+      message: errorDetails.message,
+      stack: errorDetails.stack
     }, { status: 500 });
   } finally {
     console.log('--- Upload Request Ended ---');

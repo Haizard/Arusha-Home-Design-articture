@@ -10,17 +10,29 @@ gsap.registerPlugin(ScrollTrigger);
 
 import { getProducts } from "@/app/actions/admin";
 
+type ProductCard = {
+  _id: string;
+  title: string;
+  category?: string;
+  description?: string;
+  imageUrl: string;
+  basePrice?: number;
+  planId?: string;
+  bedrooms?: number;
+  area?: string;
+};
+
 export default function ProductsGrid() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<ProductCard[]>([]);
   const [loading, setLoading] = useState(true);
-  const [lightbox, setLightbox] = useState<any | null>(null);
+  const [lightbox, setLightbox] = useState<ProductCard | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const data = await getProducts();
-        setProducts(data);
+        setProducts(data as ProductCard[]);
       } catch (err) {
         console.error("Failed to fetch products", err);
       } finally {
@@ -178,7 +190,7 @@ export default function ProductsGrid() {
                 {/* Micro Specs */}
                 {(product.bedrooms || product.area) && (
                   <div style={{ display: 'flex', gap: '12px', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '10px' }}>
-                    {product.bedrooms > 0 && (
+                    {(product.bedrooms ?? 0) > 0 && (
                       <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)', display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <span style={{ color: 'var(--color-gold)' }}>●</span> {product.bedrooms} Bed
                       </div>

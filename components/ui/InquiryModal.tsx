@@ -40,7 +40,7 @@ export default function InquiryModal({ isOpen, onClose, project }: InquiryModalP
         setSubmitted(false);
         setFormData({ name: '', email: '', phone: '', message: '' });
       }, 3000);
-    } catch (error) {
+    } catch {
       toast.error("Failed to send inquiry. Please try again.");
     } finally {
       setSubmitting(false);

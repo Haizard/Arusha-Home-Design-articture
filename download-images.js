@@ -1,13 +1,3 @@
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
-
-const IMAGES_DIR = path.join(__dirname, 'public', 'images');
-
-if (!fs.existsSync(IMAGES_DIR)) {
-  fs.mkdirSync(IMAGES_DIR, { recursive: true });
-}
-
 const images = [
   // Hero Slides
   { name: 'hero-1.jpg', url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=85&auto=format' },
@@ -48,7 +38,7 @@ const images = [
   { name: 'proj-3.jpg', url: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80&auto=format' }
 ];
 
-const download = (url, dest) => {
+const download = (https, fs, url, dest) => {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(dest);
     https.get(url, (response) => {
@@ -64,13 +54,22 @@ const download = (url, dest) => {
 };
 
 async function main() {
+  const https = await import('node:https');
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+  const imagesDir = path.join(process.cwd(), 'public', 'images');
+
+  if (!fs.existsSync(imagesDir)) {
+    fs.mkdirSync(imagesDir, { recursive: true });
+  }
+
   console.log('Starting images download...');
   for (const img of images) {
-    const dest = path.join(IMAGES_DIR, img.name);
+    const dest = path.join(imagesDir, img.name);
     try {
       if (!fs.existsSync(dest)) {
         console.log(`Downloading ${img.name}...`);
-        await download(img.url, dest);
+        await download(https, fs, img.url, dest);
         console.log(`Finished ${img.name}`);
       } else {
         console.log(`${img.name} already exists, skipping.`);

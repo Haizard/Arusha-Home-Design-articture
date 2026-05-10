@@ -7,6 +7,17 @@ import ContactCTA from '@/components/sections/ContactCTA';
 import ProjectGallery from '@/components/ui/ProjectGallery';
 import InquireButton from '@/components/ui/InquireButton';
 
+function isUsableImageSrc(src: unknown): src is string {
+  if (typeof src !== 'string') return false;
+  const value = src.trim();
+  return (
+    value.startsWith('/') ||
+    value.startsWith('http://') ||
+    value.startsWith('https://') ||
+    value.startsWith('data:image/')
+  );
+}
+
 export default async function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const project = await getProject(id).catch(() => null);
@@ -16,7 +27,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   }
 
   const currentId = project._id;
-  const displayGallery = project.gallery?.length ? project.gallery : [project.imageUrl];
+  const displayGallery = [project.imageUrl, ...(project.gallery ?? [])].filter(isUsableImageSrc);
   const specs = project.specifications || {
     year: '2023',
     area: '450 sqm',
@@ -24,7 +35,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     client: 'Confidential',
     materials: ['Glass', 'Stone', 'Steel'],
   };
-  const blueprints = project.blueprints || [];
+  const blueprints = (project.blueprints ?? []).filter(isUsableImageSrc);
   const featureList =
     project.features && project.features.length > 0
       ? project.features
@@ -102,7 +113,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <ProjectGallery images={displayGallery} />
 
             <div className="project-detail-spec-ribbon">
-              {specItems.map((item: any) => (
+              {specItems.map((item) => (
                 <div key={item.label} className="project-detail-spec-tile">
                   <item.icon size={18} />
                   <span>{item.label}</span>

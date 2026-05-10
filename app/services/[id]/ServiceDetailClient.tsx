@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
   ArrowLeft, ChevronRight, Zap, Shield, Search, Sparkles, 
   HelpCircle, ArrowDown, Building2, Sofa, Paintbrush, LayoutDashboard, 
-  Box, HardHat, ClipboardList, Hammer
+  Box, HardHat, ClipboardList, Hammer, type LucideIcon
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -15,17 +15,41 @@ import ContactCTA from '@/components/sections/ContactCTA';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ServiceDetailClient({ service, relatedProjects, otherServices }: any) {
+type ServiceStep = { title: string; desc: string };
+type ServiceFeature = { icon: string; title: string; desc: string };
+type ServiceFaq = { q: string; a: string };
+type ServiceProject = { _id: string; title: string; category?: string; imageUrl?: string; description?: string };
+type ServiceSummary = { _id: string; title: string; iconName?: string; description?: string };
+type ServiceDetail = {
+  _id: string;
+  serviceId?: string;
+  title: string;
+  description?: string;
+  iconName?: string;
+  imageUrl?: string;
+  processSteps?: ServiceStep[];
+  features_list?: ServiceFeature[];
+  faqs?: ServiceFaq[];
+};
+
+export default function ServiceDetailClient({
+  service,
+  relatedProjects,
+  otherServices,
+}: {
+  service: ServiceDetail;
+  relatedProjects: ServiceProject[];
+  otherServices: ServiceSummary[];
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const getIcon = (iconName: string) => {
-    const icons: any = { 
+    const icons: Record<string, LucideIcon> = {
         Sofa, Building2, Paintbrush, LayoutDashboard, Box, HardHat, 
         ClipboardList, Hammer, Zap, Shield, Search, Sparkles, HelpCircle 
     };
     return icons[iconName] || Building2;
   };
-  const Icon = getIcon(service.iconName);
 
   // Fallback Data
   const defaultSteps = [
@@ -48,9 +72,9 @@ export default function ServiceDetailClient({ service, relatedProjects, otherSer
     { q: "Can we visit current projects?", a: "Yes, we arrange private site visits for serious inquiries to showcase our quality standards." }
   ];
 
-  const processSteps = service.processSteps?.length > 0 ? service.processSteps : defaultSteps;
-  const featuresList = service.features_list?.length > 0 ? service.features_list : defaultFeatures;
-  const faqsList = service.faqs?.length > 0 ? service.faqs : defaultFaqs;
+  const processSteps: ServiceStep[] = (service.processSteps?.length ?? 0) > 0 ? service.processSteps! : defaultSteps;
+  const featuresList: ServiceFeature[] = (service.features_list?.length ?? 0) > 0 ? service.features_list! : defaultFeatures;
+  const faqsList: ServiceFaq[] = (service.faqs?.length ?? 0) > 0 ? service.faqs! : defaultFaqs;
 
   useGSAP(() => {
     // 1. Hero Reveal
@@ -105,7 +129,7 @@ export default function ServiceDetailClient({ service, relatedProjects, otherSer
       }
     });
 
-    processSteps.forEach((_: any, i: number) => {
+    processSteps.forEach((_, i: number) => {
       processTl.to(`.step-${i}`, { opacity: 1, x: 0, duration: 1 })
                .to(`.step-${i} .step-line`, { scaleX: 1, duration: 1 }, '-=0.5');
       if (i < processSteps.length - 1) {
@@ -148,7 +172,7 @@ export default function ServiceDetailClient({ service, relatedProjects, otherSer
       {/* Hero Section */}
       <section className="hero-section" style={{ position: 'relative', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
         <div className="hero-bg" style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-           <Image src={service.imageUrl} alt={service.title} fill style={{ objectFit: 'cover', filter: 'brightness(0.4)' }} priority />
+           <Image src={service.imageUrl || '/images/services-hero.jpg'} alt={service.title} fill style={{ objectFit: 'cover', filter: 'brightness(0.4)' }} priority />
            <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 0%, rgba(8,8,8,0.8) 100%)' }} />
         </div>
         
@@ -192,7 +216,7 @@ export default function ServiceDetailClient({ service, relatedProjects, otherSer
             </div>
 
             <div className="features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }}>
-               {featuresList.map((f: any, i: number) => {
+               {featuresList.map((f: ServiceFeature, i: number) => {
                  const FIcon = getIcon(f.icon);
                  return (
                   <div key={i} className="feature-card" style={{ 
@@ -220,7 +244,7 @@ export default function ServiceDetailClient({ service, relatedProjects, otherSer
                </p>
             </div>
             <div style={{ position: 'relative' }}>
-               {processSteps.map((step: any, i: number) => (
+               {processSteps.map((step: ServiceStep, i: number) => (
                  <div key={i} className={`step-${i}`} style={{ marginBottom: '4rem', opacity: 0.1, transform: 'translateX(50px)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '1rem' }}>
                        <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-gold)' }}>0{i+1}</span>
@@ -250,9 +274,9 @@ export default function ServiceDetailClient({ service, relatedProjects, otherSer
             </div>
             
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
-               {relatedProjects.map((project: any, i: number) => (
+               {relatedProjects.map((project: ServiceProject) => (
                  <Link key={project._id} href={`/projects/${project._id}`} className="project-item" style={{ position: 'relative', height: '600px', overflow: 'hidden' }}>
-                    <Image src={project.imageUrl} alt={project.title} fill style={{ objectFit: 'cover' }} className="project-img-inner transition-transform duration-700" />
+                    <Image src={project.imageUrl || '/images/projects-hero.jpg'} alt={project.title} fill style={{ objectFit: 'cover' }} className="project-img-inner transition-transform duration-700" />
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(8,8,8,0.9), transparent)' }} />
                     <div style={{ position: 'absolute', bottom: '3rem', left: '3rem', right: '3rem' }}>
                        <span style={{ color: 'var(--color-gold)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>{project.category}</span>
@@ -272,7 +296,7 @@ export default function ServiceDetailClient({ service, relatedProjects, otherSer
                <h2 className="font-display" style={{ fontSize: '3.5rem' }}>Clarity in <br /><em style={{ color: 'var(--color-gold)' }}>Collaboration</em></h2>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-               {faqsList.map((faq: any, i: number) => (
+               {faqsList.map((faq: ServiceFaq, i: number) => (
                  <details key={i} className="faq-details" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '2rem' }}>
                     <summary style={{ listStyle: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                        <h4 style={{ fontSize: '1.4rem', fontWeight: 500 }}>{faq.q}</h4>
@@ -292,8 +316,8 @@ export default function ServiceDetailClient({ service, relatedProjects, otherSer
          <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
             <h2 className="font-display" style={{ fontSize: '1.5rem', marginBottom: '4rem', opacity: 0.3, letterSpacing: '0.3em', textTransform: 'uppercase' }}>Other Specializations</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }}>
-               {otherServices.map((s: any) => {
-                 const SIcon = getIcon(s.iconName);
+               {otherServices.map((s: ServiceSummary) => {
+                 const SIcon = getIcon(s.iconName || 'Building2');
                  return (
                   <Link key={s._id} href={`/services/${s._id}`} className="other-service-card" style={{ 
                     padding: '3rem', background: '#111', textDecoration: 'none',

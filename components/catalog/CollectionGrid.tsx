@@ -12,7 +12,7 @@ export default function CollectionGrid({ items }: { items: CollectionCard[] }) {
       </header>
 
       <div className="collections-grid">
-        {items.map((item: any) => (
+        {items.map((item) => (
           <Link
             key={`${item.title}-${item.image}`}
             href={item.href}

@@ -13,6 +13,28 @@ const SwatchSchema = new Schema({
   finish: { type: String }, // e.g. "MelaWood SupaTexture"
 });
 
+const LookGalleryImageSchema = new Schema({
+  image: { type: String, required: true },
+  alt: { type: String },
+  caption: { type: String },
+});
+
+const LookCategorySchema = new Schema({
+  name: { type: String, required: true },
+  slug: { type: String },
+  description: { type: String },
+  coverImage: { type: String },
+  gallery: [LookGalleryImageSchema],
+});
+
+const LookGroupSchema = new Schema({
+  name: { type: String, required: true },
+  slug: { type: String },
+  description: { type: String },
+  coverImage: { type: String },
+  categories: [LookCategorySchema],
+});
+
 const MaterialRangeSchema = new Schema({
   title: { type: String, required: true }, // e.g. "MONTEO+"
   category: { type: String, required: true }, // e.g. "Melamine Faced Board"
@@ -21,6 +43,7 @@ const MaterialRangeSchema = new Schema({
   heroImage: { type: String }, // Main lifestyle image for the series
   techSpecs: [TechSpecSchema],
   swatches: [SwatchSchema],
+  lookGroups: [LookGroupSchema],
   profiles: [{ type: String }], // Cross-section images
 }, { timestamps: true });
 

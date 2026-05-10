@@ -9,6 +9,12 @@ import Inquiry from '@/models/Inquiry';
 import { revalidatePath } from 'next/cache';
 import { sendInquiryNotification } from '@/lib/mailer';
 
+type AdminPayload = Record<string, unknown>;
+
+function asString(value: unknown) {
+  return typeof value === 'string' ? value : '';
+}
+
 // --- Services ---
 export async function getServices() {
   await connectDB();
@@ -22,7 +28,7 @@ export async function getService(id: string) {
   return JSON.parse(JSON.stringify(service));
 }
 
-export async function addService(formData: any) {
+export async function addService(formData: AdminPayload) {
   await connectDB();
   console.log('Adding Service with data:', JSON.stringify(formData, null, 2));
   const service = await Service.create(formData);
@@ -31,7 +37,7 @@ export async function addService(formData: any) {
   return JSON.parse(JSON.stringify(service));
 }
 
-export async function updateService(id: string, formData: any) {
+export async function updateService(id: string, formData: AdminPayload) {
   await connectDB();
   console.log(`Updating Service ${id} with data:`, JSON.stringify(formData, null, 2));
 
@@ -73,7 +79,7 @@ export async function getProject(id: string) {
   return JSON.parse(JSON.stringify(project));
 }
 
-export async function addProject(formData: any) {
+export async function addProject(formData: AdminPayload) {
   await connectDB();
   const project = await Project.create(formData);
   revalidatePath('/');
@@ -81,7 +87,7 @@ export async function addProject(formData: any) {
   return JSON.parse(JSON.stringify(project));
 }
 
-export async function updateProject(id: string, formData: any) {
+export async function updateProject(id: string, formData: AdminPayload) {
   await connectDB();
   const project = await Project.findByIdAndUpdate(id, formData, { new: true });
   revalidatePath('/');
@@ -112,7 +118,7 @@ export async function getProduct(id: string) {
   return JSON.parse(JSON.stringify(product));
 }
 
-export async function addProduct(formData: any) {
+export async function addProduct(formData: AdminPayload) {
   await connectDB();
   const UpdatedProduct = (await import('@/models/Product')).default;
   const product = await UpdatedProduct.create(formData);
@@ -121,7 +127,7 @@ export async function addProduct(formData: any) {
   return JSON.parse(JSON.stringify(product));
 }
 
-export async function updateProduct(id: string, formData: any) {
+export async function updateProduct(id: string, formData: AdminPayload) {
   await connectDB();
   const UpdatedProduct = (await import('@/models/Product')).default;
   const product = await UpdatedProduct.findByIdAndUpdate(
@@ -149,14 +155,14 @@ export async function getTestimonials() {
   return JSON.parse(JSON.stringify(testimonials));
 }
 
-export async function addTestimonial(formData: any) {
+export async function addTestimonial(formData: AdminPayload) {
   await connectDB();
   const testimonial = await Testimonial.create(formData);
   revalidatePath('/');
   return JSON.parse(JSON.stringify(testimonial));
 }
 
-export async function updateTestimonial(id: string, formData: any) {
+export async function updateTestimonial(id: string, formData: AdminPayload) {
   await connectDB();
   const testimonial = await Testimonial.findByIdAndUpdate(id, formData, { new: true });
   revalidatePath('/');
@@ -176,7 +182,7 @@ export async function getInquiries() {
   return JSON.parse(JSON.stringify(inquiries));
 }
 
-export async function addInquiry(formData: any) {
+export async function addInquiry(formData: AdminPayload) {
   await connectDB();
 
   // 1. Save to MongoDB first — this always succeeds regardless of email
@@ -186,12 +192,12 @@ export async function addInquiry(formData: any) {
   // 2. Fire email notification — errors are caught inside sendInquiryNotification
   //    so a mail failure never breaks the form submission for the user.
   await sendInquiryNotification({
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    service: formData.service,
-    message: formData.message,
-    projectName: formData.projectName,
+    name: asString(formData.name),
+    email: asString(formData.email),
+    phone: asString(formData.phone),
+    service: asString(formData.service),
+    message: asString(formData.message),
+    projectName: asString(formData.projectName),
   });
 
   return JSON.parse(JSON.stringify(inquiry));

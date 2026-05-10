@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useRef } from "react";
 import { useScroll, useSpring, motion } from "framer-motion";
 
 export default function ScrollProgress() {

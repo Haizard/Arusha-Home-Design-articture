@@ -159,7 +159,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
         <div className="detail-card">
           <div className="detail-layout">
             <div className="detail-gallery-rail">
-              {gallery.map((image: any, index: number) => (
+              {gallery.map((image, index: number) => (
                 <button
                   key={`${image}-${index}`}
                   type="button"
@@ -194,7 +194,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
                 <div className="detail-option-block">
                   <h2>File Type</h2>
                   <div className="detail-choice-list">
-                    {fileTypes.map((type: any) => (
+                    {fileTypes.map((type) => (
                       <label key={type}>
                         <input type="radio" checked={selectedType === type} onChange={() => setSelectedType(type)} />
                         <span>{type}</span>
@@ -206,7 +206,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
                 <div className="detail-option-block">
                   <h2>Drawing Sets</h2>
                   <div className="detail-choice-list checkbox">
-                    {drawingOptions.map((option: any, index: number) => (
+                    {drawingOptions.map((option, index: number) => (
                       <label key={option}>
                         <input type="checkbox" defaultChecked={index < 2} />
                         <span>{option}</span>
@@ -216,7 +216,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
                 </div>
 
                 <div className="detail-trust-list">
-                  {trustPoints.map((item: any) => (
+                  {trustPoints.map((item) => (
                     <div key={item}>
                       <ShieldCheck size={16} />
                       <span>{item}</span>
@@ -266,7 +266,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
           <div className="detail-inclusion-card">
             <h3>Rooms included</h3>
             <ul>
-              {roomsIncluded.map((item: any) => (
+              {roomsIncluded.map((item) => (
                 <li key={item}>✓ {item}</li>
               ))}
             </ul>
@@ -274,7 +274,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
           <div className="detail-inclusion-card">
             <h3>Architectural drawings</h3>
             <ul>
-              {drawingSets.architectural.map((item: any) => (
+              {drawingSets.architectural.map((item) => (
                 <li key={item}>✓ {item}</li>
               ))}
             </ul>
@@ -282,7 +282,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
           <div className="detail-inclusion-card">
             <h3>Structural drawings</h3>
             <ul>
-              {drawingSets.structural.map((item: any) => (
+              {drawingSets.structural.map((item) => (
                 <li key={item}>✓ {item}</li>
               ))}
             </ul>
@@ -290,7 +290,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
           <div className="detail-inclusion-card">
             <h3>Electrical drawings</h3>
             <ul>
-              {drawingSets.electrical.map((item: any) => (
+              {drawingSets.electrical.map((item) => (
                 <li key={item}>✓ {item}</li>
               ))}
             </ul>
@@ -298,7 +298,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
           <div className="detail-inclusion-card">
             <h3>Mechanical drawings</h3>
             <ul>
-              {drawingSets.mechanical.map((item: any) => (
+              {drawingSets.mechanical.map((item) => (
                 <li key={item}>✓ {item}</li>
               ))}
             </ul>
@@ -306,7 +306,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
           <div className="detail-inclusion-card">
             <h3>Bills of quantity</h3>
             <ul>
-              {drawingSets.boq.map((item: any) => (
+              {drawingSets.boq.map((item) => (
                 <li key={item}>✓ {item}</li>
               ))}
             </ul>
@@ -321,7 +321,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
         </div>
 
         <div className="detail-tier-tabs">
-          {estimateTiers.map((item: any) => (
+          {estimateTiers.map((item) => (
             <button
               key={item.name}
               type="button"
@@ -339,7 +339,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
             <span>Item</span>
             <span>Cost Estimates</span>
           </div>
-          {tier?.items?.map((item: any, index: number) => (
+          {tier?.items?.map((item, index: number) => (
             <div key={`${item.label}-${index}`} className="detail-estimate-row">
               <span>{item.label}</span>
               <span>{item.cost}</span>
@@ -367,7 +367,7 @@ export default function ProductDetailClient({ product }: { product: CmsProduct }
         </div>
 
         <div className="detail-faq-card">
-          {faqs.map((faq: any, index: number) => {
+          {faqs.map((faq, index: number) => {
             const open = openFaq === index;
             return (
               <div key={`${faq.question}-${index}`} className="detail-faq-item">

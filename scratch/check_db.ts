@@ -9,11 +9,15 @@ async function check() {
   console.log('URI present:', !!process.env.MONGODB_URI);
   
   try {
-    const conn = await connectDB();
+    await connectDB();
     console.log('Database state:', mongoose.connection.readyState);
     console.log('Database name:', mongoose.connection.name);
     
     // Check if we can list collections
+    if (!mongoose.connection.db) {
+      throw new Error('MongoDB database handle is unavailable after connection');
+    }
+
     const collections = await mongoose.connection.db.listCollections().toArray();
     console.log('Collections found:', collections.map(c => c.name));
     

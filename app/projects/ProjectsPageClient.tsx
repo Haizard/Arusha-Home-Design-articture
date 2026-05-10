@@ -63,7 +63,7 @@ export default function ProjectsPageClient({ projects }: { projects: ProjectList
 
       <section className="projects-highlights">
         <div className="market-shell projects-highlights-grid">
-          {highlights.map((item: any) => (
+          {highlights.map((item) => (
             <article key={item.title} className="projects-highlight-card">
               <item.icon size={18} />
               <h2>{item.title}</h2>

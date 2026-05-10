@@ -5,9 +5,18 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 import { getTestimonials } from "@/app/actions/admin";
 
+type Testimonial = {
+  _id?: string;
+  name: string;
+  role: string;
+  avatar: string;
+  text: string;
+  stars: number;
+};
+
 export default function TestimonialsSection() {
   const [current, setCurrent] = useState(0);
-  const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -15,7 +24,7 @@ export default function TestimonialsSection() {
     const fetchTestimonials = async () => {
       try {
         const data = await getTestimonials();
-        setTestimonials(data);
+        setTestimonials(data as Testimonial[]);
       } catch (err) {
         console.error("Failed to fetch testimonials", err);
       } finally {

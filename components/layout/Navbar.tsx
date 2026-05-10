@@ -6,13 +6,15 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 const navLinks = [
-  { href: "/products", label: "Shop" },
   { href: "/materials", label: "Materials" },
+  { href: "/", label: "Material Studio" },
+  { href: "/contact", label: "Request Samples" },
+  { href: "/products", label: "Plans" },
+  { href: "/projects", label: "Projects" },
   { href: "/products?badge=best%20seller&label=Best%20Sellers", label: "Best Sellers" },
   { href: "/products", label: "By Size" },
   { href: "/products", label: "By Style" },
   { href: "/products", label: "By Budget" },
-  { href: "/contact", label: "Custom Plan" },
   { href: "/about", label: "About" },
 ];
 
@@ -217,7 +219,7 @@ export default function Navbar() {
                         <span>{menu.featured.description}</span>
                       </Link>
                       <div className="store-dropdown-links">
-                        {menu.links.map((item: any) => (
+                        {menu.links.map((item) => (
                           <Link key={item.title} href={item.href} className="store-dropdown-link" onClick={() => setOpenDropdown(null)}>
                             <strong>{item.title}</strong>
                             <span>{item.description}</span>

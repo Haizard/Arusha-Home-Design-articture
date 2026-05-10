@@ -31,6 +31,11 @@ type ProductPackageForm = { name: string; price: number; features: string[] };
 type EstimateTierItem = { label: string; cost: string };
 type EstimateTierForm = { name: string; total: string; items: EstimateTierItem[] };
 type ProductFaqForm = { question: string; answer: string };
+type MaterialTechSpecForm = { label?: string; value?: string };
+type MaterialSwatchForm = { name?: string; image?: string; look?: string; brand?: string; finish?: string };
+type MaterialLookImageForm = { image?: string; alt?: string; caption?: string };
+type MaterialLookCategoryForm = { name?: string; slug?: string; description?: string; coverImage?: string; gallery?: MaterialLookImageForm[] };
+type MaterialLookGroupForm = { name?: string; slug?: string; description?: string; coverImage?: string; categories?: MaterialLookCategoryForm[] };
 
 type AdminFormData = {
   [key: string]: unknown;
@@ -100,17 +105,23 @@ type AdminFormData = {
   phone?: string;
   message?: string;
   desc?: string;
+  logo?: string;
+  heroImage?: string;
+  techSpecs?: MaterialTechSpecForm[];
+  swatches?: MaterialSwatchForm[];
+  lookGroups?: MaterialLookGroupForm[];
+  profiles?: string[];
 };
 
 type AdminListItem = AdminFormData;
 
 const NAV_ITEMS: { id: Tab; label: string; icon: LucideIcon; color: string }[] = [
+  { id: 'materials',    label: 'Materials',    icon: Database,        color: '#31d3a3' },
   { id: 'services',     label: 'Services',     icon: LayoutDashboard, color: '#c9a84c' },
   { id: 'projects',     label: 'Projects',     icon: Briefcase,       color: '#60a5fa' },
   { id: 'products',     label: 'Products',     icon: ShoppingBag,     color: '#a78bfa' },
   { id: 'testimonials', label: 'Testimonials', icon: MessageSquare,   color: '#34d399' },
   { id: 'inquiries',    label: 'Inquiries',    icon: Mail,            color: '#f87171' },
-  { id: 'materials',    label: 'Materials',    icon: Database,        color: '#fbbf24' },
 ];
 
 const EMPTY_FORMS: Record<Tab, AdminFormData> = {
@@ -139,12 +150,12 @@ const EMPTY_FORMS: Record<Tab, AdminFormData> = {
   inquiries:    {},
   materials: { 
     title: '', category: 'Decorative Panels', description: '', logo: '', heroImage: '',
-    techSpecs: [], swatches: [], profiles: [] 
+    techSpecs: [], swatches: [], lookGroups: [], profiles: []
   },
 };
 
 export default function AdminPage() {
-  const [activeTab, setActiveTab] = useState<Tab>('services');
+  const [activeTab, setActiveTab] = useState<Tab>('materials');
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<AdminListItem[]>([]);
   const [dbStatus, setDbStatus] = useState<'checking'|'ok'|'error'>('checking');
@@ -195,6 +206,30 @@ export default function AdminPage() {
     const value = formData[key];
     return typeof value === 'string' || typeof value === 'number' ? value : '';
   };
+  const slugify = (value: string) =>
+    value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  const splitList = (value: string) => value.split(',').map((item) => item.trim()).filter(Boolean);
+  const serializeLookCategories = (categories: MaterialLookCategoryForm[] = []) =>
+    categories
+      .map((category) => [
+        category.name ?? '',
+        category.slug ?? '',
+        category.coverImage ?? '',
+        (category.gallery ?? []).map((image) => image.image).filter(Boolean).join(', '),
+        category.description ?? '',
+      ].join(' | '))
+      .join('\n');
+  const parseLookCategories = (value: string): MaterialLookCategoryForm[] =>
+    value.split('\n').map((line) => {
+      const [name = '', slug = '', coverImage = '', galleryImages = '', description = ''] = line.split('|').map((part) => part.trim());
+      return {
+        name,
+        slug: slug || slugify(name),
+        coverImage,
+        description,
+        gallery: splitList(galleryImages).map((image) => ({ image })),
+      };
+    }).filter((category) => category.name);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -349,6 +384,9 @@ export default function AdminPage() {
   const estimateTiers = (Array.isArray(formData.estimateTiers) ? formData.estimateTiers : []) as EstimateTierForm[];
   const productFaqs = (Array.isArray(formData.faqs) ? formData.faqs : []).filter((f): f is ProductFaqForm => 'question' in f && 'answer' in f);
   const testimonialStars = typeof formData.stars === 'number' ? formData.stars : 0;
+  const materialTechSpecs = (Array.isArray(formData.techSpecs) ? formData.techSpecs : []) as MaterialTechSpecForm[];
+  const materialSwatches = (Array.isArray(formData.swatches) ? formData.swatches : []) as MaterialSwatchForm[];
+  const materialLookGroups = (Array.isArray(formData.lookGroups) ? formData.lookGroups : []) as MaterialLookGroupForm[];
 
   return (
     <>
@@ -637,6 +675,168 @@ export default function AdminPage() {
              border: 1px solid rgba(255,255,255,0.08) !important;
            }
         }
+
+        /* Materials-first light dashboard refresh */
+        .admin-root {
+          background: #eaf0ed;
+          color: #111816;
+        }
+        .sidebar {
+          background: rgba(255,255,255,0.78);
+          border-right: 1px solid rgba(17,24,22,0.08);
+          box-shadow: 20px 0 50px rgba(53,74,70,0.08);
+        }
+        .sidebar-logo {
+          border-bottom-color: rgba(17,24,22,0.08);
+        }
+        .logo-mark {
+          background: linear-gradient(135deg, #101816, #31d3a3);
+          color: #eafff7;
+        }
+        .logo-text,
+        .page-title,
+        .modal-title,
+        .card-title {
+          color: #111816;
+        }
+        .logo-sub,
+        .sidebar-section-label,
+        .page-sub,
+        .modal-sub,
+        .admin-label,
+        .card-desc,
+        .card-meta-item {
+          color: rgba(17,24,22,0.52);
+        }
+        .nav-btn {
+          color: rgba(17,24,22,0.62);
+        }
+        .nav-btn:hover {
+          background: rgba(49,211,163,0.1);
+          color: #111816;
+        }
+        .nav-btn.active {
+          background: #101816;
+          color: #dffcf1;
+          box-shadow: 0 14px 28px rgba(17,24,22,0.12);
+        }
+        .nav-btn .nav-icon,
+        .db-badge,
+        .btn-ghost,
+        .tab-strip,
+        .upload-btn-icon {
+          background: rgba(255,255,255,0.68);
+          border-color: rgba(17,24,22,0.08);
+        }
+        .nav-btn.active .nav-icon {
+          background: rgba(255,255,255,0.12);
+        }
+        .nav-badge,
+        .nav-btn.active .nav-badge {
+          background: rgba(49,211,163,0.18);
+          color: #0c7f63;
+        }
+        .admin-main {
+          background:
+            linear-gradient(135deg, rgba(255,255,255,0.3), rgba(234,240,237,0.92)),
+            #eaf0ed;
+        }
+        .admin-topbar {
+          background: rgba(234,240,237,0.84);
+          border-bottom-color: rgba(17,24,22,0.08);
+        }
+        .admin-content {
+          padding: clamp(1rem, 3vw, 2rem);
+        }
+        .page-header {
+          padding: 1.15rem;
+          border: 1px solid rgba(17,24,22,0.08);
+          border-radius: 1.4rem;
+          background: rgba(255,255,255,0.72);
+          box-shadow: 0 18px 42px rgba(53,74,70,0.07);
+        }
+        .btn-primary,
+        .btn-submit {
+          background: #101816;
+          color: #dffcf1;
+          box-shadow: 0 16px 30px rgba(17,24,22,0.14);
+        }
+        .btn-primary:hover,
+        .btn-submit:hover:not(:disabled) {
+          background: #16221f;
+        }
+        .tab-pill {
+          color: rgba(17,24,22,0.58);
+        }
+        .tab-pill.active {
+          background: #d9f7b9;
+          color: #111816;
+        }
+        .item-card {
+          background: rgba(255,255,255,0.82);
+          border-color: rgba(17,24,22,0.08);
+          border-radius: 1.35rem;
+          box-shadow: 0 18px 42px rgba(53,74,70,0.08);
+        }
+        .item-card:hover {
+          border-color: rgba(49,211,163,0.34);
+          box-shadow: 0 28px 62px rgba(53,74,70,0.13);
+        }
+        .card-image {
+          background: #dfe7e2;
+        }
+        .card-image img {
+          opacity: 1;
+        }
+        .card-tag {
+          color: #0c7f63;
+        }
+        .admin-swatch-row {
+          display: flex;
+          margin-top: 0.85rem;
+        }
+        .admin-swatch-row span {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 2px solid #fff;
+          background: #dfe7e2;
+        }
+        .admin-swatch-row span + span {
+          margin-left: -0.5rem;
+        }
+        .admin-swatch-row img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .modal-overlay {
+          background: rgba(17,24,22,0.34);
+        }
+        .modal-box,
+        .modal-header {
+          background: #f8fbf9;
+          color: #111816;
+        }
+        .modal-box {
+          border-color: rgba(17,24,22,0.1);
+        }
+        .modal-header,
+        .modal-footer {
+          border-color: rgba(17,24,22,0.08);
+        }
+        .admin-input,
+        .admin-select {
+          background: rgba(255,255,255,0.82);
+          border-color: rgba(17,24,22,0.12);
+          color: #111816;
+        }
+        .admin-input:focus,
+        .admin-select:focus {
+          border-color: rgba(49,211,163,0.74);
+          background: #ffffff;
+        }
       `}</style>
 
       <Toaster
@@ -769,7 +969,7 @@ export default function AdminPage() {
               </div>
             ) : (
               <div className="cards-grid">
-                {data.map((item: any) => (
+                {data.map((item: AdminListItem) => (
                   <div key={item._id} className="item-card">
                     {activeTab === 'inquiries' ? (
                       <div className="card-body" style={{ padding: '1.5rem' }}>
@@ -783,14 +983,14 @@ export default function AdminPage() {
                             display: 'flex', alignItems: 'center', gap: '5px'
                           }}>
                             {item.status === 'read' ? <CheckCircle2 size={9} /> : item.status === 'archived' ? <Archive size={9} /> : <Clock size={9} />}
-                            {item.status || 'pending'}
+                            {typeof item.status === 'string' ? item.status : 'pending'}
                           </span>
                           <button className="card-action-btn del" title="Delete" onClick={() => { if (item._id) handleDelete(item._id); }}><Trash2 size={12} /></button>
                         </div>
 
                         {/* Service / project label */}
                         <div style={{ color: '#c9a84c', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>
-                          {item.service || item.projectName || 'General Inquiry'}
+                          {typeof item.service === 'string' ? item.service : typeof item.projectName === 'string' ? item.projectName : 'General Inquiry'}
                         </div>
 
                         {/* Name */}
@@ -820,7 +1020,7 @@ export default function AdminPage() {
                         <div style={{ display: 'flex', gap: '6px' }}>
                           {item.status !== 'read' && (
                             <button
-                              onClick={() => handleInquiryStatus(item._id, 'read')}
+                              onClick={() => { if (item._id) handleInquiryStatus(item._id, 'read'); }}
                               style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px', padding: '7px', fontSize: '11px', fontWeight: 600, background: 'rgba(52,211,153,0.1)', color: '#34d399', border: '1px solid rgba(52,211,153,0.2)', borderRadius: '8px', cursor: 'pointer' }}
                             >
                               <CheckCircle2 size={11} /> Mark Read
@@ -828,7 +1028,7 @@ export default function AdminPage() {
                           )}
                           {item.status !== 'archived' && (
                             <button
-                              onClick={() => handleInquiryStatus(item._id, 'archived')}
+                              onClick={() => { if (item._id) handleInquiryStatus(item._id, 'archived'); }}
                               style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px', padding: '7px', fontSize: '11px', fontWeight: 600, background: 'rgba(255,255,255,0.04)', color: '#555', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '8px', cursor: 'pointer' }}
                             >
                               <Archive size={11} /> Archive
@@ -836,7 +1036,7 @@ export default function AdminPage() {
                           )}
                           {item.status === 'archived' && (
                             <button
-                              onClick={() => handleInquiryStatus(item._id, 'pending')}
+                              onClick={() => { if (item._id) handleInquiryStatus(item._id, 'pending'); }}
                               style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px', padding: '7px', fontSize: '11px', fontWeight: 600, background: 'rgba(251,191,36,0.08)', color: '#fbbf24', border: '1px solid rgba(251,191,36,0.15)', borderRadius: '8px', cursor: 'pointer' }}
                             >
                               <Clock size={11} /> Reopen
@@ -847,9 +1047,9 @@ export default function AdminPage() {
                     ) : (
                       <>
                         <div className="card-image">
-                          {(item.imageUrl || item.avatar) ? (
+                          {(item.heroImage || item.imageUrl || item.avatar || item.logo) ? (
                             // eslint-disable-next-line @next/next/no-img-element
-                            <img src={item.imageUrl || item.avatar} alt={item.title || item.name} />
+                            <img src={item.heroImage || item.imageUrl || item.avatar || item.logo} alt={item.title || item.name} />
                           ) : (
                             <div className="card-no-img"><ImageIcon size={32} /></div>
                           )}
@@ -863,9 +1063,24 @@ export default function AdminPage() {
                           </div>
                         </div>
                         <div className="card-body">
-                          <div className="card-tag">{item.category || item.serviceId || item.role || activeTab}</div>
+                          <div className="card-tag">
+                            {item.category || item.serviceId || item.role || activeTab}
+                            {activeTab === 'materials' && Array.isArray(item.swatches) ? ` / ${item.swatches.length} swatches` : ''}
+                          </div>
                           <div className="card-title">{item.title || item.name}</div>
                           <div className="card-desc">{item.description || item.text || item.desc || '—'}</div>
+                          {activeTab === 'materials' && Array.isArray(item.swatches) && item.swatches.length > 0 && (
+                            <div className="admin-swatch-row">
+                              {item.swatches.slice(0, 5).map((swatch: MaterialSwatchForm, index: number) => (
+                                <span key={`${swatch.image || swatch.name}-${index}`}>
+                                  {swatch.image ? (
+                                    // eslint-disable-next-line @next/next/no-img-element
+                                    <img src={swatch.image} alt="" />
+                                  ) : null}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                           {item.location && (
                             <div className="card-meta">
                               <span className="card-meta-item">📍 {item.location}</span>
@@ -1344,7 +1559,7 @@ export default function AdminPage() {
                             className="admin-input resize-none"
                             rows={4}
                             placeholder="Substructure | $253,925"
-                            value={(Array.isArray(tier.items) ? tier.items : []).map((item: any) => `${item.label || ''} | ${item.cost || ''}`).join('\n')}
+                            value={(Array.isArray(tier.items) ? tier.items : []).map((item: EstimateTierItem) => `${item.label || ''} | ${item.cost || ''}`).join('\n')}
                             onChange={e => {
                               const tiers = estimateTiers.map((t, idx) => idx === i
                                 ? {
@@ -1443,23 +1658,84 @@ export default function AdminPage() {
                   {imageField('Hero Image URL', 'heroImage', 'Upload main lifestyle image')}
                   {textarea('Description', 'description', 'Describe this material range…')}
 
+                  <div style={{ padding: '16px', background: 'rgba(16,138,131,0.06)', borderRadius: '10px', border: '1px solid rgba(16,138,131,0.18)' }}>
+                    <div className="admin-label" style={{ marginBottom: '16px', color: '#108a83', display: 'flex', justifyContent: 'space-between', gap: '12px' }}>
+                      <span>Choose a Look Gallery</span>
+                      <button
+                        type="button"
+                        onClick={() => setFormData({
+                          ...formData,
+                          lookGroups: [...materialLookGroups, { name: '', slug: '', description: '', coverImage: '', categories: [] }],
+                        })}
+                        style={{ background: 'none', border: 'none', color: '#108a83', cursor: 'pointer', fontSize: '10px' }}
+                      >
+                        + ADD LOOK
+                      </button>
+                    </div>
+
+                    {materialLookGroups.map((look: MaterialLookGroupForm, i: number) => (
+                      <div key={i} style={{ border: '1px solid rgba(16,138,131,0.14)', padding: '12px', borderRadius: '8px', marginBottom: '12px', background: 'rgba(255,255,255,0.66)' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', marginBottom: '8px' }}>
+                          <input className="admin-input" placeholder="Look name e.g. Bliss" value={look.name ?? ''} onChange={e => {
+                            const looks = materialLookGroups.map((item: MaterialLookGroupForm, idx: number) => idx === i ? { ...item, name: e.target.value, slug: item.slug || slugify(e.target.value) } : item);
+                            setFormData({ ...formData, lookGroups: looks });
+                          }} />
+                          <input className="admin-input" placeholder="Slug e.g. bliss" value={look.slug ?? ''} onChange={e => {
+                            const looks = materialLookGroups.map((item: MaterialLookGroupForm, idx: number) => idx === i ? { ...item, slug: slugify(e.target.value) } : item);
+                            setFormData({ ...formData, lookGroups: looks });
+                          }} />
+                          <button type="button" onClick={() => setFormData({ ...formData, lookGroups: materialLookGroups.filter((_, idx: number) => idx !== i) })} className="card-action-btn del"><Trash2 size={12} /></button>
+                        </div>
+                        <div className="form-grid-2">
+                          <input className="admin-input" placeholder="Look cover image URL" value={look.coverImage ?? ''} onChange={e => {
+                            const looks = materialLookGroups.map((item: MaterialLookGroupForm, idx: number) => idx === i ? { ...item, coverImage: e.target.value } : item);
+                            setFormData({ ...formData, lookGroups: looks });
+                          }} />
+                          <input className="admin-input" placeholder="Look description" value={look.description ?? ''} onChange={e => {
+                            const looks = materialLookGroups.map((item: MaterialLookGroupForm, idx: number) => idx === i ? { ...item, description: e.target.value } : item);
+                            setFormData({ ...formData, lookGroups: looks });
+                          }} />
+                        </div>
+                        <div className="admin-field" style={{ marginTop: '10px' }}>
+                          <label className="admin-label">Categories: name | slug | cover image | gallery URLs comma separated | description</label>
+                          <textarea
+                            className="admin-input"
+                            rows={4}
+                            placeholder={'Iceberg White and Storm Grey | iceberg-white-storm-grey | /images/example.jpg | /images/a.jpg, /images/b.jpg | Kitchen pairing'}
+                            value={serializeLookCategories(look.categories)}
+                            onChange={e => {
+                              const looks = materialLookGroups.map((item: MaterialLookGroupForm, idx: number) => idx === i ? { ...item, categories: parseLookCategories(e.target.value) } : item);
+                              setFormData({ ...formData, lookGroups: looks });
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+
+                    {materialLookGroups.length === 0 ? (
+                      <div style={{ fontSize: '11px', color: '#385f5a', textAlign: 'center' }}>
+                        Add looks like Bliss, Delight, and Exhilaration, then list their colour-pairing gallery categories.
+                      </div>
+                    ) : null}
+                  </div>
+
                   {/* Tech Specs */}
                   <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div className="admin-label" style={{ marginBottom: '16px', color: '#fbbf24', display: 'flex', justifyContent: 'space-between' }}>
                       Technical Specifications
                       <button type="button" onClick={() => setFormData({...formData, techSpecs: [...(Array.isArray(formData.techSpecs) ? formData.techSpecs : []), {label: '', value: ''}]})} style={{ background: 'none', border: 'none', color: '#fbbf24', cursor: 'pointer', fontSize: '10px' }}>+ ADD SPEC</button>
                     </div>
-                    {(Array.isArray(formData.techSpecs) ? formData.techSpecs : []).map((spec: any, i: number) => (
+                    {materialTechSpecs.map((spec: MaterialTechSpecForm, i: number) => (
                       <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', marginBottom: '8px' }}>
                         <input className="admin-input" placeholder="Label (e.g. Finish)" value={spec.label} onChange={e => {
-                          const s = (Array.isArray(formData.techSpecs) ? formData.techSpecs : []).map((item: any, idx: number) => idx === i ? { ...item, label: e.target.value } : item);
+                          const s = materialTechSpecs.map((item: MaterialTechSpecForm, idx: number) => idx === i ? { ...item, label: e.target.value } : item);
                           setFormData({...formData, techSpecs: s});
                         }} />
                         <input className="admin-input" placeholder="Value (e.g. Natural Touch)" value={spec.value} onChange={e => {
-                          const s = (Array.isArray(formData.techSpecs) ? formData.techSpecs : []).map((item: any, idx: number) => idx === i ? { ...item, value: e.target.value } : item);
+                          const s = materialTechSpecs.map((item: MaterialTechSpecForm, idx: number) => idx === i ? { ...item, value: e.target.value } : item);
                           setFormData({...formData, techSpecs: s});
                         }} />
-                        <button type="button" onClick={() => setFormData({...formData, techSpecs: (Array.isArray(formData.techSpecs) ? formData.techSpecs : []).filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del"><Trash2 size={12} /></button>
+                        <button type="button" onClick={() => setFormData({...formData, techSpecs: materialTechSpecs.filter((_, idx: number) => idx !== i)})} className="card-action-btn del"><Trash2 size={12} /></button>
                       </div>
                     ))}
                   </div>
@@ -1470,16 +1746,16 @@ export default function AdminPage() {
                       Colour Range Swatches
                       <button type="button" onClick={() => setFormData({...formData, swatches: [...(Array.isArray(formData.swatches) ? formData.swatches : []), {name: '', image: '', look: '', brand: '', finish: ''}]})} style={{ background: 'none', border: 'none', color: '#fbbf24', cursor: 'pointer', fontSize: '10px' }}>+ ADD SWATCH</button>
                     </div>
-                    {(Array.isArray(formData.swatches) ? formData.swatches : []).map((swatch: any, i: number) => (
+                    {materialSwatches.map((swatch: MaterialSwatchForm, i: number) => (
                       <div key={i} style={{ border: '1px solid rgba(255,255,255,0.05)', padding: '12px', borderRadius: '8px', marginBottom: '12px', background: 'rgba(255,255,255,0.01)' }}>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', marginBottom: '8px' }}>
                           <input className="admin-input" placeholder="Swatch Name" value={swatch.name} onChange={e => {
-                            const s = (Array.isArray(formData.swatches) ? formData.swatches : []).map((item: any, idx: number) => idx === i ? { ...item, name: e.target.value } : item);
+                            const s = materialSwatches.map((item: MaterialSwatchForm, idx: number) => idx === i ? { ...item, name: e.target.value } : item);
                             setFormData({...formData, swatches: s});
                           }} />
                           <div style={{ display: 'flex', gap: '4px' }}>
                             <input className="admin-input" placeholder="Image URL" value={swatch.image} onChange={e => {
-                              const s = (Array.isArray(formData.swatches) ? formData.swatches : []).map((item: any, idx: number) => idx === i ? { ...item, image: e.target.value } : item);
+                              const s = materialSwatches.map((item: MaterialSwatchForm, idx: number) => idx === i ? { ...item, image: e.target.value } : item);
                               setFormData({...formData, swatches: s});
                             }} />
                             <label className="upload-btn-icon" style={{ width: '38px', height: '38px' }}>
@@ -1492,22 +1768,22 @@ export default function AdminPage() {
                                 const res = await fetch('/api/upload', { method: 'POST', body: upData });
                                 const resJson = await res.json();
                                 if (resJson.success) {
-                                  const s = (Array.isArray(formData.swatches) ? formData.swatches : []).map((item: any, idx: number) => idx === i ? { ...item, image: resJson.url } : item);
+                                  const s = materialSwatches.map((item: MaterialSwatchForm, idx: number) => idx === i ? { ...item, image: resJson.url } : item);
                                   setFormData({...formData, swatches: s});
                                   toast.success('Uploaded ✓', { id: tid });
                                 } else toast.error('Upload failed', { id: tid });
                               }} />
                             </label>
                           </div>
-                          <button type="button" onClick={() => setFormData({...formData, swatches: (Array.isArray(formData.swatches) ? formData.swatches : []).filter((_: any, idx: number) => idx !== i)})} className="card-action-btn del"><Trash2 size={12} /></button>
+                          <button type="button" onClick={() => setFormData({...formData, swatches: materialSwatches.filter((_, idx: number) => idx !== i)})} className="card-action-btn del"><Trash2 size={12} /></button>
                         </div>
                         <div className="form-grid-2">
                           <input className="admin-input" placeholder="Look (e.g. Wood)" value={swatch.look} onChange={e => {
-                            const s = (Array.isArray(formData.swatches) ? formData.swatches : []).map((item: any, idx: number) => idx === i ? { ...item, look: e.target.value } : item);
+                            const s = materialSwatches.map((item: MaterialSwatchForm, idx: number) => idx === i ? { ...item, look: e.target.value } : item);
                             setFormData({...formData, swatches: s});
                           }} style={{ fontSize: '11px' }} />
                           <input className="admin-input" placeholder="Finish (e.g. Textured)" value={swatch.finish} onChange={e => {
-                            const s = (Array.isArray(formData.swatches) ? formData.swatches : []).map((item: any, idx: number) => idx === i ? { ...item, finish: e.target.value } : item);
+                            const s = materialSwatches.map((item: MaterialSwatchForm, idx: number) => idx === i ? { ...item, finish: e.target.value } : item);
                             setFormData({...formData, swatches: s});
                           }} style={{ fontSize: '11px' }} />
                         </div>

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -13,23 +14,33 @@ import {
   ClipboardList,
   Hammer,
   ArrowRight,
+  type LucideIcon,
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 import { getServices } from "@/app/actions/admin";
 
+type ServiceCard = {
+  _id: string;
+  title: string;
+  description?: string;
+  iconName?: string;
+  imageUrl?: string;
+  serviceId?: string;
+};
+
 export default function ServicesGrid() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [services, setServices] = useState<any[]>([]);
+  const [services, setServices] = useState<ServiceCard[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const data = await getServices();
-        setServices(data);
+        setServices(data as ServiceCard[]);
       } catch (err) {
         console.error("Failed to fetch services", err);
       } finally {
@@ -43,7 +54,7 @@ export default function ServicesGrid() {
 
   // Helper to get Lucide Icon component from name string
   const getIcon = (iconName: string) => {
-    const icons: any = {
+    const icons: Record<string, LucideIcon> = {
       Sofa, Building2, Paintbrush, LayoutDashboard, Box, HardHat, ClipboardList, Hammer
     };
     return icons[iconName] || Building2;
@@ -200,10 +211,12 @@ export default function ServicesGrid() {
             <div key={`bg-${activeIndex}`} style={{ position: "absolute", inset: 0 }} className="feature-bg">
                {activeService && (
                  <>
-                   <img 
-                     src={activeService.imageUrl} 
-                     alt="" 
-                     style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.35)" }} 
+                   <Image
+                     src={activeService.imageUrl || "/images/service-arch.jpg"}
+                     alt=""
+                     fill
+                     sizes="(max-width: 900px) 100vw, 65vw"
+                     style={{ objectFit: "cover", filter: "brightness(0.35)" }}
                    />
                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,10,0.9) 20%, transparent 100%)" }} />
                  </>
@@ -224,7 +237,7 @@ export default function ServicesGrid() {
                      border: "1px solid rgba(201,168,76,0.3)"
                    }}>
                      {(() => {
-                        const ActiveIcon = getIcon(activeService.iconName);
+                        const ActiveIcon = getIcon(activeService.iconName || 'Building2');
                         return <ActiveIcon size={24} />;
                      })()}
                    </div>

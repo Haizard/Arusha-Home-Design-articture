@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
@@ -8,14 +8,31 @@ interface ProjectGalleryProps {
   images: string[];
 }
 
+function isUsableImageSrc(src: unknown): src is string {
+  if (typeof src !== 'string') return false;
+  const value = src.trim();
+  return (
+    value.startsWith('/') ||
+    value.startsWith('http://') ||
+    value.startsWith('https://') ||
+    value.startsWith('data:image/')
+  );
+}
+
 export default function ProjectGallery({ images = [] }: ProjectGalleryProps) {
+  const safeImages = useMemo(
+    () => images.map((image) => image?.trim()).filter(isUsableImageSrc),
+    [images]
+  );
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-  if (!images || images.length === 0) return null;
+  if (safeImages.length === 0) return null;
 
-  const nextImage = () => setActiveIndex((prev) => (prev + 1) % images.length);
-  const prevImage = () => setActiveIndex((prev) => (prev - 1 + images.length) % images.length);
+  const nextImage = () => setActiveIndex((prev) => (prev + 1) % safeImages.length);
+  const prevImage = () => setActiveIndex((prev) => (prev - 1 + safeImages.length) % safeImages.length);
+  const clampedActiveIndex = Math.min(activeIndex, safeImages.length - 1);
+  const activeImage = safeImages[clampedActiveIndex] || safeImages[0];
 
   return (
     <div className="project-gallery-system">
@@ -32,8 +49,8 @@ export default function ProjectGallery({ images = [] }: ProjectGalleryProps) {
               className="main-image-motion"
             >
               <Image
-                src={images[activeIndex]}
-                alt={`Project view ${activeIndex + 1}`}
+                src={activeImage}
+                alt={`Project view ${clampedActiveIndex + 1}`}
                 fill
                 priority
                 sizes="(max-width: 1400px) 100vw, 1200px"
@@ -64,11 +81,11 @@ export default function ProjectGallery({ images = [] }: ProjectGalleryProps) {
       {/* Thumbnail Strip */}
       <div className="thumb-strip-container">
         <div className="thumb-strip">
-          {images.map((img, idx) => (
+          {safeImages.map((img, idx) => (
             <button
               key={idx}
               onClick={() => setActiveIndex(idx)}
-              className={`thumb-btn ${activeIndex === idx ? 'active' : ''}`}
+              className={`thumb-btn ${clampedActiveIndex === idx ? 'active' : ''}`}
             >
               <div className="thumb-image-wrapper">
                 <Image
@@ -100,7 +117,7 @@ export default function ProjectGallery({ images = [] }: ProjectGalleryProps) {
             <div className="lightbox-content">
               <div style={{ position: 'relative', width: '90vw', height: '80vh' }}>
                 <Image
-                  src={images[activeIndex]}
+                  src={activeImage}
                   alt="Full screen view"
                   fill
                   sizes="90vw"

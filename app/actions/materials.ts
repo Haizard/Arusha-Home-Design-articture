@@ -4,6 +4,8 @@ import connectDB from '@/lib/mongodb';
 import MaterialRange from '@/models/MaterialRange';
 import { revalidatePath } from 'next/cache';
 
+type MaterialRangePayload = Record<string, unknown>;
+
 export async function getMaterialRanges() {
   await connectDB();
   const ranges = await MaterialRange.find({}).sort({ createdAt: -1 }).lean();
@@ -16,17 +18,19 @@ export async function getMaterialRange(id: string) {
   return JSON.parse(JSON.stringify(range));
 }
 
-export async function addMaterialRange(formData: any) {
+export async function addMaterialRange(formData: MaterialRangePayload) {
   await connectDB();
   const range = await MaterialRange.create(formData);
+  revalidatePath('/');
   revalidatePath('/materials');
   revalidatePath('/admin/materials');
   return JSON.parse(JSON.stringify(range));
 }
 
-export async function updateMaterialRange(id: string, formData: any) {
+export async function updateMaterialRange(id: string, formData: MaterialRangePayload) {
   await connectDB();
   const range = await MaterialRange.findByIdAndUpdate(id, { $set: formData }, { new: true });
+  revalidatePath('/');
   revalidatePath('/materials');
   revalidatePath(`/materials/${id}`);
   revalidatePath('/admin/materials');
@@ -36,6 +40,7 @@ export async function updateMaterialRange(id: string, formData: any) {
 export async function deleteMaterialRange(id: string) {
   await connectDB();
   await MaterialRange.findByIdAndDelete(id);
+  revalidatePath('/');
   revalidatePath('/materials');
   revalidatePath('/admin/materials');
 }
