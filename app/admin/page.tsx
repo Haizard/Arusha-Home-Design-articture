@@ -13,16 +13,19 @@ import {
   getMaterialRanges, addMaterialRange, updateMaterialRange, deleteMaterialRange,
 } from '@/app/actions/materials';
 import {
+  getLooks, addLook, updateLook, deleteLook,
+} from '@/app/actions/looks';
+import {
   LayoutDashboard, Briefcase, ShoppingBag, MessageSquare, Mail,
   Plus, Pencil, Trash2, X, Save, ChevronRight,
   AlertCircle, Loader2, Database, RefreshCw,
   Image as ImageIcon, Home, Upload, Phone, Menu,
-  CheckCircle2, Archive, Clock,
+  CheckCircle2, Archive, Clock, Sparkles,
 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
 
-type Tab = 'services' | 'projects' | 'products' | 'testimonials' | 'inquiries' | 'materials';
+type Tab = 'services' | 'projects' | 'products' | 'testimonials' | 'inquiries' | 'materials' | 'looks';
 
 type ProcessStep = { title: string; desc: string };
 type ServiceFeature = { icon: string; title: string; desc: string };
@@ -111,12 +114,16 @@ type AdminFormData = {
   swatches?: MaterialSwatchForm[];
   lookGroups?: MaterialLookGroupForm[];
   profiles?: string[];
+  slug?: string;
+  coverImage?: string;
+  categories?: MaterialLookCategoryForm[];
 };
 
 type AdminListItem = AdminFormData;
 
 const NAV_ITEMS: { id: Tab; label: string; icon: LucideIcon; color: string }[] = [
   { id: 'materials',    label: 'Materials',    icon: Database,        color: '#31d3a3' },
+  { id: 'looks',        label: 'Choose a Look', icon: Sparkles,       color: '#108a83' },
   { id: 'services',     label: 'Services',     icon: LayoutDashboard, color: '#c9a84c' },
   { id: 'projects',     label: 'Projects',     icon: Briefcase,       color: '#60a5fa' },
   { id: 'products',     label: 'Products',     icon: ShoppingBag,     color: '#a78bfa' },
@@ -152,6 +159,7 @@ const EMPTY_FORMS: Record<Tab, AdminFormData> = {
     title: '', category: 'Decorative Panels', description: '', logo: '', heroImage: '',
     techSpecs: [], swatches: [], lookGroups: [], profiles: []
   },
+  looks: { name: '', slug: '', description: '', coverImage: '', categories: [] },
 };
 
 export default function AdminPage() {
@@ -181,6 +189,7 @@ export default function AdminPage() {
       else if (activeTab === 'products')     result = await getProducts();
       else if (activeTab === 'testimonials') result = await getTestimonials();
       else if (activeTab === 'materials')    result = await getMaterialRanges();
+      else if (activeTab === 'looks')        result = await getLooks();
       else                                   result = await getInquiries();
       // Stringify ObjectIds to plain strings
       setData(JSON.parse(JSON.stringify(result)) as AdminListItem[]);
@@ -254,6 +263,9 @@ export default function AdminPage() {
       } else if (activeTab === 'materials') {
         if (editingItem?._id) await updateMaterialRange(editingItem._id, cleanData);
         else await addMaterialRange(cleanData);
+      } else if (activeTab === 'looks') {
+        if (editingItem?._id) await updateLook(editingItem._id, cleanData);
+        else await addLook(cleanData);
       } else {
         if (editingItem?._id) await updateTestimonial(editingItem._id, cleanData);
         else await addTestimonial(cleanData);
@@ -278,6 +290,7 @@ export default function AdminPage() {
       else if (activeTab === 'products')     await deleteProduct(id);
       else if (activeTab === 'testimonials') await deleteTestimonial(id);
       else if (activeTab === 'materials')    await deleteMaterialRange(id);
+      else if (activeTab === 'looks')        await deleteLook(id);
       else                                   await deleteInquiry(id);
       toast.success('Deleted ✓', { id: tid });
       fetchData();
@@ -387,6 +400,7 @@ export default function AdminPage() {
   const materialTechSpecs = (Array.isArray(formData.techSpecs) ? formData.techSpecs : []) as MaterialTechSpecForm[];
   const materialSwatches = (Array.isArray(formData.swatches) ? formData.swatches : []) as MaterialSwatchForm[];
   const materialLookGroups = (Array.isArray(formData.lookGroups) ? formData.lookGroups : []) as MaterialLookGroupForm[];
+  const lookCategories = (Array.isArray(formData.categories) ? formData.categories : []) as MaterialLookCategoryForm[];
 
   return (
     <>
@@ -1047,9 +1061,9 @@ export default function AdminPage() {
                     ) : (
                       <>
                         <div className="card-image">
-                          {(item.heroImage || item.imageUrl || item.avatar || item.logo) ? (
+                          {(item.coverImage || item.heroImage || item.imageUrl || item.avatar || item.logo) ? (
                             // eslint-disable-next-line @next/next/no-img-element
-                            <img src={item.heroImage || item.imageUrl || item.avatar || item.logo} alt={item.title || item.name} />
+                            <img src={item.coverImage || item.heroImage || item.imageUrl || item.avatar || item.logo} alt={item.title || item.name} />
                           ) : (
                             <div className="card-no-img"><ImageIcon size={32} /></div>
                           )}
@@ -1066,6 +1080,7 @@ export default function AdminPage() {
                           <div className="card-tag">
                             {item.category || item.serviceId || item.role || activeTab}
                             {activeTab === 'materials' && Array.isArray(item.swatches) ? ` / ${item.swatches.length} swatches` : ''}
+                            {activeTab === 'looks' && Array.isArray(item.categories) ? ` / ${item.categories.length} categories` : ''}
                           </div>
                           <div className="card-title">{item.title || item.name}</div>
                           <div className="card-desc">{item.description || item.text || item.desc || '—'}</div>
@@ -1807,6 +1822,67 @@ export default function AdminPage() {
                         <input type="file" hidden accept="image/*" onChange={e => handleFileUpload(e, 'profiles', true)} />
                       </label>
                     </div>
+                  </div>
+                </>)}
+
+                {activeTab === 'looks' && (<>
+                  <div className="form-grid-2">
+                    <input className="admin-input" placeholder="Look name e.g. Bliss" value={formData.name ?? ''} onChange={e => setFormData({ ...formData, name: e.target.value, slug: formData.slug || slugify(e.target.value) })} />
+                    <input className="admin-input" placeholder="Slug e.g. bliss" value={formData.slug ?? ''} onChange={e => setFormData({ ...formData, slug: slugify(e.target.value) })} />
+                  </div>
+                  {imageField('Cover Image URL', 'coverImage', 'Upload look cover')}
+                  {textarea('Description', 'description', 'Describe this look mood and use case...')}
+
+                  <div style={{ padding: '16px', background: 'rgba(16,138,131,0.06)', borderRadius: '10px', border: '1px solid rgba(16,138,131,0.18)' }}>
+                    <div className="admin-label" style={{ marginBottom: '16px', color: '#108a83', display: 'flex', justifyContent: 'space-between', gap: '12px' }}>
+                      <span>Look Categories and Galleries</span>
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, categories: [...lookCategories, { name: '', slug: '', description: '', coverImage: '', gallery: [] }] })}
+                        style={{ background: 'none', border: 'none', color: '#108a83', cursor: 'pointer', fontSize: '10px' }}
+                      >
+                        + ADD CATEGORY
+                      </button>
+                    </div>
+
+                    {lookCategories.map((category: MaterialLookCategoryForm, i: number) => (
+                      <div key={i} style={{ border: '1px solid rgba(16,138,131,0.14)', padding: '12px', borderRadius: '8px', marginBottom: '12px', background: 'rgba(255,255,255,0.66)' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', marginBottom: '8px' }}>
+                          <input className="admin-input" placeholder="Category name e.g. Iceberg White and Storm Grey" value={category.name ?? ''} onChange={e => {
+                            const categories = lookCategories.map((item, idx) => idx === i ? { ...item, name: e.target.value, slug: item.slug || slugify(e.target.value) } : item);
+                            setFormData({ ...formData, categories });
+                          }} />
+                          <input className="admin-input" placeholder="Category slug" value={category.slug ?? ''} onChange={e => {
+                            const categories = lookCategories.map((item, idx) => idx === i ? { ...item, slug: slugify(e.target.value) } : item);
+                            setFormData({ ...formData, categories });
+                          }} />
+                          <button type="button" onClick={() => setFormData({ ...formData, categories: lookCategories.filter((_, idx) => idx !== i) })} className="card-action-btn del"><Trash2 size={12} /></button>
+                        </div>
+                        <div className="form-grid-2">
+                          <input className="admin-input" placeholder="Category cover image URL" value={category.coverImage ?? ''} onChange={e => {
+                            const categories = lookCategories.map((item, idx) => idx === i ? { ...item, coverImage: e.target.value } : item);
+                            setFormData({ ...formData, categories });
+                          }} />
+                          <input className="admin-input" placeholder="Category description" value={category.description ?? ''} onChange={e => {
+                            const categories = lookCategories.map((item, idx) => idx === i ? { ...item, description: e.target.value } : item);
+                            setFormData({ ...formData, categories });
+                          }} />
+                        </div>
+                        <div className="admin-field" style={{ marginTop: '10px' }}>
+                          <label className="admin-label">Gallery image URLs (comma separated)</label>
+                          <textarea
+                            className="admin-input"
+                            rows={3}
+                            value={(category.gallery ?? []).map((image) => image.image).filter(Boolean).join(', ')}
+                            onChange={e => {
+                              const gallery = splitList(e.target.value).map((image) => ({ image }));
+                              const categories = lookCategories.map((item, idx) => idx === i ? { ...item, gallery } : item);
+                              setFormData({ ...formData, categories });
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </>)}
 

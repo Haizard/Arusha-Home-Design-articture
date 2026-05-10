@@ -136,8 +136,9 @@ export default function MaterialsHub({
   const previewSwatches = materialRanges.flatMap((range) => range.swatches ?? []).filter((swatch) => swatch.image).slice(0, 8);
 
   return (
-    <main className="materials-platform">
-      <section className="materials-command">
+    <main className={compact ? "materials-platform compact" : "materials-platform"}>
+      {!compact ? (
+        <section className="materials-command">
         <div className="materials-command-shell">
           <aside className="materials-side-panel">
             <Link href="/" className="materials-brand-lockup">
@@ -251,6 +252,7 @@ export default function MaterialsHub({
           </div>
         </div>
       </section>
+      ) : null}
 
       <section className="materials-showcase">
         <div className="material-section-heading">
