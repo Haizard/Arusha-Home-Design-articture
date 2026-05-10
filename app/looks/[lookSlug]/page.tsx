@@ -61,7 +61,7 @@ export default async function LookCategoriesPage({
                   <Image src={coverImage} alt={category.name || "Look category"} fill sizes="(max-width: 900px) 100vw, 33vw" />
                 </span>
                 <span className="look-category-page-body">
-                  <small><Palette size={14} /> {(category.coloursDesignsUsed ?? []).slice(0, 2).join(" / ") || "Colour pairing"}</small>
+                  <small><Palette size={14} /> {(category.coloursDesignsUsed ?? []).slice(0, 2).map((design) => design.name).filter(Boolean).join(" / ") || "Colour pairing"}</small>
                   <strong>{category.name}</strong>
                   <em>{category.description || `${category.gallery?.length ?? 0} gallery references`}</em>
                   <b>Open gallery <ArrowRight size={14} /></b>

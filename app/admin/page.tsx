@@ -42,11 +42,12 @@ type MaterialLookCategoryForm = {
   slug?: string;
   description?: string;
   coverImage?: string;
-  coloursDesignsUsed?: string[];
+  coloursDesignsUsed?: MaterialLookDesignForm[];
   productRange?: string[];
   gallery?: MaterialLookImageForm[];
 };
 type MaterialLookGroupForm = { name?: string; slug?: string; description?: string; coverImage?: string; categories?: MaterialLookCategoryForm[] };
+type MaterialLookDesignForm = { name?: string; image?: string; finish?: string; productRange?: string };
 
 type AdminFormData = {
   [key: string]: unknown;
@@ -247,6 +248,18 @@ export default function AdminPage() {
         gallery: splitList(galleryImages).map((image) => ({ image })),
       };
     }).filter((category) => category.name);
+  const serializeLookDesigns = (designs: MaterialLookDesignForm[] = []) =>
+    designs.map((design) => [
+      design.name ?? '',
+      design.image ?? '',
+      design.finish ?? '',
+      design.productRange ?? '',
+    ].join(' | ')).join('\n');
+  const parseLookDesigns = (value: string): MaterialLookDesignForm[] =>
+    value.split('\n').map((line) => {
+      const [name = '', image = '', finish = '', productRange = ''] = line.split('|').map((part) => part.trim());
+      return { name, image, finish, productRange };
+    }).filter((design) => design.name);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -386,6 +399,26 @@ export default function AdminPage() {
       const categories = lookCategories.map((item, idx) => {
         if (idx !== index) return item;
         return { ...item, gallery: [...(item.gallery ?? []), { image: url }] };
+      });
+      setFormData({ ...formData, categories });
+      toast.success('Uploaded ✓', { id: tid });
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Upload failed'), { id: tid });
+    }
+  };
+
+  const handleLookDesignImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, categoryIndex: number, designIndex: number) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const tid = toast.loading('Uploading design preview...');
+    try {
+      const url = await uploadImageFile(file);
+      const categories = lookCategories.map((category, idx) => {
+        if (idx !== categoryIndex) return category;
+        const designs = (category.coloursDesignsUsed ?? []).map((design, designIdx) =>
+          designIdx === designIndex ? { ...design, image: url } : design
+        );
+        return { ...category, coloursDesignsUsed: designs };
       });
       setFormData({ ...formData, categories });
       toast.success('Uploaded ✓', { id: tid });
@@ -1930,16 +1963,30 @@ export default function AdminPage() {
                         </div>
                         <div className="form-grid-2" style={{ marginTop: '10px' }}>
                           <div className="admin-field">
-                            <label className="admin-label">Colours & Designs Used (comma separated)</label>
+                            <label className="admin-label">Colours & Designs Used: name | image URL | finish | product range</label>
                             <textarea
                               className="admin-input"
-                              rows={3}
-                              value={(category.coloursDesignsUsed ?? []).join(', ')}
+                              rows={4}
+                              placeholder={'Iceberg White | /uploads/iceberg.jpg | Matte | Decorative boards'}
+                              value={serializeLookDesigns(category.coloursDesignsUsed)}
                               onChange={e => {
-                                const categories = lookCategories.map((item, idx) => idx === i ? { ...item, coloursDesignsUsed: splitList(e.target.value) } : item);
+                                const categories = lookCategories.map((item, idx) => idx === i ? { ...item, coloursDesignsUsed: parseLookDesigns(e.target.value) } : item);
                                 setFormData({ ...formData, categories });
                               }}
                             />
+                            {(category.coloursDesignsUsed ?? []).length > 0 ? (
+                              <div style={{ display: 'grid', gap: '6px', marginTop: '8px' }}>
+                                {(category.coloursDesignsUsed ?? []).map((design, designIndex) => (
+                                  <div key={`${design.name}-${designIndex}`} style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '8px', alignItems: 'center' }}>
+                                    <span style={{ fontSize: '11px', color: '#385f5a' }}>{design.name || `Design ${designIndex + 1}`}</span>
+                                    <label className="upload-btn-icon" style={{ width: '38px', height: '34px' }}>
+                                      <Upload size={14} />
+                                      <input type="file" hidden accept="image/*" onChange={e => handleLookDesignImageUpload(e, i, designIndex)} />
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : null}
                           </div>
                           <div className="admin-field">
                             <label className="admin-label">Product Range (comma separated)</label>

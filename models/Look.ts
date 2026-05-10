@@ -6,12 +6,19 @@ const LookGalleryImageSchema = new Schema({
   caption: { type: String },
 });
 
+const LookDesignSchema = new Schema({
+  name: { type: String, required: true },
+  image: { type: String },
+  finish: { type: String },
+  productRange: { type: String },
+});
+
 const LookCategorySchema = new Schema({
   name: { type: String, required: true },
   slug: { type: String },
   description: { type: String },
   coverImage: { type: String },
-  coloursDesignsUsed: [{ type: String }],
+  coloursDesignsUsed: [LookDesignSchema],
   productRange: [{ type: String }],
   gallery: [LookGalleryImageSchema],
 });

@@ -4,6 +4,7 @@ import { ArrowLeft, Images, Sparkles } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getLookBySlug } from "@/app/actions/looks";
 import { fallbackLooks, getSlug, isUsableImageSrc, type LookItem } from "@/lib/lookFallbacks";
+import LookDesignPreview from "@/components/looks/LookDesignPreview";
 
 export default async function LookCategoryPage({
   params,
@@ -47,11 +48,7 @@ export default async function LookCategoryPage({
         <div className="look-detail-spec-card">
           <p className="material-kicker">Colours & Designs Used</p>
           <h2>Design palette</h2>
-          <div className="look-detail-chip-list">
-            {(category.coloursDesignsUsed?.length ? category.coloursDesignsUsed : ["Add colours and designs from the CMS"]).map((item) => (
-              <span key={item}>{item}</span>
-            ))}
-          </div>
+          <LookDesignPreview designs={category.coloursDesignsUsed ?? []} fallbackImage={fallbackImage} />
         </div>
         <div className="look-detail-spec-card">
           <p className="material-kicker">Product Range</p>

@@ -4,12 +4,19 @@ export type LookGalleryImage = {
   caption?: string;
 };
 
+export type LookDesign = {
+  name?: string;
+  image?: string;
+  finish?: string;
+  productRange?: string;
+};
+
 export type LookCategory = {
   name?: string;
   slug?: string;
   description?: string;
   coverImage?: string;
-  coloursDesignsUsed?: string[];
+  coloursDesignsUsed?: LookDesign[];
   productRange?: string[];
   gallery?: LookGalleryImage[];
 };
@@ -58,7 +65,10 @@ export const fallbackLooks: LookItem[] = [
         slug: "iceberg-white-storm-grey",
         coverImage: "/images/service-kitchen.jpg",
         description: "A clean white and cool grey pairing for contemporary cabinet work.",
-        coloursDesignsUsed: ["Iceberg White", "Storm Grey", "Soft matte cabinet balance"],
+        coloursDesignsUsed: [
+          { name: "Iceberg White", image: "/images/service-kitchen.jpg", finish: "Soft matte", productRange: "Decorative boards" },
+          { name: "Storm Grey", image: "/images/prod-tv.jpg", finish: "Cool neutral", productRange: "Kitchen cabinetry" },
+        ],
         productRange: ["Decorative boards", "Kitchen cabinetry", "Wardrobe shutters"],
         gallery: [{ image: "/images/service-kitchen.jpg" }, { image: "/images/prod-tv.jpg" }],
       },
@@ -67,7 +77,10 @@ export const fallbackLooks: LookItem[] = [
         slug: "arden-iceberg-white",
         coverImage: "/images/prod-wardrobe.jpg",
         description: "Warm wood detail balanced with crisp white surfaces.",
-        coloursDesignsUsed: ["Arden woodgrain", "Iceberg White", "Vertical wardrobe panels"],
+        coloursDesignsUsed: [
+          { name: "Arden woodgrain", image: "/images/prod-wardrobe.jpg", finish: "Woodgrain", productRange: "Wardrobes" },
+          { name: "Iceberg White", image: "/images/service-interior.jpg", finish: "Matte", productRange: "Wall panels" },
+        ],
         productRange: ["Wardrobes", "Wall panels", "Joinery boards"],
         gallery: [{ image: "/images/prod-wardrobe.jpg" }, { image: "/images/service-interior.jpg" }],
       },
@@ -84,7 +97,10 @@ export const fallbackLooks: LookItem[] = [
         slug: "natural-oak-glacier",
           coverImage: "/images/service-interior.jpg",
           description: "A bright timber-led combination with light neutral panels.",
-          coloursDesignsUsed: ["Natural Oak", "Glacier neutral", "Open shelf accents"],
+          coloursDesignsUsed: [
+            { name: "Natural Oak", image: "/images/service-interior.jpg", finish: "Woodgrain", productRange: "Kitchen surfaces" },
+            { name: "Glacier neutral", image: "/images/prod-bath.jpg", finish: "Light neutral", productRange: "Feature shelving" },
+          ],
           productRange: ["Kitchen surfaces", "Living room storage", "Feature shelving"],
           gallery: [{ image: "/images/service-interior.jpg" }, { image: "/images/prod-bath.jpg" }],
         },
@@ -101,7 +117,10 @@ export const fallbackLooks: LookItem[] = [
         slug: "graphite-warm-walnut",
           coverImage: "/images/prod-tv.jpg",
           description: "A darker premium pairing for media walls, feature storage, and suites.",
-          coloursDesignsUsed: ["Graphite", "Warm Walnut", "High contrast TV wall"],
+          coloursDesignsUsed: [
+            { name: "Graphite", image: "/images/prod-tv.jpg", finish: "Deep matte", productRange: "Media units" },
+            { name: "Warm Walnut", image: "/images/projects-hero.jpg", finish: "Woodgrain", productRange: "Feature wall panels" },
+          ],
           productRange: ["Media units", "Premium cabinetry", "Feature wall panels"],
           gallery: [{ image: "/images/prod-tv.jpg" }, { image: "/images/projects-hero.jpg" }],
         },
