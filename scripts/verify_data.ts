@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import MaterialRange from './models/MaterialRange';
+import MaterialRange from '../models/MaterialRange';
 
 dotenv.config();
 
