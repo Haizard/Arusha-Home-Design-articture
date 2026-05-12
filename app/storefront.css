@@ -485,26 +485,30 @@
 .material-card-media {
   position: relative;
   min-height: 19rem;
-  background: #dfe7e2;
+  background: var(--mat-accent-bg);
   overflow: hidden;
 }
 
 .material-card-shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.24));
+  background: linear-gradient(180deg, rgba(0,0,0,0.01), rgba(26,30,46,0.22));
 }
 
+/* Pill chip — matches 'Live' tag style from the reference dashboard */
 .material-card-chip {
   position: absolute;
   top: 0.9rem;
   left: 0.9rem;
-  padding: 0.4rem 0.75rem;
+  padding: 0.35rem 0.8rem;
   border-radius: 999px;
-  background: rgba(255,255,255,0.82);
-  color: rgba(17,24,22,0.72);
-  font-size: 0.72rem;
-  font-weight: 850;
+  background: rgba(255,255,255,0.90);
+  color: var(--mat-navy);
+  font-size: 0.71rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.60);
 }
 
 .material-card-body {
@@ -516,11 +520,11 @@
 }
 
 .material-card-eyebrow {
-  color: rgba(17,24,22,0.42);
-  font-size: 0.72rem;
-  font-weight: 850;
+  color: rgba(26,30,46,0.45);
+  font-size: 0.71rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
 }
 
 .material-card-body h3 {
@@ -552,7 +556,7 @@
   border: 2px solid white;
   border-radius: 50%;
   overflow: hidden;
-  background: #dfe7e2;
+  background: var(--mat-accent-bg);
 }
 
 .material-mini-swatches span + span {
@@ -575,18 +579,25 @@
 }
 
 .materials-swatch-tile {
-  padding: 0.7rem;
-  border-radius: 1.2rem;
-  background: rgba(255,255,255,0.82);
-  border: 1px solid var(--mat-line);
+  padding: 0.75rem;
+  border-radius: var(--mat-radius-card);
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(255,255,255,0.70);
+  box-shadow: var(--mat-shadow-card);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.materials-swatch-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--mat-shadow-hover);
 }
 
 .materials-swatch-tile > div {
   position: relative;
   aspect-ratio: 1;
-  border-radius: 0.9rem;
+  border-radius: 14px;
   overflow: hidden;
-  background: #dfe7e2;
+  background: var(--mat-accent-bg);
 }
 
 .materials-swatch-tile strong,
@@ -596,13 +607,14 @@
 
 .materials-swatch-tile strong {
   margin-top: 0.65rem;
-  font-size: 0.95rem;
+  font-size: 0.93rem;
+  color: var(--mat-navy);
 }
 
 .materials-swatch-tile span {
   color: var(--mat-muted);
-  font-size: 0.78rem;
-  font-weight: 750;
+  font-size: 0.76rem;
+  font-weight: 600;
 }
 
 .materials-secondary-band {
@@ -692,21 +704,25 @@
 .material-detail-stats div {
   display: grid;
   gap: 0.25rem;
-  padding: 0.75rem;
-  border: 1px solid var(--mat-line);
-  border-radius: 1rem;
-  background: rgba(255,255,255,0.62);
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgba(255,255,255,0.70);
+  border-radius: var(--mat-radius-card);
+  background: rgba(255,255,255,0.90);
+  box-shadow: var(--mat-shadow-card);
 }
 
 .material-detail-stats strong {
   font-size: 1.1rem;
   line-height: 1;
+  color: var(--mat-navy);
 }
 
 .material-detail-stats span {
   color: var(--mat-muted);
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .material-detail-preview {
@@ -777,21 +793,23 @@
   margin-top: 0.75rem;
 }
 
+/* Spec strip — styled like the temp/watt pill-chips row from the reference dashboard */
 .material-spec-strip div,
 .material-spec-table div {
-  padding: 1rem;
-  border-radius: 1rem;
-  background: rgba(255,255,255,0.7);
-  border: 1px solid var(--mat-line);
+  padding: 0.85rem 1rem;
+  border-radius: var(--mat-radius-card);
+  background: rgba(255,255,255,0.90);
+  border: 1px solid rgba(255,255,255,0.70);
+  box-shadow: var(--mat-shadow-card);
 }
 
 .material-spec-strip span,
 .material-spec-table span {
   display: block;
-  color: rgba(17,24,22,0.45);
-  font-size: 0.7rem;
-  font-weight: 850;
-  letter-spacing: 0.14em;
+  color: var(--mat-muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -799,6 +817,7 @@
 .material-spec-table strong {
   display: block;
   margin-top: 0.35rem;
+  color: var(--mat-navy);
 }
 
 .material-look-workbench {
@@ -841,9 +860,9 @@
   position: relative;
   display: block;
   aspect-ratio: 1;
-  border-radius: 0.8rem;
+  border-radius: 14px;
   overflow: hidden;
-  background: #dfe7e2;
+  background: var(--mat-accent-bg);
 }
 
 .material-look-rail strong,
@@ -878,15 +897,15 @@
 }
 
 .material-look-category-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 28px 66px rgba(53,74,70,0.13);
+  transform: translateY(-5px);
+  box-shadow: var(--mat-shadow-hover);
 }
 
 .material-look-category-image {
   position: relative;
   display: block;
   aspect-ratio: 1.2 / 0.82;
-  background: #dfe7e2;
+  background: var(--mat-accent-bg);
 }
 
 .material-look-category-body {
@@ -946,7 +965,7 @@
   position: relative;
   display: block;
   aspect-ratio: 0.9 / 1;
-  background: #dfe7e2;
+  background: var(--mat-accent-bg);
   overflow: hidden;
 }
 
@@ -987,9 +1006,10 @@
   gap: 0.5rem;
   min-height: 18rem;
   text-align: center;
-  border: 1px dashed rgba(17,24,22,0.18);
-  border-radius: 1.4rem;
-  background: rgba(255,255,255,0.55);
+  border: 1.5px dashed rgba(26,30,46,0.14);
+  border-radius: var(--mat-radius-card);
+  background: rgba(255,255,255,0.60);
+  color: var(--mat-muted);
 }
 
 .material-detail-bottom {
@@ -1014,9 +1034,10 @@
 .material-profile-grid div {
   position: relative;
   aspect-ratio: 1;
-  border: 1px solid var(--mat-line);
-  border-radius: 1rem;
-  background: rgba(255,255,255,0.66);
+  border: 1px solid rgba(255,255,255,0.70);
+  border-radius: var(--mat-radius-card);
+  background: rgba(255,255,255,0.85);
+  box-shadow: var(--mat-shadow-card);
   overflow: hidden;
 }
 
@@ -1036,7 +1057,7 @@
   position: relative;
   min-height: min(78vh, 48rem);
   overflow: hidden;
-  background: #dfe7e2;
+  background: var(--mat-accent-bg);
 }
 
 .material-look-page-hero > img,
@@ -1049,7 +1070,7 @@
 .material-look-page-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(17,24,22,0.72), rgba(17,24,22,0.16) 68%);
+  background: linear-gradient(90deg, rgba(26,30,46,0.72), rgba(26,30,46,0.14) 68%);
 }
 
 .material-look-page-shell {
@@ -1069,13 +1090,21 @@
   width: fit-content;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.65rem 0.85rem;
+  padding: 0.6rem 0.9rem;
   border-radius: 999px;
-  background: rgba(255,255,255,0.84);
-  color: var(--mat-ink);
+  background: rgba(255,255,255,0.88);
+  color: var(--mat-navy);
   font-size: 0.8rem;
-  font-weight: 850;
+  font-weight: 700;
   text-decoration: none;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.60);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.material-look-back:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
 }
 
 .material-look-page-copy {
@@ -1137,8 +1166,8 @@
   position: relative;
   min-height: 18rem;
   overflow: hidden;
-  border-radius: 1.2rem;
-  background: #dfe7e2;
+  border-radius: var(--mat-radius-card);
+  background: var(--mat-accent-bg);
 }
 
 .material-look-page-grid figure.featured {
