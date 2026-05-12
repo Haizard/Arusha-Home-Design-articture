@@ -1654,9 +1654,13 @@ body {
   color: #111111;
 }
 
-.market-shell {
-  width: min(1360px, calc(100vw - clamp(1.5rem, 6vw, 4rem)));
+.market-shell, .pg-shell {
+  width: min(1280px, calc(100vw - clamp(2rem, 8vw, 6rem)));
   margin: 0 auto;
+}
+
+section {
+  padding: clamp(5rem, 10vw, 9rem) 0;
 }
 
 .market-hero {

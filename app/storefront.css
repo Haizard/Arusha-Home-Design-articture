@@ -1599,7 +1599,7 @@
 .store-footer {
   position: relative;
   background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
+  backdrop-filter: blur(24px);
   border-top: 1px solid var(--glass-border);
   color: var(--color-stone-100);
 }
@@ -2039,17 +2039,19 @@
   display: flex;
   min-height: clamp(34rem, 72vh, 48rem);
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  height: 100%;
+  padding-bottom: clamp(4rem, 10vw, 8rem);
   color: white;
 }
 
-.pg-hero h1 {
-  max-width: 8.5ch;
-  font-size: clamp(3.2rem, 7vw, 6.7rem);
-  line-height: 0.86;
-  letter-spacing: -0.05em;
+.pg-hero-content h1 {
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: -0.06em;
   text-transform: uppercase;
-  text-shadow: 0 20px 45px rgba(0,0,0,0.36);
+  color: white;
+  margin-bottom: 2.5rem;
 }
 
 .pg-outline-button {
@@ -2253,9 +2255,31 @@
 
 .pg-about-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.58fr) minmax(260px, 0.42fr);
-  gap: clamp(2rem, 8vw, 8rem);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 10vw, 8rem);
   align-items: center;
+}
+
+.pg-about-copy p:first-child {
+  color: var(--color-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.pg-about-copy h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.pg-about-copy p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-stone-300);
 }
 
 .pg-story-card {
@@ -2301,6 +2325,32 @@
   font-weight: 900;
   letter-spacing: -0.08em;
   white-space: nowrap;
+}
+
+/* Stats Grid */
+.pg-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.pg-stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.pg-stat-item h3 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-stone-100);
+}
+
+.pg-stat-item p {
+  font-size: 0.85rem;
+  color: var(--color-stone-400);
+  margin-top: 0.5rem;
+  line-height: 1.3;
 }
 
 .pg-ranges {
@@ -2357,6 +2407,162 @@
   color: white;
   font-size: 1rem;
   font-weight: 900;
+}
+
+/* New Range Card V2 */
+.pg-range-card-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-decoration: none;
+  transition: transform 0.3s var(--ease-expo);
+}
+
+.pg-range-card-v2:hover {
+  transform: translateY(-8px);
+}
+
+.pg-range-image-wrap {
+  position: relative;
+  aspect-ratio: 16/11;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: var(--color-slate);
+}
+
+.pg-range-number {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  z-index: 2;
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: white;
+}
+
+.pg-range-info h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-stone-100);
+  line-height: 1.2;
+}
+
+/* Section Containers */
+.pg-section {
+  padding: clamp(5rem, 12vw, 10rem) 0;
+}
+
+.pg-section-dark {
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px);
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+/* Portfolio V3 */
+.pg-portfolio-grid-v3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.pg-portfolio-card-v3 {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 2rem;
+  overflow: hidden;
+  background: var(--color-slate);
+  text-decoration: none;
+}
+
+.pg-portfolio-card-v3 img {
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-expo);
+}
+
+.pg-portfolio-card-v3:hover img {
+  transform: scale(1.1);
+}
+
+.pg-portfolio-label-v3 {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  background: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-stone-100);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s;
+}
+
+.pg-portfolio-card-v3:hover .pg-portfolio-label-v3 {
+  background: var(--color-gold);
+  color: white;
+}
+
+/* Range V3 */
+.pg-range-grid-v3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+.pg-range-card-v3 {
+  text-decoration: none;
+}
+
+.pg-range-image-v3 {
+  position: relative;
+  aspect-ratio: 16/11;
+  border-radius: 2rem;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: var(--color-slate);
+}
+
+.pg-range-image-v3 img {
+  object-fit: cover;
+}
+
+.pg-range-card-v3 h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-stone-100);
+  margin-bottom: 0.6rem;
+}
+
+.pg-range-card-v3 p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-stone-400);
+}
+
+/* Intro Box */
+.pg-intro-box {
+  max-width: 42rem;
+  margin: 0 auto;
+  text-align: center;
+  background: white;
+  padding: 4rem;
+  border-radius: 3rem;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.04);
+}
+
+.pg-intro-box h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 2rem;
+}
+
+.pg-intro-box p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--color-stone-400);
 }
 
 .pg-expression {
@@ -3603,4 +3809,31 @@
     font-size: 0.6rem;
     line-height: 1.12;
   }
+}
+
+/* Core Typography & Layout Utilities */
+.pg-gold-label {
+  color: var(--color-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.pg-heading-lg {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--color-stone-100);
+}
+
+.pg-sub-text {
+  margin-top: 1.5rem;
+  max-width: 36rem;
+  color: var(--color-stone-400);
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
