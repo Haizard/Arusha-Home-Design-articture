@@ -186,7 +186,7 @@ export default function Navbar() {
 
         <ul className="store-nav-links" role="list">
           {navLinks.map((link) => {
-            const showChevron = ["By Size", "By Style", "By Budget", "About"].includes(link.label);
+            const showChevron = ["By Size", "By Style", "By Budget", "About", "Materials"].includes(link.label);
             const menu = dropdowns[link.label];
             return (
               <li

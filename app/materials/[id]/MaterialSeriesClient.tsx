@@ -7,19 +7,25 @@ import {
   ArrowLeft,
   BadgeCheck,
   Boxes,
+  Download,
+  FileText,
   Grid3X3,
   Info,
   Layers3,
+  Maximize2,
   Palette,
+  Play,
   Ruler,
   Search,
   Sparkles,
+  Video,
 } from "lucide-react";
 import ColorViewer from "@/components/materials/ColorViewer";
 
 type Swatch = {
   name: string;
   image: string;
+  category?: string;
   look?: string;
   brand?: string;
   finish?: string;
@@ -28,6 +34,11 @@ type Swatch = {
 type TechSpec = {
   label?: string;
   value?: string;
+};
+
+type DownloadLink = {
+  label: string;
+  url: string;
 };
 
 type LookGalleryImage = {
@@ -59,6 +70,11 @@ type MaterialRange = {
   description?: string;
   logo?: string;
   heroImage?: string;
+  howItIsMade?: {
+    description?: string;
+    videoUrl?: string;
+  };
+  downloads?: DownloadLink[];
   techSpecs?: TechSpec[];
   swatches?: Swatch[];
   lookGroups?: LookGroup[];
@@ -88,100 +104,70 @@ function isUsableImageSrc(src: unknown): src is string {
   );
 }
 
-function getFallbackLookGroups(): LookGroup[] {
-  return [
-    {
-      name: "Bliss",
-      slug: "bliss",
-      description: "Soft, calm pairings for bright kitchens, wardrobes, and relaxed living spaces.",
-      coverImage: "/images/service-kitchen.jpg",
-      categories: [
-        {
-          name: "Iceberg White and Storm Grey",
-          slug: "iceberg-white-storm-grey",
-          coverImage: "/images/service-kitchen.jpg",
-          description: "A clean white and cool grey pairing for contemporary cabinet work.",
-          gallery: [{ image: "/images/service-kitchen.jpg" }, { image: "/images/prod-tv.jpg" }],
-        },
-        {
-          name: "Arden and Iceberg White",
-          slug: "arden-iceberg-white",
-          coverImage: "/images/prod-wardrobe.jpg",
-          description: "Warm wood detail balanced with crisp white surfaces.",
-          gallery: [{ image: "/images/prod-wardrobe.jpg" }, { image: "/images/service-interior.jpg" }],
-        },
-      ],
-    },
-    {
-      name: "Delight",
-      slug: "delight",
-      description: "Warmer combinations for expressive interiors and family spaces.",
-      coverImage: "/images/service-interior.jpg",
-      categories: [
-        {
-          name: "Natural Oak and Glacier",
-          slug: "natural-oak-glacier",
-          coverImage: "/images/service-interior.jpg",
-          description: "A bright timber-led combination with light neutral panels.",
-          gallery: [{ image: "/images/service-interior.jpg" }, { image: "/images/prod-bath.jpg" }],
-        },
-      ],
-    },
-    {
-      name: "Exhilaration",
-      slug: "exhilaration",
-      description: "Bolder contrast stories for premium statement joinery.",
-      coverImage: "/images/prod-tv.jpg",
-      categories: [
-        {
-          name: "Graphite and Warm Walnut",
-          slug: "graphite-warm-walnut",
-          coverImage: "/images/prod-tv.jpg",
-          description: "A darker premium pairing for media walls, feature storage, and suites.",
-          gallery: [{ image: "/images/prod-tv.jpg" }, { image: "/images/projects-hero.jpg" }],
-        },
-      ],
-    },
-  ];
+function getYouTubeEmbed(url: string) {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}` : null;
 }
 
 export default function MaterialSeriesClient({ range }: { range: MaterialRange }) {
   const swatches = (range.swatches ?? []).filter((swatch: Swatch) => isUsableImageSrc(swatch?.image) && swatch?.name);
   const cmsLookGroups = (range.lookGroups ?? []).filter((look) => look?.name);
-  const lookGroups = cmsLookGroups.length > 0 ? cmsLookGroups : getFallbackLookGroups();
+  const lookGroups = cmsLookGroups;
   const [selectedColor, setSelectedColor] = useState<Swatch | null>(null);
-  const [activeLook, setActiveLook] = useState("All");
-  const [activeLookGallery, setActiveLookGallery] = useState(() => getSlug(lookGroups[0]?.name, lookGroups[0]?.slug));
+  const [activeTab, setActiveTab] = useState("overview");
+  const [activeLookGallery, setActiveLookGallery] = useState(() => lookGroups[0] ? getSlug(lookGroups[0].name, lookGroups[0].slug) : "");
   const [query, setQuery] = useState("");
 
-  const looks = useMemo(() => {
-    const values = swatches.map((swatch: Swatch) => swatch.look || swatch.finish || "Other");
-    return ["All", ...Array.from(new Set<string>(values))];
-  }, [swatches]);
-
-  const filteredSwatches = useMemo(() => {
+  const categorizedSwatches = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-
-    return swatches.filter((swatch: Swatch) => {
-      const look = swatch.look || swatch.finish || "Other";
-      const haystack = [swatch.name, swatch.look, swatch.finish, swatch.brand].filter(Boolean).join(" ").toLowerCase();
-
-      if (activeLook !== "All" && look !== activeLook) return false;
-      if (normalizedQuery && !haystack.includes(normalizedQuery)) return false;
-      return true;
+    const filtered = swatches.filter((swatch) => {
+      const haystack = [swatch.name, swatch.look, swatch.finish, swatch.brand, swatch.category].filter(Boolean).join(" ").toLowerCase();
+      return !normalizedQuery || haystack.includes(normalizedQuery);
     });
-  }, [activeLook, query, swatches]);
+
+    const groups: Record<string, Swatch[]> = {};
+    filtered.forEach((swatch) => {
+      const cat = swatch.category || "General";
+      if (!groups[cat]) groups[cat] = [];
+      groups[cat].push(swatch);
+    });
+    return groups;
+  }, [query, swatches]);
 
   const activeGallery = lookGroups.find((look) => getSlug(look.name, look.slug) === activeLookGallery) ?? lookGroups[0];
   const lookCategories = activeGallery?.categories?.filter((category) => category?.name) ?? [];
   const heroImage = isUsableImageSrc(range.heroImage) ? range.heroImage : swatches[0]?.image || "/images/service-kitchen.jpg";
-  const firstSpecs = (range.techSpecs ?? []).slice(0, 4);
   const profiles = (range.profiles ?? []).filter(isUsableImageSrc);
   const rangeTitle = range.title || "Material range";
+  const youtubeUrl = range.howItIsMade?.videoUrl ? getYouTubeEmbed(range.howItIsMade.videoUrl) : null;
 
   return (
     <main className="material-detail-platform">
-      <section className="material-detail-hero">
+      {/* Floating Quick Links */}
+      <nav className="material-quick-links">
+        <a href="#hero" className="material-quick-link">
+            <Info size={20} />
+            <span>Overview</span>
+        </a>
+        <a href="#looks" className="material-quick-link">
+            <Maximize2 size={20} />
+            <span>Gallery</span>
+        </a>
+        <a href="#swatches" className="material-quick-link">
+            <Palette size={20} />
+            <span>Swatches</span>
+        </a>
+        {range.downloads?.length ? (
+            <a href="#downloads" className="material-quick-link">
+                <Download size={20} />
+                <span>Downloads</span>
+            </a>
+        ) : null}
+      </nav>
+
+      <section id="hero" className="material-detail-hero">
         <div className="material-detail-shell">
           <aside className="material-detail-sidebar">
             <Link href="/materials" className="material-back-link">
@@ -190,8 +176,8 @@ export default function MaterialSeriesClient({ range }: { range: MaterialRange }
 
             <div className="material-range-identity">
               {isUsableImageSrc(range.logo) ? (
-                <span>
-                  <Image src={range.logo} alt={`${rangeTitle} logo`} fill sizes="80px" />
+                <span className="material-logo-frame">
+                  <Image src={range.logo} alt={`${rangeTitle} logo`} fill sizes="80px" className="object-contain" />
                 </span>
               ) : (
                 <span className="material-logo-fallback">{String(range.title || "M").slice(0, 2)}</span>
@@ -204,65 +190,99 @@ export default function MaterialSeriesClient({ range }: { range: MaterialRange }
 
             <div className="material-detail-search">
               <Search size={16} />
-              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search color, look, finish" />
-            </div>
-
-            <div className="material-look-list">
-              {looks.map((look) => (
-                <button key={look} type="button" className={activeLook === look ? "active" : ""} onClick={() => setActiveLook(look)}>
-                  <Palette size={15} />
-                  {look}
-                </button>
-              ))}
+              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search color, category, finish" />
             </div>
 
             <div className="material-detail-stats">
-              <div><Grid3X3 size={17} /><strong>{swatches.length}</strong><span>swatches</span></div>
+              <div><Grid3X3 size={17} /><strong>{swatches.length}</strong><span>colors</span></div>
               <div><Ruler size={17} /><strong>{range.techSpecs?.length ?? 0}</strong><span>specs</span></div>
               <div><Boxes size={17} /><strong>{profiles.length}</strong><span>profiles</span></div>
             </div>
           </aside>
 
           <div className="material-detail-main">
-            <div className="material-detail-preview">
-              <Image src={heroImage} alt={rangeTitle} fill priority sizes="(max-width: 960px) 100vw, 62vw" className="material-detail-hero-image" />
-              <div className="material-detail-preview-overlay" />
-              <div className="material-detail-copy">
-                <p className="material-kicker">Range overview</p>
-                <h2>{rangeTitle}</h2>
-                <p>{range.description || "A curated material range with inspectable colors, profiles, and specification data for interior design decisions."}</p>
-              </div>
-              <div className="material-floating-spec">
-                <BadgeCheck size={18} />
-                <div>
-                  <strong>Specification ready</strong>
-                  <span>Compare color, finish, profile, and use case before customer consultation.</span>
-                </div>
-              </div>
-            </div>
+            <nav className="material-tabs-nav">
+                <button className={`material-tab-btn ${activeTab === 'overview' ? 'active' : ''}`} onClick={() => setActiveTab('overview')}>Range Overview</button>
+                {range.howItIsMade?.description && (
+                    <button className={`material-tab-btn ${activeTab === 'made' ? 'active' : ''}`} onClick={() => setActiveTab('made')}>How it's Made</button>
+                )}
+                {range.techSpecs?.length ? (
+                    <button className={`material-tab-btn ${activeTab === 'specs' ? 'active' : ''}`} onClick={() => setActiveTab('specs')}>Technical Data</button>
+                ) : null}
+                {range.downloads?.length ? (
+                    <button className={`material-tab-btn ${activeTab === 'downloads' ? 'active' : ''}`} onClick={() => setActiveTab('downloads')}>Downloads</button>
+                ) : null}
+            </nav>
 
-            {firstSpecs.length > 0 ? (
-              <div className="material-spec-strip">
-                {firstSpecs.map((spec: TechSpec, index: number) => (
-                  <div key={`${spec.label}-${index}`}>
-                    <span>{spec.label}</span>
-                    <strong>{spec.value}</strong>
-                  </div>
-                ))}
-              </div>
-            ) : null}
+            <div className="material-tab-content">
+                {activeTab === 'overview' && (
+                    <div className="material-detail-preview">
+                        <Image src={heroImage} alt={rangeTitle} fill priority sizes="(max-width: 960px) 100vw, 62vw" className="material-detail-hero-image" />
+                        <div className="material-detail-preview-overlay" />
+                        <div className="material-detail-copy">
+                            <p className="material-kicker">Product range</p>
+                            <h2>{rangeTitle}</h2>
+                            <p>{range.description || "A curated material range with inspectable colors, profiles, and specification data."}</p>
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'made' && (
+                    <div className="material-text-block">
+                        <p className="material-kicker"><Play size={14} /> Process</p>
+                        <h2>Manufacturing excellence</h2>
+                        <p>{range.howItIsMade?.description}</p>
+                        {youtubeUrl && (
+                            <div className="material-video-wrapper">
+                                <iframe src={youtubeUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {activeTab === 'specs' && (
+                    <div className="material-spec-panel">
+                        <h2>Specification table</h2>
+                        <div className="material-spec-table">
+                            {(range.techSpecs ?? []).map((spec, index) => (
+                                <div key={`${spec.label}-${index}`}>
+                                    <span>{spec.label}</span>
+                                    <strong>{spec.value}</strong>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'downloads' && (
+                    <div className="material-download-panel">
+                        <h2>Brochures & Guides</h2>
+                        <div className="material-download-list">
+                            {(range.downloads ?? []).map((dl, index) => (
+                                <a key={index} href={dl.url} className="material-download-item">
+                                    <div>
+                                        <strong>{dl.label}</strong>
+                                        <small>PDF Document</small>
+                                    </div>
+                                    <FileText size={20} />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
           </div>
         </div>
       </section>
 
-      {lookGroups.length > 0 ? (
-        <section className="material-look-gallery">
+      {lookGroups.length > 0 && (
+        <section id="looks" className="material-look-gallery">
           <div className="material-section-heading compact">
             <div>
-              <p className="material-kicker">Choose a look</p>
-              <h2>Start with a mood, then open the exact colour pairing.</h2>
+              <p className="material-kicker">Get inspired</p>
+              <h2>Pairings & Applications</h2>
             </div>
-            <p>{lookGroups.length} curated looks managed from the admin CMS</p>
+            <p>Explore how {rangeTitle} looks in real-world settings.</p>
           </div>
 
           <div className="material-look-workbench">
@@ -284,15 +304,13 @@ export default function MaterialSeriesClient({ range }: { range: MaterialRange }
                       <Image src={coverImage} alt={look.name || "Material look"} fill sizes="88px" />
                     </span>
                     <strong>{look.name}</strong>
-                    <small>{look.categories?.length ?? 0} combinations</small>
                   </button>
                 );
               })}
             </div>
 
             <div className="material-look-categories">
-              {lookCategories.length > 0 ? (
-                lookCategories.map((category) => {
+                {lookCategories.map((category) => {
                   const lookSlug = getSlug(activeGallery?.name, activeGallery?.slug);
                   const categorySlug = getSlug(category.name, category.slug);
                   const coverImage = isUsableImageSrc(category.coverImage)
@@ -309,97 +327,53 @@ export default function MaterialSeriesClient({ range }: { range: MaterialRange }
                         <Image src={coverImage} alt={category.name || "Look category"} fill sizes="(max-width: 900px) 100vw, 28vw" />
                       </span>
                       <span className="material-look-category-body">
-                        <small>{activeGallery?.name}</small>
                         <strong>{category.name}</strong>
-                        <em>{category.description || `${category.gallery?.length ?? 0} gallery images`}</em>
+                        <em>{category.description || "View application gallery"}</em>
                       </span>
                     </Link>
                   );
-                })
-              ) : (
-                <div className="material-empty-panel">
-                  <Info size={24} />
-                  <h3>No combinations added for this look</h3>
-                  <p>Add categories and gallery images from the admin materials editor.</p>
-                </div>
-              )}
+                })}
             </div>
           </div>
         </section>
-      ) : null}
+      )}
 
-      <section className="material-detail-content">
+      <section id="swatches" className="material-detail-content">
         <div className="material-section-heading compact">
           <div>
-            <p className="material-kicker">Color range</p>
-            <h2>Inspect every swatch like a product.</h2>
+            <p className="material-kicker">Colour range</p>
+            <h2>Explore swatches by family</h2>
           </div>
-          <p>{filteredSwatches.length} colors shown</p>
+          <p>{swatches.length} colours total</p>
         </div>
 
-        {filteredSwatches.length > 0 ? (
-          <div className="material-detail-swatch-grid">
-            {filteredSwatches.map((swatch: Swatch, index: number) => (
-              <button key={`${swatch.name}-${index}`} type="button" className="material-detail-swatch" onClick={() => setSelectedColor(swatch)}>
-                <span className="material-detail-swatch-image">
-                  <Image src={swatch.image} alt={swatch.name} fill sizes="(max-width: 700px) 50vw, (max-width: 1100px) 25vw, 18vw" />
-                  <span><Sparkles size={15} /> Inspect</span>
-                </span>
-                <span className="material-detail-swatch-body">
-                  <strong>{swatch.name}</strong>
-                  <small>{swatch.look || swatch.finish || "Material finish"}</small>
-                </span>
-              </button>
-            ))}
-          </div>
+        {Object.keys(categorizedSwatches).length > 0 ? (
+          Object.entries(categorizedSwatches).map(([category, items]) => (
+            <div key={category} className="material-swatch-category">
+                <h3><Palette size={18} /> {category}</h3>
+                <div className="material-detail-swatch-grid">
+                    {items.map((swatch, index) => (
+                    <button key={`${swatch.name}-${index}`} type="button" className="material-detail-swatch" onClick={() => setSelectedColor(swatch)}>
+                        <span className="material-detail-swatch-image">
+                            <Image src={swatch.image} alt={swatch.name} fill sizes="(max-width: 700px) 50vw, 25vw" />
+                            <span><Sparkles size={15} /> Inspect</span>
+                        </span>
+                        <span className="material-detail-swatch-body">
+                            <strong>{swatch.name}</strong>
+                            <small>{swatch.finish || "Finish"}</small>
+                        </span>
+                    </button>
+                    ))}
+                </div>
+            </div>
+          ))
         ) : (
           <div className="material-empty-panel">
             <Info size={24} />
-            <h3>No swatches match this filter</h3>
-            <p>Clear the search or choose another look category.</p>
+            <h3>No swatches match your search</h3>
           </div>
         )}
       </section>
-
-      {(range.techSpecs?.length ?? 0) > 0 || profiles.length > 0 ? (
-        <section className="material-detail-bottom">
-          <div className="material-spec-panel">
-            <div>
-              <p className="material-kicker">Technical data</p>
-              <h2>Specification table</h2>
-            </div>
-            <div className="material-spec-table">
-              {(range.techSpecs ?? []).map((spec: TechSpec, index: number) => (
-                <div key={`${spec.label}-${index}`}>
-                  <span>{spec.label}</span>
-                  <strong>{spec.value}</strong>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {profiles.length > 0 ? (
-            <div className="material-profile-panel">
-              <div>
-                <p className="material-kicker">Profiles</p>
-                <h2>Edge and section previews</h2>
-              </div>
-              <div className="material-profile-grid">
-                {profiles.map((profile: string, index: number) => (
-                  <div key={`${profile}-${index}`}>
-                    <Image src={profile} alt={`${rangeTitle} profile ${index + 1}`} fill sizes="(max-width: 900px) 50vw, 20vw" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div className="material-profile-panel empty">
-              <Layers3 size={24} />
-              <h2>Profiles can be added from the admin dashboard.</h2>
-            </div>
-          )}
-        </section>
-      ) : null}
 
       {selectedColor ? (
         <ColorViewer swatch={selectedColor} onClose={() => setSelectedColor(null)} />
@@ -407,3 +381,4 @@ export default function MaterialSeriesClient({ range }: { range: MaterialRange }
     </main>
   );
 }
+

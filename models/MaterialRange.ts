@@ -8,9 +8,15 @@ const TechSpecSchema = new Schema({
 const SwatchSchema = new Schema({
   name: { type: String, required: true }, // e.g. "Thornbury"
   image: { type: String, required: true }, // High-res swatch image
+  category: { type: String }, // e.g. "Woodgrains", "Solid Colours"
   look: { type: String }, // e.g. "Delight"
   brand: { type: String }, // e.g. "Monteo+"
   finish: { type: String }, // e.g. "MelaWood SupaTexture"
+});
+
+const DownloadSchema = new Schema({
+  label: { type: String, required: true },
+  url: { type: String, required: true },
 });
 
 const LookGalleryImageSchema = new Schema({
@@ -41,6 +47,11 @@ const MaterialRangeSchema = new Schema({
   description: { type: String },
   logo: { type: String }, // URL to brand logo
   heroImage: { type: String }, // Main lifestyle image for the series
+  howItIsMade: {
+    description: { type: String },
+    videoUrl: { type: String }, // YouTube/Vimeo link
+  },
+  downloads: [DownloadSchema],
   techSpecs: [TechSpecSchema],
   swatches: [SwatchSchema],
   lookGroups: [LookGroupSchema],

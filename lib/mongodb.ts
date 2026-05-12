@@ -30,9 +30,9 @@ async function connectDB() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      serverSelectionTimeoutMS: 10000,
-      connectTimeoutMS: 10000,
-      socketTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 20000,
+      connectTimeoutMS: 20000,
+      socketTimeoutMS: 30000,
       // NOTE: family:4 intentionally removed — it prevents SRV DNS from resolving
       // on networks whose DNS server does not support SRV records over IPv4-only paths.
     };
