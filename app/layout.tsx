@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans, Space_Grotesk, Italiana, Cormorant_Garamond } from "next/font/google";
+import { Playfair_Display, DM_Sans, Space_Grotesk, Italiana, Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
 import "./storefront.css";
 import ScrollProgress from "@/components/ui/ScrollProgress";
@@ -34,6 +34,13 @@ const italiana = Italiana({
   display: "swap",
 });
 
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
@@ -61,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body
-        className={`${playfair.variable} ${dmSans.variable} ${spaceGrotesk.variable} ${italiana.variable} ${cormorant.variable}`}
+        className={`${playfair.variable} ${dmSans.variable} ${spaceGrotesk.variable} ${italiana.variable} ${cormorant.variable} ${outfit.variable}`}
         style={{ fontFamily: "var(--font-dm-sans), system-ui, sans-serif" }}
       >
         <SmoothScrollProvider>
