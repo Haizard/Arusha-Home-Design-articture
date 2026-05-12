@@ -4236,3 +4236,35 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Category Filters */
+.material-category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.material-cat-pill {
+  padding: 0.4rem 0.8rem;
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a0a0a0;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.material-cat-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.material-cat-pill.active {
+  background: #c5a059;
+  border-color: #c5a059;
+  color: #000;
+  font-weight: 600;
+}

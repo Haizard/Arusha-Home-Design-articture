@@ -119,12 +119,20 @@ export default function MaterialSeriesClient({ range }: { range: MaterialRange }
   const [activeTab, setActiveTab] = useState("overview");
   const [activeLookGallery, setActiveLookGallery] = useState(() => lookGroups[0] ? getSlug(lookGroups[0].name, lookGroups[0].slug) : "");
   const [query, setQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const swatchCategories = useMemo(() => {
+    const cats = new Set(swatches.map(s => s.category || "General"));
+    return ["All", ...Array.from(cats)].sort();
+  }, [swatches]);
 
   const categorizedSwatches = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     const filtered = swatches.filter((swatch) => {
-      const haystack = [swatch.name, swatch.look, swatch.finish, swatch.brand, swatch.category].filter(Boolean).join(" ").toLowerCase();
-      return !normalizedQuery || haystack.includes(normalizedQuery);
+      const cat = swatch.category || "General";
+      const matchesQuery = !normalizedQuery || [swatch.name, swatch.look, swatch.finish, swatch.brand, cat].filter(Boolean).join(" ").toLowerCase().includes(normalizedQuery);
+      const matchesCategory = selectedCategory === "All" || cat === selectedCategory;
+      return matchesQuery && matchesCategory;
     });
 
     const groups: Record<string, Swatch[]> = {};
@@ -192,6 +200,20 @@ export default function MaterialSeriesClient({ range }: { range: MaterialRange }
               <Search size={16} />
               <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search color, category, finish" />
             </div>
+
+            {swatchCategories.length > 2 && (
+              <div className="material-category-filters">
+                {swatchCategories.map(cat => (
+                  <button 
+                    key={cat} 
+                    className={`material-cat-pill ${selectedCategory === cat ? 'active' : ''}`}
+                    onClick={() => setSelectedCategory(cat)}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            )}
 
             <div className="material-detail-stats">
               <div><Grid3X3 size={17} /><strong>{swatches.length}</strong><span>colors</span></div>
