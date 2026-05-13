@@ -29,29 +29,52 @@ interface ProductRange {
     swatches: Swatch[];
 }
 
-function parseSwatchPage(filePath: string): Swatch | null {
-    if (!fs.existsSync(filePath)) return null;
-    const html = fs.readFileSync(filePath, 'utf8');
+function cleanText(value: string | undefined) {
+    return (value || '').replace(/\s+/g, ' ').trim();
+}
+
+function usableText(value: string | undefined) {
+    const text = cleanText(value);
+    return text && text !== 'Colour' && text !== 'Color' && text !== 'Product' ? text : '';
+}
+
+function resolvePgUrl(value: string | undefined) {
+    const src = cleanText(value);
+    if (!src || src.startsWith('data:image/svg')) return '';
+    if (src.startsWith('//')) return `https:${src}`;
+    if (src.startsWith('/')) return `https://pgbison.co.za${src}`;
+    return src;
+}
+
+function parseField($: cheerio.CheerioAPI, label: string) {
+    const field = $('.field-label').filter((_, item) => cleanText($(item).text()).startsWith(label)).first();
+    const parentText = cleanText(field.parent().text());
+    return cleanText(parentText.replace(label, ''));
+}
+
+function parseSwatchPage(filePath: string, fallbackName: string, fallbackImage: string): Swatch | null {
+    if (!fs.existsSync(filePath) && !fallbackImage) return null;
+    const html = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : '';
     const $ = cheerio.load(html);
 
-    let name = $('h1:contains("Colour")').next('p').text().trim();
-    if (!name) {
-        name = $('h1').text().trim();
-    }
-    if (!name || name === 'Colour') {
-        name = path.basename(filePath, '.html');
-    }
+    const fieldName = parseField($, 'Colour');
+    const h1Name = $('h1').first().text();
+    const name = usableText(fieldName) || usableText(fallbackName) || usableText(h1Name) || path.basename(filePath, '.html');
     
     // Main image from the large scrollable image
-    const image = $('.scrollable-image-container').attr('data-src') || $('.scrollable-image-container').attr('src') || '';
+    const image = resolvePgUrl(
+        $('.scrollable-image-container').attr('data-src')
+        || $('.scrollable-image-container').attr('src')
+        || fallbackImage
+    );
     
-    const category = $('.field-label:contains("Brand")').parent().find('p').text().trim(); // Note: clone layout uses Brand as category sometimes
-    const look = $('.field-label:contains("Look")').parent().find('p').text().trim();
+    const look = parseField($, 'Look');
     
     const finishes: string[] = [];
     $('.finish-item').each((_, item) => {
-        finishes.push($(item).text().trim());
+        finishes.push(cleanText($(item).text()));
     });
+    const finish = finishes.join(', ') || parseField($, 'Finish');
 
     return {
         name,
@@ -59,7 +82,7 @@ function parseSwatchPage(filePath: string): Swatch | null {
         category: '', // Will determine from range
         look,
         brand: '', // Will determine from range
-        finish: finishes.join(', ')
+        finish
     };
 }
 
@@ -113,6 +136,7 @@ function main() {
             
             console.log(`  [DEBUG] Container ${i} group: "${groupCategory}", links found: ${swatchLinks.length}`);
 
+            const seenHrefs = new Set<string>();
             swatchLinks.each((_, a) => {
                 const href = $(a).attr('href') || '';
                 // Match pattern like /products/supagloss/urbino or /products/melawood/nata
@@ -120,22 +144,25 @@ function main() {
                 // Updated regex to be more flexible: looks for /products/ followed by two segments
                 const match = href.match(/\/products\/([^\/]+)\/([^\/?#]+)/);
                 
-                if (match) {
+                if (match && !seenHrefs.has(href)) {
+                    seenHrefs.add(href);
                     const subDir = match[1];
-                    const swatchSlug = match[2];
+                    const swatchSlug = match[2].replace(/\/$/, '');
+                    const fallbackName = cleanText($(a).text()) || $(a).find('img').attr('alt') || swatchSlug;
+                    const fallbackImage = resolvePgUrl($(a).find('img').attr('data-src') || $(a).find('img').attr('src'));
                     
                     const swatchFilePath = path.join(CLONE_PATH, 'products', subDir, `${swatchSlug}.html`);
                     
                     // console.log(`  [DEBUG] Attempting to parse swatch: ${swatchSlug} at ${swatchFilePath}`);
 
-                    const swatchData = parseSwatchPage(swatchFilePath);
+                    const swatchData = parseSwatchPage(swatchFilePath, fallbackName, fallbackImage);
                     if (swatchData) {
                         swatchData.brand = title;
                         // If we found a group category (e.g. "Woodgrains"), use it, otherwise fallback to range category
                         swatchData.category = groupCategory || swatchData.category;
                         
                         // Avoid duplicates if the same swatch appears in multiple carousels (unlikely but safe)
-                        if (!swatches.find(s => s.name === swatchData.name)) {
+                        if (!swatches.find(s => s.name === swatchData.name && s.image === swatchData.image)) {
                             swatches.push(swatchData);
                         }
                     } else {

@@ -13,6 +13,7 @@ interface DesignUsed {
 interface ProductRange {
     name: string;
     image: string;
+    images: string[];
 }
 
 interface LookCategory {
@@ -80,7 +81,7 @@ function parseLookPage(lookSlug: string): LookCategory | null {
         // Product name usually in the link or image alt
         const productName = img.attr('alt') || 'Product';
         if (src) {
-            productRange.push({ name: productName, image: src });
+            productRange.push({ name: productName, image: src, images: [src] });
         }
     });
 

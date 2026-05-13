@@ -5,6 +5,10 @@ type MongooseCache = {
   promise: Promise<typeof mongoose> | null;
 };
 
+type ConnectOptions = {
+  quiet?: boolean;
+};
+
 declare global {
   var mongoose: MongooseCache | undefined;
 }
@@ -16,7 +20,7 @@ declare global {
  */
 const cached = global.mongoose ?? (global.mongoose = { conn: null, promise: null });
 
-async function connectDB() {
+async function connectDB(options: ConnectOptions = {}) {
   const URI = process.env.MONGODB_URI;
   if (!URI) {
     console.error('❌ MONGODB_URI is missing in environment variables');
@@ -30,14 +34,16 @@ async function connectDB() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      serverSelectionTimeoutMS: 20000,
-      connectTimeoutMS: 20000,
-      socketTimeoutMS: 30000,
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
+      socketTimeoutMS: 10000,
       // NOTE: family:4 intentionally removed — it prevents SRV DNS from resolving
       // on networks whose DNS server does not support SRV records over IPv4-only paths.
     };
 
-    console.log('⏳ Connecting to MongoDB...');
+    if (!options.quiet) {
+      console.log('⏳ Connecting to MongoDB...');
+    }
     cached.promise = mongoose.connect(URI, opts)
       .then((mg) => {
         console.log('✅ MongoDB Connected Successfully');
@@ -46,16 +52,18 @@ async function connectDB() {
       .catch((err) => {
         // Reset so the NEXT request will retry a fresh connection
         cached.promise = null;
-        console.error('❌ MongoDB Connection Error:', err.message);
-        console.error(
-          '\n🔧 Atlas checklist — work through these steps:\n' +
-          '  1. Open https://cloud.mongodb.com → find your cluster\n' +
-          '     → if it shows "Paused", click Resume and wait ~1 min\n' +
-          '  2. Network Access → Add IP Address → 0.0.0.0/0  (allow all IPs)\n' +
-          '  3. Database Access → confirm user "haithammisape_db_user" exists\n' +
-          '     with the password in your MONGODB_URI\n' +
-          '  4. Re-check the MONGODB_URI value in your .env file\n'
-        );
+        if (!options.quiet) {
+          console.error('❌ MongoDB Connection Error:', err.message);
+          console.error(
+            '\n🔧 Atlas checklist — work through these steps:\n' +
+            '  1. Open https://cloud.mongodb.com → find your cluster\n' +
+            '     → if it shows "Paused", click Resume and wait ~1 min\n' +
+            '  2. Network Access → Add IP Address → 0.0.0.0/0  (allow all IPs)\n' +
+            '  3. Database Access → confirm user "haithammisape_db_user" exists\n' +
+            '     with the password in your MONGODB_URI\n' +
+            '  4. Re-check the MONGODB_URI value in your .env file\n'
+          );
+        }
         throw err;
       });
   }

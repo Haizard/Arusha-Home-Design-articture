@@ -41,7 +41,10 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            ]
           }
         ]
       },
@@ -115,7 +118,10 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            ]
           }
         ]
       },
@@ -175,7 +181,10 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            ]
           }
         ]
       },
@@ -204,7 +213,10 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            ]
           }
         ]
       }
@@ -281,11 +293,17 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png",
+            "images": [
+              "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            ]
           },
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            ]
           }
         ]
       },
@@ -314,11 +332,17 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            ]
           },
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            ]
           }
         ]
       },
@@ -347,15 +371,24 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            ]
           },
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            ]
           },
           {
             "name": "alt tag",
-            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png",
+            "images": [
+              "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            ]
           }
         ]
       },
@@ -384,11 +417,17 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            ]
           },
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            ]
           }
         ]
       }
@@ -460,7 +499,10 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            ]
           }
         ]
       },
@@ -485,7 +527,10 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            ]
           }
         ]
       },
@@ -518,11 +563,17 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            ]
           },
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            ]
           }
         ]
       },
@@ -551,11 +602,17 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            ]
           },
           {
             "name": "alt tag",
-            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png",
+            "images": [
+              "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            ]
           }
         ]
       },
@@ -588,11 +645,17 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png",
+            "images": [
+              "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            ]
           },
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Formica_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Formica_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/Formica_2.webp"
+            ]
           }
         ]
       }
@@ -653,11 +716,17 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png",
+            "images": [
+              "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            ]
           },
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+            ]
           }
         ]
       },
@@ -697,7 +766,10 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            ]
           }
         ]
       },
@@ -722,7 +794,10 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png",
+            "images": [
+              "/wp-content/uploads/2024/08/SupaGloss_2.png"
+            ]
           }
         ]
       },
@@ -751,7 +826,10 @@
         "productRange": [
           {
             "name": "alt tag",
-            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp",
+            "images": [
+              "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+            ]
           }
         ]
       }

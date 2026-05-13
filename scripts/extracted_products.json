@@ -168,10 +168,34 @@
     ],
     "swatches": [
       {
-        "name": "Product",
+        "name": "Lannach",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/08/lucca-scaled.jpg",
         "category": "Woodgrains",
         "look": "Bliss",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FT Formica Lifeseal® Texture"
+      },
+      {
+        "name": "Torra",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Torra-A.png",
+        "category": "Woodgrains",
+        "look": "Delight",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FT Formica Lifeseal® Texture"
+      },
+      {
+        "name": "Saxon Oak",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_FLSW_SaxonOak.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FT Formica Lifeseal® Texture"
+      },
+      {
+        "name": "Martinique",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/07/New2023_PGBison_FLSW_Martinique.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
         "brand": "Formica Lifeseal Worktops",
         "finish": "FT Formica Lifeseal® Texture"
       },
@@ -224,12 +248,108 @@
         "finish": "FG Formica Lifeseal® Gloss"
       },
       {
+        "name": "Brooklyn Loft",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_FLSW_BrooklynLoft.jpg",
+        "category": "Stones & Structure",
+        "look": "Bliss",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FT Formica Lifeseal® Texture"
+      },
+      {
+        "name": "Malbacco",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/imkp0fFh.jpeg",
+        "category": "Stones & Structure",
+        "look": "Bliss",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FT Formica Lifeseal® Texture"
+      },
+      {
+        "name": "Kristall",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_FLSW_Kristall.jpg",
+        "category": "Stones & Structure",
+        "look": "Exhilaration",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Catalan",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_FLSW_Catalan.jpg",
+        "category": "Stones & Structure",
+        "look": "Ecstacy",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Antares",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/07/New2023_PGBison_FLSW_Antares.jpg",
+        "category": "Stones & Structure",
+        "look": "Delight",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Vento Blu",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_FLSW_VentoBlu.jpg",
+        "category": "Stones & Structure",
+        "look": "Bliss",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Moreno",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_FLSW_Moreno.jpg",
+        "category": "Stones & Structure",
+        "look": "Delight",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Akashi",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/New2023_PGBison_FLSW_Akashi.jpg",
+        "category": "Stones & Structure",
+        "look": "Exhilaration",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Volans",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/07/New2023_PGBison_FLSW_Volans.jpg",
+        "category": "Stones & Structure",
+        "look": "Delight",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FT Formica Lifeseal® Texture"
+      },
+      {
+        "name": "Cassiopeia",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/07/New2023_PGBison_FLSW_Cassiopeia.jpg",
+        "category": "Stones & Structure",
+        "look": "Exhilaration",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
         "name": "Tucana",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_FLSW_Tucana.jpg",
         "category": "Stones & Structure",
         "look": "Exhilaration",
         "brand": "Formica Lifeseal Worktops",
         "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Comet Granite",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_FLSW_CometGranite.jpg",
+        "category": "Stones & Structure",
+        "look": "Delight",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Black Slate",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_FLSW_BlackSlate.jpg",
+        "category": "Stones & Structure",
+        "look": "Bliss",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FT Formica Lifeseal® Texture"
       },
       {
         "name": "Aquila",
@@ -240,12 +360,28 @@
         "finish": "FG Formica Lifeseal® Gloss"
       },
       {
+        "name": "White",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_FLSW_White.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FT Formica Lifeseal® Texture"
+      },
+      {
         "name": "Dunblane Grey",
         "image": "https://pgbison.co.za/wp-content/uploads/2025/12/10827-ST_DunblaneGrey_Acuity-scaled.jpg",
         "category": "Solid Colours",
         "look": "Delight",
         "brand": "Formica Lifeseal Worktops",
         "finish": "SA Melawood SupaTexture® Acuity"
+      },
+      {
+        "name": "Black",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_FLSW_Black.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FT Formica Lifeseal® Texture"
       }
     ]
   },
@@ -375,12 +511,164 @@
         "finish": "MI Melawood® Intrinsic"
       },
       {
-        "name": "Product",
+        "name": "Black Cherry",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Black_Cherry_1000x1500mm-72dpi-CROP-1-scaled.jpg",
         "category": "Woodgrains",
         "look": "Bliss",
         "brand": "I-Melawood",
         "finish": "MP Melawood® Peen"
+      },
+      {
+        "name": "Lockeport",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Lockeport_1000x1500mm-72dpi-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "ML Melawood® Linear"
+      },
+      {
+        "name": "Arden",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Arden_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Bliss",
+        "brand": "I-Melawood",
+        "finish": "MN Melawood® Natural Touch"
+      },
+      {
+        "name": "Shale Oak",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Shale_Oak_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Bliss",
+        "brand": "I-Melawood",
+        "finish": "MP Melawood® Peen"
+      },
+      {
+        "name": "Esperanza Oak",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Esperanza_Oak_1000x1500mm-72dpi-CROP--scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "ML Melawood® Linear"
+      },
+      {
+        "name": "Stonetown",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Stonetown_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "ML Melawood® Linear"
+      },
+      {
+        "name": "Brookhill",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Brookhill_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Delight",
+        "brand": "I-Melawood",
+        "finish": "MF Melawood® Fusion"
+      },
+      {
+        "name": "Vardo",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Vardo_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Bliss",
+        "brand": "I-Melawood",
+        "finish": "MN Melawood® Natural Touch"
+      },
+      {
+        "name": "Kirkwall",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Kirkwall_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Delight",
+        "brand": "I-Melawood",
+        "finish": "ML Melawood® Linear"
+      },
+      {
+        "name": "Camden",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Camden_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "ML Melawood® Linear"
+      },
+      {
+        "name": "Greythorne",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Greythorne_1000x1500mm-72dpi--scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "I-Melawood",
+        "finish": "MF Melawood® Fusion"
+      },
+      {
+        "name": "Haven",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Haven_1000x1500mm-72dpi-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "I-Melawood",
+        "finish": "MF Melawood® Fusion"
+      },
+      {
+        "name": "Harvard Cherry",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_MW_HarvardCherry-1.jpg",
+        "category": "Woodgrains",
+        "look": "Delight",
+        "brand": "I-Melawood",
+        "finish": "MF Melawood® Fusion"
+      },
+      {
+        "name": "Alegria",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Alegria_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Delight",
+        "brand": "I-Melawood",
+        "finish": "ML Melawood® Linear"
+      },
+      {
+        "name": "Nosara",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Nosara_1000x1500mm-72dpi--scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "ML Melawood® Linear"
+      },
+      {
+        "name": "Monument Oak",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Monument_Oak_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "ML Melawood® Linear"
+      },
+      {
+        "name": "African Wenge",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/African_Wenge_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "I-Melawood",
+        "finish": "MF Melawood® Fusion"
+      },
+      {
+        "name": "Luca Polenta",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Luca_Polenta_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Stones & Structure",
+        "look": "BlissDelightEcstacyExhilaration",
+        "brand": "I-Melawood",
+        "finish": "MF Melawood® Fusion"
+      },
+      {
+        "name": "Luca Urban",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Luca_Urban_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Stones & Structure",
+        "look": "BlissDelightEcstacyExhilaration",
+        "brand": "I-Melawood",
+        "finish": "MF Melawood® Fusion"
+      },
+      {
+        "name": "Anchor Point",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Anchor_Point_1000x1500mm-72dpi--scaled.jpg",
+        "category": "Stones & Structure",
+        "look": "Exhilaration",
+        "brand": "I-Melawood",
+        "finish": "MN Melawood® Natural Touch"
       },
       {
         "name": "Rioverde",
@@ -407,6 +695,30 @@
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
       },
       {
+        "name": "Iceberg White",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_IcebergWhite.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Cappuccino",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/3.png",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
+        "name": "Folkstone Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_FolkstoneGrey.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
         "name": "Congo",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_Congo.jpg",
         "category": "Solid Colours",
@@ -415,8 +727,40 @@
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
       },
       {
+        "name": "Dunblane Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_DunblaneGrey.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, FT Formica Lifeseal® Texture"
+      },
+      {
+        "name": "Caraz",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/caraz.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Naran",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/New2023_PGBison_MW_Naran.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
         "name": "Kara Blu",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/12/New2023_PGBison_Supa_KaraBlu.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Muidan",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/New2023_PGBison_MW_Muidan.jpg",
         "category": "Solid Colours",
         "look": "Ecstacy",
         "brand": "I-Melawood",
@@ -431,12 +775,28 @@
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
       },
       {
+        "name": "Kalapana",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/kalapana.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
         "name": "Storm Grey",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/12/2023_PGBison_Supa_StormGrey.jpg",
         "category": "Solid Colours",
         "look": "Delight",
         "brand": "I-Melawood",
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
+        "name": "Super Black",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Super-Black-M-SG-2016-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
       }
     ]
   },
@@ -479,10 +839,34 @@
         "finish": "SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
       },
       {
-        "name": "Product",
+        "name": "Treviso",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Treviso_1000x1500mm-72dpi-scaled.jpg",
         "category": "Woodgrains",
         "look": "Delight",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Banbridge",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Banbridge_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Tunari",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Tunari_1000x1500mm-72dpi--scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Napoca",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Napoca_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
         "brand": "MelaWood SupaGloss",
         "finish": "SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
       },
@@ -491,6 +875,14 @@
         "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Urbino_1000x1500mm-72dpi--scaled.jpg",
         "category": "Stones & Structure",
         "look": "Delight",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®"
+      },
+      {
+        "name": "Azzano",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Azzano_1000x1500mm-72dpi-CROP--scaled.jpg",
+        "category": "Stones & Structure",
+        "look": "Exhilaration",
         "brand": "MelaWood SupaGloss",
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®"
       },
@@ -519,6 +911,38 @@
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
       },
       {
+        "name": "Iceberg White",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_IcebergWhite.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Summer White",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_Supa_SummerWhite.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®"
+      },
+      {
+        "name": "Cappuccino",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/3.png",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
+        "name": "Folkstone Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_FolkstoneGrey.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
         "name": "Congo",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_Congo.jpg",
         "category": "Solid Colours",
@@ -527,8 +951,40 @@
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
       },
       {
+        "name": "Dunblane Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_DunblaneGrey.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, FT Formica Lifeseal® Texture"
+      },
+      {
+        "name": "Caraz",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/caraz.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Naran",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/New2023_PGBison_MW_Naran.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
         "name": "Kara Blu",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/12/New2023_PGBison_Supa_KaraBlu.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Muidan",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/New2023_PGBison_MW_Muidan.jpg",
         "category": "Solid Colours",
         "look": "Ecstacy",
         "brand": "MelaWood SupaGloss",
@@ -543,12 +999,28 @@
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
       },
       {
+        "name": "Kalapana",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/kalapana.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
         "name": "Storm Grey",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/12/2023_PGBison_Supa_StormGrey.jpg",
         "category": "Solid Colours",
         "look": "Delight",
         "brand": "MelaWood SupaGloss",
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
+        "name": "Super Black",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Super-Black-M-SG-2016-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
       }
     ]
   },
@@ -579,8 +1051,16 @@
     ],
     "swatches": [
       {
-        "name": "Product",
+        "name": "Banbridge",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Banbridge_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Tunari",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Tunari_1000x1500mm-72dpi--scaled.jpg",
         "category": "Woodgrains",
         "look": "Exhilaration",
         "brand": "MelaWood SupaMatt",
@@ -591,6 +1071,14 @@
         "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Urbino_1000x1500mm-72dpi--scaled.jpg",
         "category": "Stones & Structure",
         "look": "Delight",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®"
+      },
+      {
+        "name": "Azzano",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Azzano_1000x1500mm-72dpi-CROP--scaled.jpg",
+        "category": "Stones & Structure",
+        "look": "Exhilaration",
         "brand": "MelaWood SupaMatt",
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®"
       },
@@ -619,12 +1107,76 @@
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
       },
       {
+        "name": "Iceberg White",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_IcebergWhite.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Summer White",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/2023_PGBison_Supa_SummerWhite.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®"
+      },
+      {
+        "name": "Folkstone Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_FolkstoneGrey.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
         "name": "Congo",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_Congo.jpg",
         "category": "Solid Colours",
         "look": "Ecstacy",
         "brand": "MelaWood SupaMatt",
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
+        "name": "Dunblane Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_DunblaneGrey.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, FT Formica Lifeseal® Texture"
+      },
+      {
+        "name": "Caraz",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/caraz.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Naran",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/New2023_PGBison_MW_Naran.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Kara Blu",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/12/New2023_PGBison_Supa_KaraBlu.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Muidan",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/New2023_PGBison_MW_Muidan.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
       },
       {
         "name": "Petrol Blue",
@@ -635,12 +1187,28 @@
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
       },
       {
+        "name": "Kalapana",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/kalapana.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
         "name": "Storm Grey",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/12/2023_PGBison_Supa_StormGrey.jpg",
         "category": "Solid Colours",
         "look": "Delight",
         "brand": "MelaWood SupaMatt",
         "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
+        "name": "Super Black",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Super-Black-M-SG-2016-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
       }
     ]
   },
@@ -703,10 +1271,34 @@
         "finish": "SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
       },
       {
-        "name": "Product",
+        "name": "Treviso",
         "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Treviso_1000x1500mm-72dpi-scaled.jpg",
         "category": "Woodgrains",
         "look": "Delight",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Banbridge",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Banbridge_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Tunari",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Tunari_1000x1500mm-72dpi--scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Napoca",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Napoca_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
         "brand": "MelaWood SupaTexture",
         "finish": "SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
       },

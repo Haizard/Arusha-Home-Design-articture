@@ -43,9 +43,19 @@ async function downloadImage(url: string): Promise<string | null> {
             writer.on('error', reject);
         });
     } catch (error) {
-        console.error(`Failed to download ${url}:`, (error as any).message);
+        const message = error instanceof Error ? error.message : String(error);
+        console.error(`Failed to download ${url}:`, message);
         return url; // Keep remote if failed
     }
+}
+
+async function downloadImageList(urls: string[] | undefined): Promise<string[]> {
+    const migrated: string[] = [];
+    for (const url of urls || []) {
+        const next = await downloadImage(url);
+        if (next) migrated.push(next);
+    }
+    return migrated;
 }
 
 async function migrateAssets() {
@@ -54,7 +64,12 @@ async function migrateAssets() {
             throw new Error('MONGODB_URI is not defined in .env');
         }
 
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(process.env.MONGODB_URI, {
+            bufferCommands: false,
+            serverSelectionTimeoutMS: 20000,
+            connectTimeoutMS: 20000,
+            socketTimeoutMS: 30000,
+        });
         console.log('Connected to MongoDB');
 
         // 1. Migrate Looks
@@ -66,6 +81,14 @@ async function migrateAssets() {
                 cat.coverImage = await downloadImage(cat.coverImage) || cat.coverImage;
                 for (const img of cat.gallery) {
                     img.image = await downloadImage(img.image) || img.image;
+                }
+                for (const design of cat.coloursDesignsUsed || []) {
+                    design.image = await downloadImage(design.image) || design.image;
+                    design.images = await downloadImageList(design.images);
+                }
+                for (const productRange of cat.productRange || []) {
+                    productRange.image = await downloadImage(productRange.image) || productRange.image;
+                    productRange.images = await downloadImageList(productRange.images);
                 }
             }
             await look.save();
@@ -79,6 +102,15 @@ async function migrateAssets() {
             range.heroImage = await downloadImage(range.heroImage) || range.heroImage;
             for (const swatch of range.swatches) {
                 swatch.image = await downloadImage(swatch.image) || swatch.image;
+            }
+            for (const lookGroup of range.lookGroups || []) {
+                lookGroup.coverImage = await downloadImage(lookGroup.coverImage) || lookGroup.coverImage;
+                for (const category of lookGroup.categories || []) {
+                    category.coverImage = await downloadImage(category.coverImage) || category.coverImage;
+                    for (const img of category.gallery || []) {
+                        img.image = await downloadImage(img.image) || img.image;
+                    }
+                }
             }
             await range.save();
         }

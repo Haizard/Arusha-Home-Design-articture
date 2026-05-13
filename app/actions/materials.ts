@@ -3,19 +3,40 @@
 import connectDB from '@/lib/mongodb';
 import MaterialRange from '@/models/MaterialRange';
 import { revalidatePath } from 'next/cache';
+import { getFallbackMaterialRange, getFallbackMaterialRanges, normalizeMaterialRangeAssets } from '@/lib/materialFallbacks';
+import { withTimeout } from '@/lib/withTimeout';
+import mongoose from 'mongoose';
 
 type MaterialRangePayload = Record<string, unknown>;
+const READ_TIMEOUT_MS = 1500;
+
+async function getMaterialRangesFromDb() {
+  await connectDB({ quiet: true });
+  const ranges = await MaterialRange.find({}).sort({ createdAt: -1 }).lean();
+  return (JSON.parse(JSON.stringify(ranges)) as ReturnType<typeof getFallbackMaterialRanges>).map(normalizeMaterialRangeAssets);
+}
 
 export async function getMaterialRanges() {
-  await connectDB();
-  const ranges = await MaterialRange.find({}).sort({ createdAt: -1 }).lean();
-  return JSON.parse(JSON.stringify(ranges));
+  return withTimeout(
+    getMaterialRangesFromDb().catch(() => getFallbackMaterialRanges()),
+    READ_TIMEOUT_MS,
+    getFallbackMaterialRanges()
+  );
 }
 
 export async function getMaterialRange(id: string) {
-  await connectDB();
-  const range = await MaterialRange.findById(id).lean();
-  return JSON.parse(JSON.stringify(range));
+  return withTimeout(
+    (async () => {
+      await connectDB({ quiet: true });
+      const query = mongoose.Types.ObjectId.isValid(id)
+        ? MaterialRange.findById(id)
+        : MaterialRange.findOne({ title: new RegExp(`^${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') });
+      const range = await query.lean();
+      return range ? normalizeMaterialRangeAssets(JSON.parse(JSON.stringify(range))) : getFallbackMaterialRange(id);
+    })().catch(() => getFallbackMaterialRange(id)),
+    READ_TIMEOUT_MS,
+    getFallbackMaterialRange(id)
+  );
 }
 
 export async function addMaterialRange(formData: MaterialRangePayload) {

@@ -10,5 +10,5 @@ export default async function MaterialRangePage({ params }: { params: Promise<{ 
     notFound();
   }
 
-  return <MaterialSeriesClient range={range} />;
+  return <MaterialSeriesClient range={range as Parameters<typeof MaterialSeriesClient>[0]["range"]} />;
 }

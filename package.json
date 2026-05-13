@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "pgbison:extract": "tsx scripts/extract_products.ts && tsx scripts/extract_looks.ts",
+    "pgbison:audit": "tsx scripts/audit_migration.ts",
+    "pgbison:migrate": "npm run pgbison:extract && npm run pgbison:audit && node scripts/migrate_pgbison.cjs --seed --audit"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

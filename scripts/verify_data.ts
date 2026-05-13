@@ -7,7 +7,12 @@ dotenv.config();
 
 async function verify() {
     try {
-        await mongoose.connect(process.env.MONGODB_URI || '');
+        await mongoose.connect(process.env.MONGODB_URI || '', {
+            bufferCommands: false,
+            serverSelectionTimeoutMS: 20000,
+            connectTimeoutMS: 20000,
+            socketTimeoutMS: 30000,
+        });
         
         // Verify Products
         const materialCount = await MaterialRange.countDocuments();

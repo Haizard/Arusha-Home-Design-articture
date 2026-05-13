@@ -11,7 +11,12 @@ const jsonPath = path.join(process.cwd(), 'scripts', 'extracted_looks.json');
 
 async function seed() {
     try {
-        await mongoose.connect(MONGODB_URI);
+        await mongoose.connect(MONGODB_URI, {
+            bufferCommands: false,
+            serverSelectionTimeoutMS: 20000,
+            connectTimeoutMS: 20000,
+            socketTimeoutMS: 30000,
+        });
         console.log('Connected to MongoDB');
 
         if (!fs.existsSync(jsonPath)) {
@@ -40,7 +45,8 @@ async function seed() {
                     coloursDesignsUsed: cat.coloursDesignsUsed,
                     productRange: cat.productRange.map((pr: any) => ({
                         name: pr.name === 'alt tag' ? 'PG Bison Product' : pr.name,
-                        image: pr.image
+                        image: pr.image,
+                        images: Array.isArray(pr.images) && pr.images.length > 0 ? pr.images : [pr.image].filter(Boolean)
                     }))
                 }))
             };

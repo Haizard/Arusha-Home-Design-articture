@@ -16,6 +16,7 @@ const LookDesignSchema = new Schema({
 
 const LookProductRangeSchema = new Schema({
   name: { type: String, required: true },
+  image: { type: String },
   images: [{ type: String }],
   description: { type: String },
 });

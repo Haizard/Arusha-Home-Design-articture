@@ -14,7 +14,12 @@ async function seedProducts() {
             throw new Error('MONGODB_URI is not defined in .env');
         }
 
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(process.env.MONGODB_URI, {
+            bufferCommands: false,
+            serverSelectionTimeoutMS: 20000,
+            connectTimeoutMS: 20000,
+            socketTimeoutMS: 30000,
+        });
         console.log('Connected to MongoDB');
 
         const rawData = fs.readFileSync(DATA_FILE, 'utf8');
