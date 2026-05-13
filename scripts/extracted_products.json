@@ -1,0 +1,891 @@
+[
+  {
+    "title": "BisonBord",
+    "slug": "bisonbord",
+    "category": "Decorative Board",
+    "description": "Our premium quality, interior-grade BisonBord® serves a wide variety of purposes across homes, offices and retail spaces. BisonBord is available as E1 (Class 1) or E2 (Class 2)*.",
+    "logo": "/wp-content/uploads/2024/08/bison_bord.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2024/08/PG-Bison-New_Product_supawood.png",
+    "howItIsMade": {
+      "description": "Wood chips are refined, dried and sorted by size into coarse and fine wood particles. These are then lightly coated with a precise amount of resin and formed into a three-layer mat. The layers are pressed together using heat and pressure to produce panels with specific thickness and density.",
+      "videoUrl": "https://www.youtube.com/watch?v=kdQqtH1LaUE"
+    },
+    "downloads": [
+      {
+        "label": "It’s the BisonBord®, BisonBord® MR and BisonLam® Guide",
+        "url": "/wp-content/uploads/2024/08/ItU2019s-the-BisonBord-BisonBord-MR-and-BisonLam-Guide.pdf"
+      },
+      {
+        "label": "BisonBord® MR Technical Data Sheet",
+        "url": "/wp-content/uploads/2024/08/9947-BisonBord-MR-Data-Sheet-Aug23.pdf"
+      },
+      {
+        "label": "BisonBord® Technical Data Sheet",
+        "url": "/wp-content/uploads/2024/08/9947-BisonBord-Data-Sheet-Aug23_1.pdf"
+      },
+      {
+        "label": "Certificate of Compliance E1 BisonBord® – Ugie",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/Ugie-E1-PB.pdf"
+      },
+      {
+        "label": "How to Identify an Original Product",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/How-to-identify-original-product-1.pdf"
+      }
+    ],
+    "swatches": []
+  },
+  {
+    "title": "Colour Carcass Solution",
+    "slug": "colour-carcass-solution",
+    "category": "Decorative Board",
+    "description": "Colour carcassing is growing in popularity. With minimal additional investment over the full cost of a project, colour carcassing takes your installation to a completely new level.\"Colour carcass\" refers to using different, often bold or contrasting, colors for the inner boxes (carcasses) of kitchen cabinets or furniture, rather than the standard neutral white or woodgrain",
+    "logo": "",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2025/04/10620-Gallery-5-Range-website-banners-Colour-Carcass-scaled.jpg",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [],
+    "swatches": [
+      {
+        "name": "Cappuccino",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/05/cappuccino-scaled.webp",
+        "category": "",
+        "look": "Delight",
+        "brand": "Colour Carcass Solution",
+        "finish": "MP Melawood® Peen, MS Melawood® Strata, DB DecoBord (3mm)"
+      },
+      {
+        "name": "Congo",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/05/congo.webp",
+        "category": "",
+        "look": "Delight",
+        "brand": "Colour Carcass Solution",
+        "finish": "MP Melawood® Peen, MS Melawood® Strata, DB DecoBord (3mm)"
+      },
+      {
+        "name": "Folkstone Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/05/folkstone-grey.webp",
+        "category": "",
+        "look": "Delight",
+        "brand": "Colour Carcass Solution",
+        "finish": "MP Melawood® Peen, MS Melawood® Strata, DB DecoBord (3mm)"
+      },
+      {
+        "name": "Storm Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/05/storm-grey.jpg",
+        "category": "",
+        "look": "Delight",
+        "brand": "Colour Carcass Solution",
+        "finish": "MP Melawood® Peen, MS Melawood® Strata, DB DecoBord (3mm)"
+      },
+      {
+        "name": "Luca Polenta",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/05/luca-polenta.jpg",
+        "category": "",
+        "look": "Delight",
+        "brand": "Colour Carcass Solution",
+        "finish": "MF Melawood® Fusion"
+      },
+      {
+        "name": "Luca Urban",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/05/luca-urban.jpg",
+        "category": "",
+        "look": "Delight",
+        "brand": "Colour Carcass Solution",
+        "finish": "MF Melawood® Fusion"
+      }
+    ]
+  },
+  {
+    "title": "Door Skins",
+    "slug": "door-skins",
+    "category": "Decorative Board",
+    "description": "Introducing DOOR SKINS by PG Bison.",
+    "logo": "",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2025/04/10620-Gallery-5-Range-website-banners-Door-Skins-scaled.jpg",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [],
+    "swatches": []
+  },
+  {
+    "title": "feed",
+    "slug": "feed",
+    "category": "Decorative Board",
+    "description": "",
+    "logo": "",
+    "heroImage": "",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [],
+    "swatches": []
+  },
+  {
+    "title": "Formica Lifeseal Worktops",
+    "slug": "formica-lifeseal-worktops",
+    "category": "Decorative Board",
+    "description": "Because less is more.",
+    "logo": "https://pgbison.co.za/wp-content/uploads/2026/04/formica_logo_fixed.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2026/04/formica_page_banner.jpg",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [
+      {
+        "label": "It’s the Formica LifeSeal Worktops™ Guide",
+        "url": "/wp-content/uploads/2024/08/ItU2019s-the-Formica-LifeSeal-Worktops-Guide.pdf"
+      },
+      {
+        "label": "Formica LifeSeal Worktops™ Data Sheet",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/Formica-LifeSeal-Worktop-Data-Sheet-Mar26.pdf"
+      },
+      {
+        "label": "Formica LifeSeal Worktops™ Installation and Care Guide",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/10525-FLSW-Installation-and-Care-Guide-WEB.pdf"
+      },
+      {
+        "label": "Formica LifeSeal Worktops 22mm on SupaWood",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/Formica-LifeSeal-Worktops-22mm-on-SupaWood.pdf"
+      },
+      {
+        "label": "How to Install Formica LifeSeal Worktops™ Step by Step",
+        "url": "/wp-content/uploads/2024/08/How-to-install-Formica-LifeSeal-Worktops-step-by-step.pdf"
+      },
+      {
+        "label": "Formica LifeSeal Worktops™ Application Awareness Flyer",
+        "url": "/wp-content/uploads/2024/08/Formica-LifeSeal-Worktops-Application-Awareness-Flyer.pdf"
+      },
+      {
+        "label": "How to Identify an Original Product",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/How-to-identify-original-product-1.pdf"
+      }
+    ],
+    "swatches": [
+      {
+        "name": "Product",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/lucca-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Bliss",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FT Formica Lifeseal® Texture"
+      },
+      {
+        "name": "Laniakea",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Laniakea_5025-sparkly.jpg",
+        "category": "Stones & Structure",
+        "look": "Exhilaration",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Faroe",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Faroe.jpg",
+        "category": "Stones & Structure",
+        "look": "Bliss",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Oliana",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Oliana.jpg",
+        "category": "Stones & Structure",
+        "look": "Delight",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Elara",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Elara.jpg",
+        "category": "Stones & Structure",
+        "look": "Ecstacy",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Meribel",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Meribel_1050-sparkly.jpg",
+        "category": "Stones & Structure",
+        "look": "Ecstacy",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Pantanal",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Pantanal-scaled.jpg",
+        "category": "Stones & Structure",
+        "look": "Ecstacy",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Tucana",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_FLSW_Tucana.jpg",
+        "category": "Stones & Structure",
+        "look": "Exhilaration",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Aquila",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_FLSW_Aquila.jpg",
+        "category": "Stones & Structure",
+        "look": "Exhilaration",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "FG Formica Lifeseal® Gloss"
+      },
+      {
+        "name": "Dunblane Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/12/10827-ST_DunblaneGrey_Acuity-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "Formica Lifeseal Worktops",
+        "finish": "SA Melawood SupaTexture® Acuity"
+      }
+    ]
+  },
+  {
+    "title": "Luxora Premium worktops",
+    "slug": "luxora-by-pg-bison",
+    "category": "Decorative Board",
+    "description": "FIND THE BEAUTY WITHIN.",
+    "logo": "https://pgbison.co.za/wp-content/uploads/2025/04/luxora-1.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2025/04/10620-Gallery-5-Range-website-banners-Luxora-scaled.jpg",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [],
+    "swatches": [
+      {
+        "name": "Carisbrooke",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Carisbrooke.jpg",
+        "category": "Colour Range",
+        "look": "Exhilaration",
+        "brand": "Luxora Premium worktops",
+        "finish": "Textured"
+      },
+      {
+        "name": "Zaros",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Zaros.jpg",
+        "category": "Colour Range",
+        "look": "Exhilaration",
+        "brand": "Luxora Premium worktops",
+        "finish": "Textured"
+      },
+      {
+        "name": "Barchand",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Barchand-scaled.jpg",
+        "category": "Colour Range",
+        "look": "Bliss",
+        "brand": "Luxora Premium worktops",
+        "finish": "Textured"
+      },
+      {
+        "name": "Vesuvio",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Vesuvio.jpg",
+        "category": "Colour Range",
+        "look": "Bliss",
+        "brand": "Luxora Premium worktops",
+        "finish": "Textured"
+      },
+      {
+        "name": "Soria",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Soria-scaled.jpg",
+        "category": "Colour Range",
+        "look": "Delight",
+        "brand": "Luxora Premium worktops",
+        "finish": "Textured"
+      },
+      {
+        "name": "Alyko",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Alyko.jpg",
+        "category": "Colour Range",
+        "look": "Delight",
+        "brand": "Luxora Premium worktops",
+        "finish": "Textured"
+      }
+    ]
+  },
+  {
+    "title": "I-Melawood",
+    "slug": "melawood",
+    "category": "Decorative Board",
+    "description": "MelaWood® is PG Bison’s leading brand of melamine-faced board (MFB).",
+    "logo": "/wp-content/uploads/2024/08/melawood-logo.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2024/08/pgbison-131.jpg",
+    "howItIsMade": {
+      "description": "Our top-quality BisonBord® is covered on both sides with decorative paper that has been infused with melamine resin using heat and pressure. When the resin-coated paper is pressed, the resin flows and hardens to create a smooth, non-porous surface. This means there are no microscopic pores for germs to hide; it also makes the surface so much easier to clean with a damp cloths.The cured melamine surface provides a durable finish that is scratch and moisture-resistant. To finish the job, the edges of the cut MelaWood® panels are sealed using a suitable glue and edge-banding material – this gives each panel the best protection possible against exposure to moisture.As a further benefit, a special anti-bacterial additive is blended into our melamine resin, which helps destroy any bacteria that may come into contact with the surface within hours. MelaWood® is the perfect solution for hygiene-sensitive, high-traffic areas where cleanliness alone is insufficient, such as healthcare facilities, office spaces, schools, restaurants, retail and in your home.",
+      "videoUrl": "https://www.youtube.com/watch?v=3FStoloeUVk"
+    },
+    "downloads": [
+      {
+        "label": "MelaWood Product Guide",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/10672-MelaWood-Guide-G5-2025-v3.pdf"
+      },
+      {
+        "label": "MelaWood® Technical Data Sheet",
+        "url": "/wp-content/uploads/2024/06/9947-MelaWood-Data-Sheet-Aug23.pdf"
+      },
+      {
+        "label": "MelaWood® Care Guide",
+        "url": "/wp-content/uploads/2024/06/8894-MelaWood-Care-Instruction-A4-FA-1.pdf"
+      },
+      {
+        "label": "How to Identify an Original Product",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/How-to-identify-original-product-1.pdf"
+      }
+    ],
+    "swatches": [
+      {
+        "name": "Farasan",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Farasan_1000x1500mm-72dpi--scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "I-Melawood",
+        "finish": "MI Melawood® Intrinsic"
+      },
+      {
+        "name": "Pasadena",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Pasadena_1000x1500mm-72dpi--scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Bliss",
+        "brand": "I-Melawood",
+        "finish": "MI Melawood® Intrinsic"
+      },
+      {
+        "name": "Clydeshaw",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Clydeshaw_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "MI Melawood® Intrinsic"
+      },
+      {
+        "name": "Northridge",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Northridge_1000x1500mm-72dpi-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "MI Melawood® Intrinsic"
+      },
+      {
+        "name": "Product",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Black_Cherry_1000x1500mm-72dpi-CROP-1-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Bliss",
+        "brand": "I-Melawood",
+        "finish": "MP Melawood® Peen"
+      },
+      {
+        "name": "Rioverde",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Rioverde.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Bellavista",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Bellavista.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Nata",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Nata.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Congo",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_Congo.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
+        "name": "Kara Blu",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/12/New2023_PGBison_Supa_KaraBlu.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Petrol Blue",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Petrol-Blue.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Storm Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/12/2023_PGBison_Supa_StormGrey.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "I-Melawood",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      }
+    ]
+  },
+  {
+    "title": "MelaWood SupaGloss",
+    "slug": "melawood-supagloss",
+    "category": "Decorative Board",
+    "description": "Bring a touch of luxury with the glass-like MelaWood SupaGloss. This UV-hardened gloss surface, locally manufactured according to the latest international standards, offers rich colours and excellent durability.",
+    "logo": "/wp-content/uploads/2024/08/melawood_supa_gloss.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2024/08/MorE-101.jpg",
+    "howItIsMade": {
+      "description": "Hot-coated polyurethane (PUR) is applied to MelaWood® with a SupaWood® core and then cured using ultraviolet (UV) light to produce a durable, high-gloss surface with good wear and scratch resistance.This technology also gives MelaWood® SupaGloss™ its consistent stability and visual depth.MelaWood® SupaGloss™, locally manufactured by PG Bison to international standards, gives you the assurance of a readily available product, consistent in colour and surface finish. You will never have to worry about one batch of boards not matching the next or discolouration.With matching décor in a PEEN finish on the reverse side, MelaWood® SupaGloss™ is supplied with a protective film to protect the gloss face during handling and processing, so your finished product arrives on site looking as good as expected.",
+      "videoUrl": "https://www.youtube.com/watch?v=lCYJpKWfqQo"
+    },
+    "downloads": [
+      {
+        "label": "SupaGloss Product Guide",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/10672-SupaGloss-G5-Product-Guide-2025-v3.pdf"
+      },
+      {
+        "label": "MelaWood® SupaGloss™ Technical Data Sheet",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood-SupaGloss-Technical-Data-Sheet-Apr26.pdf"
+      },
+      {
+        "label": "MelaWood® SupaGloss™ Care Guide",
+        "url": "/wp-content/uploads/2024/08/8833-SupaGloss-Care-Instruction-A4-FA.pdf"
+      },
+      {
+        "label": "How to Identify an Original Product",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/How-to-identify-original-product-1.pdf"
+      }
+    ],
+    "swatches": [
+      {
+        "name": "Calais",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Calais_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Product",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Treviso_1000x1500mm-72dpi-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Delight",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Urbino",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Urbino_1000x1500mm-72dpi--scaled.jpg",
+        "category": "Stones & Structure",
+        "look": "Delight",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®"
+      },
+      {
+        "name": "Rioverde",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Rioverde.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Nata",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Nata.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Bellavista",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Bellavista.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Congo",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_Congo.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
+        "name": "Kara Blu",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/12/New2023_PGBison_Supa_KaraBlu.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Petrol Blue",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Petrol-Blue.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Storm Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/12/2023_PGBison_Supa_StormGrey.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaGloss",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      }
+    ]
+  },
+  {
+    "title": "MelaWood SupaMatt",
+    "slug": "melawood-supamatt",
+    "category": "Decorative Board",
+    "description": "MelaWood® SupaMatt™ has a soft and sophisticated finish that will add elegance to any setting. Although matt surfaces can be prone to showing fingerprints, MelaWood® SupaMatt™ uses advanced technology to reduce the visibility in typical everyday use.",
+    "logo": "/wp-content/uploads/2024/08/melawood_supa_matt.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2024/08/pgbison-49-retouched.jpg",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [
+      {
+        "label": "MelaWood SupaMatt® Product Guide",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/10672-SupaMatt-G5-Product-Guide-2025-v3.pdf"
+      },
+      {
+        "label": "MelaWood® SupaMatt™ Care Instructions",
+        "url": "/wp-content/uploads/2024/08/9939-Update-SupaMatt-Care-Instructions-A4-v4.pdf"
+      },
+      {
+        "label": "How to Identify an Original Product",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/How-to-identify-original-product-1.pdf"
+      }
+    ],
+    "swatches": [
+      {
+        "name": "Product",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Banbridge_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Urbino",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Urbino_1000x1500mm-72dpi--scaled.jpg",
+        "category": "Stones & Structure",
+        "look": "Delight",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®"
+      },
+      {
+        "name": "Rioverde",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Rioverde.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Nata",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Nata.jpg",
+        "category": "Solid Colours",
+        "look": "Bliss",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Bellavista",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Bellavista.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Congo",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_Congo.jpg",
+        "category": "Solid Colours",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      },
+      {
+        "name": "Petrol Blue",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Petrol-Blue.jpg",
+        "category": "Solid Colours",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen"
+      },
+      {
+        "name": "Storm Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/12/2023_PGBison_Supa_StormGrey.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaMatt",
+        "finish": "SM Melawood SupaMatt®, SG Melawood SupaGloss®, MP Melawood® Peen, MS Melawood® Strata"
+      }
+    ]
+  },
+  {
+    "title": "MelaWood SupaTexture",
+    "slug": "melawood-supatexture",
+    "category": "Decorative Board",
+    "description": "The rich grain and roughness of MelaWood SupaTexture combined with a diverse colour range will add an inviting touch to your surfaces.",
+    "logo": "/wp-content/uploads/2024/08/supatexture-1.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2024/08/zYNTA-pJ.jpeg",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [
+      {
+        "label": "MelaWood® SupaTexture™ Product Guide",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/MelaWood-SupaTexture®-Product-Guide.pdf"
+      },
+      {
+        "label": "SupaTexture™ Care Guide",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/9389-NewLeaf-SupaTexture-Care-Instructions-A4-FA.m.pdf"
+      },
+      {
+        "label": "How to Identify an Original Product",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/How-to-identify-original-product-1.pdf"
+      }
+    ],
+    "swatches": [
+      {
+        "name": "Earlswood",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Earlswood_1000x1500mm-72dpi-CROP--scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Exhilaration",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SC Melawood SupaTexture® Capitol"
+      },
+      {
+        "name": "Laredo",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Laredo_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Bliss",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SC Melawood SupaTexture® Capitol"
+      },
+      {
+        "name": "Vieste",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Vieste_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SC Melawood SupaTexture® Capitol"
+      },
+      {
+        "name": "Calais",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Calais_1000x1500mm-72dpi-CROP-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Ecstacy",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Product",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Treviso_1000x1500mm-72dpi-scaled.jpg",
+        "category": "Woodgrains",
+        "look": "Delight",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SG Melawood SupaGloss®, ST MelaWood SupaTexture®"
+      },
+      {
+        "name": "Rioverde",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/12/10827-ST_Rioverde_Acuity-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SA Melawood SupaTexture® Acuity"
+      },
+      {
+        "name": "Nata",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/12/10827-ST_Nata_Acuity-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SA Melawood SupaTexture® Acuity"
+      },
+      {
+        "name": "Bellavista",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/12/10827-ST_Bellavista_Acuity-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SA Melawood SupaTexture® Acuity"
+      },
+      {
+        "name": "Kara Blu",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/12/10827-ST_KaraBlu_Acuity-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SA Melawood SupaTexture® Acuity"
+      },
+      {
+        "name": "Dunblane Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/12/10827-ST_DunblaneGrey_Acuity-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SA Melawood SupaTexture® Acuity"
+      },
+      {
+        "name": "Storm Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/12/10827-ST_StormGrey_Acuity-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SA Melawood SupaTexture® Acuity"
+      },
+      {
+        "name": "Super Black",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/12/10827-ST_SuperBlack_Acuity-scaled.jpg",
+        "category": "Solid Colours",
+        "look": "Delight",
+        "brand": "MelaWood SupaTexture",
+        "finish": "SA Melawood SupaTexture® Acuity"
+      }
+    ]
+  },
+  {
+    "title": "Monteo+",
+    "slug": "monteo",
+    "category": "Decorative Board",
+    "description": "+FREE YOUR IMAGINATION",
+    "logo": "https://pgbison.co.za/wp-content/uploads/2025/04/monteo-1.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2025/04/10620-Gallery-5-Range-website-banners-Monteo-scaled.jpg",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [],
+    "swatches": [
+      {
+        "name": "Kalapana",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/12/2023_PGBison_Supa_Kalapana.jpg",
+        "category": "Colour Range",
+        "look": "Exhilaration",
+        "brand": "Monteo+",
+        "finish": "Natural Touch"
+      },
+      {
+        "name": "Dunblane Grey",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/12/2023_PGBison_Supa_DunblaneGrey.jpg",
+        "category": "Colour Range",
+        "look": "Bliss",
+        "brand": "Monteo+",
+        "finish": "Natural Touch"
+      },
+      {
+        "name": "Iceberg White",
+        "image": "https://pgbison.co.za/wp-content/uploads/2024/12/2023_PGBison_Supa_IcebergWhite.jpg",
+        "category": "Colour Range",
+        "look": "Bliss",
+        "brand": "Monteo+",
+        "finish": "Natural Touch"
+      },
+      {
+        "name": "Bellavista",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Bellavista.jpg",
+        "category": "Colour Range",
+        "look": "Delight",
+        "brand": "Monteo+",
+        "finish": "Natural Touch"
+      },
+      {
+        "name": "Thornbury",
+        "image": "https://pgbison.co.za/wp-content/uploads/2025/04/Thornbury_1000x1500mm-72dpi-scaled.jpg",
+        "category": "Colour Range",
+        "look": "Delight",
+        "brand": "Monteo+",
+        "finish": "SA Melawood SupaTexture® Acuity"
+      }
+    ]
+  },
+  {
+    "title": "SupaWood",
+    "slug": "supawood",
+    "category": "Decorative Board",
+    "description": "Enjoy the best of solid timber and the advantages of wood-based manufactured board with PG Bison’s exceptional SupaWood®.",
+    "logo": "https://pgbison.co.za/wp-content/uploads/2024/08/supa_wood.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2024/08/PG-Bison-New_Product_supawood.png",
+    "howItIsMade": {
+      "description": "SupaWood® is made using cutting-edge technology. Wood chips are ground into fibres and mixed with resin. The mixture is then bonded using heat and pressure to create a high-quality panel product.",
+      "videoUrl": "https://www.youtube.com/watch?v=BhBCKKTH4uQ"
+    },
+    "downloads": [
+      {
+        "label": "SupaWood® Technical Data Sheet",
+        "url": "/wp-content/uploads/2024/08/SupaWood-Technical-Data-Sheet.pdf"
+      },
+      {
+        "label": "How to Identify an Original Product",
+        "url": "https://pgbison.co.za/wp-content/uploads/2024/08/How-to-identify-original-product-1.pdf"
+      }
+    ],
+    "swatches": []
+  },
+  {
+    "title": "Thesen",
+    "slug": "thesen",
+    "category": "Decorative Board",
+    "description": "By making use of slow grown pine from the southern Cape, Thesen’s pine has better timber density, exceptional strength, durability and quality.",
+    "logo": "https://pgbison.co.za/wp-content/uploads/2024/09/thesen.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2024/09/Theesen_2.jpg",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [],
+    "swatches": []
+  },
+  {
+    "title": "Woodchem",
+    "slug": "woodchem",
+    "category": "Decorative Board",
+    "description": "Wood Chemicals SA (Pty) Ltd, a wholly owned subsidiary of PG Bison, supplies Formaldehyde and Formaldehyde based Resins into more than 30 different industries throughout sub-Saharan Africa. Woodchem as it is commonly known is the largest urea-formaldehyde (UF) resin and formaldehyde producer in sub-Saharan Africa.",
+    "logo": "https://pgbison.co.za/wp-content/uploads/2024/09/woodchem.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2024/09/Woodchem-Banner.jpg",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [],
+    "swatches": []
+  },
+  {
+    "title": "Woodline",
+    "slug": "woodline",
+    "category": "Decorative Board",
+    "description": "Known for its structural strength, durability and quality, the slow-grown Radiata pine's sapwood allows deeper penetration of the chemicals during treatment processes, enhancing the product's longevity.",
+    "logo": "https://pgbison.co.za/wp-content/uploads/2024/09/woodline.png",
+    "heroImage": "https://pgbison.co.za/wp-content/uploads/2025/04/10620-Gallery-5-Range-website-banners-Door-Skins-scaled.jpg",
+    "howItIsMade": {
+      "description": "",
+      "videoUrl": ""
+    },
+    "downloads": [],
+    "swatches": []
+  }
+]
