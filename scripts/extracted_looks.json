@@ -1,0 +1,760 @@
+[
+  {
+    "name": "Choose Your Look",
+    "slug": "explorer",
+    "description": "This eclectic range of designs, colours and textures bring energy and vibrancy to your space, a perfect mix for our connected, fast paced world.",
+    "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/explorer.webp",
+    "categories": [
+      {
+        "name": "Luca Polenta",
+        "slug": "cocoa-bean-interiors-showroom-kramerville-johannesburg",
+        "description": "",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A1444f-MAIN-retouched_Resized.jpg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A1449f-retouched_Resized-683x1024.jpg",
+            "alt": "Cocoa Bean Interiors - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A1446f-retouched_Resized-683x1024.jpg",
+            "alt": "Cocoa Bean Interiors - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A1444f-MAIN-retouched_Resized-1024x683.jpg",
+            "alt": "Cocoa Bean Interiors - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A1436f-retouched_Resized-1024x683.jpg",
+            "alt": "",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Luca Polenta",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Luca_Polenta_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+          }
+        ]
+      },
+      {
+        "name": "Alegria and Kara Blu",
+        "slug": "the-hills-game-reserve-estate-pretoria",
+        "description": "",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2330p-MAIN-retouched_Resized.jpg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2356p-retouched_Resized-683x1024.jpg",
+            "alt": "Sosh Granite - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2353p-retouched_Resized-1024x683.jpg",
+            "alt": "Sosh Granite - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2351p-retouched_Resized-683x1024.jpg",
+            "alt": "Sosh Granite - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2346p-retouched_Resized-683x1024.jpg",
+            "alt": "Sosh Granite - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2344p-retouched_Resized-1024x683.jpg",
+            "alt": "Sosh Granite - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2339p-retouched_Resized-683x1024.jpg",
+            "alt": "Sosh Granite - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2335p-retouched_Resized-683x1024.jpg",
+            "alt": "Sosh Granite - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2330p-MAIN-retouched_Resized-683x1024.jpg",
+            "alt": "Sosh Granite - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2324p-retouched_Resized-683x1024.jpg",
+            "alt": "Sosh Granite - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2317p-retouched_Resized-683x1024.jpg",
+            "alt": "Sosh Granite - Tshwane",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Kara Blu",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/12/New2023_PGBison_Supa_KaraBlu.jpg"
+          },
+          {
+            "name": "Luca Polenta",
+            "image": "https://pgbison.co.za/wp-content/uploads/2025/05/luca-polenta-683x1024.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+          }
+        ]
+      },
+      {
+        "name": "Alegria",
+        "slug": "sandton-blackbrick-johannesburg",
+        "description": "",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2501p-MAIN-retouched_Resized.jpg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2534p-retouched_Resized-683x1024.jpg",
+            "alt": "Dizain Pronounced - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2521p-retouched_Resized-1024x683.jpg",
+            "alt": "Dizain Pronounced - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2501p-MAIN-retouched_Resized-1024x683.jpg",
+            "alt": "Dizain Pronounced - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2532p-retouched_Resized-683x1024.jpg",
+            "alt": "Dizain Pronounced - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2527p-retouched_Resized-683x1024.jpg",
+            "alt": "Dizain Pronounced - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2511p-retouched_Resized-683x1024.jpg",
+            "alt": "Dizain Pronounced - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2507p-retouched_Resized-683x1024.jpg",
+            "alt": "Dizain Pronounced - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2502p-retouched_Resized-711x1024.jpg",
+            "alt": "Dizain Pronounced - Gauteng",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Alegria",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Alegria_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+          }
+        ]
+      },
+      {
+        "name": "Kalapana and Kirkwall",
+        "slug": "kalapana-and-kirkwall-2",
+        "description": "Creating Beautiful Spaces Enquire Now There is a new convergence of the physical and digital worlds. We’re permanently connected, always…",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/06/U-mTbSIa-scaled.jpeg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/U-mTbSIa-scaled-1024x682.jpeg",
+            "alt": "",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Kirkwall",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Kirkwall_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          },
+          {
+            "name": "Kalapana",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/kalapana-1024x675.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Choose Your Look",
+    "slug": "minimalist",
+    "description": "Softer hues and simpler designs reflecting light in a gentler way, bathing any space in a sense of calm and quiet kindness.",
+    "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/9fEhW50u.webp",
+    "categories": [
+      {
+        "name": "Iceberg White and Storm Grey",
+        "slug": "norbet-kitchens-showroom-roodepoort-johannesburg",
+        "description": "",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2375p-MAIN-retouched_Resized.jpg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2421p-retouched_Resized-683x1024.jpg",
+            "alt": "Norbet Kitchens - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2406p-retouched_Resized-683x1024.jpg",
+            "alt": "Norbet Kitchens - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2389p-retouched_Resized-683x1024.jpg",
+            "alt": "Norbet Kitchens - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2386p-retouched_Resized-683x1024.jpg",
+            "alt": "Norbet Kitchens - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2378p-retouched_Resized-683x1024.jpg",
+            "alt": "Norbet Kitchens - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2375p-MAIN-retouched_Resized-683x1024.jpg",
+            "alt": "Norbet Kitchens - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2373p-retouched_Resized-683x1024.jpg",
+            "alt": "Norbet Kitchens - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2371p-retouched_Resized-683x1024.jpg",
+            "alt": "Norbet Kitchens - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2365p-retouched_Resized-683x1024.jpg",
+            "alt": "Norbet Kitchens - Gauteng",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Luca Polenta",
+            "image": "https://pgbison.co.za/wp-content/uploads/2025/05/luca-polenta-683x1024.jpg"
+          },
+          {
+            "name": "Iceberg White",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_IcebergWhite.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+          },
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+          }
+        ]
+      },
+      {
+        "name": "Arden and Iceberg White",
+        "slug": "arden-and-iceberh-white",
+        "description": "Creating Beautiful Spaces Enquire Now There is a new convergence of the physical and digital worlds. We’re permanently connected, always…",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/06/tnSwDdDu-scaled.jpeg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/tnSwDdDu-scaled-1024x614.jpeg",
+            "alt": "",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Arden",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Arden_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          },
+          {
+            "name": "Iceberg White",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_IcebergWhite.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+          },
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+          }
+        ]
+      },
+      {
+        "name": "Caraz and Brookhill",
+        "slug": "caraz-and-brookhull",
+        "description": "Creating Beautiful Spaces Enquire Now There is a new convergence of the physical and digital worlds. We’re permanently connected, always…",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/06/0o6bgxMs-scaled.jpeg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/0o6bgxMs-scaled-683x1024.jpeg",
+            "alt": "",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Brookhill",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Brookhill_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          },
+          {
+            "name": "Caraz",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/caraz-1024x674.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+          },
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+          },
+          {
+            "name": "alt tag",
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+          }
+        ]
+      },
+      {
+        "name": "Folkstone Grey and Arden",
+        "slug": "folkstone-frey-and-arden",
+        "description": "Creating Beautiful Spaces Enquire Now There is a new convergence of the physical and digital worlds. We’re permanently connected, always…",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/06/jfiuNtzI.jpg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/jfiuNtzI-1024x682.jpg",
+            "alt": "",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Arden",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Arden_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          },
+          {
+            "name": "Folkstone Grey",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_FolkstoneGrey.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+          },
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Choose Your Look",
+    "slug": "natural",
+    "description": "Delight Archives- Combinations of colours and designs, inspired by nature, and give you the chance to play with your own creative spirit.",
+    "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/X2zhwJU.webp",
+    "categories": [
+      {
+        "name": "Alegria and Iceberg White",
+        "slug": "shumba-innovations-william-lombardy-estate-residential-pretoria",
+        "description": "",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4682p-MAIN-retouched_Resized.jpg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4694p-retouched_Resized-683x1024.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4691p-retouched_Resized-1024x683.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4682p-MAIN-retouched_Resized-1024x683.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4705p-retouched-copy_Resized-683x1024.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4703p-retouched_Resized-683x1024.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4700p-retouched_Resized-683x1024.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4699p-retouched_Resized-683x1024.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4692p-retouched-copy_Resized-1024x683.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Alegria",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Alegria_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          },
+          {
+            "name": "Iceberg White",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_IcebergWhite.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+          }
+        ]
+      },
+      {
+        "name": "Alegria",
+        "slug": "dizain-pronounced-vosloorus-johannesburg",
+        "description": "",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2081p-retouched_Resized.jpg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A2081p-retouched_Resized-683x1024.jpg",
+            "alt": "Dizain Pronounced - Gauteng",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Alegria",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Alegria_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+          }
+        ]
+      },
+      {
+        "name": "Iceberg White, Camden and Storm Grey",
+        "slug": "iceberg-shite-camden-and-storm-grey",
+        "description": "Creating Beautiful Spaces Enquire Now There is a new convergence of the physical and digital worlds. We’re permanently connected, always…",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/06/eLO-NMzg-scaled.jpeg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/eLO-NMzg-scaled-1024x576.jpeg",
+            "alt": "",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Camden",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Camden_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          },
+          {
+            "name": "Luca Polenta",
+            "image": "https://pgbison.co.za/wp-content/uploads/2025/05/luca-polenta-683x1024.jpg"
+          },
+          {
+            "name": "Iceberg White",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_IcebergWhite.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+          },
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+          }
+        ]
+      },
+      {
+        "name": "Dunblane Grey and Azzano",
+        "slug": "dunblane-grey-and-azzano",
+        "description": "Creating Beautiful Spaces Enquire Now There is a new convergence of the physical and digital worlds. We’re permanently connected, always…",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/06/8k-Uyg9Q-scaled.jpeg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/8k-Uyg9Q-scaled-1024x768.jpeg",
+            "alt": "",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Dunblane Grey",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_DunblaneGrey.jpg"
+          },
+          {
+            "name": "Azzano",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Azzano_1000x1500mm-72dpi-CROP--683x1024.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+          },
+          {
+            "name": "alt tag",
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+          }
+        ]
+      },
+      {
+        "name": "Azzano, Astana and Torra",
+        "slug": "azzano-astana-and-torra",
+        "description": "Creating Beautiful Spaces Enquire Now There is a new convergence of the physical and digital worlds. We’re permanently connected, always…",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/06/c4nL2gHE-scaled.jpeg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/c4nL2gHE-scaled-1024x384.jpeg",
+            "alt": "",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Astana",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Astana-ST-1-scaled-1024x782.jpg"
+          },
+          {
+            "name": "Torra",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Torra-A-1024x776.png"
+          },
+          {
+            "name": "Azzano",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Azzano_1000x1500mm-72dpi-CROP--683x1024.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+          },
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Formica_2.webp"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Choose Your Look",
+    "slug": "urban",
+    "description": "A chapter filled with bold colour and sophisticated designs that bring a sense of unbridled joy to your space.",
+    "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/zYNTA-pJ.webp",
+    "categories": [
+      {
+        "name": "Alegria, Congo and Luca Polenta",
+        "slug": "shumba-innovations-william-silverwoods-boulevard",
+        "description": "",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4753p-MAIN-retouched_Resized.jpg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4754p-retouched_Resized-683x1024.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4753p-MAIN-retouched_Resized-1024x683.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4748p-retouched_Resized-1024x683.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4743p-retouched_Resized-683x1024.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4720p-retouched_Resized-683x1024.jpg",
+            "alt": "Shumba Innovations - Tshwane",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Alegria",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Alegria_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          },
+          {
+            "name": "Congo",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_Congo.jpg"
+          },
+          {
+            "name": "Luca Polenta",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Luca_Polenta_1000x1500mm-72dpi-CROP-683x1024.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+          },
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/Melawood_Logo_Croped.webp"
+          }
+        ]
+      },
+      {
+        "name": "Super Black",
+        "slug": "okelo-designs-emfuleni-residential-project-johannesburg",
+        "description": "",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4503p-MAIN-retouched_Resized.jpg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4491p-retouched_Resized-935x1024.jpg",
+            "alt": "Okelo Designs - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4472p-retouched_Resized-683x1024.jpg",
+            "alt": "Okelo Designs - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4503p-MAIN-retouched_Resized-1024x683.jpg",
+            "alt": "Okelo Designs - Gauteng",
+            "caption": ""
+          },
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/0J1A4475p-retouched_Resized-683x1024.jpg",
+            "alt": "Okelo Designs - Gauteng",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Super Black",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Super-Black-M-SG-2016-scaled-1024x717.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+          }
+        ]
+      },
+      {
+        "name": "Petrol Blue",
+        "slug": "petrol-blue",
+        "description": "Creating Beautiful Spaces Enquire Now There is a new convergence of the physical and digital worlds. We’re permanently connected, always…",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/06/iGQ5ZqRQ-scaled.jpeg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/iGQ5ZqRQ-scaled-1024x726.jpeg",
+            "alt": "",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Petrol Blue",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Petrol-Blue-1024x1024.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "/wp-content/uploads/2024/08/SupaGloss_2.png"
+          }
+        ]
+      },
+      {
+        "name": "Super Black and Dunblane Grey",
+        "slug": "super-black-and-dunblane-grey",
+        "description": "Creating Beautiful Spaces Enquire Now There is a new convergence of the physical and digital worlds. We’re permanently connected, always…",
+        "coverImage": "https://pgbison.co.za/wp-content/uploads/2024/06/7DOIBWsA-scaled.jpeg",
+        "gallery": [
+          {
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/7DOIBWsA-scaled-1024x768.jpeg",
+            "alt": "",
+            "caption": ""
+          }
+        ],
+        "coloursDesignsUsed": [
+          {
+            "name": "Super Black",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/Super-Black-M-SG-2016-scaled-1024x717.jpg"
+          },
+          {
+            "name": "Dunblane Grey",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/06/2023_PGBison_MW_DunblaneGrey.jpg"
+          }
+        ],
+        "productRange": [
+          {
+            "name": "alt tag",
+            "image": "https://pgbison.co.za/wp-content/uploads/2024/08/SupaMatt_2.webp"
+          }
+        ]
+      }
+    ]
+  }
+]

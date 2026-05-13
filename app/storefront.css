@@ -35,15 +35,15 @@
   background: #F7F5F2;
   color: var(--mat-ink);
   min-height: 100vh;
+  font-family: 'Inter', sans-serif;
 }
 
 .materials-command {
-  padding: clamp(1rem, 3vw, 2rem);
+  padding: 1.5rem;
 }
 
 .materials-command-shell {
-  width: min(1500px, 100%);
-  min-height: calc(100vh - 7rem);
+  width: min(1440px, 100%);
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(230px, 0.26fr) minmax(0, 1fr);
