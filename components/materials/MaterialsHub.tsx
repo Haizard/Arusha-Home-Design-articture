@@ -2,21 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BadgeCheck,
-  Boxes,
-  Building2,
-  Layers3,
-  Palette,
-  Play,
-  Ruler,
-  Search,
-  ShieldCheck,
-  SlidersHorizontal,
-  Sparkles,
-  SwatchBook,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 type TechSpec = {
   label?: string;
@@ -74,6 +60,14 @@ function materialHref(range: MaterialRangeCard) {
   return range._id ? `/materials/${range._id}` : "/materials";
 }
 
+function getProductArchiveImage(range: MaterialRangeCard) {
+  return range.heroImage || range.swatches?.find((swatch) => swatch.image)?.image || "";
+}
+
+function hasProductArchiveImage(range: MaterialRangeCard) {
+  return Boolean(getProductArchiveImage(range));
+}
+
 function RangeCard({ range, featured = false }: { range: MaterialRangeCard; featured?: boolean }) {
   const swatches = range.swatches?.filter((swatch) => swatch.image).slice(0, 4) ?? [];
 
@@ -111,6 +105,27 @@ function RangeCard({ range, featured = false }: { range: MaterialRangeCard; feat
   );
 }
 
+function ProductArchiveCard({ range }: { range: MaterialRangeCard }) {
+  const image = getProductArchiveImage(range) || "/images/service-kitchen.jpg";
+  const title = range.title || "Material range";
+
+  return (
+    <Link href={materialHref(range)} className="materials-product-tile" aria-label={`View ${title}`}>
+      <Image
+        src={image}
+        alt={title}
+        fill
+        sizes="(max-width: 760px) 100vw, (max-width: 1180px) 50vw, 640px"
+        className="materials-product-image"
+      />
+      <span className="materials-product-name">
+        <strong>{title}</strong>
+        <small>{range.category || "Product range"}</small>
+      </span>
+    </Link>
+  );
+}
+
 export default function MaterialsHub({
   ranges,
   compact = false,
@@ -119,8 +134,31 @@ export default function MaterialsHub({
   compact?: boolean;
 }) {
   const materialRanges = ranges;
+  const archiveRanges = materialRanges.filter(hasProductArchiveImage);
   const featured = materialRanges.slice(0, 2);
   const rest = materialRanges.slice(2);
+
+  if (compact) {
+    return (
+      <div className="materials-platform compact">
+        <section className="materials-product-archive">
+          <div className="materials-product-shell">
+            <div className="materials-product-heading">
+              <p>Material Library</p>
+              <h1>Surfaces That Shape Beautiful Homes</h1>
+              <span>Explore boards, textures, finishes, and colour stories selected for refined interiors.</span>
+            </div>
+
+            <div className="materials-product-grid">
+              {archiveRanges.map((range, index) => (
+                <ProductArchiveCard key={range._id || index} range={range} />
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="materials-platform">

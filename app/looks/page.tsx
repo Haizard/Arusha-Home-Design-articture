@@ -15,19 +15,18 @@ export default async function LooksPage() {
         <Image src={heroImage} alt="Choose a look" fill priority sizes="100vw" />
         <div className="looks-hero-overlay" />
         <div className="looks-shell looks-hero-copy">
-          <p className="material-kicker">Choose a Look</p>
-          <h1>Pick the mood before choosing the colour combination.</h1>
-          <p>Browse looks like Bliss, Delight, and Exhilaration, then open each pairing gallery for real room references.</p>
+          <p className="material-kicker">Curated Look Library</p>
+          <h1>Find the Feeling Before the Finish.</h1>
+          <p>Mood-led palettes, room references, and colour pairings to help every surface feel intentional before materials are selected.</p>
         </div>
       </section>
 
       <section className="looks-shell looks-grid-section">
         <div className="material-section-heading compact">
           <div>
-            <p className="material-kicker">Look library</p>
-            <h2>CMS controlled inspiration galleries.</h2>
+            <p className="material-kicker">Design moods</p>
+            <h2>Choose the atmosphere your home should carry.</h2>
           </div>
-          <p>{cmsLooks.length > 0 ? "Live admin content" : "Preview content shown until admin entries are added"}</p>
         </div>
 
         <div className="looks-grid">
@@ -47,7 +46,7 @@ export default async function LooksPage() {
                   </div>
                   <Link href={`/looks/${lookSlug}`} className="look-open-link">
                     <Images size={15} />
-                    Open categories
+                    Explore look
                     <ArrowRight size={14} />
                   </Link>
                 </div>
